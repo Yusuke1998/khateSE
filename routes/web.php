@@ -1,16 +1,23 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+use Illuminate\Http\Request;
+use App\User;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::view('/', 'inicio');
+
+
+Route::post('publicar', 'HomeController@publicar');
+Route::post('comentar', 'HomeController@comentar');
+Route::post('filtro', 'HomeController@topicid');
+
+Route::post('eliminarpost', 'HomeController@eliminarpost');
+Route::post('eliminarcomment', 'HomeController@eliminarcomment');
+
+Route::get('profile', 'HomeController@profile');
+Route::get('home', 'HomeController@index')->name('home');
+Route::get('home/{topic}', 'HomeController@topic')->where('topic', '^[A-Za-z_]+$');
+Route::get('post/{id}', 'HomeController@postid')->where('id', '^[\d]+$');
+
+
+Auth::routes();

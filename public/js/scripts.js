@@ -8,6 +8,14 @@ $(() => {
 		$('#topicidform').submit()
 	})
 
+	// MOstrar la contraseña>
+	$('#reveal').mousedown(() => {
+		$('#clave').attr('type', 'text')
+	})
+	$('#reveal').mouseup(() => {
+		$('#clave').attr('type', 'password')
+	})
+
 
 	// eliminar publicacion
 	$('.delpost').click(function(){

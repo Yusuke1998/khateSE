@@ -30,14 +30,16 @@ class DatabaseSeeder extends Seeder
 				'first_name' => 'Pepito',
 				'last_name'	 => 'Fuentes',
 				'phone'		 => '04244444444',
-				'avatar'     => 'user.png'
+				'avatar'     => 'user.png',
+				'created_at' => now()
 			],
 			[
 				'pin' => '140000000',
 				'first_name' => 'jose',
 				'last_name'	 => 'lopez',
 				'phone'		 => '04140001010',
-				'avatar'     => 'user.png'
+				'avatar'     => 'user.png',
+				'created_at' => now()
 			],
 		]);
 
@@ -46,32 +48,45 @@ class DatabaseSeeder extends Seeder
 				'email' 	 => 'pepito@fuentes.com',
 				'password'   => bcrypt('pepito123'),
 				'type'		 => 'Profesor',
-				'people_id'	 => 1
+				'people_id'	 => 1,
+				'created_at' => now()
 			],
 			[
 				'email' 	 => 'jose@lopez.com',
 				'password'   => bcrypt('jose123'),
 				'type'		 => 'Estudiante',
-				'people_id'	 => 2
+				'people_id'	 => 2,
+				'created_at' => now()
 			]
 		]);
 
 		DB::table('topics')->insert([
-			'topic' 	 => 'TopicoUno',
+			['topic' 	 => 'Topico Uno'],
+			['topic' 	 => 'Topico dos']
 		]);
 
 		DB::table('posts')->insert([
-			'post' 	     => 'HOla esto es un post',
-			'file'       => 'file.pdf',
-			'topic_id'	 => 1,
-			'people_id'  => 1,
-			'created_at' => now()
+			[
+				'post' 	     => 'HOla esto es un post',
+				'file'       => 'file.pdf',
+				'topic_id'	 => 1,
+				'people_id'  => 1,
+				'created_at' => now()
+			],
+			[
+				'post' 	     => 'Probando el post desde los seeders',
+				'file'       => '',
+				'topic_id'	 => 2,
+				'people_id'  => 1,
+				'created_at' => now()
+			]
 		]);
 
 		DB::table('comments')->insert([
 			'comment'    => 'HOla esto es un comentario bla a sdasd',
 			'people_id'  => 2,
-			'post_id'    => 1
+			'post_id'    => 1,
+			'created_at' => now()
 		]);
 
 
@@ -81,7 +96,7 @@ class DatabaseSeeder extends Seeder
 		]);
 
 		DB::table('notes')->insert([
-			'note' 	   => '100',
+			'note' 	   => '80',
 			'test_id'  => 1,
 			'user_id' => 2,
 		]);

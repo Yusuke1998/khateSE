@@ -81,6 +81,18 @@
 								@endif
 							</div>
 							<div class="col md-form">
+								<i class="fas fa-user-circle prefix"></i>
+								<select name="type" class="ml-5 mdb-select colorful-select dropdown-dark" id="type" required>
+									<option disabled selected>Selecciona un tipo de cuenta</option>
+									<option value="Estudiante">Estudiante</option>
+									<option value="Profesor">Profesor</option>
+								</select>
+							</div>
+
+						</div>
+
+						<div class="form-row">
+							<div class="col md-form">
 								<i class="fas fa-key prefix"></i>
 								<input type="password" id="pass" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" required>
 								<label for="pass">Contraseña</label>
@@ -90,9 +102,6 @@
 									</span>
 								@endif
 							</div>
-						</div>
-
-						<div class="form-row">
 							<div class="col-md-6 md-form">
 								 <i class="fas fa-key prefix"></i>
 								<input type="password" id="passw" name="password_confirmation" class="form-control" required>

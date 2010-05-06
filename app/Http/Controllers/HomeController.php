@@ -38,7 +38,6 @@ class HomeController extends Controller
 	{
 		// $allposts = Post::all()->sortByDesc('id');
 
-
 		$topics   = Topic::all();
 
 		$allposts = DB::table('posts')
@@ -47,7 +46,6 @@ class HomeController extends Controller
 					->join('topics', 'topics.id', '=', 'posts.topic_id')
 					->select('people.first_name', 'people.last_name', 'people.avatar', 'users.type', 'users.email', 'posts.post', 'posts.id', 'posts.file', 'posts.created_at', 'topics.topic')
 					->get()->sortByDesc('id');
-
 
 		$students = DB::table('users')
 					->join('people', 'people.id', '=', 'users.people_id')
@@ -120,7 +118,6 @@ class HomeController extends Controller
 						->where('topic_id', $req->input('topicid'))
 						->get()->sortByDesc('id');
 
-
 		$topics     = Topic::all();
 
 		$students   = DB::table('users')
@@ -180,6 +177,7 @@ class HomeController extends Controller
 	}
 
 
+
 	// Solicitud ajax
 	public function getpublicacion(Request $req)
 	{
@@ -194,7 +192,6 @@ class HomeController extends Controller
 
 
 	// Logica del formulario
-
 	public function publicar(Request $req)
 	{
 		$post = new Post();
@@ -297,6 +294,38 @@ class HomeController extends Controller
 		$post->delete();
 
 		return redirect('home')->with('success', 'La publicación se ha eliminado correctamente.');
+	}
+
+	// Editar perfil
+	public function editarperfil(Request $req)
+	{
+		$peopleid = $req->input('peopleid');
+		$userid   = $req->input('userid');
+
+		$people   = People::find($peopleid);
+		$user     = User::find($userid);
+
+		$people->pin 		= $req->input('pin');
+		$people->first_name = $req->input('first_name');
+		$people->last_name  = $req->input('last_name');
+		$people->phone 		= $req->input('phone');
+
+		if ( $req->file('file') )
+		{
+			if ( $people->avatar !== 'user.png' )
+			{
+				Storage::delete($people->avatar);
+			}
+			$people->avatar = $req->file('file')->store('');
+		}
+
+		$user->email = $req->input('email');
+		$user->about = $req->input('about');
+
+		$people->save();
+		$user->save();
+
+		return redirect('profile')->with('success', 'Perfil editado satisfactoriamente.');
 	}
 
 }

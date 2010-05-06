@@ -19,6 +19,8 @@ Route::post('eliminarcomment', 'HomeController@eliminarcomment');
 Route::post('editarpublicacion', 'HomeController@editarpublicacion');
 Route::post('editarcomentario', 'HomeController@editarcomentario');
 
+Route::post('editarperfil', 'HomeController@editarperfil');
+
 Route::get('profile', 'HomeController@profile');
 Route::get('home', 'HomeController@index')->name('home');
 Route::get('home/{topic}', 'HomeController@topic')->where('topic', '^[A-Za-z_]+$');

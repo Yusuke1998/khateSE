@@ -13,14 +13,14 @@
 					<div class="card testimonial-card">
 						<div class="card-up red lighten-1"></div>
 						<div class="avatar mx-auto white">
-							<img src="{{ asset('images/'.$me[0]->avatar) }}" class="rounded-circle" alt="woman avatar">
+							<img src="{{ asset('storage/'.$me[0]->avatar) }}" class="rounded-circle" alt="404">
 						</div>
 						<div class="card-body">
 							<h4 class="card-title">{{ $me[0]->first_name }} {{ $me[0]->last_name }}</h4>
 							<p>{{ $me[0]->type }}</p>
 							@if( $me[0]->about )
 								<hr>
-								<p><i class="fa fa-quote-left"></i> $me[0]->about</p>
+								<p><i class="fa fa-quote-left mr-2"></i> {{ $me[0]->about }}</p>
 							@endif
 						</div>
 					</div>
@@ -40,7 +40,8 @@
 							<ul class="list-group">
 								@foreach( $topics as $topic )
 									<li class="list-group-item">
-										<a href='{{ url("home/$topic->topic") }}'>{{ $topic->topic }}</a>
+										{{ $topic->topic }}
+										{{-- <a href='{{ url("home/$topic->topic") }}'>{{ $topic->topic }}</a> --}}
 									</li>
 								@endforeach
 							</ul>
@@ -141,7 +142,7 @@
 							<div class="card-body">
 								<div class="row">
 									<div class="col-2">
-										<img src="{{ asset('images/'.$post->avatar) }}" width="60px" height="60px">
+										<img class="rounded-circle" src="{{ asset('storage/'.$post->avatar) }}" width="60px" height="60px">
 									</div>
 									<div class="col-10">
 										<div class="d-flex justify-content-between">
@@ -176,27 +177,47 @@
 
 										@if( $post->file )
 
-											@if( preg_match('/[\.jpg|\.jpeg|\.png|\.gif]$/', $post->file) )
+											@if( preg_match('/[\.jpg|\.jpeg|\.png]$/', $post->file) )
 
 												<div class="view zoom overlay">
 													<img class="img-fluid" src='{{ asset("storage/$post->file") }}' target="_blank">
+												</div>
+
+											@elseif( strrpos($post->file, '.txt') )
+
+												<hr>
+												<div class="row">
+													<div class="col-1">
+														<i class="fas fa-file-alt fa-2x grey-text"></i>
+													</div>
+													<div class="col-11">
+														<a href='{{ asset("storage/$post->file") }}' target="_blank">{{ $post->file }}</a>
+													</div>
 												</div>
 
 											@elseif( preg_match('/[\.pdf]$/', $post->file) )
 
 												<hr>
 												<div class="row">
-													<div class="col-2">
-														<a href='{{ asset("images/pdf.jpg") }}' target="_blank"></a>
+													<div class="col-1">
+														<i class="fas fa-file-pdf fa-2x red-text"></i>
 													</div>
 													<div class="col-10">
-														<p>{{ $post->file }}</p>
+														<a href='{{ asset("storage/$post->file") }}' target="_blank">{{ $post->file }}</a>
 													</div>
 												</div>
 
 											@elseif( preg_match('/[\.docx|\.doc|\.odt|\.otp|\.otg]$/', $post->file) )
 
-												<p>{{ $post->file }}</p>
+												<hr>
+												<div class="row">
+													<div class="col-1">
+														<i class="fas fa-file-word fa-2x blue-text"></i>
+													</div>
+													<div class="col-11">
+														<a href='{{ asset("storage/$post->file") }}' target="_blank">{{ $post->file }}</a>
+													</div>
+												</div>
 
 											@endif
 										@endif
@@ -209,7 +230,7 @@
 
 										<div class="row">
 											<div class="col-2">
-												<img src="{{ asset('images/'.$comment->avatar) }}" width="50px" height="50px">
+												<img src="{{ asset('storage/'.$comment->avatar) }}" width="50px" height="50px">
 											</div>
 											<div class="col-10">
 												<div class="d-flex justify-content-between">
@@ -241,27 +262,47 @@
 
 												@if( $comment->file )
 
-													@if( preg_match('/[\.jpg|\.jpeg|\.png|\.gif]$/', $comment->file) )
+													@if( preg_match('/[\.jpg|\.jpeg|\.png]$/', $comment->file) )
 
 														<div class="view zoom overlay">
 															<img class="img-fluid" src='{{ asset("storage/$comment->file") }}' target="_blank">
 														</div>
 
-													@elseif( preg_match('/[\.pdf]$/', $comment->file) )
+													@elseif( strrpos($comment->file, '.txt') )
+
+														<hr>
+														<div class="row">
+															<div class="col-1">
+																<i class="fas fa-file-alt fa-2x blue-text"></i>
+															</div>
+															<div class="col-11">
+																<a href='{{ asset("storage/$post->file") }}' target="_blank">{{ $post->file }}</a>
+															</div>
+														</div>
+
+													@elseif( strrpos($comment->file, '.pdf') )
 
 														<hr>
 														<div class="row">
 															<div class="col-2">
-																<a href='{{ asset("images/pdf.jpg") }}' target="_blank"></a>
+																<i class="fas fa-file-pdf fa-2x red-text"></i>
 															</div>
 															<div class="col-10">
-																<p>{{ $comment->file }}</p>
+																<a href='{{ asset("storage/$post->file") }}' target="_blank">{{ $post->file }}</a>
 															</div>
 														</div>
 
 													@elseif( preg_match('/[\.docx|\.doc|\.odt|\.otp|\.otg]$/', $comment->file) )
 
-														<p>{{ $comment->file }}</p>
+														<hr>
+														<div class="row">
+															<div class="col-1">
+																<i class="fas fa-file-word fa-2x blue-text"></i>
+															</div>
+															<div class="col-11">
+																<a href='{{ asset("storage/$post->file") }}' target="_blank">{{ $post->file }}</a>
+															</div>
+														</div>
 
 													@endif
 												@endif
@@ -273,7 +314,7 @@
 							@endif
 							<div class="card-footer py-0 d-flex justify-content-between align-items-center">
 								<div class="mr-2">
-									<img src="{{ asset('images/'.$me[0]->avatar) }}" class="border" width="40px" height="40px">
+									<img src="{{ asset('storage/'.$me[0]->avatar) }}" class="border" width="40px" height="40px">
 								</div>
 								<form action="{{ url('comentar') }}" method="post" class="md-form ml-2 w-100" enctype="multipart/form-data">
 									@csrf

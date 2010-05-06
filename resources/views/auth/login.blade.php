@@ -13,7 +13,7 @@
 				<div class="form-row">
 					<div class="col md-form">
 						<i class="fas fa-envelope prefix"></i>
-						<input type="email" name="email" id="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }} validate" value="{{ old('email') }}" required>
+						<input type="email" autofocus name="email" id="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }} validate" value="{{ old('email') }}" required>
 						<label for="email">Correo Electrónico</label>
 						@if ($errors->has('email'))
 							<span class="invalid-feedback" role="alert">

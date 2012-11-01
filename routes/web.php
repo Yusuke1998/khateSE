@@ -14,7 +14,7 @@ Route::post('filtro', 'HomeController@topicid');
 Route::get('getpublicacion', 'HomeController@getpublicacion'); // para la solicitud ajax
 Route::get('getcomentario', 'HomeController@getcomentario'); // para la solicitud ajax
 Route::get('addnotas', 'HomeController@addnotas');
-Route::get('activateCertificate', 'HomeController@activateCertificate'); // para la solicitud ajax
+Route::get('toggleCertificate', 'HomeController@toggleCertificate'); // para la solicitud ajax
 
 Route::post('eliminarpost', 'HomeController@eliminarpost');
 Route::post('eliminarcomment', 'HomeController@eliminarcomment');
@@ -28,7 +28,9 @@ Route::get('home', 'HomeController@index')->name('home');
 Route::get('post/{id}', 'HomeController@postid')->where('id', '^[\d]+$');
 Route::get('progreso', 'HomeController@progreso');
 Route::get('certificado', 'HomeController@certificado');
+Route::get('notaspdf', 'HomeController@notaspdf');
 
+Route::post('bloquear', 'HomeController@bloquear');
 
 Route::get('notas/{topic}', 'HomeController@topic')->where('topic', '^[A-Za-z_]+$');
 Route::get('notas', 'HomeController@notas');

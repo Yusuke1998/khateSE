@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Software Educativo</title>
+	<title>Derecho Romano</title>
 	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
@@ -15,7 +15,7 @@
 			<div class="modal-content">
 				<div class="modal-header red lighten-1 white-text">
 					<h5 class="modal-title" id="exampleModalLabel">Regístrate</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
@@ -127,7 +127,7 @@
 			<div class="row">
 
 				<div class="col animated slideInLeft white-text delay-1s">
-					<h1 class="font-weight-bold">Software Educativo</h1>
+					<h1 class="font-weight-bold">Derecho Romano</h1>
 					<hr>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, obcaecati voluptatem ducimus aut accusantium sunt aut accusantium sunt.</p>
@@ -196,7 +196,7 @@
 
 	<div class="container my-5">
 
-		<h2 class="text-center mt-5 wow fadeInDownBig">About Software Educativo</h2>
+		<h2 class="text-center mt-5 wow fadeInDownBig">About Derecho Romano</h2>
 		<hr class="w-25 mb-5">
 
 		<div class="row">

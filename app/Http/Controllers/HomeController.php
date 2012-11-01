@@ -19,138 +19,173 @@ use App\Test;
 
 class HomeController extends Controller
 {
-
 	public function __construct()
 	{
 		$this->middleware('auth');
 	}
-
-
 	// Mostrat las vistas
-
 
 	public function index()
 	{
-		$topics   = Topic::all();
+		if ( Auth::user()->isactivated ) {
 
-		$allposts = DB::table('posts')
-					->join('people', 'people.id', '=', 'posts.people_id')
-					->join('users', 'people.id', '=', 'users.people_id')
-					->join('topics', 'topics.id', '=', 'posts.topic_id')
-					->select('people.first_name', 'people.last_name', 'people.avatar', 'users.type', 'users.email', 'posts.post', 'posts.id', 'posts.file', 'posts.created_at', 'topics.topic')
-					->get()->sortByDesc('id');
+			$topics   = Topic::all();
 
-		$students = User::where('type', 'Estudiante')->get();
-
-		$id = Auth::user()->id;
-		$me = User::find($id);
-
-		return view('user.dashboard')
-			->with('me', $me)
-			->with('posts', $allposts)
-			->with('estudiantes', $students)
-			->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
-			->with('topics', $topics);
-	}
-
-	public function profile()
-	{
-		$topics = Topic::all();
-
-		$id = Auth::user()->id;
-		$me = User::find($id);
-
-		return view('user.profile')
-				->with('topics', $topics)
-				->with('me', $me);
-	}
-
-	public function topicid(Request $req)
-	{
-		$posttopics = DB::table('posts')
+			$allposts = DB::table('posts')
 						->join('people', 'people.id', '=', 'posts.people_id')
 						->join('users', 'people.id', '=', 'users.people_id')
 						->join('topics', 'topics.id', '=', 'posts.topic_id')
 						->select('people.first_name', 'people.last_name', 'people.avatar', 'users.type', 'users.email', 'posts.post', 'posts.id', 'posts.file', 'posts.created_at', 'topics.topic')
-						->where('topic_id', $req->input('topicid'))
 						->get()->sortByDesc('id');
 
-		$topics     = Topic::all();
+			$students = User::where('type', 'Estudiante')->get();
 
-		$students   = User::where('type', 'Estudiante')->get();
+			$id = Auth::user()->id;
+			$me = User::find($id);
 
-		$id = Auth::user()->id;
-		$me = User::find($id);
+			return view('user.dashboard')
+				->with('me', $me)
+				->with('posts', $allposts)
+				->with('estudiantes', $students)
+				->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
+				->with('topics', $topics);
+		}
+		else {
+			return view('user.disactivated');
+		}
+	}
 
-		return view('user.dashboard')
-			->with('me', $me)
-			->with('estudiantes', $students)
-			->with('posts', $posttopics)
-			->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
-			->with('topics', $topics);
+	public function profile()
+	{
+		if ( Auth::user()->isactivated ) {
+
+			$topics = Topic::all();
+
+			$id = Auth::user()->id;
+			$me = User::find($id);
+
+			return view('user.profile')
+					->with('topics', $topics)
+					->with('me', $me);
+		}
+		else {
+			return view('user.disactivated');
+		}
+	}
+
+	public function topicid(Request $req)
+	{
+		if ( Auth::user()->isactivated ) {
+
+			$posttopics = DB::table('posts')
+							->join('people', 'people.id', '=', 'posts.people_id')
+							->join('users', 'people.id', '=', 'users.people_id')
+							->join('topics', 'topics.id', '=', 'posts.topic_id')
+							->select('people.first_name', 'people.last_name', 'people.avatar', 'users.type', 'users.email', 'posts.post', 'posts.id', 'posts.file', 'posts.created_at', 'topics.topic')
+							->where('topic_id', $req->input('topicid'))
+							->get()->sortByDesc('id');
+
+			$topics     = Topic::all();
+
+			$students   = User::where('type', 'Estudiante')->get();
+
+			$id = Auth::user()->id;
+			$me = User::find($id);
+
+			return view('user.dashboard')
+				->with('me', $me)
+				->with('estudiantes', $students)
+				->with('posts', $posttopics)
+				->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
+				->with('topics', $topics);
+		}
+		else {
+			return view('user.disactivated');
+		}
 	}
 
 	public function postid($id)
 	{
-		$topics = Topic::all();
+		if ( Auth::user()->isactivated ) {
 
-		$post = DB::table('posts')
-				->join('people', 'people.id', '=', 'posts.people_id')
-				->join('users', 'people.id', '=', 'users.people_id')
-				->join('topics', 'topics.id', '=', 'posts.topic_id')
-				->select('people.first_name', 'people.last_name', 'people.avatar', 'users.type', 'users.email', 'posts.post', 'posts.id', 'posts.file', 'posts.created_at', 'topics.topic')
-				->where('posts.id', $id)
-				->get();
+			$topics = Topic::all();
 
-		$comments = DB::table('comments')
-				->join('people', 'people.id', '=', 'comments.people_id')
-				->join('users', 'people.id', '=', 'users.people_id')
-				->select('people.first_name', 'people.last_name', 'people.avatar', 'users.type', 'users.email', 'comments.comment', 'comments.file', 'comments.created_at', 'comments.id')
-				->where('post_id', $id)
-				->get();
+			$post = DB::table('posts')
+					->join('people', 'people.id', '=', 'posts.people_id')
+					->join('users', 'people.id', '=', 'users.people_id')
+					->join('topics', 'topics.id', '=', 'posts.topic_id')
+					->select('people.first_name', 'people.last_name', 'people.avatar', 'users.type', 'users.email', 'posts.post', 'posts.id', 'posts.file', 'posts.created_at', 'topics.topic')
+					->where('posts.id', $id)
+					->get();
 
-		$students = User::where('type', 'Estudiante')->get();
+			$comments = DB::table('comments')
+					->join('people', 'people.id', '=', 'comments.people_id')
+					->join('users', 'people.id', '=', 'users.people_id')
+					->select('people.first_name', 'people.last_name', 'people.avatar', 'users.type', 'users.email', 'comments.comment', 'comments.file', 'comments.created_at', 'comments.id')
+					->where('post_id', $id)
+					->get();
 
-		$id = Auth::user()->id;
-		$me = User::find($id);
+			$students = User::where('type', 'Estudiante')->get();
 
-		return view('user.dashboard')
-			->with('me', $me)
-			->with('estudiantes', $students)
-			->with('posts', $post)
-			->with('comments', $comments)
-			->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
-			->with('topics', $topics);
+			$id = Auth::user()->id;
+			$me = User::find($id);
+
+			return view('user.dashboard')
+				->with('me', $me)
+				->with('estudiantes', $students)
+				->with('posts', $post)
+				->with('comments', $comments)
+				->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
+				->with('topics', $topics);
+		}
+		else {
+			return view('user.disactivated');
+		}
 	}
 
 	public function progreso()
 	{
-		$people = People::where('id', Auth::user()->people_id)->get();
-		$topics = Topic::all();
+		if ( Auth::user()->isactivated ) {
 
-		$id = Auth::user()->id;
-		$me = User::find($id);
+			$people = People::where('id', Auth::user()->people_id)->get();
+			$topics = Topic::all();
 
-		$notas  = Note::where('user_id', $id)->get();
+			$id = Auth::user()->id;
+			$me = User::find($id);
 
-		return view('user.progreso')
-				->with('topics', $topics)
-				->with('notas', $notas)
-				->with('people', $people)
-				->with('me', $me);
+			$notas  = Note::where('user_id', $id)->get();
+
+			return view('user.progreso')
+					->with('topics', $topics)
+					->with('notas', $notas)
+					->with('people', $people)
+					->with('me', $me);
+		}
+		else {
+			return view('user.disactivated');
+		}
 	}
 
 	public function certificado()
 	{
-		$id = Auth::user()->people_id;
-		$p  = People::where('id', $id)->get();
+		$id  = Auth::user()->people_id;
+		$p   = People::where('id', $id)->get();
+		$pin = $p[0]->pin;
+		$nota = 0;
 
 		if ( $p[0]->isgraduated != 0 )
 		{
-			$data['data'] = Note::where('user_id', $id)->get();
+			$notas = Note::where('user_id', $id)->get();
 
-			$pdf = PDF::loadView('pdf.certificado', $data);
-			return $pdf->download('test.pdf');
+			for ($i=0; $i < count($notas); $i++) {
+				$nota += $notas[$i]->note;
+			}
+
+			$data['data'] = $notas;
+			$data['nota'] = $nota / count($notas);
+
+			$pdf = PDF::loadView('pdf.certificado', $data)->setPaper('letter', 'landscape');
+			return $pdf->download("certificado-$pin.pdf");
 		}
 		else {
 			return redirect()->back();
@@ -219,33 +254,34 @@ class HomeController extends Controller
 	{
 		return Comment::find($req->input('idcomment'));
 	}
-	public function activateCertificate(Request $req)
+	public function toggleCertificate(Request $req)
 	{
-		$id = $req->input('peopleid');
-		$people = People::find($id);
+		$peopleid = $req->input('peopleid');
+		$people   = People::find($peopleid);
 
-		$people->isgraduated = 1;
+		if( $people->isgraduated == 1 )
+		{
+			$people->isgraduated = 0;
+		}
+		else {
+			$people->isgraduated = 1;
+		}
+
 		$people->save();
 
 		echo $people->isgraduated;
 	}
 	public function addnotas(Request $req)
 	{
-		$id    = $req->input('userid');
-		$notes = Note::where('user_id', $id)->get();
-		$c 	   = 0;
+		$testid  = $req->input('testid');
+		$userid  = $req->input('userid');
+		$note    = $req->input('note');
 
-		for( $i=0; $i < count($notes); $i++ )
-		{
-			if( $notes[$i]->test_id === $notes[$i]->test_id )
-			{
-				$c++;
-			}
-		}
+		$notes = Note::where('user_id', $userid)->where('test_id', $testid)->get();
 
-		if ( $c >= 1 )
+		if ( isset($notes[0]) && $notes[0]->test_id == $testid && $notes[0]->user_id == $userid )
 		{
-			die('true');
+			die('false');
 		}
 		else
 		{
@@ -261,6 +297,17 @@ class HomeController extends Controller
 		}
 	}
 
+
+	// Boton de notas
+	public function notaspdf(Request $req)
+	{
+		$data['notas'] = Note::all();
+
+		// return view('pdf.notas')->with('notas', $data['notas']);
+
+		$pdf = PDF::loadView('pdf.notas', $data);
+		return $pdf->download('notas.pdf');
+	}
 
 	// Logica del formulario
 
@@ -421,6 +468,24 @@ class HomeController extends Controller
 		$test->topic_id = $req->input('topicid');
 
 		$test->save();
+
+		return back();
+	}
+
+	public function bloquear(Request $req)
+	{
+		$user = User::where('people_id', $req->input('peopleid'))->get();
+
+		if ($user[0]->isactivated == 1)
+		{
+			$user[0]->isactivated = 0;
+		}
+		else
+		{
+			$user[0]->isactivated = 1;
+		}
+
+		$user[0]->save();
 
 		return back();
 	}

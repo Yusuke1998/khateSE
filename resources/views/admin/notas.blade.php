@@ -29,11 +29,31 @@
 								@foreach( $estudiantes as $e )
 									<li class="list-group-item d-flex justify-content-between align-items-center px-3">
 										<span class="f-2">{{ $e->people->first_name.' '.$e->people->last_name }}</span>
-										<button data-toggle="tooltip"
-											{{ $e->people->isgraduated == 1? "title=Desbloqueado" : "title=Desbloquear_Certificado" }}
-											data-peopleid="{{ $e->people->id }}"
-											class="btn btn-sm p-2 actcert {{ $e->people->isgraduated == 1? 'btn-success' : 'btn-danger' }}">
-										<i class="fas fa-check"></i></button>
+
+
+										<!-- Split button -->
+										<div class="btn-group">
+											<button type="button" class="btn btn-flat p-1" data-toggle="dropdown" aria-haspopup="true"aria-expanded="false">
+												<i class="fas fa-ellipsis-v"></i>
+											</button>
+											<div class="dropdown-menu">
+												@if( $e->isactivated == 1 )
+													<a class="dropdown-item blockuser" data-toggle="modal" data-peopleid="{{ $e->people->id }}" href="#bloquear">Bloquear usuario</a>
+												@else
+													<a class="dropdown-item" onclick="event.preventDefault();document.getElementById('formpeopleid').submit();">Activar usuario</a>
+													<form action="{{ url('bloquear') }}" method="post" id="formpeopleid" style="display: none;">
+														@csrf
+														<input type="hidden" name="peopleid" value="{{ $e->people->id }}">
+													</form>
+												@endif
+
+												@if( $e->people->isgraduated == 1 )
+													<a class="dropdown-item actcert" data-peopleid="{{ $e->people->id }}" id="toggle">Deshabilitar certificado</a>
+												@else
+													<a class="dropdown-item actcert" data-peopleid="{{ $e->people->id }}" id="toggle">Habilitar certificado</a>
+												@endif
+											</div>
+										</div>
 									</li>
 								@endforeach
 							</ul>
@@ -64,9 +84,14 @@
 			<div class="card">
 				<h4 class="card-header red lighten-1 white-text d-flex justify-content-between align-items-center">
 					<span><i class="fas fa-clipboard-list mr-2"></i> Notas</span>
-					<button class="btn btn-md btn-elegant" data-toggle="modal" data-target="#notanueva">
-						<i class="fas fa-clipboard-list mr-2"></i>Añadir nota
-					</button>
+					<div>
+						<a class="btn btn-md btn-elegant" href="{{ url('notaspdf') }}">
+							<i class="fas fa-file-pdf mr-2"></i>Descargar PDF
+						</a>
+						<button class="btn btn-md btn-elegant" data-toggle="modal" data-target="#notanueva">
+							<i class="fas fa-clipboard-list mr-2"></i>Añadir nota
+						</button>
+					</div>
 				</h4>
 				<div class="card-body">
 
@@ -109,7 +134,7 @@
 </div>
 
 
-<!-- Modal -->
+<!-- Modal para añadir nota -->
 <div class="modal fade" id="notanueva" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
@@ -127,7 +152,7 @@
 							<select class="mdb-select md-form colorful-select dropdown-dark" name="testid" id="testid" required>
 								<option disabled selected>Escoge una prueba</option>
 								@foreach( $tests as $t )
-									<option value="{{ $t->id }}">{{ $t->link }}</option>
+									<option value="{{ $t->id }}">{{ $t->topic->topic }} - {{ $t->link }}</option>
 								@endforeach
 							</select>
 							<label>Selecciona un enlace de examen </label>
@@ -152,6 +177,34 @@
 				<div class="modal-footer">
 					<button type="button" class="btn-md btn btn-elegant" data-dismiss="modal">Cerrar</button>
 					<button type="submit" class="btn-md btn btn-danger"><i class="fas fa-save mr-2"></i>Guardar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<!-- Modal bloquer estudiante -->
+<div class="modal fade" id="bloquear" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Desactivar cuenta</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form action="{{ url('bloquear') }}" method="post">
+				@csrf
+				<input type="hidden" name="peopleid" id="desacpeopleid">
+				<div class="modal-body">
+
+					<p class="lead text-center">¿Estás seguro de desactivarle la cuenta a éste estudiante?</p>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn-md btn btn-elegant" data-dismiss="modal">Cerrar</button>
+					<button type="submit" class="btn-md btn btn-danger"><i class="fas fa-save mr-2"></i>Desactivar</button>
 				</div>
 			</form>
 		</div>

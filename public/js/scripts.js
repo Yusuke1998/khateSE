@@ -27,21 +27,25 @@ $(() => {
 	})
 
 
+
 	$('.actcert').click(function(){
 		let id = $(this)[0].dataset.peopleid
 
 		$.ajax({
 			method : 'get',
-			url    : 'http://127.0.0.1:8000/activateCertificate',
+			url    : 'http://127.0.0.1:8000/toggleCertificate',
 			data   : { peopleid: id  }
 		})
 
 		.done((data) => {
+			console.log(data)
 			if ( data == 1 ) {
 				toastr.success('El estudiante ahora puede descargar su certificado.')
+				$('#toggle').text('Deshabilitar certificado')
 			}
 			else {
-				toastr.error(data, 'ERROR')
+				toastr.info('Le has desactivado la opción del certificado.')
+				$('#toggle').text('Habilitar certificado')
 			}
 		})
 
@@ -69,7 +73,7 @@ $(() => {
 			$('#userid').val('')
 			$('#nota').val('')
 
-			if (data == 'true')
+			if (data == 'false')
 			{
 				toastr.error('Esta nota ya ha sido cargada.')
 				return false
@@ -89,6 +93,14 @@ $(() => {
 
 	})
 
+
+	// bloquear usuario
+	$('.blockuser').click(function(){
+		let peopleid = $(this)[0].dataset.peopleid
+		$('#desacpeopleid').val(peopleid)
+
+		console.log($('#desacpeopleid'))
+	})
 
 
 	// eliminar publicacion

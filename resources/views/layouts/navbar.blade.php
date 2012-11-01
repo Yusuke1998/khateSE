@@ -2,7 +2,7 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark red lighten-1 scrolling-navbar">
 
 	<!-- Navbar brand -->
-	<a class="navbar-brand" href="{{ url('home') }}"><i class="fas fa-graduation-cap mr-2"></i>Software Educativo</a>
+	<a class="navbar-brand" href="{{ url('home') }}"><i class="fas fa-graduation-cap mr-2"></i>Derecho Romano</a>
 
 	<!-- Collapse button -->
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">

@@ -157,7 +157,7 @@
 														<i class="fas fa-ellipsis-v fa-2x"></i>
 													</button>
 													<div class="dropdown-menu">
-														<a class="dropdown-item" data-toggle="modal" href="#editpost">Editar</a>
+														<a class="dropdown-item editpost" data-postid="{{ $post->id }}" data-toggle="modal" href="#editpost">Editar</a>
 														<a class="dropdown-item delpost" data-postid="{{ $post->id }}" data-toggle="modal" href="#delpost">Eliminar</a>
 													</div>
 												</div>
@@ -223,7 +223,7 @@
 																<i class="fas fa-ellipsis-h fa-2x"></i>
 															</button>
 															<div class="dropdown-menu">
-																<a class="dropdown-item" data-toggle="modal" href="#editcomment">Editar</a>
+																<a class="dropdown-item editcomment" data-id="{{ $comment->id }}" data-toggle="modal" href="#editcomment">Editar</a>
 																<a class="dropdown-item delcomment" data-id="{{ $comment->id }}" data-toggle="modal" href="#delcomment">Eliminar</a>
 															</div>
 														</div>
@@ -239,7 +239,7 @@
 											<div class="col">
 												<p>{{ $comment->comment }}</p>
 
-												@if( $post->file )
+												@if( $comment->file )
 
 													@if( preg_match('/[\.jpg|\.jpeg|\.png|\.gif]$/', $comment->file) )
 
@@ -272,29 +272,35 @@
 								@endforeach
 							@endif
 							<div class="card-footer py-0 d-flex justify-content-between align-items-center">
-								<img src="{{ asset('images/'.$me[0]->avatar) }}" class="border" width="40px" height="40px">
-								<form action="{{ url('comentar') }}" method="post" class="md-form ml-2 w-100 border" enctype="multipart/form-data">
+								<div class="mr-2">
+									<img src="{{ asset('images/'.$me[0]->avatar) }}" class="border" width="40px" height="40px">
+								</div>
+								<form action="{{ url('comentar') }}" method="post" class="md-form ml-2 w-100" enctype="multipart/form-data">
 									@csrf
-									<div class="form-group form-inline">
-										<input type="hidden" name="postid" value="{{ $post->id }}">
-										<input type="hidden" name="peopleid" value="{{ Auth::user()->people_id }}">
+									<div class="form-row">
+										<div class="col">
+											<input type="hidden" name="postid" value="{{ $post->id }}">
+											<input type="hidden" name="peopleid" value="{{ Auth::user()->people_id }}">
 
-										<input type="text" name="comentario" id="comentario" class="form-control" required>
-										<label for="comentario">Escribe una respuesta...</label>
-
-										<div class="file-field ">
-											<div class="btn btn-danger btn-flat p-2 float-right">
-												<i class="fas fa-file-upload"></i>
-												<input type="file" name="file">
-											</div>
+											<input type="text" name="comentario" id="comentario" class="form-control float-left" required>
+											<label for="comentario">Escribe una respuesta...</label>
+										</div>
+										<div class="col-1">
+											<button type="submit" class="btn btn-sm btn-danger p-2">
+												<i class="fas fa-comment"></i>
+											</button>
 										</div>
 									</div>
 
-
-
-									{{-- <div class="file-path-wrapper">
-										<input class="file-path validate" type="text" placeholder="Upload your file">
-									</div> --}}
+									<div class="file-field">
+										<div class="py-2 float-left">
+											<i class="fas fa-file-upload"></i>
+											<input type="file" name="filecomment">
+										</div>
+										<div class="file-path-wrapper">
+											<input class="file-path validate" type="text" placeholder="Sube un archivo">
+										</div>
+									</div>
 
 								</form>
 							</div>
@@ -339,10 +345,34 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form action="">
+			<form action="{{ url('editarcomentario') }}" method="post" class="px-3" enctype="multipart/form-data">
+				@csrf
+				<input type="hidden" name="idcomment" id="commentid">
+				<input type="hidden" name="postid" id="postid">
+				<input type="hidden" name="peopleid" id="peopleid">
+
 				<div class="modal-body">
-					...
+					<div class="form-row">
+						<div class="col">
+							<label for="comment">Comentario</label>
+							<input type="text" id="comment" name="comentario" class="form-control">
+						</div>
+					</div>
+					<div class="form-row mt-1">
+						<div class="col md-form">
+							 <div class="file-field">
+								<div class="btn btn-primary btn-sm float-left">
+									<i class="fas fa-file-upload"></i>
+									<input type="file" name="filecomment">
+								</div>
+								<div class="file-path-wrapper">
+									<input class="file-path validate" type="text" placeholder="Sube tu archivo">
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
+
 				<div class="modal-footer">
 					<button type="button" class="btn btn-elegant btn-md" data-dismiss="modal">Cerrar</button>
 					<button type="submit" class="btn btn-danger btn-md"><i class="fas fa-edit mr-2"></i>Editar</button>
@@ -364,11 +394,12 @@
 			</div>
 			<form action="{{ url('eliminarcomment') }}" method="post">
 				@csrf
-				<input type="hidden" name="commentid" id="commentid">
+				<input type="hidden" name="commentid" id="commentidd">
 
 				<div class="modal-body">
 					<p class="lead text-center">¿Está seguro de eliminar éste comentario?</p>
 				</div>
+
 				<div class="modal-footer">
 					<button type="button" class="btn btn-elegant btn-md" data-dismiss="modal">Cerrar</button>
 					<button type="submit" class="btn btn-danger btn-md"><i class="fas fa-trash mr-2"></i>Eliminar</button>
@@ -390,13 +421,39 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
+			<form action="{{ url('editarpublicacion') }}" method="post" class="px-3" enctype="multipart/form-data">
+				@csrf
+				<input type="hidden" name="postid" id="editpostid">
+				<input type="hidden" name="topicid" id="topicidd">
+				<input type="hidden" name="peopleid" id="editpeopleid">
+
 				<div class="modal-body">
-					...
+					<div class="form-row">
+						<div class="col">
+							<label for="pub">Publicación</label>
+							<input type="text" id="pub" name="publicacion" class="form-control">
+						</div>
+					</div>
+					<div class="form-row mt-1">
+						<div class="col md-form">
+							 <div class="file-field">
+								<div class="btn btn-primary btn-sm float-left">
+									<i class="fas fa-file-upload"></i>
+									<input type="file" name="file">
+								</div>
+								<div class="file-path-wrapper">
+									<input class="file-path validate" type="text" placeholder="Sube tu archivo">
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
+
 				<div class="modal-footer">
 					<button type="button" class="btn btn-elegant btn-md" data-dismiss="modal">Cerrar</button>
 					<button type="submit" class="btn btn-danger btn-md"><i class="fas fa-edit mr-2"></i>Editar</button>
 				</div>
+			</form>
 		</div>
 	</div>
 </div>
@@ -412,7 +469,7 @@
 			</div>
 			<form action="{{ url('eliminarpost') }}" method="post">
 				@csrf
-				<input type="hidden" name="postid" id="postid">
+				<input type="hidden" name="postid" id="delpostid">
 
 				<div class="modal-body">
 					<p class="lead text-center">¿Está seguro de eliminar ésta publicación?</p>

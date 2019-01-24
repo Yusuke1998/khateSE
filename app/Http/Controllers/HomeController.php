@@ -177,7 +177,18 @@ class HomeController extends Controller
 			->with('posts', $post)
 			->with('comments', $comments)
 			->with('topics', $topics);
+	}
 
+
+	// Solicitud ajax
+	public function getpublicacion(Request $req)
+	{
+		return Post::find($req->input('idpost'));
+	}
+
+	public function getcomentario(Request $req)
+	{
+		return Comment::find($req->input('idcomment'));
 	}
 
 
@@ -186,7 +197,6 @@ class HomeController extends Controller
 
 	public function publicar(Request $req)
 	{
-
 		$post = new Post();
 
 		if ( $req->file('file') )
@@ -203,13 +213,53 @@ class HomeController extends Controller
 		return redirect('home');
 	}
 
+	public function editarpublicacion(Request $req)
+	{
+		$idpost = $req->input('postid');
+		$post   = Post::find($idpost);
+
+		if ( $req->file('file') )
+		{
+			Storage::delete($post->file);
+			$post->file  = $req->file('file')->store('');
+		}
+
+		$post->post      = $req->input('publicacion');
+		$post->topic_id  = $req->input('topicid');
+		$post->people_id = $req->input('peopleid');
+
+		$post->save();
+
+		return redirect("post/$idpost");
+	}
+
 	public function comentar(Request $req)
 	{
 		$comment = new Comment();
 
-		if ( $req->file('file') )
+		if ( $req->file('filecomment') )
 		{
-			$post->file = $req->file('file')->store('');
+			$comment->file = $req->file('filecomment')->store('');
+		}
+
+		$comment->comment   = $req->comentario;
+		$comment->post_id   = $req->postid;
+		$comment->people_id = $req->peopleid;
+
+		$comment->save();
+
+		return redirect("post/$req->postid");
+	}
+
+	public function editarcomentario(Request $req)
+	{
+		$id = $req->input('idcomment');
+		$comment = Comment::find($id);
+
+		if ( $req->file('filecomment') )
+		{
+			Storage::delete($comment->file);
+			$comment->file = $req->file('filecomment')->store('');
 		}
 
 		$comment->comment   = $req->comentario;
@@ -237,10 +287,10 @@ class HomeController extends Controller
 
 	public function eliminarpost(Request $req)
 	{
-		$id = $req->input('postid');
+		$id   = $req->input('postid');
 		$post = Post::find($id);
 
-		if ( asset($post->file) ) {
+		if ( isset($post->file) ) {
 			Storage::delete($post->file);
 		}
 

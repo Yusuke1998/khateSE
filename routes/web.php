@@ -11,8 +11,13 @@ Route::post('publicar', 'HomeController@publicar');
 Route::post('comentar', 'HomeController@comentar');
 Route::post('filtro', 'HomeController@topicid');
 
+Route::get('getpublicacion', 'HomeController@getpublicacion'); // para la solicitud ajax
+Route::get('getcomentario', 'HomeController@getcomentario'); // para la solicitud ajax
+
 Route::post('eliminarpost', 'HomeController@eliminarpost');
 Route::post('eliminarcomment', 'HomeController@eliminarcomment');
+Route::post('editarpublicacion', 'HomeController@editarpublicacion');
+Route::post('editarcomentario', 'HomeController@editarcomentario');
 
 Route::get('profile', 'HomeController@profile');
 Route::get('home', 'HomeController@index')->name('home');

@@ -4,6 +4,16 @@ $(() => {
 
 	new WOW().init()
 
+	$('[data-toggle="tooltip"]').tooltip()
+
+	$('#dtBasicExample').DataTable();
+	$('.dataTables_length').addClass('bs-select');
+
+	$('#notasdt').DataTable();
+	$('.dataTables_length').addClass('mdb-select mdb-form');
+
+
+
 	$('#topicid').change(() => {
 		$('#topicidform').submit()
 	})
@@ -15,6 +25,70 @@ $(() => {
 	$('#reveal').mouseup(() => {
 		$('#clave').attr('type', 'password')
 	})
+
+
+	$('.actcert').click(function(){
+		let id = $(this)[0].dataset.peopleid
+
+		$.ajax({
+			method : 'get',
+			url    : 'http://127.0.0.1:8000/activateCertificate',
+			data   : { peopleid: id  }
+		})
+
+		.done((data) => {
+			if ( data == 1 ) {
+				toastr.success('El estudiante ahora puede descargar su certificado.')
+			}
+			else {
+				toastr.error(data, 'ERROR')
+			}
+		})
+
+		.fail((error) => {
+			toastr.error('Ha ocurrido un error')
+			console.log('AJAX ERROR BELLOW')
+			console.error(error)
+		})
+	})
+
+
+	// ajax function than add new notes
+	$('#notesform').submit((e) => {
+		e.preventDefault()
+
+		$.ajax({
+			method : 'get',
+			url    : 'http://127.0.0.1:8000/addnotas',
+			data   : $('#notesform').serialize()
+		})
+
+		.done(data => {
+
+			$('#testid').val('')
+			$('#userid').val('')
+			$('#nota').val('')
+
+			if (data == 'true')
+			{
+				toastr.error('Esta nota ya ha sido cargada.')
+				return false
+			}
+
+			toastr.success(data)
+
+			setTimeout(() => {
+				toastr.info('Recarga la página para ver los cambios.')
+			}, 2000)
+		})
+
+		.fail(error => {
+			console.log(error)
+			toastr.error(error.statusText, 'Ha ocurrido un error')
+		})
+
+	})
+
 
 
 	// eliminar publicacion
@@ -62,6 +136,7 @@ $(() => {
 	$('.editcomment').click(function(){
 
 		let idcomment = $(this)[0].dataset.id
+
 
 		$.ajax({
 			url : 'http://127.0.0.1:8000/getcomentario',

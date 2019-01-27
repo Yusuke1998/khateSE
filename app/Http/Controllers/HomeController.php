@@ -6,38 +6,31 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon as BaseCarbon;
+use Barryvdh\DomPDF\Facade as PDF;
 
 use App\Post;
 use App\Topic;
 use App\People;
 use App\User;
 use App\Comment;
+use App\Note;
+use App\Test;
 
 class HomeController extends Controller
 {
-	/**
-	 * Create a new controller instance.
-	 *
-	 * @return void
-	 */
+
 	public function __construct()
 	{
 		$this->middleware('auth');
 	}
 
-	/**
-	 * Show the application dashboard.
-	 *
-	 * @return \Illuminate\Contracts\Support\Renderable
-
-	 */
 
 	// Mostrat las vistas
 
+
 	public function index()
 	{
-		// $allposts = Post::all()->sortByDesc('id');
-
 		$topics   = Topic::all();
 
 		$allposts = DB::table('posts')
@@ -47,65 +40,29 @@ class HomeController extends Controller
 					->select('people.first_name', 'people.last_name', 'people.avatar', 'users.type', 'users.email', 'posts.post', 'posts.id', 'posts.file', 'posts.created_at', 'topics.topic')
 					->get()->sortByDesc('id');
 
-		$students = DB::table('users')
-					->join('people', 'people.id', '=', 'users.people_id')
-					->where('type', 'Estudiante')
-					->get();
+		$students = User::where('type', 'Estudiante')->get();
 
 		$id = Auth::user()->id;
-		$me = DB::table('users')
-					->join('people', 'people.id', '=', 'users.people_id')
-					->where('users.id', $id)
-					->get();
+		$me = User::find($id);
 
 		return view('user.dashboard')
 			->with('me', $me)
 			->with('posts', $allposts)
 			->with('estudiantes', $students)
+			->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 			->with('topics', $topics);
 	}
 
 	public function profile()
 	{
+		$topics = Topic::all();
+
 		$id = Auth::user()->id;
-		$me = DB::table('users')
-					->join('people', 'people.id', '=', 'users.people_id')
-					->where('users.id', $id)
-					->get();
+		$me = User::find($id);
 
 		return view('user.profile')
+				->with('topics', $topics)
 				->with('me', $me);
-	}
-
-	public function topic($topic)
-	{
-		$topicid    = Topic::where('topic', $topic)->get();
-		$topics     = Topic::all();
-
-		$posttopics = DB::table('posts')
-						->join('people', 'people.id', '=', 'posts.people_id')
-						->join('users', 'people.id', '=', 'users.people_id')
-						->join('topics', 'topics.id', '=', 'posts.topic_id')
-						->select('people.first_name', 'people.last_name', 'people.avatar', 'users.type', 'users.email', 'posts.post', 'posts.id', 'posts.file', 'posts.created_at', 'topics.topic')
-						->where('topic_id', $topicid[0]->id)
-						->get()->sortByDesc('id');
-
-		$students   = DB::table('users')
-						->join('people', 'people.id', '=', 'users.people_id')
-						->where('type', 'Estudiante')
-						->get();
-
-		$id = Auth::user()->id;
-		$me = DB::table('users')
-					->join('people', 'people.id', '=', 'users.people_id')
-					->where('users.id', $id)
-					->get();
-
-		return view('user.dashboard')
-			->with('me', $me)
-			->with('estudiantes', $students)
-			->with('posts', $posttopics)
-			->with('topics', $topics);
 	}
 
 	public function topicid(Request $req)
@@ -120,21 +77,16 @@ class HomeController extends Controller
 
 		$topics     = Topic::all();
 
-		$students   = DB::table('users')
-						->join('people', 'people.id', '=', 'users.people_id')
-						->where('type', 'Estudiante')
-						->get();
+		$students   = User::where('type', 'Estudiante')->get();
 
 		$id = Auth::user()->id;
-		$me = DB::table('users')
-					->join('people', 'people.id', '=', 'users.people_id')
-					->where('users.id', $id)
-					->get();
+		$me = User::find($id);
 
 		return view('user.dashboard')
 			->with('me', $me)
 			->with('estudiantes', $students)
 			->with('posts', $posttopics)
+			->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 			->with('topics', $topics);
 	}
 
@@ -157,41 +109,162 @@ class HomeController extends Controller
 				->where('post_id', $id)
 				->get();
 
-		$students = DB::table('users')
-					->join('people', 'people.id', '=', 'users.people_id')
-					->where('type', 'Estudiante')
-					->get();
+		$students = User::where('type', 'Estudiante')->get();
 
 		$id = Auth::user()->id;
-		$me = DB::table('users')
-					->join('people', 'people.id', '=', 'users.people_id')
-					->where('users.id', $id)
-					->get();
+		$me = User::find($id);
 
 		return view('user.dashboard')
 			->with('me', $me)
 			->with('estudiantes', $students)
 			->with('posts', $post)
 			->with('comments', $comments)
+			->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 			->with('topics', $topics);
+	}
+
+	public function progreso()
+	{
+		$people = People::where('id', Auth::user()->people_id)->get();
+		$topics = Topic::all();
+
+		$id = Auth::user()->id;
+		$me = User::find($id);
+
+		$notas  = Note::where('user_id', $id)->get();
+
+		return view('user.progreso')
+				->with('topics', $topics)
+				->with('notas', $notas)
+				->with('people', $people)
+				->with('me', $me);
+	}
+
+	public function certificado()
+	{
+		$id = Auth::user()->people_id;
+		$p  = People::where('id', $id)->get();
+
+		if ( $p[0]->isgraduated != 0 )
+		{
+			$data['data'] = Note::where('user_id', $id)->get();
+
+			$pdf = PDF::loadView('pdf.certificado', $data);
+			return $pdf->download('test.pdf');
+		}
+		else {
+			return redirect()->back();
+		}
+	}
+
+
+	// vistas del profesor
+
+
+	public function notas()
+	{
+		if ( Auth::user()->type == 'Profesor' )
+		{
+			$topics   = Topic::all();
+			$notas    = Note::all();
+			$tests    = Test::all();
+			$people   = User::where('type', 'Estudiante')->get();
+			// $students = User::where('type', 'Estudiante')->get();
+
+			$id = Auth::user()->id;
+			$me = User::find($id);
+
+			return view('admin.notas')
+					->with('topics', $topics)
+					->with('notas', $notas)
+					->with('tests', $tests)
+					->with('personas', $people)
+					->with('estudiantes', $people)
+					->with('me', $me);
+		}
+		else {
+			return redirect('login');
+		}
+	}
+
+	public function topic($topic)
+	{
+		if ( Auth::user()->type == 'Profesor' )
+		{
+			$topicid = Topic::where('topic', $topic)->get();
+			$topics  = Topic::all();
+
+			$id = Auth::user()->id;
+			$me = User::find($id);
+
+			return view('user.dashboard')
+				->with('me', $me)
+				->with('topics', $topics);
+		}
+		else {
+			return redirect('login');
+		}
 	}
 
 
 
-	// Solicitud ajax
+	// Solicitudes ajax
+
+
 	public function getpublicacion(Request $req)
 	{
 		return Post::find($req->input('idpost'));
 	}
-
 	public function getcomentario(Request $req)
 	{
 		return Comment::find($req->input('idcomment'));
 	}
+	public function activateCertificate(Request $req)
+	{
+		$id = $req->input('peopleid');
+		$people = People::find($id);
 
+		$people->isgraduated = 1;
+		$people->save();
+
+		echo $people->isgraduated;
+	}
+	public function addnotas(Request $req)
+	{
+		$id    = $req->input('userid');
+		$notes = Note::where('user_id', $id)->get();
+		$c 	   = 0;
+
+		for( $i=0; $i < count($notes); $i++ )
+		{
+			if( $notes[$i]->test_id === $notes[$i]->test_id )
+			{
+				$c++;
+			}
+		}
+
+		if ( $c >= 1 )
+		{
+			die('true');
+		}
+		else
+		{
+			$note = new Note();
+
+			$note->test_id = $req->input('testid');
+			$note->user_id = $req->input('userid');
+			$note->note    = $req->input('note');
+
+			$note->save();
+
+			echo 'Nota registrada satisfactoriamente';
+		}
+	}
 
 
 	// Logica del formulario
+
+
 	public function publicar(Request $req)
 	{
 		$post = new Post();
@@ -321,6 +394,7 @@ class HomeController extends Controller
 
 		$user->email = $req->input('email');
 		$user->about = $req->input('about');
+		$user->type  = $req->input('type')?? $user->type;
 
 		$people->save();
 		$user->save();
@@ -328,4 +402,26 @@ class HomeController extends Controller
 		return redirect('profile')->with('success', 'Perfil editado satisfactoriamente.');
 	}
 
+	public function addtema(Request $req)
+	{
+		$topic = new Topic();
+
+		$topic->topic = $req->input('tema');
+
+		$topic->save();
+
+		return back()->with('success', 'Se ha registrado el tema');
+	}
+
+	public function addeval(Request $req)
+	{
+		$test = new Test();
+
+		$test->link 	= $req->input('link');
+		$test->topic_id = $req->input('topicid');
+
+		$test->save();
+
+		return back();
+	}
 }

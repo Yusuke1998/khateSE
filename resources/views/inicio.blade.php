@@ -203,45 +203,45 @@
 			<div class="col">
 				<div class="row mb-3 wow rollIn">
 					<div class="col-1">
-						<i class="fas fa-code fa-2x"></i>
+						<i class="fas fa-paper-plane fa-2x"></i>
 					</div>
 					<div class="col ml-3">
-						<h5>Lorem ipsum dolor sit amet.</h5>
-						<p>coñooooooo q pasaaaaaaaaaaaaaaaaaLorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+						<h5>Fácil de usar</h5>
+						<p>Lorem texto de prueba ipsum dolor sit amet, consectetur adipisicing elit.</p>
 					</div>
 				</div>
 				<div class="row mb-3 wow rollIn">
 					<div class="col-1">
-						<i class="fas fa-code fa-2x"></i>
+						<i class="fas fa-smile fa-2x"></i>
 					</div>
 					<div class="col ml-3">
-						<h5>Lorem ipsum dolor sit amet.</h5>
-						<p>coñooooooo q pasaaaaaaaaaaaaaaaaaLorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+						<h5>Interfáz de usuario amigable</h5>
+						<p>Lorem texto de prueba ipsum dolor sit amet, consectetur adipisicing elit.</p>
 					</div>
 				</div>
 				<div class="row mb-3 wow rollIn">
 					<div class="col-1">
-						<i class="fas fa-code fa-2x"></i>
+						<i class="fas fa-thumbs-up fa-2x"></i>
 					</div>
 					<div class="col ml-3">
-						<h5>Lorem ipsum dolor sit amet.</h5>
-						<p>coñooooooo q pasaaaaaaaaaaaaaaaaaLorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+						<h5>Acceso gratuito a la aplicación</h5>
+						<p>Lorem texto de prueba ipsum dolor sit amet, consectetur adipisicing elit.</p>
 					</div>
 				</div>
 				<div class="row mb-3 wow rollIn">
 					<div class="col-1">
-						<i class="fas fa-code fa-2x"></i>
+						<i class="fab fa-google fa-2x"></i>
 					</div>
 					<div class="col ml-3">
-						<h5>Lorem ipsum dolor sit amet.</h5>
-						<p>coñooooooo q pasaaaaaaaaaaaaaaaaaLorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+						<h5>Exámenes con Google Form</h5>
+						<p>Esta herramienta usa Google Forms para crear y enviar los exámenes a sus alumnos.</p>
 					</div>
 				</div>
 			</div>
 			<div class="col wow slideInRight delay-1s">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita provident hic natus eum repudiandae aliquam sapiente a alias. neque nulla cupiditate nesciunt, ad et est assumenda deserunt, eligendi quibusdam nisi.</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quibusdam ab ducimus molestiae laborum perspiciatis praesentium facilis sit debitis vero, veritatis, dolorem nam nihil eum molestias ex optio! Esse, debitis tenetur.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat facere voluptatem, error, facilis, sed quo quidem voluptas praesentium quibusdam dignissimos eveniet atque magnam. Perferendis, qui saepe magnam inventore aliquid dolorum.</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum placeat vel sed nihil debitis id sit optio adipisci ipsum cum alias inventore, tempore nam cupiditate atque, repellat, quam voluptates. Aut.</p>
+				<div class="view overlay zoom">
+					<img src="{{ asset('images/img10.jpg') }}" alt="404" class="img-fluid img-thumbnail">
+				</div>
 			</div>
 		</div>
 

@@ -12,4 +12,9 @@ class Topic extends Model
     {
     	return $this->hasOne('App\Post');
     }
+
+    public function test()
+    {
+    	return $this->belongsTo('App\Test');
+    }
 }

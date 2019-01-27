@@ -20,6 +20,7 @@ class CreatePeopleTable extends Migration
             $table->string('last_name', 32);
             $table->string('phone', 15);
             $table->string('avatar', 255)->nullable();
+            $table->boolean('isgraduated')->default(0);
             $table->timestamps();
         });
     }

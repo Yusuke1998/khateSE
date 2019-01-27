@@ -31,15 +31,15 @@ class DatabaseSeeder extends Seeder
 				'last_name'	 => 'Fuentes',
 				'phone'		 => '04244444444',
 				'avatar'     => 'user.png',
-				'created_at' => now()
+				'created_at' => now('America/Caracas')
 			],
 			[
 				'pin' => '140000000',
-				'first_name' => 'jose',
-				'last_name'	 => 'lopez',
+				'first_name' => 'Jose Fernando',
+				'last_name'	 => 'Lopez',
 				'phone'		 => '04140001010',
 				'avatar'     => 'user.png',
-				'created_at' => now()
+				'created_at' => now('America/Caracas')
 			],
 		]);
 
@@ -49,20 +49,20 @@ class DatabaseSeeder extends Seeder
 				'password'   => bcrypt('pepito123'),
 				'type'		 => 'Profesor',
 				'people_id'	 => 1,
-				'created_at' => now()
+				'created_at' => now('America/Caracas')
 			],
 			[
 				'email' 	 => 'jose@lopez.com',
 				'password'   => bcrypt('jose123'),
 				'type'		 => 'Estudiante',
 				'people_id'	 => 2,
-				'created_at' => now()
+				'created_at' => now('America/Caracas')
 			]
 		]);
 
 		DB::table('topics')->insert([
-			['topic' 	 => 'Topico Uno'],
-			['topic' 	 => 'Topico dos']
+			['topic' => 'Evaluaciones', 'created_at' => now('America/Caracas')],
+			['topic' => 'Tema Uno', 'created_at'     => now('America/Caracas')]
 		]);
 
 		DB::table('posts')->insert([
@@ -71,14 +71,14 @@ class DatabaseSeeder extends Seeder
 				'file'       => 'file.pdf',
 				'topic_id'	 => 1,
 				'people_id'  => 1,
-				'created_at' => now()
+				'created_at' => now('America/Caracas')
 			],
 			[
 				'post' 	     => 'Probando el post desde los seeders',
 				'file'       => '',
 				'topic_id'	 => 2,
 				'people_id'  => 1,
-				'created_at' => now()
+				'created_at' => now('America/Caracas')
 			]
 		]);
 
@@ -86,23 +86,26 @@ class DatabaseSeeder extends Seeder
 			'comment'    => 'HOla esto es un comentario bla a sdasd',
 			'people_id'  => 2,
 			'post_id'    => 1,
-			'created_at' => now()
+			'created_at' => now('America/Caracas')
 		]);
 
 
 		DB::table('tests')->insert([
-			'link' 	   => 'http://forms.enlaceaprueba.com',
-			'topic_id' => 1,
+			'link' 	     => 'http://forms.enlaceaprueba.com',
+			'topic_id'   => 1,
+			'created_at' => now('America/Caracas')
 		]);
 
-		DB::table('notes')->insert([
-			'note' 	   => '80',
-			'test_id'  => 1,
-			'user_id' => 2,
-		]);
+		// DB::table('notes')->insert([
+		// 	'note' 	     => '80',
+		// 	'test_id'    => 1,
+		// 	'user_id' 	 => 2,
+		// 	'created_at' => now('America/Caracas')
+		// ]);
 
-		DB::table('certificates')->insert([
-			'note_id' => 1,
-		]);
+		// DB::table('certificates')->insert([
+		// 	'note_id' => 1,
+		// 	'created_at' => now('America/Caracas')
+		// ]);
 	}
 }

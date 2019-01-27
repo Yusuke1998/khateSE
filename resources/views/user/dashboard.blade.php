@@ -2,7 +2,7 @@
 @include('layouts.navbar')
 
 <br>
-<div class="container my-5 py-4">
+<div class="container my-5 pt-4">
 
 	<div class="row animated fadeIn">
 		<div class="col-md-3 col-sm-12">
@@ -13,14 +13,14 @@
 					<div class="card testimonial-card">
 						<div class="card-up red lighten-1"></div>
 						<div class="avatar mx-auto white">
-							<img src="{{ asset('storage/'.$me[0]->avatar) }}" class="rounded-circle" alt="404">
+							<img src="{{ asset('storage/'.$me->people->avatar) }}" class="rounded-circle" alt="404">
 						</div>
 						<div class="card-body">
-							<h4 class="card-title">{{ $me[0]->first_name }} {{ $me[0]->last_name }}</h4>
-							<p>{{ $me[0]->type }}</p>
-							@if( $me[0]->about )
+							<h4 class="card-title">{{ $me->people->first_name }} {{ $me->people->last_name }}</h4>
+							<p class="lead">{{ $me->type }}</p>
+							@if( $me->about )
 								<hr>
-								<p><i class="fa fa-quote-left mr-2"></i> {{ $me[0]->about }}</p>
+								<p><i class="fa fa-quote-left mr-2"></i> {{ $me->about }}</p>
 							@endif
 						</div>
 					</div>
@@ -29,7 +29,7 @@
 
 				<div class="col-12">
 
-					<div class="card mb-4">
+					<div class="card mb-5">
 						<div class="card-header red lighten-1 white-text">
 							<h5 class="d-flex justify-content-between">
 								<span><i class="fas fa-book mr-2"></i>Temas</span>
@@ -97,7 +97,7 @@
 									</div>
 									<div>
 										<button class="btn px-2 btn-sm btn-elegant" type="reset"><i class="fas fa-times mr-2"></i>Cancelar</button>
-										<button class="btn px-2 btn-sm btn-danger" type="submit"><i class="fas fa-send mr-2"></i>Enviar</button>
+										<button class="btn px-2 btn-sm btn-danger" type="submit"><i class="fas fa-send mr-2"></i>Publicar</button>
 									</div>
 								</div>
 
@@ -167,19 +167,27 @@
 										@if( $post->type == 'Profesor' )
 											<p class="text-muted m-0"><i class="fas fa-check-circle mr-1 text-success"></i> {{ $post->type }}</p>
 										@endif
-										<p class="text-muted m-0">{{ $post->created_at }}</p>
+										<p class="text-muted m-0">{{ $carbon->diffForHumans($post->created_at) }}</p>
 									</div>
 								</div>
 								<hr>
 								<div class="row">
 									<div class="col">
-										<p class="mb-3">{{ $post->post }}</p>
+
+										@if( preg_match('/^(http:\/\/|https:\/\/)/', $post->post) )
+
+											<a href="{{ $post->post }}" target="_blank">{{ $post->post }}</a>
+
+										@else
+											<p class="mb-3">{{ $post->post }}</p>
+
+										@endif
 
 										@if( $post->file )
 
 											@if( preg_match('/[\.jpg|\.jpeg|\.png]$/', $post->file) )
 
-												<div class="view zoom overlay">
+												<div class="view zoom overlay d-flex justify-content-center">
 													<img class="img-fluid" src='{{ asset("storage/$post->file") }}' target="_blank">
 												</div>
 
@@ -230,7 +238,7 @@
 
 										<div class="row">
 											<div class="col-2">
-												<img src="{{ asset('storage/'.$comment->avatar) }}" width="50px" height="50px">
+												<img src="{{ asset('storage/'.$comment->avatar) }}" class="rounded-circle" width="50px" height="50px">
 											</div>
 											<div class="col-10">
 												<div class="d-flex justify-content-between">
@@ -253,7 +261,7 @@
 												@if( $comment->type == 'Profesor' )
 													<p class="text-muted m-0"><i class="fas fa-check-circle mr-1 text-success"></i> {{ $comment->type }}</p>
 												@endif
-												<p class="text-muted m-0">{{ $comment->created_at }}</p>
+												<p class="text-muted m-0">{{ $carbon->diffForHumans($comment->created_at) }}</p>
 											</div>
 										</div>
 										<div class="row mt-2">
@@ -276,7 +284,7 @@
 																<i class="fas fa-file-alt fa-2x blue-text"></i>
 															</div>
 															<div class="col-11">
-																<a href='{{ asset("storage/$post->file") }}' target="_blank">{{ $post->file }}</a>
+																<a href='{{ asset("storage/$comment->file") }}' target="_blank">{{ $comment->file }}</a>
 															</div>
 														</div>
 
@@ -284,11 +292,11 @@
 
 														<hr>
 														<div class="row">
-															<div class="col-2">
+															<div class="col-1">
 																<i class="fas fa-file-pdf fa-2x red-text"></i>
 															</div>
-															<div class="col-10">
-																<a href='{{ asset("storage/$post->file") }}' target="_blank">{{ $post->file }}</a>
+															<div class="col-11">
+																<a href='{{ asset("storage/$comment->file") }}' target="_blank">{{ $comment->file }}</a>
 															</div>
 														</div>
 
@@ -300,7 +308,7 @@
 																<i class="fas fa-file-word fa-2x blue-text"></i>
 															</div>
 															<div class="col-11">
-																<a href='{{ asset("storage/$post->file") }}' target="_blank">{{ $post->file }}</a>
+																<a href='{{ asset("storage/$comment->file") }}' target="_blank">{{ $comment->file }}</a>
 															</div>
 														</div>
 
@@ -314,7 +322,7 @@
 							@endif
 							<div class="card-footer py-0 d-flex justify-content-between align-items-center">
 								<div class="mr-2">
-									<img src="{{ asset('storage/'.$me[0]->avatar) }}" class="border" width="40px" height="40px">
+									<img src="{{ asset('storage/'.$me->people->avatar) }}" class="border" width="40px" height="40px">
 								</div>
 								<form action="{{ url('comentar') }}" method="post" class="md-form ml-2 w-100" enctype="multipart/form-data">
 									@csrf
@@ -364,7 +372,7 @@
 				<div class="card-body">
 					<ul class="list-group">
 						@foreach( $estudiantes as $e )
-							<li class="list-group-item">{{ $e->first_name }} {{ $e->last_name }}</li>
+							<li class="list-group-item">{{ $e->people->first_name }} {{ $e->people->last_name }}</li>
 						@endforeach
 					</ul>
 				</div>
@@ -394,7 +402,8 @@
 
 				<div class="modal-body">
 					<div class="form-row">
-						<div class="col">
+						<div class="col md-form">
+							<i class="fas fa-comment-dot prefix"></i>
 							<label for="comment">Comentario</label>
 							<input type="text" id="comment" name="comentario" class="form-control">
 						</div>
@@ -470,7 +479,7 @@
 
 				<div class="modal-body">
 					<div class="form-row">
-						<div class="col">
+						<div class="col md-form">
 							<label for="pub">Publicación</label>
 							<input type="text" id="pub" name="publicacion" class="form-control">
 						</div>

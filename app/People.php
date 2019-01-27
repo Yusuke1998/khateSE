@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class People extends Model
 {
-    protected $fillable = ['pin', 'first_name', 'last_name', 'phone', 'avatar'];
+    protected $fillable = ['pin', 'first_name', 'last_name', 'phone', 'avatar', 'isgraduated'];
     protected $table = 'people';
 
     public function post()

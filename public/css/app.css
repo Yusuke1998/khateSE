@@ -4,8 +4,13 @@
 
 /* ESTILOS PROPIOS */
 body {
-	background-color: #F8F8F8;
+	background-color: #f9fbe7;
 	font-size: 12px
+}
+
+
+.card-columns {
+	column-count: 4
 }
 
 .f-2 { font-size: 14px !important }

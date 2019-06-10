@@ -4,7 +4,7 @@
 
 	<div class="card animated fadeIn" style="width: 600px">
 
-		<div class="card-header red lighten-1 white-text text-center">
+		<div class="card-header cyan lighten-3 dark-text text-center">
 			<h3>Regístrate</h3>
 		</div>
 		<div class="card-body px-5">
@@ -69,7 +69,7 @@
 					</div>
 					<div class="col md-form">
 						<i class="fas fa-user-circle prefix"></i>
-						<select name="type" class="ml-5 mdb-select colorful-select dropdown-dark" id="type" required>
+						<select name="type" class="ml-5 mdb-select colorful-select dropdown-primary" id="type" required>
 							<option disabled selected>Selecciona un tipo de cuenta</option>
 							<option value="Estudiante">Estudiante</option>
 							<option value="Profesor">Profesor</option>
@@ -95,8 +95,7 @@
 					</div>
 				</div>
 
-				<button type="button" class="btn btn-md btn-elegant" data-dismiss="modal">Cerrar</button>
-				<button type="submit" class="btn btn-md btn-danger"><i class="fas fa-save mr-2"></i>Guardar</button>
+				<button type="submit" class="btn mt-5 btn-md cyan lighten-2"><i class="fas fa-save mr-2"></i>Guardar</button>
 			</form>
 		</div>
 

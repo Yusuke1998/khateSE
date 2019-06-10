@@ -8,7 +8,7 @@
 	<!-- CSRF Token -->
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
-	<title>{{ config('app.name', 'Derecho Romano') }}</title>
+	<title>{{ config('app.name', 'Networking') }}</title>
 
 	<!-- Fonts -->
 <!-- 	<link rel="dns-prefetch" href="https://fonts.gstatic.com">

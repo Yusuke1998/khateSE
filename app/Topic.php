@@ -6,15 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Topic extends Model
 {
-    protected $fillable = ['topic'];
+    protected $fillable = ['topic', 'image', 'description'];
 
-    public function post()
+    public function content()
     {
-    	return $this->hasOne('App\Post');
+    	return $this->hasOne(Content::class);
     }
 
-    public function test()
+     public function text_content()
     {
-    	return $this->belongsTo('App\Test');
+    	return $this->hasOne(TextContent::class);
     }
 }

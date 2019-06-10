@@ -4,23 +4,25 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+
 class People extends Model
 {
-    protected $fillable = ['pin', 'first_name', 'last_name', 'phone', 'avatar', 'isgraduated'];
-    protected $table = 'people';
 
-    public function post()
+    protected $fillable = ['first_name', 'last_name', 'avatar'];
+    protected $table 	= 'people';
+
+    public function content()
     {
-    	return $this->hasMany('App\Post');
+    	return $this->hasOne(Content::class);
     }
 
-    public function comment()
+    public function text_content()
     {
-    	return $this->hasMany('App\Comment');
+    	return $this->hasOne(TextContent::class);
     }
 
     public function user()
     {
-    	return $this->hasOne('App\User');
+        return $this->hasOne(User::class);
     }
 }

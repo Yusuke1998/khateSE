@@ -3,7 +3,7 @@
 <div class="centrado-vertical">
 
 	<div class="card animated fadeIn" style="width: 400px">
-		<h3 class="card-header danger-color white-text text-center py-4">
+		<h3 class="card-header cyan lighten-3 dark-text text-center py-4">
 			<strong>Entrar a la plataforma</strong>
 		</h3>
 		<div class="card-body px-5 mx-3">
@@ -49,7 +49,7 @@
 				</div>
 
 				<div class="mt-5 text-center">
-					<button class="btn btn-danger" type="submit"><i class="fas fa-sign-in-alt mr-2"></i>Entrar</button>
+					<button class="btn cyan lighten-2" type="submit"><i class="fas fa-sign-in-alt mr-2"></i>Entrar</button>
 				</div>
 			</form>
 		</div>

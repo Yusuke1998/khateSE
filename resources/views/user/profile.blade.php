@@ -10,7 +10,7 @@
 				<div class="col-12 mb-3">
 
 					<div class="card testimonial-card">
-						<div class="card-up red lighten-1"></div>
+						<div class="card-up cyan lighten-3"></div>
 						<div class="avatar mx-auto white">
 							<img src="{{ asset('storage/'.$me->people->avatar) }}" class="rounded-circle" alt="404">
 						</div>
@@ -36,10 +36,10 @@
 				<div class="col">
 
 					<div class="card">
-						<div class="card-header red lighten-1 white-text">
+						<div class="card-header cyan lighten-3 dark-text">
 							<h3 class="d-flex justify-content-between align-items-center">
 								<span><i class="fas fa-user mr-2"></i> Perfil</span>
-								<button class="btn btn-elegant btn-md" data-toggle="modal" data-target="#editar">
+								<button class="btn cyan lighten-2 btn-md" data-toggle="modal" data-target="#editar">
 									<i class="fas fa-edit mr-2"></i>Editar
 								</button>
 							</h3>
@@ -47,8 +47,6 @@
 						<div class="card-body">
 
 							<div class="row">
-								<div class="col-2 text-right font-weight-bold">Cédula:</div>
-								<div class="col-4">{{ $me->people->pin }}</div>
 								<div class="col-2 text-right font-weight-bold h6">Nombre:</div>
 								<div class="col-4">{{ $me->people->first_name }}</div>
 							</div>
@@ -56,24 +54,24 @@
 							<div class="row my-3">
 								<div class="col-2 text-right font-weight-bold h6">Apellido:</div>
 								<div class="col-4">{{ $me->people->last_name }}</div>
-								<div class="col-2 text-right font-weight-bold">Teléfono:</div>
-								<div class="col-4">{{ $me->people->phone }}</div>
 							</div>
 
-							<div class="row">
-								<div class="col-2 text-right font-weight-bold">Correo:</div>
+							<div class="row mb-3">
+								<div class="col-2 text-right font-weight-bold h6">Correo:</div>
 								<div class="col-4">{{ $me->email }}</div>
-								<div class="col-2 text-right font-weight-bold">Cuenta:</div>
-								<div class="col-4">{{ $me->type}}</div>
 
 
-								{{-- <div class="col-2 text-right font-weight-bold">Clave:</div>
+								<!-- {{--<div class="col-2 text-right font-weight-bold">Clave:</div>
 								<div class="col-4 d-flex justify-content-between">
 									<input type="password" id="clave" class="form-control px-1 w-75" readonly value="{{ decrypt($me[0]->password) }}">
 									<button class="btn btn-primary p-2" id="reveal" type="button">
 										<i class="fas fa-eye ml-2"></i>
 									</button>
-								</div> --}}
+								</div>--}} -->
+							</div>
+							<div class="row">
+								<div class="col-2 text-right font-weight-bold h6">Cuenta:</div>
+								<div class="col-4">{{ $me->type}}</div>
 							</div>
 
 						</div>
@@ -108,29 +106,29 @@
 				<div class="modal-body px-4">
 
 					<div class="form-row">
-						<div class="col md-form">
+						<!-- <div class="col md-form">
 							<i class="fas fa-id-card prefix"></i>
 							<input type="text" name="pin" readonly id="pin" class="form-control" value="{{ $me->people->pin }}">
 							<label for="pin">Cédula</label>
-						</div>
+						</div> -->
 						<div class="col md-form">
 							<i class="fas fa-user prefix"></i>
 							<input type="text" name="first_name" id="name" class="validate form-control"  pattern="^[a-zA-Záéíóú]+(?:\s?[a-zA-Záéíóú]\s?)+$" value="{{ $me->people->first_name }}" required>
 							<label for="name">Nombre</label>
 						</div>
-					</div>
-
-					<div class="form-row">
 						<div class="col md-form">
 							<i class="fas fa-user prefix"></i>
 							<input type="text" name="last_name" id="apellido" class="validate form-control" required pattern="^[a-zA-Záéíóú]+(?:\s?[a-zA-Záéíóú]\s?)+$" value="{{ $me->people->last_name }}">
 							<label for="apellido">Apellido</label>
 						</div>
-						<div class="col md-form">
+					</div>
+
+					<div class="form-row">
+						<!-- <div class="col md-form">
 							<i class="fas fa-phone prefix"></i>
 							<input type="text" maxlength="11" minlength="10" name="phone" id="phone" class="validate form-control" required pattern="^[\d]+$" value="{{ $me->people->phone }}">
 							<label for="phone">Teléfono</label>
-						</div>
+						</div> -->
 					</div>
 
 					<div class="form-row">
@@ -139,11 +137,11 @@
 							<input type="email" name="email" id="correo" class="validate form-control" required value="{{ $me->email }}">
 							<label for="correo">Correo Electrónico</label>
 						</div>
-						<div class="col md-form">
+						<!-- <div class="col md-form">
 							<i class="fas fa-user prefix"></i>
 							<input name="about" type="text" length="255" class="form-control" maxlength="255" id="about" value="{{ $me->about }}">
 							<label for="about">Acerca de ti</label>
-						</div>
+						</div> -->
 					</div>
 
 					<div class="form-row mb-3">
@@ -163,8 +161,8 @@
 							<i class="fas fa-user-circle prefix"></i>
 							<select name="type" id="type" class="mdb-select ml-5">
 								<option disabled selected>Tipo de cuenta</option>
-								<option value="Estudiante">Estudiante</option>
-								<option value="Profesor">Profesor</option>
+								<option value="student">Estudiante</option>
+								<option value="teacher">Profesor</option>
 							</select>
 						</div>
 					</div>
@@ -192,8 +190,8 @@
 				</div>
 
 				<div class="modal-footer">
-					<button type="button" class="btn btn-elegant btn-md" data-dismiss="modal">Cerrar</button>
-					<button type="submit" class="btn btn-danger btn-md"><i class="fas fa-edit mr-2"></i>Editar</button>
+					<button type="button" class="btn btn-primary btn-md" data-dismiss="modal">Cerrar</button>
+					<button type="submit" class="btn cyan lighten-3 btn-md"><i class="fas fa-edit mr-2"></i>Editar</button>
 				</div>
 			</form>
 		</div>

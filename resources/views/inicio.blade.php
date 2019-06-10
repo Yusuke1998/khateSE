@@ -2,20 +2,19 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Derecho Romano</title>
+	<title>Software Educativo (Redes)</title>
 	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
-
 
 	{{-- MODAL REGISTRO --}}
 
 	<div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
-				<div class="modal-header red lighten-1 white-text">
+				<div class="modal-header cyan lighten-3 dark-text">
 					<h5 class="modal-title" id="exampleModalLabel">Regístrate</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
@@ -24,16 +23,6 @@
 					<div class="modal-body px-5">
 
 						<div class="form-row">
-							<div class="col md-form">
-								<i class="fas fa-id-card prefix"></i>
-								<input type="text" minlength="7" maxlength="9" name="pin" id="pin" class="validate form-control{{ $errors->has('pin') ? ' is-invalid' : '' }}" pattern="^[\d]{7,10}$">
-								<label for="pin">Cédula</label>
-								@if ($errors->has('pin'))
-									<span class="invalid-feedback" role="alert">
-										<strong>{{ $errors->first('pin') }}</strong>
-									</span>
-								@endif
-							</div>
 							<div class="col md-form">
 								<i class="fas fa-user prefix"></i>
 								<input type="text" name="first_name" id="name" class="validate form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" value="{{ old('first_name') }}" pattern="^[a-zA-Záéíóú]+(?:\s?[a-zA-Záéíóú]\s?)+$">
@@ -44,9 +33,6 @@
 									</span>
 								@endif
 							</div>
-						</div>
-
-						<div class="form-row">
 							<div class="col md-form">
 								<i class="fas fa-user prefix"></i>
 								<input type="text" name="last_name" id="apellido" class="validate form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" required pattern="^[a-zA-Záéíóú]+(?:\s?[a-zA-Záéíóú]\s?)+$" value="{{ old('last_name') }}"e>
@@ -54,16 +40,6 @@
 								@if ($errors->has('last_name'))
 									<span class="invalid-feedback" role="alert">
 										<strong>{{ $errors->first('last_name') }}</strong>
-									</span>
-								@endif
-							</div>
-							<div class="col md-form">
-								<i class="fas fa-phone prefix"></i>
-								<input type="text" maxlength="11" minlength="10" name="phone" id="phone" class="validate form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" value="{{ old('phone') }}" required pattern="^[\d]+$">
-								<label for="phone">Teléfono</label>
-								@if ($errors->has('phone'))
-									<span class="invalid-feedback" role="alert">
-										<strong>{{ $errors->first('phone') }}</strong>
 									</span>
 								@endif
 							</div>
@@ -82,10 +58,10 @@
 							</div>
 							<div class="col md-form">
 								<i class="fas fa-user-circle prefix"></i>
-								<select name="type" class="ml-5 mdb-select colorful-select dropdown-dark" id="type" required>
+								<select name="type" class="ml-5 mdb-select colorful-select dropdown-primary" id="type" required>
 									<option disabled selected>Selecciona un tipo de cuenta</option>
-									<option value="Estudiante">Estudiante</option>
-									<option value="Profesor">Profesor</option>
+									<option value="student">Estudiante</option>
+									<option value="teacher">Profesor</option>
 								</select>
 							</div>
 
@@ -111,8 +87,8 @@
 
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-md btn-elegant" data-dismiss="modal">Cerrar</button>
-						<button type="submit" class="btn btn-md btn-danger"><i class="fas fa-save mr-2"></i>Guardar</button>
+						<button type="button" class="btn btn-md cyan" data-dismiss="modal">Cerrar</button>
+						<button type="submit" class="btn btn-md cyan lighten-2"><i class="fas fa-save mr-2"></i>Guardar</button>
 					</div>
 				</form>
 			</div>
@@ -122,21 +98,31 @@
 	{{-- FIN MODAL REGISTRO --}}
 
 
-	<div class="card card-image" style="background-image: url({{ asset('images/img.jpg') }}); background-attachment: fixed; background-position: bottom;">
+	<div class="card card-image" style="background: linear-gradient(#80deea, #e0f7fa)">
 		<div class="py-5 px-4 my-5 container">
 			<div class="row">
 
-				<div class="col animated slideInLeft white-text delay-1s">
-					<h1 class="font-weight-bold">Derecho Romano</h1>
-					<hr>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, obcaecati voluptatem ducimus aut accusantium sunt aut accusantium sunt.</p>
-					<a class="btn btn-md btn-danger" data-toggle="modal" href="#register"><i class="fas fa-user-plus mr-2"></i>Regístrate</a>
+				<div class="col animated slideInLeft white-text delay-1s d-flex align-items-center">
+					<div>
+						<h1 style="text-shadow: 1px 1px .5px #3F3F3F" class="font-weight-bold text-center animated zoomIn delay-2s">Software Educativo (Redes)</h1>
+					
+						<hr class="my-4">
+
+						<!-- <p class="text-justify lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, obcaecati voluptatem ducimus aut accusantium sunt aut accusantium sunt.</p>
+						<p class="text-justify lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, dolores ut id voluptas officia repellat ratione, expedita autem eveniet similique illum soluta ex nulla. Eaque asperiores maxime magni dolor voluptates?</p> -->
+						<div class="d-flex justify-content-center mt-5 animated zoomIn delay-2s">
+							<button class="btn btn-md cyan lighten-2" data-toggle="modal" href="#register">
+								<i class="fas fa-user-plus mr-2"></i>Regístrate
+							</button>
+						</div>
+					</div>
 				</div>
+			
+				<div class="col-1"></div>
 
 				<div class="col animated slideInRight">
 					<div class="card opacity">
-						<h3 class="card-header danger-color white-text text-center py-4">
+						<h3 style="text-shadow: 1px 1px .5px #3F3F3F" class="card-header cyan lighten-3 white-text text-center py-4">
 							<strong>Entrar a la plataforma</strong>
 						</h3>
 						<div class="card-body px-5 mx-3">
@@ -182,7 +168,7 @@
 								</div>
 
 								<div class="mt-5 text-center">
-									<button class="btn btn-danger" type="submit"><i class="fas fa-sign-in-alt mr-2"></i>Entrar</button>
+									<button class="btn cyan lighten-2" type="submit"><i class="fas fa-sign-in-alt mr-2"></i>Entrar</button>
 								</div>
 							</form>
 						</div>
@@ -196,7 +182,7 @@
 
 	<div class="container my-5">
 
-		<h2 class="text-center mt-5 wow fadeInDownBig">About Derecho Romano</h2>
+		<h2 class="text-center mt-5 wow fadeInDownBig">Aquí irá la intro de la herramienta</h2>
 		<hr class="w-25 mb-5">
 
 		<div class="row">
@@ -297,7 +283,7 @@
 									<img src="{{ asset('images/img2.jpg') }}" class="rounded-circle" alt="woman avatar">
 								</div>
 								<div class="card-body">
-									<h4 class="card-title">Loriana Machado</h4>
+									<h4 class="card-title">Katherin Gamez</h4>
 									<hr>
 									<p><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam nostrum non dolor iusto sequi rerum a atque eos cupiditate rem.</p>
 								</div>
@@ -345,7 +331,7 @@
 									<img src="{{ asset('images/img3.jpg') }}" class="rounded-circle" alt="woman avatar">
 								</div>
 								<div class="card-body">
-									<h4 class="card-title">Francis Rios</h4>
+									<h4 class="card-title">Maholys Zapata</h4>
 									<hr>
 									<p><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam nostrum non dolor iusto sequi rerum a atque eos cupiditate rem.</p>
 								</div>
@@ -407,7 +393,7 @@
 									<img src="{{ asset('images/img9.jpg') }}" class="rounded-circle" alt="woman avatar">
 								</div>
 								<div class="card-body">
-									<h4 class="card-title">Yessebel Avila</h4>
+									<h4 class="card-title">Pepito Fuentes</h4>
 									<hr>
 									<p><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam nostrum non dolor iusto sequi rerum a atque eos cupiditate rem.</p>
 								</div>
@@ -509,7 +495,7 @@
 			<!-- Call to action -->
 			<ul class="list-unstyled list-inline text-center py-2">
 				<li class="list-inline-item">
-					<a href="#register" data-toggle="modal" class="btn btn-danger btn-rounded"><i class="fas fa-user-plus mr-2"></i> Regístrate</a>
+					<a href="#register" data-toggle="modal" class="btn cyan lighten-2 btn-rounded"><i class="fas fa-user-plus mr-2"></i> Regístrate</a>
 				</li>
 			</ul>
 			<!-- Call to action -->

@@ -15,12 +15,9 @@ class CreatePeopleTable extends Migration
     {
         Schema::create('people', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('pin', 9)->unique();
-            $table->string('first_name', 32);
-            $table->string('last_name', 32);
-            $table->string('phone', 15);
-            $table->string('avatar', 255)->nullable();
-            $table->boolean('isgraduated')->default(0);
+            $table->string('first_name', 64);
+            $table->string('last_name', 64);
+            $table->string('avatar')->nullable()->default('user.png');
             $table->timestamps();
         });
     }

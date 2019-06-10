@@ -9,7 +9,7 @@ $(() => {
 	$('#dtBasicExample').DataTable();
 	$('.dataTables_length').addClass('bs-select');
 
-	$('#notasdt').DataTable();
+	$('#dtstudents').DataTable();
 	$('.dataTables_length').addClass('mdb-select mdb-form');
 
 
@@ -28,80 +28,8 @@ $(() => {
 
 
 
-	$('.actcert').click(function(){
-		let id = $(this)[0].dataset.peopleid
 
-		$.ajax({
-			method : 'get',
-			url    : 'http://127.0.0.1:8000/toggleCertificate',
-			data   : { peopleid: id  }
-		})
-
-		.done((data) => {
-			console.log(data)
-			if ( data == 1 ) {
-				toastr.success('El estudiante ahora puede descargar su certificado.')
-				$('#toggle').text('Deshabilitar certificado')
-			}
-			else {
-				toastr.info('Le has desactivado la opción del certificado.')
-				$('#toggle').text('Habilitar certificado')
-			}
-		})
-
-		.fail((error) => {
-			toastr.error('Ha ocurrido un error')
-			console.log('AJAX ERROR BELLOW')
-			console.error(error)
-		})
-	})
-
-
-	// ajax function than add new notes
-	$('#notesform').submit((e) => {
-		e.preventDefault()
-
-		$.ajax({
-			method : 'get',
-			url    : 'http://127.0.0.1:8000/addnotas',
-			data   : $('#notesform').serialize()
-		})
-
-		.done(data => {
-
-			$('#testid').val('')
-			$('#userid').val('')
-			$('#nota').val('')
-
-			if (data == 'false')
-			{
-				toastr.error('Esta nota ya ha sido cargada.')
-				return false
-			}
-
-			toastr.success(data)
-
-			setTimeout(() => {
-				toastr.info('Recarga la página para ver los cambios.')
-			}, 2000)
-		})
-
-		.fail(error => {
-			console.log(error)
-			toastr.error(error.statusText, 'Ha ocurrido un error')
-		})
-
-	})
-
-
-	// bloquear usuario
-	$('.blockuser').click(function(){
-		let peopleid = $(this)[0].dataset.peopleid
-		$('#desacpeopleid').val(peopleid)
-
-		console.log($('#desacpeopleid'))
-	})
-
+	
 
 	// eliminar publicacion
 	$('.delpost').click(function(){
@@ -109,12 +37,6 @@ $(() => {
 		$('#delpostid').val(postid)
 
 		console.log($('#commentid'))
-	})
-
-	// eliminar comentario
-	$('.delcomment').click(function(){
-		let delcomment = $(this)[0].dataset.id
-		$('#commentidd').val(delcomment)
 	})
 
 
@@ -144,29 +66,27 @@ $(() => {
 		})
 	})
 
-	// editar comenetario
-	$('.editcomment').click(function(){
-
-		let idcomment = $(this)[0].dataset.id
 
 
-		$.ajax({
-			url : 'http://127.0.0.1:8000/getcomentario',
-			method: 'get',
-			data : { idcomment : idcomment }
-		})
+	$('.img').click(function(e){
 
-		.done((data) => {
+		let h = $(this).children()
 
-			$('#commentid').val(data.id)
-			$('#comment').val(data.comment)
-			$('#peopleid').val(data.people_id)
-			$('#postid').val(data.post_id)
-		})
+		console.log(h[1])
 
-		.fail((error) => {
-			console.log(error.responseText)
-		})
+		$('#targettitulo').text(h[1].firstElementChild.innerText)
+		$('#targetimg').attr('src', h[0].firstElementChild.src)
+		$('#targettopic').text(h[1].children[1].innerText)
+		$('#targetcontenido').text(h[1].lastElementChild.innerText)
+	})
+
+
+	$('.btnmodalcontent').click(function(){
+
+		let a = $(this).parent().parent()
+
+		$('#modaltitle').text(a.children('div.w-100').children('h5').text())
+		$('#contenido').text(a.children('p.content').text())
 	})
 
 })

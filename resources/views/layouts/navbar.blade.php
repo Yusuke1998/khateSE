@@ -1,8 +1,8 @@
 <!--Navbar-->
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark red lighten-1 scrolling-navbar">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light cyan lighten-3 scrolling-navbar">
 
 	<!-- Navbar brand -->
-	<a class="navbar-brand" href="{{ url('home') }}"><i class="fas fa-graduation-cap mr-2"></i>Derecho Romano</a>
+	<a class="navbar-brand" href="{{ url('home') }}"><i class="fas fa-graduation-cap mr-2"></i>Software Educativo (Redes)</a>
 
 	<!-- Collapse button -->
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,31 +17,47 @@
 			<li class="nav-item">
 				<a class="nav-link" href="{{ url('home') }}"><i class="fas fa-home mr-2"></i>Inicio</a>
 			</li>
-			@if ( Auth::user()->type == 'Estudiante' )
+			@if ( Auth::user()->type == 'student' )
 				<li class="nav-item">
-					<a class="nav-link" href="{{ url('progreso') }}"><i class="fas fa-chart-line mr-2"></i>Progreso</a>
+					<a class="nav-link" href="{{ url('imagenes') }}"><i class="fas fa-chart-line mr-2"></i>Imágenes</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{ url('videos') }}"><i class="fas fa-chart-line mr-2"></i>Vídeos</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{ url('pruebas') }}"><i class="fas fa-chart-line mr-2"></i>Pruebas</a>
 				</li>
 			@else
 				<li class="nav-item">
-					<a class="nav-link" href="{{ url('notas') }}"><i class="fas fa-clipboard-list mr-2"></i>Notas</a>
+					<a class="nav-link" href="{{ url('estudiantes') }}"><i class="fas fa-bolt mr-2"></i>Estudiantes</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="modal" href="#temanuevo"><i class="fas fa-plus mr-2"></i>Añadir tema</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" data-toggle="modal" href="#registroeval"><i class="fas fa-bolt mr-2"></i>Registrar evaluación</a>
+
+				<!-- Dropdown -->
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-bolt"></i> Aañdir contenido</a>
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+						<a class="dropdown-item" data-toggle="modal" href="#addcontent">
+							<i class="fas fa-image mr-2"></i>Contenido Multimedia
+						</a>
+						<a class="dropdown-item" data-toggle="modal" href="#addcontenttext">
+							<i class="fas fa-edit mr-2"></i>Contenido Textual
+						</a>
+					</div>
 				</li>
 			@endif
 
 			<!-- Dropdown -->
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-				aria-expanded="false"><i class="fas fa-user mr-2"></i>{{ $me->type }}</a>
-				<div class="dropdown-menu dropdown-menu-right dropdown-dark" aria-labelledby="navbarDropdownMenuLink">
+				aria-expanded="false"><i class="fas fa-user mr-2"></i>{{ $me->people->type }}</a>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
 					<a class="dropdown-item" href="{{ url('profile') }}">
 						<i class="fas fa-user mr-2"></i>Perfil
 					</a>
-					@if ( Auth::user()->type == 'Profesor' )
+					@if ( Auth::user()->people->type == 'teacher' )
 						<a class="dropdown-item" href="https://docs.google.com/forms/u/0/d/1ljxTuDGYSjuElImNkafnqu1Vj3DgViMfrzCTV6hy2qY/edit?ntd=1&usp=forms_home&ths=true" target="_blank">
 							<i class="fab fa-google mr-2"></i>Crear Evaluación
 						</a>
@@ -58,13 +74,6 @@
 			</li>
 
 		</ul>
-		<!-- Links -->
-
-		{{-- <form class="form-inline">
-			<div class="md-form my-0">
-				<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-			</div>
-		</form> --}}
 	</div>
 	<!-- Collapsible content -->
 
@@ -85,16 +94,34 @@
 				@csrf
 				<div class="modal-body">
 
-					<div class="form-group md-form">
+					<div class="form-group md-form ">
 						<i class="fas fa-book prefix"></i>
-						<input type="text" name="tema" id="tema" class="form-control" required pattern="^[a-zA-Záéíóú]+(?:\s?[a-zA-Záéíóú]\s?)+$">
+						<input type="text" name="tema" id="tema" class="form-control validate" placeholder="sin espacios entre palabras" required pattern="^[A-Za-z0-9_]+$">
 						<label for="tema">Tema</label>
+					</div>
+
+					<div class="form-group md-form my-5">
+						<i class="fas fa-edit prefix"></i>
+						<textarea id="description" name="description" class="md-textarea form-control"></textarea>
+						<label for="description">Descripción del tema</label>
+					</div>
+					
+					<div class="form-group md-form">
+						<div class="file-field">
+							<a class="btn-floating aqua-gradient mt-0 float-left">
+								<i class="fas fa-paperclip" aria-hidden="true"></i>
+								<input type="file" name="topicimg" accept="image/*">
+							</a>
+							<div class="file-path-wrapper">
+								<input class="file-path validate" type="text" placeholder="Upload your image">
+							</div>
+						</div>
 					</div>
 
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn-md btn btn-elegant" data-dismiss="modal">Cerrar</button>
-					<button type="submit" class="btn-md btn btn-danger"><i class="fas fa-save mr-2"></i>Guardar</button>
+					<button type="button" class="btn-md btn red lighten-1" data-dismiss="modal"><i class="fas fa-times mr-2"></i>Cerrar</button>
+					<button type="submit" class="btn-md btn cyan lighten-2"><i class="fas fa-save mr-2"></i>Guardar</button>
 				</div>
 			</form>
 		</div>
@@ -102,33 +129,109 @@
 </div>
 
 
-<!-- Modal registrar evaluacion-->
-<div class="modal fade" id="registroeval" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal registrar contenido multimedia-->
+<div class="modal fade" id="addcontent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Registrar evaluación</h5>
+				<h5 class="modal-title" id="exampleModalLabel">Añadir contenido Multimedia</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form action="{{ url('addeval') }}" method="post">
+			<form action="{{ url('addcontent') }}" method="post" enctype="multipart/form-data">
 				@csrf
 				<div class="modal-body">
 
-					<div class="form-group md-form">
-						<i class="fas fa-link prefix"></i>
-						<input type="text" name="link" id="link" class="form-control validate" required pattern="^(http:\/\/|https:\/\/).+">
-						<label for="link">Enlace</label>
+					<input type="hidden" name="peopleid" value="{{ Auth::user()->people_id }}">
+
+					<div class="form-row">
+						<div class="col">
+							<label for="name">Nombre</label>
+							<input type="text" name="name" class="form-control" required id="name">
+						</div>
 					</div>
 
-					<div class="form-row mt-3">
-						<div class="col md-form">
-							<i class="fas fa-book prefix"></i>
-							<select class="ml-5 mdb-select dropdown-dark md-form colorful-select" name="topicid" required id="tema">
-								<option disabled selected>Escoge el tema de la evaluación</option>
-								@foreach( $topics as $topic )
-									<option value="{{ $topic->id }}">{{ $topic->topic }}</option>
+					<div class="form-row my-3">
+						<div class="col">
+							<label for="publicar"><i class="fas fa-edit mr-2"></i>Escribe una descripción</label>
+							<textarea name="publicar" id="publicar" class="form-control" required></textarea>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="col">
+							<label class="mdb-main-label">Tema en el cual registrar el contenido</label>
+							<select class="browser-default custom-select" required name="topicid">
+								<option selected disabled>Escoge un tema</option>
+								@foreach( $topics as $t )
+									<option value="{{ $t->id }}">{{ $t->topic }}</option>
+								@endforeach
+							</select>
+						</div>
+						<div class="col">
+							<div class="d-flex justify-content-between align-items-center">
+								<div class="file-field md-form">
+									<div class="btn waves-effect teal accent-4 dark-text btn-sm float-left px-2">
+										<i class="fas fa-file-upload fa-2x"></i>
+										<input type="file" name="file">
+									</div>
+									<div class="file-path-wrapper">
+										<input class="file-path validate form" type="text" placeholder="Sube un archivo" required>
+									</div> 
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button class="btn px-2 btn-sm red lighten-1 waves-effect" type="reset"><i class="fas fa-times mr-2"></i>Limpiar</button>
+					<button class="btn px-2 btn-sm cyan lighten-2 waves-effect" type="submit"><i class="fas fa-send mr-2"></i>Publicar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<!-- MODAL registrar focntenido textuial -->
+<div class="modal fade" id="addcontenttext" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Añadir contenido Textual</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form action="{{ url('addcontenttext') }}" method="post">
+				@csrf
+				<div class="modal-body">
+
+					<input type="hidden" name="peopleid" value="{{ Auth::user()->people_id }}">
+
+					<div class="form-row">
+						<div class="col">
+							<label for="name">Nombre</label>
+							<input type="text" name="nametext" class="form-control" required id="name">
+						</div>
+					</div>
+
+					<div class="form-row my-3">
+						<div class="col">
+							<label for="publicartext"><i class="fas fa-edit mr-2"></i>Contenido</label>
+							<textarea name="publicartext" id="publicartext" rows="10" class="form-control" required></textarea>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="col">
+							<label class="mdb-main-label">Tema en el cual registrar el contenido</label>
+							<select class="browser-default custom-select" required name="topicid">
+								<option selected disabled>Escoge un tema</option>
+								@foreach( $topics as $t )
+									<option value="{{ $t->id }}">{{ $t->topic }}</option>
 								@endforeach
 							</select>
 						</div>
@@ -136,8 +239,8 @@
 
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn-md btn btn-elegant" data-dismiss="modal">Cerrar</button>
-					<button type="submit" class="btn-md btn btn-danger"><i class="fas fa-save mr-2"></i>Guardar</button>
+					<button class="btn px-2 btn-sm red lighten-1 waves-effect" type="reset"><i class="fas fa-times mr-2"></i>Limpiar</button>
+					<button class="btn px-2 btn-sm cyan lighten-2 waves-effect" type="submit"><i class="fas fa-send mr-2"></i>Publicar</button>
 				</div>
 			</form>
 		</div>

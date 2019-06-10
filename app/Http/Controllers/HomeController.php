@@ -30,13 +30,19 @@ class HomeController extends Controller
 	// Muestra la vista principal con todas la INFORMACION
 	public function index()
 	{
-		$topics   = Topic::all();
-		$contents = Content::all()->sortByDesc('id');
-		$files 	  = [];
+		$topics   	  = Topic::all();
+		$contents 	  = Content::all()->sortByDesc('id');
+		$textcontents = TextContent::all()->sortByDesc('id');
+		$files 	  	  = [];
+		$images	  	  = [];
 
 		foreach ($contents as $k => $v) {
 			if ( preg_match("/(.pdf|.txt|.csv|.doc|.docx|.ppt|.excel|.odt|.xls)$/", $v->file) ) {
 				$files[] = $contents[$k];
+			}
+
+			if ( preg_match("/(.jpg|.png|.gif)$/", $v->file) ) {
+				$images[] = $contents[$k];
 			}
 		}
 
@@ -51,9 +57,10 @@ class HomeController extends Controller
 					->with('topics', $topics);
 		}
 
-
 		return view('admin.index')
-				->with('contents', $files)
+				->with('files', $files)
+				->with('textcontents', $textcontents)
+				->with('images', $images)
 				->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 				->with('me', $me)
 				->with('topics', $topics);

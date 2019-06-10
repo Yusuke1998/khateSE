@@ -9,6 +9,7 @@
 	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 	<script src="{{ asset('js/popper.min.js') }}"></script>
 	<script src="{{ asset('js/mdb.min.js') }}"></script>
+	<script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
 	<script src="{{ asset('js/scripts.js') }}"></script>
 
 </body>

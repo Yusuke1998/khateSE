@@ -67,6 +67,8 @@ $(() => {
 	})
 
 
+	CKEDITOR.replace('publicartext');
+
 
 	$('.img').click(function(e){
 
@@ -86,7 +88,7 @@ $(() => {
 		let a = $(this).parent().parent()
 
 		$('#modaltitle').text(a.children('div.w-100').children('h5').text())
-		$('#contenido').text(a.children('p.content').text())
+		$('#contenido').html(a.children('p.content').text())
 	})
 
 })

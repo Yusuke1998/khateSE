@@ -44,70 +44,144 @@
 		</div>
 			
 		<div class="col-md-9 col-sm-12 animated zoomInRight slow">
-			<div class="card" >
-				<div class="card-body">
+			
+			<!-- Classic tabs -->
+			<div class="classic-tabs mx-2">
 
-					vista del admin, aqui ira todo el contenido tanto los archivos como las imagenes y los videos, divididos en secciones tal como se muestr en la primera seccion q es la q mostrara los archivos.
+				<ul class="nav cyan lighten-3" id="myClassicTabOrange" role="tablist">
+					<li class="nav-item">
+						<a class="nav-link black-text  waves-light active show" id="profile-tab-classic-orange" data-toggle="tab" href="#profile-classic-orange" role="tab" aria-controls="profile-classic-orange" aria-selected="true">
+							<i class="fas fa-edit fa-2x pb-2" aria-hidden="true"></i><br>Contenido
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link black-text waves-light" id="follow-tab-classic-orange" data-toggle="tab" href="#follow-classic-orange" role="tab" aria-controls="follow-classic-orange" aria-selected="false">
+							<i class="fas fa-image fa-2x pb-2" aria-hidden="true"></i><br>Imágenes
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link black-text waves-light" id="contact-tab-classic-orange" data-toggle="tab" href="#contact-classic-orange"
+						role="tab" aria-controls="contact-classic-orange" aria-selected="false">
+							<i class="fas fa-video fa-2x pb-2" aria-hidden="true"></i><br>Vídeos
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link black-text waves-light" id="awesome-tab-classic-orange" data-toggle="tab" href="#awesome-classic-orange" role="tab" aria-controls="awesome-classic-orange" aria-selected="false">
+							<i class="fas fa-file fa-2x pb-2" aria-hidden="true"></i><br>Archivos
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link black-text waves-light" id="test-tab-classic-orange" data-toggle="tab" href="#test-classic-orange" role="tab" aria-controls="test-classic-orange" aria-selected="false">
+							<i class="fas fa-star fa-2x pb-2" aria-hidden="true"></i><br>Pruebas
+						</a>
+					</li>
+				</ul>
 
-					@if( count($contents) > 0 )
-						<div class="card-columns">
-							@foreach($contents as $content)
-								<!-- Card Wider -->
-								<div class="card wider mb-4 img">
-									<!-- Card image -->
-									<div class="view text-center mt-3" data-toggle="modal" data-target="#imgmodal">
-
-										@if( preg_match("/(\.pdf)$/", $content->file) )
-											<a href='{{ asset("storage/$content->file") }}'><i class="fas fa-file-pdf fa-5x"></i></a>
-										@endif
-
-										@if( preg_match("/(\.docx|\.doc|\.odt)$/", $content->file) )
-											<a href='{{ asset("storage/$content->file") }}'><i class="fas fa-file-word fa-5x"></i></a>
-										@endif
-										
-										@if( preg_match("/(.txt)$/", $content->file) )
-											<a href='{{ asset("storage/$content->file") }}'><i class="fas fa-file-alt fa-5x"></i></a>
-										@endif
-
-										@if( preg_match("/(\.csv)$/", $content->file) )
-											<a href='{{ asset("storage/$content->file") }}'><i class="fas fa-file-csv fa-5x"></i></a>
-										@endif
-
-										@if( preg_match("/(.ppt)$/", $content->file) )
-											<a href='{{ asset("storage/$content->file") }}'><i class="fas fa-file-powerpoint fa-5x"></i></a>
-										@endif
-										
-										@if( preg_match("/(\.excel|\.xls)$/", $content->file) )
-											<a href='{{ asset("storage/$content->file") }}'><i class="fas fa-file-excel fa-5x"></i></a>
-										@endif
-
-									</div>
-									<!-- Card content -->
-									<div class="card-body card-body-cascade text-justify">
-										<!-- Title -->
-										<p class="card-title text-center">{{ $content->name }}</p>
-										<!-- Subtitle -->
-										<p class="blue-text pb-2 text-center">{{ $content->topic->topic }}</p>
-										<!-- Text -->
-										<p class="card-text">{{ $content->comment }}</p>
-									</div>
-									<div class="card-footer">
-								    	<small class="text-muted">{{ $carbon->diffForHumans($content->created_at) }}</small>
-									</div>
-
+				<div class="tab-content card" id="myClassicTabContentOrange">
+					<div class="tab-pane fade active show" id="profile-classic-orange" role="tabpanel" aria-labelledby="profile-tab-classic-orange">
+						
+						@foreach($textcontents as $t)
+							<div class="card mb-3">
+								<div class="card-body">
+									<h4 class="card-title">{{ $t->name }}</h4>
+									<p class="card-text">{{ $t->textcontent }}</p>
 								</div>
-								<!-- Card Wider -->
+							</div>
+						@endforeach
+
+					</div>
+					<div class="tab-pane fade" id="follow-classic-orange" role="tabpanel" aria-labelledby="follow-tab-classic-orange">
+						
+						@foreach($images as $img)
+							<div class="card mb-3">
+								<div class="card-body d-flex justify-content-center">
+									<img class="img-fluid" src='{{ asset("storage/$img->file") }}' alt="">
+								</div>
+							</div>
+						@endforeach
+
+					</div>
+					<div class="tab-pane fade" id="contact-classic-orange" role="tabpanel" aria-labelledby="contact-tab-classic-orange">
+						<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
+							deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non
+							provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
+							Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est
+							eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas
+						assumenda est, omnis dolor repellendus. </p>
+					</div>
+					<div class="tab-pane fade" id="awesome-classic-orange" role="tabpanel" aria-labelledby="awesome-tab-classic-orange">
+						
+						<div class="row">
+							@foreach($files as $content)
+								<div class="col-4">
+									<div class="card wider mb-4 img">
+										<!-- Card image -->
+										<div class="view text-center mt-3" data-toggle="modal" data-target="#imgmodal">
+
+											@if( preg_match("/(\.pdf)$/", $content->file) )
+												<a title="{{ $content->file }}" href='{{ asset("storage/$content->file") }}'><i class="fas fa-file-pdf fa-5x"></i></a>
+											@endif
+
+											@if( preg_match("/(\.docx|\.doc|\.odt)$/", $content->file) )
+												<a title="{{ $content->file }}" href='{{ asset("storage/$content->file") }}'><i class="fas fa-file-word fa-5x"></i></a>
+											@endif
+											
+											@if( preg_match("/(.txt)$/", $content->file) )
+												<a title="{{ $content->file }}" href='{{ asset("storage/$content->file") }}'><i class="fas fa-file-alt fa-5x"></i></a>
+											@endif
+
+											@if( preg_match("/(\.csv)$/", $content->file) )
+												<a title="{{ $content->file }}" href='{{ asset("storage/$content->file") }}'><i class="fas fa-file-csv fa-5x"></i></a>
+											@endif
+
+											@if( preg_match("/(.ppt)$/", $content->file) )
+												<a title="{{ $content->file }}" href='{{ asset("storage/$content->file") }}'><i class="fas fa-file-powerpoint fa-5x"></i></a>
+											@endif
+											
+											@if( preg_match("/(\.excel|\.xls)$/", $content->file) )
+												<a title="{{ $content->file }}" href='{{ asset("storage/$content->file") }}'><i class="fas fa-file-excel fa-5x"></i></a>
+											@endif
+
+										</div>
+										<!-- Card content -->
+										<div class="card-body card-body-cascade text-justify">
+											<!-- Title -->
+											<p class="card-title text-center">{{ $content->name }}</p>
+											<!-- Subtitle -->
+											<p class="blue-text pb-2 text-center">{{ $content->topic->topic }}</p>
+											<!-- Text -->
+											<p class="card-text">{{ $content->comment }}</p>
+										</div>
+										<div class="card-footer">
+									    	<small class="text-muted">{{ $carbon->diffForHumans($content->created_at) }}</small>
+										</div>
+
+									</div>
+								</div>
 							@endforeach
 						</div>
-					@else
-						<h3 class="text-center mb-5">Aún no hay un contenido registrado.</h3>
-						<p class="text-center">
-							<i class="fas fa-user fa-10x"></i>
-						</p>
-					@endif
 
+					</div>
+					<div class="tab-pane fade" id="test-classic-orange" role="tabpanel" aria-labelledby="awesome-tab-classic-orange">
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+							dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+							ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+							eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+						deserunt mollit anim id est laborum.</p>
+					</div>
 				</div>
+
 			</div>
+			<!-- Classic tabs -->
+
+
+
+
+
+
+
+
+			
 			
 		</div>
 	</div>

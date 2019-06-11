@@ -55,27 +55,19 @@
 				
 				<div class="col-12">
 					
-					
-					<div class="card animated slow wow zoomIn mb-4">
-						<div class="card-body">
-							<div class="embed-responsive embed-responsive-16by9">
-								<video controls src="{{ asset('storage/v2.mp4') }}"></video>
+					@foreach($videos as $v)	
+						<div class="card animated slow wow zoomIn mb-4">
+							<div class="card-body">
+								<div class="embed-responsive embed-responsive-16by9">
+									<video controls src="{{ asset('storage/v2.mp4') }}"></video>
+								</div>
+							</div>
+							<div class="card-footer">
+								<p class="h4">{{ $v->name }}</p>
+								<p class="text-monospace">{{ $v->comment }}</p>
 							</div>
 						</div>
-						<div class="card-footer">
-							<p class="lead">Porque un numero dividido entre 0 da infinito?</p>
-						</div>
-					</div>
-					<div class="card animated wow slow zoomIn">
-						<div class="card-body">
-							<div class="embed-responsive embed-responsive-16by9">
-								<video controls src="{{ asset('storage/v2.mp4') }}"></video>
-							</div>
-						</div>
-						<div class="card-footer">
-							<p class="lead">Que pasa cuando dividimos algo entre 0? porq da 0?</p>
-						</div>
-					</div>
+					@endforeach
 				</div>
 				
 			</div>

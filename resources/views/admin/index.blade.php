@@ -50,23 +50,23 @@
 
 				<ul class="nav cyan lighten-3" id="myClassicTabOrange" role="tablist">
 					<li class="nav-item">
-						<a class="nav-link black-text  waves-light active show" id="profile-tab-classic-orange" data-toggle="tab" href="#profile-classic-orange" role="tab" aria-controls="profile-classic-orange" aria-selected="true">
+						<a class="nav-link black-text  waves-light active show" id="contenido-tab-classic-orange" data-toggle="tab" href="#contenido-classic-orange" role="tab" aria-controls="contenido-classic-orange" aria-selected="true">
 							<i class="fas fa-edit fa-2x pb-2" aria-hidden="true"></i><br>Contenido
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link black-text waves-light" id="follow-tab-classic-orange" data-toggle="tab" href="#follow-classic-orange" role="tab" aria-controls="follow-classic-orange" aria-selected="false">
+						<a class="nav-link black-text waves-light" id="images-tab-classic-orange" data-toggle="tab" href="#images-classic-orange" role="tab" aria-controls="images-classic-orange" aria-selected="false">
 							<i class="fas fa-image fa-2x pb-2" aria-hidden="true"></i><br>Imágenes
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link black-text waves-light" id="contact-tab-classic-orange" data-toggle="tab" href="#contact-classic-orange"
-						role="tab" aria-controls="contact-classic-orange" aria-selected="false">
+						<a class="nav-link black-text waves-light" id="videos-tab-classic-orange" data-toggle="tab" href="#videos-classic-orange"
+						role="tab" aria-controls="videos-classic-orange" aria-selected="false">
 							<i class="fas fa-video fa-2x pb-2" aria-hidden="true"></i><br>Vídeos
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link black-text waves-light" id="awesome-tab-classic-orange" data-toggle="tab" href="#awesome-classic-orange" role="tab" aria-controls="awesome-classic-orange" aria-selected="false">
+						<a class="nav-link black-text waves-light" id="files-tab-classic-orange" data-toggle="tab" href="#files-classic-orange" role="tab" aria-controls="files-classic-orange" aria-selected="false">
 							<i class="fas fa-file fa-2x pb-2" aria-hidden="true"></i><br>Archivos
 						</a>
 					</li>
@@ -78,22 +78,22 @@
 				</ul>
 
 				<div class="tab-content card" id="myClassicTabContentOrange">
-					<div class="tab-pane fade active show" id="profile-classic-orange" role="tabpanel" aria-labelledby="profile-tab-classic-orange">
+					<div class="tab-pane fade active show" id="contenido-classic-orange" role="tabpanel" aria-labelledby="contenido-tab-classic-orange">
 						
 						@foreach($textcontents as $t)
-							<div class="card mb-3">
+							<div class="card mb-3 hoverable">
 								<div class="card-body">
 									<h4 class="card-title">{{ $t->name }}</h4>
-									<p class="card-text">{{ $t->textcontent }}</p>
+									<p class="card-text">{{!! $t->textcontent !!}}</p>
 								</div>
 							</div>
 						@endforeach
 
 					</div>
-					<div class="tab-pane fade" id="follow-classic-orange" role="tabpanel" aria-labelledby="follow-tab-classic-orange">
+					<div class="tab-pane fade" id="images-classic-orange" role="tabpanel" aria-labelledby="images-tab-classic-orange">
 						
 						@foreach($images as $img)
-							<div class="card mb-3">
+							<div class="card mb-3 view zoom hoverable">
 								<div class="card-body d-flex justify-content-center">
 									<img class="img-fluid" src='{{ asset("storage/$img->file") }}' alt="">
 								</div>
@@ -101,20 +101,28 @@
 						@endforeach
 
 					</div>
-					<div class="tab-pane fade" id="contact-classic-orange" role="tabpanel" aria-labelledby="contact-tab-classic-orange">
-						<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-							deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non
-							provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
-							Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est
-							eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas
-						assumenda est, omnis dolor repellendus. </p>
+					<div class="tab-pane fade" id="videos-classic-orange" role="tabpanel" aria-labelledby="videos-tab-classic-orange">
+						
+						<div class="card mb-3 hoverable">
+							<div class="card-body">
+								
+								@foreach( $videos as $v )
+									<video controls src='{{ "storage/$v->file" }}'></video>
+								@endforeach
+
+							</div>
+							<div class="card-footer">
+								<p class="h4 text-monospace">{{ $v->name }}</p>
+							</div>
+						</div>
+
 					</div>
-					<div class="tab-pane fade" id="awesome-classic-orange" role="tabpanel" aria-labelledby="awesome-tab-classic-orange">
+					<div class="tab-pane fade" id="files-classic-orange" role="tabpanel" aria-labelledby="files-tab-classic-orange">
 						
 						<div class="row">
 							@foreach($files as $content)
 								<div class="col-4">
-									<div class="card wider mb-4 img">
+									<div class="card wider mb-4 img hoverable">
 										<!-- Card image -->
 										<div class="view text-center mt-3" data-toggle="modal" data-target="#imgmodal">
 
@@ -162,7 +170,7 @@
 						</div>
 
 					</div>
-					<div class="tab-pane fade" id="test-classic-orange" role="tabpanel" aria-labelledby="awesome-tab-classic-orange">
+					<div class="tab-pane fade" id="test-classic-orange" role="tabpanel" aria-labelledby="test-tab-classic-orange">
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
 							dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
 							ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore

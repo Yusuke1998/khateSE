@@ -34,6 +34,7 @@ class HomeController extends Controller
 		$contents 	  = Content::all()->sortByDesc('id');
 		$textcontents = TextContent::all()->sortByDesc('id');
 		$files 	  	  = [];
+		$videos   	  = [];
 		$images	  	  = [];
 
 		foreach ($contents as $k => $v) {
@@ -43,6 +44,10 @@ class HomeController extends Controller
 
 			if ( preg_match("/(.jpg|.png|.gif)$/", $v->file) ) {
 				$images[] = $contents[$k];
+			}
+
+			if ( preg_match("/(.mp4)$/", $v->file) ) {
+				$videos[] = $contents[$k];
 			}
 		}
 
@@ -61,11 +66,13 @@ class HomeController extends Controller
 				->with('files', $files)
 				->with('textcontents', $textcontents)
 				->with('images', $images)
+				->with('videos', $videos)
 				->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 				->with('me', $me)
 				->with('topics', $topics);
 
 	}
+
 	public function videos()
 	{
 		$topics   = Topic::all();

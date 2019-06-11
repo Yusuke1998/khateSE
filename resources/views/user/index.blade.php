@@ -44,7 +44,7 @@
 		</div>
 			
 		<div class="col-md-9 col-sm-12 animated zoomInRight slow">
-			<div class="card" >
+			<div class="card">
 				<div class="card-body px-5">
 
 					@if( count($topics) > 0 )
@@ -56,7 +56,7 @@
 							
 							@foreach($topics as $t)	
 								<!-- Card -->
-								<div class="card col-md-4 col-sm-3 mb-4">
+								<div class="card col-md-4 col-sm-3 mb-4 hoverable">
 									<!-- Card image -->
 									<div class="view zoom d-flex align-items-center" style="height: 160px">
 										<img class="card-img-top" src='{{ asset("storage/$t->image") }}' alt="Card image cap">

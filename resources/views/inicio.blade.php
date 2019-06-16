@@ -98,14 +98,14 @@
 	{{-- FIN MODAL REGISTRO --}}
 
 
-	<div class="card card-image" style="background: linear-gradient(#80deea, #e0f7fa)">
+	<div class="card card-image" style="background: linear-gradient(#C7F9FF, #DCEFFF)">
 		<div class="py-5 px-4 my-5 container">
 			<div class="row">
 
 				<div class="col animated slideInLeft white-text delay-1s d-flex align-items-center">
 					<div>
 						<h1 style="text-shadow: 1px 1px .5px #3F3F3F" class="font-weight-bold text-center animated zoomIn delay-2s">Software Educativo (Redes)</h1>
-					
+
 						<hr class="my-4">
 
 						<!-- <p class="text-justify lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, obcaecati voluptatem ducimus aut accusantium sunt aut accusantium sunt.</p>
@@ -117,7 +117,7 @@
 						</div>
 					</div>
 				</div>
-			
+
 				<div class="col-1"></div>
 
 				<div class="col animated slideInRight">
@@ -182,54 +182,109 @@
 
 	<div class="container my-5">
 
-		<h2 class="text-center mt-5 wow fadeInDownBig">Aquí irá la intro de la herramienta</h2>
+<!-- Intro de la herramienta -->
+
+		<h2 class="text-center mt-5 wow fadeInDownBig">¿Estas listo? ¡Empieza ya!</h2>
 		<hr class="w-25 mb-5">
 
+		<!-- Row 1 -->
 		<div class="row">
-			<div class="col">
-				<div class="row mb-3 wow rollIn">
-					<div class="col-1">
-						<i class="fas fa-paper-plane fa-2x"></i>
-					</div>
-					<div class="col ml-3">
-						<h5>Fácil de usar</h5>
-						<p>Lorem texto de prueba ipsum dolor sit amet, consectetur adipisicing elit.</p>
-					</div>
-				</div>
-				<div class="row mb-3 wow rollIn">
-					<div class="col-1">
-						<i class="fas fa-smile fa-2x"></i>
-					</div>
-					<div class="col ml-3">
-						<h5>Interfáz de usuario amigable</h5>
-						<p>Lorem texto de prueba ipsum dolor sit amet, consectetur adipisicing elit.</p>
-					</div>
-				</div>
-				<div class="row mb-3 wow rollIn">
-					<div class="col-1">
-						<i class="fas fa-thumbs-up fa-2x"></i>
-					</div>
-					<div class="col ml-3">
-						<h5>Acceso gratuito a la aplicación</h5>
-						<p>Lorem texto de prueba ipsum dolor sit amet, consectetur adipisicing elit.</p>
-					</div>
-				</div>
-				<div class="row mb-3 wow rollIn">
-					<div class="col-1">
-						<i class="fab fa-google fa-2x"></i>
-					</div>
-					<div class="col ml-3">
-						<h5>Exámenes con Google Form</h5>
-						<p>Esta herramienta usa Google Forms para crear y enviar los exámenes a sus alumnos.</p>
-					</div>
+			<div class="col-6">
+				<div class="row mb-3 wow zoomIn"><br><br><br>
+					<h5 class="text-center">Software educatico dedicado al area de Redes, digido principalmente a estudiantes y tambien a profesores del area de Ingenieria de Sistemas de la Universidad Nacional Experimental Rómulo Gallegos.</h5>
 				</div>
 			</div>
-			<div class="col wow slideInRight delay-1s">
-				<div class="view overlay zoom">
-					<img src="{{ asset('images/img10.jpg') }}" alt="404" class="img-fluid img-thumbnail">
+			<div class="col-6">
+				<div class="row mb-3 wow bounceInRight p-2">
+					<!-- <div class="col-1"></div> -->
+					<img src="{{ asset('images/avatar_estudiante.png') }}" alt="404" class=" ml-3 img-fluid img-thumbnail">
+					<!-- <div class="col-1"></div> -->
+					<img src="{{ asset('images/avatar_prof.png') }}" alt="404" class="ml-4 img-fluid img-thumbnail">
+				</div>
+			</div>
+		</div><br><br>
+		<hr class="my-4">
+
+		<!-- Row 2 -->
+		<div class="row">
+
+			<div class="col wow wobble delay-1s">
+				<div class=" view overlay zoom">
+					<img src="{{ asset('images/home_prof.png') }}" alt="404" class="img-fluid img-thumbnail">
+				</div>
+			</div>
+			<div class="col-1"></div>
+			<div class="col">
+				<div class="row mb-3 wow zoomIn">
+					<div class="col ml-3"><br><br><br>
+						<h5 class="text-center">Los profesores pueden tener acceso y control total al sistema, manejando desde su perfil el contenido a impartir en clase.</h5>
+					</div>
 				</div>
 			</div>
 		</div>
+		<hr class="my-5">
+
+		<!-- Row 3 -->
+	
+		<div class="row mb-4">
+			<div class="col wow animated zoomIn">
+				<h5 class="text-center">Añadir contenido multimedia y textual clasificado por temas con respectivas imagenes y archivos para los estudiantes. </h5>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col wow view overlay zoom animated bounceInRight ">
+				<img src="{{ asset('images/aniadir_tema_prof.png') }}" alt="404" class="img-dimentions img-fluid img-thumbnail">
+			</div>
+			<div class="col view wow animated rubberBand overlay zoom">
+				<img src="{{ asset('images/aniadir_cont_textual_prof.png') }}" alt="404" class="img-dimentions img-fluid img-thumbnail">
+			</div>
+			<div class="col wow animated bounceInLeft view overlay zoom">
+				<img src="{{ asset('images/aniadir_cont_multimedia_prof.png') }}" alt="404" class="img-dimentions img-fluid img-thumbnail">
+			</div>
+		</div>
+
+		<br><br><br><br>
+
+		
+		<div class="row">
+			<div class="col">
+				<h5 class="text-center">Estructurar y formular todas y cada una de la pruebas que realizaran durante el semestre, organizadas por tema y a su vez estos por cada lapso correspondiente, tambien puede controlar y saber el numero o matrícula total de estudiantes en cada clase.</h5>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col wow zoomInDown view overlay zoom"><br><br>
+				<img src="{{ asset('images/temas_prof.png') }}" alt="404" class="img-dimentions img-fluid img-thumbnail">
+			</div>
+			<div class="col wow zoomInDown view overlay zoom"><br><br>
+				<img src="{{ asset('images/estudiantes_prof.png') }}" alt="404" class="img-dimentions img-fluid img-thumbnail">
+			</div>
+			<div class="col wow view zoomInDown overlay zoom"><br><br>
+				<img src="{{ asset('images/form_3.png') }}" alt="404" class="img-dimentions img-fluid img-thumbnail">
+			</div>
+		</div>
+
+
+		<hr class="my-5">
+		<div class="row wow zoomIn mb-4">
+			<div class="col">
+				<h5 class="text-center">Y desde luego, cada estudiante perteneciente a una clase puede realizar las pruebas asignadas por su profesor, estar al tanto de todo el contenido educativo, textual y/o audiovisual disponible para él o ella, asi como tener la libertad del tema sobre el cual quiere aprender.</h5>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col wow zoomInUp view overlay zoom"><br><br>
+				<img src="{{ asset('images/temas.png') }}" alt="404" class="img-dimentions img-fluid img-thumbnail">
+			</div>
+			<div class="col wow zoomInUp view overlay zoom"><br><br>
+				<img src="{{ asset('images/home_estudiante.png') }}" alt="404" class="img-dimentions img-fluid img-thumbnail">
+			</div>
+			<div class="col wow zoomInUp view overlay zoom"><br><br>
+				<img src="{{ asset('images/form_1.png') }}" alt="404" class="img-dimentions img-fluid img-thumbnail">
+			</div>
+		</div>
+
+		<hr class="my-5">
+
+		<!-- Fin de la intro -->
 
 
 		<h2 class="text-center mt-5 wow fadeInDownBig">Nuestros estudiantes</h2>

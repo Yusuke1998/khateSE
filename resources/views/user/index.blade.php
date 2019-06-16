@@ -2,7 +2,7 @@
 @include('layouts.navbar')
 
 <br>
-<div class="container my-5 pt-5 animated fadeIn">
+<div class="container my-5 pt-5 animated fadeIn bg">
 
 	<div class="row">
 
@@ -51,7 +51,6 @@
 
 						<h2 class="text-center mb-5 font-weight-light animated rollIn delay-1s">Seleciona un tema para empezar</h2>
 
-						
 						<div class="row">
 							
 							@foreach($topics as $t)	

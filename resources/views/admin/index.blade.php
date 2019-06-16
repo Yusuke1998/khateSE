@@ -1,8 +1,21 @@
 @include('layouts.header')
 @include('layouts.navbar')
 
+
+
+
+{{--<div class="embed-responsive">
+	<iframe class="embed-responsive-item" src="{{  }}"></iframe>
+</div>--}}
+
+
+
+
+
+
+
 <br>
-<div class="container my-5 pt-5 animated fadeIn">
+<div class="container my-5 pt-5 animated fadeIn bg">
 
 	<div class="row">
 
@@ -80,94 +93,111 @@
 				<div class="tab-content card" id="myClassicTabContentOrange">
 					<div class="tab-pane fade active show" id="contenido-classic-orange" role="tabpanel" aria-labelledby="contenido-tab-classic-orange">
 						
-						@foreach($textcontents as $t)
-							<div class="card mb-3 hoverable">
-								<div class="card-body">
-									<h4 class="card-title">{{ $t->name }}</h4>
-									<p class="card-text">{{!! $t->textcontent !!}}</p>
+						@if( count($textcontents) > 0 )
+							@foreach($textcontents as $t)
+								<div class="card mb-3 hoverable">
+									<div class="card-body">
+										<h4 class="card-title">{{ $t->name }}</h4>
+										<p class="card-text">{{!! $t->textcontent !!}}</p>
+									</div>
 								</div>
-							</div>
-						@endforeach
+							@endforeach
+						@else
+							<h2 class="text-center">Aun no hay contenido registrado.</h2>
+						@endif
 
 					</div>
 					<div class="tab-pane fade" id="images-classic-orange" role="tabpanel" aria-labelledby="images-tab-classic-orange">
 						
-						@foreach($images as $img)
-							<div class="card mb-3 view zoom hoverable">
-								<div class="card-body d-flex justify-content-center">
-									<img class="img-fluid" src='{{ asset("storage/$img->file") }}' alt="">
+						@if( count($images) > 0 )
+							@foreach($images as $img)
+								<div class="card mb-3 view zoom hoverable">
+									<div class="card-body d-flex justify-content-center">
+										<img class="img-fluid" src='{{ asset("storage/$img->file") }}' alt="">
+									</div>
 								</div>
-							</div>
-						@endforeach
+							@endforeach
+						@else
+							<h2 class="text-center">Aun no hay contenido registrado.</h2>
+						@endif
 
 					</div>
 					<div class="tab-pane fade" id="videos-classic-orange" role="tabpanel" aria-labelledby="videos-tab-classic-orange">
 						
-						<div class="card mb-3 hoverable">
-							<div class="card-body">
-								
-								@foreach( $videos as $v )
-									<video controls src='{{ "storage/$v->file" }}'></video>
-								@endforeach
-
-							</div>
-							<div class="card-footer">
-								<p class="h4 text-monospace">{{ $v->name }}</p>
-							</div>
-						</div>
+						@if( count($videos) > 0 )
+							@foreach( $videos as $v )
+								<div class="card mb-3 hoverable">
+									<div class="card-body">
+										<video class="video-fluid" controls src='{{ "storage/$v->file" }}'></video>
+									</div>
+									<div class="card-footer">
+										<p class="h4 text-monospace">{{ $v->name }}</p>
+									</div>
+								</div>
+							@endforeach
+						@else
+							<h2 class="text-center">Aun no hay contenido registrado.</h2>
+						@endif
 
 					</div>
 					<div class="tab-pane fade" id="files-classic-orange" role="tabpanel" aria-labelledby="files-tab-classic-orange">
 						
 						<div class="row">
-							@foreach($files as $content)
-								<div class="col-4">
-									<div class="card wider mb-4 img hoverable">
-										<!-- Card image -->
-										<div class="view text-center mt-3" data-toggle="modal" data-target="#imgmodal">
+							@if( count($files) > 0 )
+								@foreach($files as $content)
+									<div class="col-4">
+										<div class="card wider mb-4 img hoverable">
+											<!-- Card image -->
+											<div class="view text-center mt-3" data-toggle="modal" data-target="#imgmodal">
 
-											@if( preg_match("/(\.pdf)$/", $content->file) )
-												<a title="{{ $content->file }}" href='{{ asset("storage/$content->file") }}'><i class="fas fa-file-pdf fa-5x"></i></a>
-											@endif
+												@if( preg_match("/(\.pdf)$/", $content->file) )
+													<a title="{{ $content->file }}" href='{{ asset("storage/$content->file") }}'><i class="fas fa-file-pdf fa-5x"></i></a>
+												@endif
 
-											@if( preg_match("/(\.docx|\.doc|\.odt)$/", $content->file) )
-												<a title="{{ $content->file }}" href='{{ asset("storage/$content->file") }}'><i class="fas fa-file-word fa-5x"></i></a>
-											@endif
-											
-											@if( preg_match("/(.txt)$/", $content->file) )
-												<a title="{{ $content->file }}" href='{{ asset("storage/$content->file") }}'><i class="fas fa-file-alt fa-5x"></i></a>
-											@endif
+												@if( preg_match("/(\.docx|\.doc|\.odt)$/", $content->file) )
+													<a title="{{ $content->file }}" href='{{ asset("storage/$content->file") }}'><i class="fas fa-file-word fa-5x"></i></a>
+												@endif
+												
+												@if( preg_match("/(.txt)$/", $content->file) )
+													<a title="{{ $content->file }}" href='{{ asset("storage/$content->file") }}'><i class="fas fa-file-alt fa-5x"></i></a>
+												@endif
 
-											@if( preg_match("/(\.csv)$/", $content->file) )
-												<a title="{{ $content->file }}" href='{{ asset("storage/$content->file") }}'><i class="fas fa-file-csv fa-5x"></i></a>
-											@endif
+												@if( preg_match("/(\.csv)$/", $content->file) )
+													<a title="{{ $content->file }}" href='{{ asset("storage/$content->file") }}'><i class="fas fa-file-csv fa-5x"></i></a>
+												@endif
 
-											@if( preg_match("/(.ppt)$/", $content->file) )
-												<a title="{{ $content->file }}" href='{{ asset("storage/$content->file") }}'><i class="fas fa-file-powerpoint fa-5x"></i></a>
-											@endif
-											
-											@if( preg_match("/(\.excel|\.xls)$/", $content->file) )
-												<a title="{{ $content->file }}" href='{{ asset("storage/$content->file") }}'><i class="fas fa-file-excel fa-5x"></i></a>
-											@endif
+												@if( preg_match("/(.ppt)$/", $content->file) )
+													<a title="{{ $content->file }}" href='{{ asset("storage/$content->file") }}'><i class="fas fa-file-powerpoint fa-5x"></i></a>
+												@endif
+												
+												@if( preg_match("/(\.excel|\.xls)$/", $content->file) )
+													<a title="{{ $content->file }}" href='{{ asset("storage/$content->file") }}'><i class="fas fa-file-excel fa-5x"></i></a>
+												@endif
+
+											</div>
+											<!-- Card content -->
+											<div class="card-body card-body-cascade text-justify">
+												<!-- Title -->
+												<p class="card-title text-center">{{ $content->name }}</p>
+												<!-- Subtitle -->
+												<p class="blue-text pb-2 text-center">{{ $content->topic->topic }}</p>
+												<!-- Text -->
+												<p class="card-text">{{ $content->comment }}</p>
+											</div>
+											<div class="card-footer">
+										    	<small class="text-muted">{{ $carbon->diffForHumans($content->created_at) }}</small>
+											</div>
 
 										</div>
-										<!-- Card content -->
-										<div class="card-body card-body-cascade text-justify">
-											<!-- Title -->
-											<p class="card-title text-center">{{ $content->name }}</p>
-											<!-- Subtitle -->
-											<p class="blue-text pb-2 text-center">{{ $content->topic->topic }}</p>
-											<!-- Text -->
-											<p class="card-text">{{ $content->comment }}</p>
-										</div>
-										<div class="card-footer">
-									    	<small class="text-muted">{{ $carbon->diffForHumans($content->created_at) }}</small>
-										</div>
-
 									</div>
+								@endforeach
+							@else
+								<div class="col">
+									<h2 class="text-center">Aun no hay contenido registrado.</h2>
 								</div>
-							@endforeach
+							@endif
 						</div>
+
 
 					</div>
 					<div class="tab-pane fade" id="test-classic-orange" role="tabpanel" aria-labelledby="test-tab-classic-orange">

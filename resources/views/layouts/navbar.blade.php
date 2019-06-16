@@ -197,7 +197,7 @@
 
 <!-- MODAL registrar focntenido textuial -->
 <div class="modal fade" id="addcontenttext" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
+	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="exampleModalLabel">Añadir contenido Textual</h5>
@@ -216,16 +216,6 @@
 							<label for="name">Nombre</label>
 							<input type="text" name="nametext" class="form-control" required id="name">
 						</div>
-					</div>
-
-					<div class="form-row my-3">
-						<div class="col">
-							<label for="publicartext"><i class="fas fa-edit mr-2"></i>Contenido</label>
-							<textarea name="publicartext" id="publicartext" rows="10" class="form-control" required></textarea>
-						</div>
-					</div>
-
-					<div class="form-row">
 						<div class="col">
 							<label class="mdb-main-label">Tema en el cual registrar el contenido</label>
 							<select class="browser-default custom-select" required name="topicid">
@@ -234,6 +224,13 @@
 									<option value="{{ $t->id }}">{{ $t->topic }}</option>
 								@endforeach
 							</select>
+						</div>
+					</div>
+
+					<div class="form-row my-3">
+						<div class="col">
+							<label for="publicartext"><i class="fas fa-edit mr-2"></i>Contenido</label>
+							<textarea name="publicartext" id="publicartext" rows="10" class="form-control" required></textarea>
 						</div>
 					</div>
 

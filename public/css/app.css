@@ -4,7 +4,7 @@
 
 /* ESTILOS PROPIOS */
 body {
-	background-color: #f9fbe7;
+	background: linear-gradient(#C7F9FF, #DCEFFF);;
 	font-size: 12px
 }
 
@@ -24,6 +24,12 @@ body {
 	position: absolute;
 	top: 0; bottom: 0; left: 0; right: 0;
 
+}
+
+.img-dimentions
+{
+    height:  13rem !important;
+    width:  30rem !important;
 }
 
 .validate { margin-bottom: .7rem !important  }
@@ -76,6 +82,11 @@ table.dataTable thead .sorting_desc_disabled {
 	float: right;
 	text-align: right;
 	padding-top: 0.25em;
+}
+
+.video-fluid {
+	width: 100%;
+	height: auto;
 }
 
 /*#mdb-scrollspy-ex .nav-item {

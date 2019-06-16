@@ -42,7 +42,7 @@ class HomeController extends Controller
 				$files[] = $contents[$k];
 			}
 
-			if ( preg_match("/(.jpg|.png|.gif)$/", $v->file) ) {
+			if ( preg_match("/(.jpg|.png|.jpeg|.gif)$/", $v->file) ) {
 				$images[] = $contents[$k];
 			}
 

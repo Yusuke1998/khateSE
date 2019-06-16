@@ -2,7 +2,7 @@
 @include('layouts.navbar')
 
 <br>
-<div class="container my-5 pt-5 animated fadeIn">
+<div class="container my-5 pt-5 animated fadeIn bg">
 
 	<div class="row">
 
@@ -66,6 +66,7 @@
 								</div>
 							@endforeach
 						</ul>
+
 					@else
 						<h2 class="text-center font-weight-light">No hay información registrada aún.</h2>
 					@endif

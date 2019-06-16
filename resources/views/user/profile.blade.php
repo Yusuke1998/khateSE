@@ -1,7 +1,7 @@
 @include('layouts.header')
 @include('layouts.navbar')
 
-<div class="container animated fadeIn mt-5 py-5" >
+<div class="container animated fadeIn mt-5 py-5 bg">
 
 	<div class="row">
 

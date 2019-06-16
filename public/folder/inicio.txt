@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Software Educativo (Redes)</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+</head>
+<body>
+
+    {{-- MODAL REGISTRO --}}
+
+    <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header cyan lighten-3 dark-text">
+                    <h5 class="modal-title" id="exampleModalLabel">Regístrate</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ url('register') }}" method="post">
+                    @csrf
+                    <div class="modal-body px-5">
+
+                        <div class="form-row">
+                            <div class="col md-form">
+                                <i class="fas fa-user prefix"></i>
+                                <input type="text" name="first_name" id="name" class="validate form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" value="{{ old('first_name') }}" pattern="^[a-zA-Záéíóú]+(?:\s?[a-zA-Záéíóú]\s?)+$">
+                                <label for="name">Nombre</label>
+                                @if ($errors->has('first_name'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('first_name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="col md-form">
+                                <i class="fas fa-user prefix"></i>
+                                <input type="text" name="last_name" id="apellido" class="validate form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" required pattern="^[a-zA-Záéíóú]+(?:\s?[a-zA-Záéíóú]\s?)+$" value="{{ old('last_name') }}"e>
+                                <label for="apellido">Apellido</label>
+                                @if ($errors->has('last_name'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('last_name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col md-form">
+                                <i class="fas fa-envelope prefix"></i>
+                                <input type="email" name="email" id="correo" class="validate form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" required>
+                                <label for="correo">Correo Electrónico</label>
+                                @if ($errors->has('email'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="col md-form">
+                                <i class="fas fa-user-circle prefix"></i>
+                                <select name="type" class="ml-5 mdb-select colorful-select dropdown-primary" id="type" required>
+                                    <option disabled selected>Selecciona un tipo de cuenta</option>
+                                    <option value="student">Estudiante</option>
+                                    <option value="teacher">Profesor</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col md-form">
+                                <i class="fas fa-key prefix"></i>
+                                <input type="password" id="pass" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" required>
+                                <label for="pass">Contraseña</label>
+                                @if ($errors->has('password'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="col-md-6 md-form">
+                                 <i class="fas fa-key prefix"></i>
+                                <input type="password" id="passw" name="password_confirmation" class="form-control" required>
+                                <label for="passw">Repita Contraseña</label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-md cyan" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-md cyan lighten-2"><i class="fas fa-save mr-2"></i>Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {{-- FIN MODAL REGISTRO --}}
+
+
+    <div class="card card-image" style="background: linear-gradient(#C7F9FF, #DCEFFF)">
+        <div class="py-5 px-4 my-5 container">
+            <div class="row">
+
+                <div class="col animated slideInLeft white-text delay-1s d-flex align-items-center">
+                    <div>
+                        <h1 style="text-shadow: 1px 1px .5px #3F3F3F" class="font-weight-bold text-center animated zoomIn delay-2s">Software Educativo (Redes)</h1>
+
+                        <hr class="my-4">
+
+                        <!-- <p class="text-justify lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, obcaecati voluptatem ducimus aut accusantium sunt aut accusantium sunt.</p>
+                        <p class="text-justify lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, dolores ut id voluptas officia repellat ratione, expedita autem eveniet similique illum soluta ex nulla. Eaque asperiores maxime magni dolor voluptates?</p> -->
+                        <div class="d-flex justify-content-center mt-5 animated zoomIn delay-2s">
+                            <button class="btn btn-md cyan lighten-2" data-toggle="modal" href="#register">
+                                <i class="fas fa-user-plus mr-2"></i>Regístrate
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-1"></div>
+
+                <div class="col animated slideInRight">
+                    <div class="card opacity">
+                        <h3 style="text-shadow: 1px 1px .5px #3F3F3F" class="card-header cyan lighten-3 white-text text-center py-4">
+                            <strong>Entrar a la plataforma</strong>
+                        </h3>
+                        <div class="card-body px-5 mx-3">
+                            <form action="{{ route('login') }}" method="post">
+                                @csrf
+
+                                <div class="form-row">
+                                    <div class="col md-form">
+                                        <i class="fas fa-envelope prefix"></i>
+                                        <input type="email" name="email" id="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }} validate" value="{{ old('email') }}" required>
+                                        <label for="email">Correo Electrónico</label>
+                                        @if ($errors->has('email'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('email') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col md-form">
+                                        <i class="fas fa-key prefix"></i>
+                                        <input type="password" name="password" id="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" required>
+                                        <label for="password">Contraseña</label>
+                                        @if ($errors->has('password'))
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $errors->first('password') }}</strong>
+                                            </span>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-around mt-4">
+                                    <div>
+                                        <div class="form-check">
+                                            <input type="checkbox" class="form-check-input" id="remember" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                                            <label class="form-check-label" for="remember">Recuérdame</label>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <a href="{{ route('password.request') }}">¿Olvidó su contraseña?</a>
+                                    </div>
+                                </div>
+
+                                <div class="mt-5 text-center">
+                                    <button class="btn cyan lighten-2" type="submit"><i class="fas fa-sign-in-alt mr-2"></i>Entrar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container my-5">
+
+<!-- Intro de la herramienta -->
+
+        <h2 class="text-center mt-5 wow fadeInDownBig">¿Estas listo? ¡Empieza ya!</h2>
+        <hr class="w-25 mb-5">
+
+        <!-- Row 1 -->
+        <div class="row">
+            <div class="col-6">
+                <div class="row mb-3 wow rollIn">
+<!--                    <div class="col-1">
+                        <i class="fas fa-paper-plane fa-2x"></i>
+                    </div> -->
+                    <div class="col ml-3">
+                        <h4>Contamos con un amplio conocimiento en redes informáticas.</h4><br><br><br>
+                        <h5>De lo micro a lo macro, lo que quieras aprender, lo tenemos para ti.</h5><br>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-5 wow slideInRight delay-1s">
+                <div class="view overlay zoom">
+                    <img src="{{ asset('images/conocimiento1.jpg') }}" alt="404" class="img-fluid img-thumbnail">
+                </div>
+            </div>
+        </div><br><br>
+
+        <!-- Row 2 -->
+        <div class="row">
+
+            <div class="col-5 wow slideInRight delay-1s">
+                <div class="view overlay zoom">
+                    <img src="{{ asset('images/portada_conocimiento.jpg') }}" alt="404" class="img-fluid img-thumbnail">
+                </div>
+            </div>
+            <div class="col-1"></div>
+            <div class="col-6">
+                <div class="row mb-3 wow rollIn">
+<!--                    <div class="col-1">
+                        <i class="fas fa-paper-plane fa-2x"></i>
+                    </div> -->
+                    <div class="col ml-3">
+                        <h4>Tu escoges como empezar, tomas una clase, un tema... ¡Como desees!</h4><br><br><br>
+                        <h5>¡Aprender no es un problema, tampoco es dificil con nosotros!.</h5><br>
+
+                    </div>
+                </div>
+            </div>
+        </div><br><br>
+
+        <!-- Row 3 -->
+    <hr class="my-5 bg-black">
+    <section id="animations-on-scroll">
+      <section>
+
+        <div class="row">
+
+          <div class="col-md-4 mb-4">
+            <img src="{{ asset('images/temas.png') }}" alt="¡Selecciona un tema para empezar!" class="img-dimentions view overlay zoom img-fluid wow tada z-depth-1" data-wow-delay="0.2s" style="visibility: visible; animation-name: tada; animation-delay: 0.2s;"><br><br>
+            <div class="col text-center">
+                <h5>¡Selecciona cualquier tema!</h5>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-4">
+            <img src="{{ asset('images/user-minimals.jpeg') }}" alt="Cottage on a lake surrounded by mountains." class="img-dimentions img-fluid wow tada z-depth-1" data-wow-delay="0.2s" style="visibility: visible; animation-name: tada; animation-delay: 0.2s;"><br><br>
+            <div class="col text-center">
+                <h5>Estudiantes satisfechos</h5>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-4">
+            <img src="{{ asset('images/lista.jpg') }}" alt="Cyclist riding down the mountain path." class="img-dimentions img-fluid wow fadeInLeft z-depth-1" data-wow-delay="0.3s" style="visibility: visible; animation-name: fadeInLeft; animation-delay: 0.3s;"><br><br>
+            <div class="col text-center">
+                <h5>Los temas estan organizados por lapsos.</h5>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-md-4 mb-4 mb-md-0">
+            <img src="{{ asset('images/satisfactorio.png') }}" alt="View on mountains from mountain top." class="img-dimentions img-fluid wow fadeInRight z-depth-1" data-wow-delay="0.4s" style="visibility: visible; animation-name: fadeInRight; animation-delay: 0.4s;"><br><br>
+            <div class="col text-center">
+                <h5>Es gratis. ¡Entra ya!</h5>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-4 mb-md-0">
+            <img src="{{ asset('images/notebook.jpg') }}" alt="Rocky shore in the morning." class="img-dimentions img-fluid wow fadeInUp z-depth-1" data-wow-delay="0.5s" style="visibility: visible; animation-name: fadeInUp; animation-delay: 0.5s;"><br><br>
+            <div class="col text-center">
+                <h5>Contamos con recursos multimedia y material audiovisual.</h5>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-4 mb-md-0">
+            <img src="{{ asset('images/google-forms.png') }}" alt="Rocky shore in the morning." class="img-dimentions view overlay zoom transparent img-fluid wow rollIn z-depth-1" data-wow-delay="0.6s" style="visibility: visible; animation-name: rollIn; animation-delay: 0.6s;"><br><br>
+            <div class="col text-center">
+                <h5>Nuestras pruebas estan hechas con los formularios de Google</h5>
+            </div>
+          </div>
+
+        </div>
+      </section>
+       <hr class="my-5">
+      <!-- Section: Live preview -->
+
+      <!-- Slider informativo -->
+      <main>
+
+        <div class="view jarallax" style="height: 100vh; ">
+            <img class="jarallax-img" src="{{ asset('images/img10.jpg') }}" style="width: 100% !important;" alt="">
+            <div class="mask rgba-blue-slight">
+                <div class="container flex-center text-center">
+                    <div class="row mt-5">
+                        <div class="col-md-12 wow fadeIn mb-3">
+                            <h1 class="display-3 mb-2 wow fadeInDown" data-wow-delay="0.3s" style="color: #fff">Empieza ahora con nosotros</h1>
+                            <h5 class="text-uppercase mb-3 mt-1 font-weight-bold wow fadeIn" data-wow-delay="0.4s" style="color: #fff">Obten el mejor conocimiento en redes.</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+<!-- Main layout -->
+      <!-- /Slider informativo -->
+
+
+    </section>
+    <hr class="my-5">
+
+    <!-- Fin de la intro -->
+
+
+        <h2 class="text-center mt-5 wow fadeInDownBig">Nuestros estudiantes</h2>
+        <hr class="w-25 mb-5">
+
+
+        <div class="my-5 py-2 wow fadeInUpBig">
+
+            <!--Carousel Wrapper-->
+            <div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
+
+                <!--Controls-->
+                {{-- <div class="controls-top">
+                    <a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
+                    <a class="btn-floating" href="#multi-item-example" data-slide="next"><i class="fa fa-chevron-right"></i></a>
+                </div> --}}
+                <!--/.Controls-->
+
+                <!--Indicators-->
+                <ol class="carousel-indicators">
+                    <li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
+                    <li data-target="#multi-item-example" data-slide-to="1"></li>
+                    <li data-target="#multi-item-example" data-slide-to="2"></li>
+                </ol>
+                <!--/.Indicators-->
+
+                <!--Slides-->
+                <div class="carousel-inner" role="listbox">
+
+                    <!--First slide-->
+                    <div class="carousel-item active">
+
+                        <div class="col-md-4">
+                            <div class="card testimonial-card mr-5 hoverable">
+                                <div class="card-up indigo lighten-1"></div>
+                                <div class="avatar mx-auto white">
+                                    <img src="{{ asset('images/img1.jpg') }}" class="rounded-circle" alt="woman avatar">
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="card-title">karla Villegas</h4>
+                                    <hr>
+                                    <p><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam nostrum non dolor iusto sequi rerum a atque eos cupiditate rem.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 clearfix d-none d-md-block">
+                            <div class="card testimonial-card mr-5 hoverable">
+                                <div class="card-up indigo lighten-1"></div>
+                                <div class="avatar mx-auto white">
+                                    <img src="{{ asset('images/img2.jpg') }}" class="rounded-circle" alt="woman avatar">
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="card-title">Katherin Gamez</h4>
+                                    <hr>
+                                    <p><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam nostrum non dolor iusto sequi rerum a atque eos cupiditate rem.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 clearfix d-none d-md-block">
+                            <div class="card testimonial-card mr-5 hoverable">
+                                <div class="card-up indigo lighten-1"></div>
+                                <div class="avatar mx-auto white">
+                                    <img src="{{ asset('images/img5.jpg') }}" class="rounded-circle" alt="woman avatar">
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="card-title">Jose Lopez</h4>
+                                    <hr>
+                                    <p><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam nostrum non dolor iusto sequi rerum a atque eos cupiditate rem.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--/.First slide-->
+
+                    <!--Second slide-->
+                    <div class="carousel-item">
+
+                        <div class="col-md-4">
+                            <div class="card testimonial-card mr-5 hoverable">
+                                <div class="card-up indigo lighten-1"></div>
+                                <div class="avatar mx-auto white">
+                                    <img src="{{ asset('images/img4.jpg') }}" class="rounded-circle" alt="woman avatar">
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="card-title">Karelys Lopez</h4>
+                                    <hr>
+                                    <p><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam nostrum non dolor iusto sequi rerum a atque eos cupiditate rem.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 clearfix d-none d-md-block">
+                            <div class="card testimonial-card mr-5 hoverable">
+                                <div class="card-up indigo lighten-1"></div>
+                                <div class="avatar mx-auto white">
+                                    <img src="{{ asset('images/img3.jpg') }}" class="rounded-circle" alt="woman avatar">
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="card-title">Maholys Zapata</h4>
+                                    <hr>
+                                    <p><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam nostrum non dolor iusto sequi rerum a atque eos cupiditate rem.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 clearfix d-none d-md-block">
+                            <div class="card testimonial-card mr-5 hoverable">
+                                <div class="card-up indigo lighten-1"></div>
+                                <div class="avatar mx-auto white">
+                                    <img src="{{ asset('images/img6.jpg') }}" class="rounded-circle" alt="woman avatar">
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="card-title">Julio Yanez</h4>
+                                    <hr>
+                                    <p><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam nostrum non dolor iusto sequi rerum a atque eos cupiditate rem.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--/.Second slide-->
+
+                    <!--Third slide-->
+                    <div class="carousel-item">
+
+                        <div class="col-md-4">
+                            <div class="card testimonial-card mr-5 hoverable">
+                                <div class="card-up indigo lighten-1"></div>
+                                <div class="avatar mx-auto white">
+                                    <img src="{{ asset('images/img7.jpg') }}" class="rounded-circle" alt="woman avatar">
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="card-title">Cesar Padrino</h4>
+                                    <hr>
+                                    <p><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam nostrum non dolor iusto sequi rerum a atque eos cupiditate rem.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 clearfix d-none d-md-block">
+                            <div class="card testimonial-card mr-5 hoverable">
+                                <div class="card-up indigo lighten-1"></div>
+                                <div class="avatar mx-auto white">
+                                    <img src="{{ asset('images/img8.jpg') }}" class="rounded-circle" alt="woman avatar">
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="card-title">Gibert Carrera</h4>
+                                    <hr>
+                                    <p><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam nostrum non dolor iusto sequi rerum a atque eos cupiditate rem.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 clearfix d-none d-md-block">
+                            <div class="card testimonial-card mr-5 hoverable">
+                                <div class="card-up indigo lighten-1"></div>
+                                <div class="avatar mx-auto white">
+                                    <img src="{{ asset('images/img9.jpg') }}" class="rounded-circle" alt="woman avatar">
+                                </div>
+                                <div class="card-body">
+                                    <h4 class="card-title">Pepito Fuentes</h4>
+                                    <hr>
+                                    <p><i class="fa fa-quote-left"></i> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magnam nostrum non dolor iusto sequi rerum a atque eos cupiditate rem.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--/.Third slide-->
+
+                </div>
+                <!--/.Slides-->
+
+            </div>
+            <!--/.Carousel Wrapper-->
+
+        </div>
+
+    </div>
+
+    <footer class="page-footer font-small stylish-color-dark pt-4 wow fadeIn">
+
+        <div class="container-fluid text-center text-md-left ">
+
+
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-md-4 mx-auto">
+
+                    <!-- Content -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Software Educativo</h5>
+                    <p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit.</p>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none">
+
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+
+                    <!-- Links -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 2</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 3</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 4</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none">
+
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+
+                    <!-- Links -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#!">Link 1</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 2</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 3</a>
+                        </li>
+                        <li>
+                            <a href="#!">Link 4</a>
+                        </li>
+                    </ul>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+
+
+
+            <hr>
+            <!-- Call to action -->
+            <ul class="list-unstyled list-inline text-center py-2">
+                <li class="list-inline-item">
+                    <a href="#register" data-toggle="modal" class="btn cyan lighten-2 btn-rounded"><i class="fas fa-user-plus mr-2"></i> Regístrate</a>
+                </li>
+            </ul>
+            <!-- Call to action -->
+        </div>
+
+        <div class="footer-copyright text-center py-3">© 2018 Copyright:
+            <a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
+        </div>
+
+    </footer>
+
+    <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+    <script src="{{ asset('js/mdb.min.js') }}"></script>
+    <script src="{{ asset('js/scripts.js') }}"></script>
+</body>
+</html>
+
+

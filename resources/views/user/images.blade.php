@@ -2,7 +2,7 @@
 @include('layouts.navbar')
 
 <br>
-<div class="container my-5 pt-5 animated fadeIn">
+<div class="container my-5 pt-5 animated fadeIn bg">
 
 	<div class="row">
 

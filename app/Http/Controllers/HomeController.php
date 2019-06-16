@@ -16,16 +16,12 @@ use App\User;
 use App\TextContent;
 
 
-# color pastel azul #a9e5e3
-
-
 class HomeController extends Controller
 {
 	public function __construct()
 	{
 		$this->middleware('auth');
 	}
-	
 
 	// Muestra la vista principal con todas la INFORMACION
 	public function index()

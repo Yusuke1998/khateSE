@@ -182,7 +182,7 @@
 
 	<div class="container my-5">
 
-<!-- Intro de la herramienta -->
+		<!-- Intro de la herramienta -->
 
 		<h2 class="text-center mt-5 wow fadeInDownBig">¿Estas listo? ¡Empieza ya!</h2>
 		<hr class="w-25 mb-5">
@@ -190,8 +190,8 @@
 		<!-- Row 1 -->
 		<div class="row">
 			<div class="col-6">
-				<div class="row mb-3 wow zoomIn"><br><br><br>
-					<h5 class="text-center">Software educatico dedicado al area de Redes, digido principalmente a estudiantes y tambien a profesores del area de Ingenieria de Sistemas de la Universidad Nacional Experimental Rómulo Gallegos.</h5>
+				<div class="mb-3 wow zoomIn"><br><br><br>
+					<h5 class="text-center d-flex align-items-center">Software educatico dedicado al area de Redes, digido principalmente a estudiantes y tambien a profesores del area de Ingenieria de Sistemas de la Universidad Nacional Experimental Rómulo Gallegos.</h5>
 				</div>
 			</div>
 			<div class="col-6">
@@ -208,18 +208,14 @@
 		<!-- Row 2 -->
 		<div class="row">
 
-			<div class="col wow wobble delay-1s">
+			<div class="col wow wobble">
 				<div class=" view overlay zoom">
 					<img src="{{ asset('images/home_prof.png') }}" alt="404" class="img-fluid img-thumbnail">
 				</div>
 			</div>
 			<div class="col-1"></div>
-			<div class="col">
-				<div class="row mb-3 wow zoomIn">
-					<div class="col ml-3"><br><br><br>
-						<h5 class="text-center">Los profesores pueden tener acceso y control total al sistema, manejando desde su perfil el contenido a impartir en clase.</h5>
-					</div>
-				</div>
+			<div class="col wow zoomIn d-flex align-items-center">
+				<h5 class="text-center">Los profesores pueden tener acceso y control total al sistema, manejando desde su perfil el contenido a impartir en clase.</h5>
 			</div>
 		</div>
 		<hr class="my-5">
@@ -247,8 +243,8 @@
 
 		
 		<div class="row">
-			<div class="col">
-				<h5 class="text-center">Estructurar y formular todas y cada una de la pruebas que realizaran durante el semestre, organizadas por tema y a su vez estos por cada lapso correspondiente, tambien puede controlar y saber el numero o matrícula total de estudiantes en cada clase.</h5>
+			<div class="col wow zoomIn">
+				<h5 class="text-center">Estructurar y formular todas y cada una de la pruebas que realizarán durante el semestre, organizadas por secciones y a su vez estos por sus unidades correspondientes, también puede controlar y saber el número o matrícula total de estudiantes en cada sección.</h5>
 			</div>
 		</div>
 		<div class="row">
@@ -265,6 +261,7 @@
 
 
 		<hr class="my-5">
+		
 		<div class="row wow zoomIn mb-4">
 			<div class="col">
 				<h5 class="text-center">Y desde luego, cada estudiante perteneciente a una clase puede realizar las pruebas asignadas por su profesor, estar al tanto de todo el contenido educativo, textual y/o audiovisual disponible para él o ella, asi como tener la libertad del tema sobre el cual quiere aprender.</h5>

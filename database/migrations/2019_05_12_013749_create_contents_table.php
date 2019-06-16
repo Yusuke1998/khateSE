@@ -20,9 +20,11 @@ class CreateContentsTable extends Migration
             $table->string('file')->nullable();
             $table->unsignedInteger('topic_id');
             $table->unsignedInteger('people_id');
+            $table->unsignedInteger('section_id');
 
             $table->foreign('topic_id')->references('id')->on('topics');
             $table->foreign('people_id')->references('id')->on('people');
+            $table->foreign('section_id')->references('id')->on('sections');
 
             $table->timestamps();
         });

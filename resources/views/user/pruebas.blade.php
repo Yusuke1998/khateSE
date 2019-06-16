@@ -25,7 +25,7 @@
 					<div class="card mb-5">
 						<div class="card-header cyan lighten-3 text-dark ">
 							<h5 class="d-flex justify-content-between">
-								<span><i class="fas fa-book mr-2"></i>Temas</span>
+								<span><i class="fas fa-book mr-2"></i>Unidades</span>
 								<span>{{ $topics->count() }}</span>
 							</h5>
 						</div>

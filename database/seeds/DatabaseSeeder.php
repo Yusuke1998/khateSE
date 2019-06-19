@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
 			[
 				'first_name' => 'Katherin',
 				'last_name'	 => 'Gamez',
-				'avatar'     => 'kate.jpg',
+				'avatar'     => 'kathe.jpg',
 				'created_at' => now('America/Caracas')
 			]
 		]);
@@ -48,8 +48,8 @@ class DatabaseSeeder extends Seeder
 				'created_at' => now('America/Caracas')
 			],
 			[
-				'email' 	 => 'kate@gamez.com',
-				'password'   => bcrypt('kate123'),
+				'email' 	 => 'kathe@gamez.com',
+				'password'   => bcrypt('kathe123'),
 				'type'		 => 'student',
 				'people_id'	 => 2,
 				'created_at' => now('America/Caracas')
@@ -60,6 +60,28 @@ class DatabaseSeeder extends Seeder
 			['topic' => 'tema_uno', 'image' => 'image2.jpg', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, consequuntur officiis nobis ex nihil impedit.', 'created_at' => now('America/Caracas')],
 			['topic' => 'Cables', 'image' => 'image3.jpg', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit.', 'created_at' => now('America/Caracas')],
 		]);
+
+		/**
+
+		DB::table('sections')->insert([
+			[
+			'sections'	=> 'seccion 1'
+			],
+			[
+			'sections'	=> 'seccion 2'
+			],
+			[
+			'sections'	=> 'seccion 3'
+			],
+			[
+			'sections'	=> 'seccion 4'
+			],
+			[
+			'sections'	=> 'seccion 5'
+			],
+		]);
+
+		**/
 
 		DB::table('contents')->insert([
 			[

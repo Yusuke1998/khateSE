@@ -9,7 +9,6 @@
 		<div class="card-body px-5 mx-3">
 			<form action="{{ route('login') }}" method="post">
 				@csrf
-
 				<div class="form-row">
 					<div class="col md-form">
 						<i class="fas fa-envelope prefix"></i>

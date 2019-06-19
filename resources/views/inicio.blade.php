@@ -104,12 +104,9 @@
 
 				<div class="col animated slideInLeft white-text delay-1s d-flex align-items-center">
 					<div>
-						<h1 style="text-shadow: 1px 1px .5px #3F3F3F" class="font-weight-bold text-center animated zoomIn delay-2s">Software Educativo (Redes)</h1>
+						<h1 style="color: #3C3533; font-size: 45px;" class="font-weight-bold text-center animated zoomIn delay-2s">Software Educativo (Redes)</h1>
 
 						<hr class="my-4">
-
-						<!-- <p class="text-justify lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam, obcaecati voluptatem ducimus aut accusantium sunt aut accusantium sunt.</p>
-						<p class="text-justify lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor, dolores ut id voluptas officia repellat ratione, expedita autem eveniet similique illum soluta ex nulla. Eaque asperiores maxime magni dolor voluptates?</p> -->
 						<div class="d-flex justify-content-center mt-5 animated zoomIn delay-2s">
 							<button class="btn btn-md cyan lighten-2" data-toggle="modal" href="#register">
 								<i class="fas fa-user-plus mr-2"></i>Regístrate
@@ -122,8 +119,8 @@
 
 				<div class="col animated slideInRight">
 					<div class="card opacity">
-						<h3 style="text-shadow: 1px 1px .5px #3F3F3F" class="card-header cyan lighten-3 white-text text-center py-4">
-							<strong>Entrar a la plataforma</strong>
+						<h3 style="color: #3C3533;" class="card-header cyan lighten-3 text-center py-4">
+							<strong>Ingresa a la plataforma!</strong>
 						</h3>
 						<div class="card-body px-5 mx-3">
 							<form action="{{ route('login') }}" method="post">
@@ -561,6 +558,12 @@
 
 	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 	<script src="{{ asset('js/mdb.min.js') }}"></script>
+	<script>
+		$('document').ready(function(){
+			$('#email').focus();
+			$('#password').focus();
+		});
+	</script>
 	<script src="{{ asset('js/scripts.js') }}"></script>
 </body>
 </html>

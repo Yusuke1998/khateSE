@@ -6,17 +6,12 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateContentsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('contents', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('comment', 800);
+            $table->text('comment');
             $table->string('file')->nullable();
             $table->unsignedInteger('topic_id');
             $table->unsignedInteger('people_id');
@@ -30,11 +25,6 @@ class CreateContentsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('contents');

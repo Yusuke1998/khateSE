@@ -36,6 +36,12 @@ class DatabaseSeeder extends Seeder
 				'last_name'	 => 'Gamez',
 				'avatar'     => 'kathe.jpg',
 				'created_at' => now('America/Caracas')
+			],
+			[
+				'first_name' => 'jhonny jose',
+				'last_name'	 => 'perez martinez',
+				'avatar'     => 'user.png',
+				'created_at' => now('America/Caracas')
 			]
 		]);
 
@@ -53,6 +59,13 @@ class DatabaseSeeder extends Seeder
 				'type'		 => 'student',
 				'people_id'	 => 2,
 				'created_at' => now('America/Caracas')
+			],
+			[
+				'email' 	 => 'admin@admin.com',
+				'password'   => bcrypt('admin'),
+				'type'		 => 'teacher',
+				'people_id'	 => 3,
+				'created_at' => now('America/Caracas')
 			]
 		]);
 
@@ -61,27 +74,23 @@ class DatabaseSeeder extends Seeder
 			['topic' => 'Cables', 'image' => 'image3.jpg', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit.', 'created_at' => now('America/Caracas')],
 		]);
 
-		/**
-
 		DB::table('sections')->insert([
 			[
-			'sections'	=> 'seccion 1'
+			'section'	=> 'seccion 1'
 			],
 			[
-			'sections'	=> 'seccion 2'
+			'section'	=> 'seccion 2'
 			],
 			[
-			'sections'	=> 'seccion 3'
+			'section'	=> 'seccion 3'
 			],
 			[
-			'sections'	=> 'seccion 4'
+			'section'	=> 'seccion 4'
 			],
 			[
-			'sections'	=> 'seccion 5'
+			'section'	=> 'seccion 5'
 			],
 		]);
-
-		**/
 
 		DB::table('contents')->insert([
 			[
@@ -90,7 +99,8 @@ class DatabaseSeeder extends Seeder
 				'file'       => 'image3.jpg',
 				'topic_id'	 => 2,
 				'people_id'  => 1,
-				'created_at' => now('America/Caracas')
+				'created_at' => now('America/Caracas'),
+				'section_id' =>	rand(1,5)
 			],
 			[
 				'name'		 => 'Topologia de red x',
@@ -98,7 +108,8 @@ class DatabaseSeeder extends Seeder
 				'file'       => 'image.jpg',
 				'topic_id'	 => 1,
 				'people_id'  => 1,
-				'created_at' => now('America/Caracas')
+				'created_at' => now('America/Caracas'),
+				'section_id' =>	rand(1,5)
 			],
 			[
 				'name'		 => 'MEdio de transmision radial',
@@ -106,7 +117,8 @@ class DatabaseSeeder extends Seeder
 				'file'       => 'image2.jpg',
 				'topic_id'	 => 1,
 				'people_id'  => 1,
-				'created_at' => now('America/Caracas')
+				'created_at' => now('America/Caracas'),
+				'section_id' =>	rand(1,5)
 			]
 		]);
 

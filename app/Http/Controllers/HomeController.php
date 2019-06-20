@@ -178,6 +178,8 @@ class HomeController extends Controller
 		$post->file 	 = $req->file('file')->store('');
 		$post->topic_id  = $req->topicid;
 		$post->people_id = $req->peopleid;
+		// Cambio provicional, para que no tire eeror con la seccion
+		$post->section_id = '1';
 
 		$post->save();
 
@@ -192,6 +194,8 @@ class HomeController extends Controller
 		$posttext->textcontent = $req->publicartext;
 		$posttext->topic_id    = $req->topicid;
 		$posttext->people_id   = $req->peopleid;
+		// Cambio provicional, para que no tire eeror con la seccion
+		$posttext->section_id = '1';
 
 		$posttext->save();
 

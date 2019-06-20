@@ -15,11 +15,13 @@
 							<img src="{{ asset('storage/'.$me->people->avatar) }}" class="rounded-circle" alt="404">
 						</div>
 						<div class="card-body">
-							<h4 class="card-title">{{ $me->people->first_name }} {{ $me->people->last_name }}</h4>
-							<p class="lead">{{ $me->type }}</p>
-							@if( $me->about )
-								<hr>
-								<p><i class="fa fa-quote-left mr-2"></i>{{ $me->about }}</p>
+							<h4 class="card-title mt-3">{{ $me->people->first_name }} {{ $me->people->last_name }}</h4>
+							@if($me->type == 'admin')
+							<p class="lead">Administrador</p>
+							@elseif($me->type == 'teacher')
+							<p class="lead">Profesor</p>
+							@elseif($me->type == 'student')
+							<p class="lead">Estudiante</p>
 							@endif
 						</div>
 					</div>
@@ -106,11 +108,6 @@
 				<div class="modal-body px-4">
 
 					<div class="form-row">
-						<!-- <div class="col md-form">
-							<i class="fas fa-id-card prefix"></i>
-							<input type="text" name="pin" readonly id="pin" class="form-control" value="{{ $me->people->pin }}">
-							<label for="pin">Cédula</label>
-						</div> -->
 						<div class="col md-form">
 							<i class="fas fa-user prefix"></i>
 							<input type="text" name="first_name" id="name" class="validate form-control"  pattern="^[a-zA-Záéíóú]+(?:\s?[a-zA-Záéíóú]\s?)+$" value="{{ $me->people->first_name }}" required>
@@ -124,24 +121,11 @@
 					</div>
 
 					<div class="form-row">
-						<!-- <div class="col md-form">
-							<i class="fas fa-phone prefix"></i>
-							<input type="text" maxlength="11" minlength="10" name="phone" id="phone" class="validate form-control" required pattern="^[\d]+$" value="{{ $me->people->phone }}">
-							<label for="phone">Teléfono</label>
-						</div> -->
-					</div>
-
-					<div class="form-row">
 						<div class="col md-form">
 							<i class="fas fa-envelope prefix"></i>
 							<input type="email" name="email" id="correo" class="validate form-control" required value="{{ $me->email }}">
 							<label for="correo">Correo Electrónico</label>
 						</div>
-						<!-- <div class="col md-form">
-							<i class="fas fa-user prefix"></i>
-							<input name="about" type="text" length="255" class="form-control" maxlength="255" id="about" value="{{ $me->about }}">
-							<label for="about">Acerca de ti</label>
-						</div> -->
 					</div>
 
 					<div class="form-row mb-3">
@@ -166,27 +150,6 @@
 							</select>
 						</div>
 					</div>
-
-
-					{{-- <div class="form-row mb-3">
-						<div class="col md-form">
-							<i class="fas fa-key prefix"></i>
-							<input type="password" id="pass" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" required>
-							<label for="pass">Contraseña</label>
-							@if ($errors->has('password'))
-								<span class="invalid-feedback" role="alert">
-									<strong>{{ $errors->first('password') }}</strong>
-								</span>
-							@endif
-						</div>
-						<div class="col-md-6 md-form">
-							<i class="fas fa-key prefix"></i>
-							<input type="password" id="passw" name="password_confirmation" class="form-control" required>
-							<label for="passw">Repita Contraseña</label>
-						</div>
-					</div> --}}
-
-
 				</div>
 
 				<div class="modal-footer">

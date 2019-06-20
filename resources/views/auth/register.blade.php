@@ -71,8 +71,8 @@
 						<i class="fas fa-user-circle prefix"></i>
 						<select name="type" class="ml-5 mdb-select colorful-select dropdown-primary" id="type" required>
 							<option disabled selected>Selecciona un tipo de cuenta</option>
-							<option value="Estudiante">Estudiante</option>
-							<option value="Profesor">Profesor</option>
+							<option value="student">Estudiante</option>
+							<option value="teacher">Profesor</option>
 						</select>
 					</div>
 				</div>

@@ -37,7 +37,7 @@
 
 				<!-- Dropdown -->
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-bolt"></i> Aañdir contenido</a>
+					<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-bolt"></i> Añadir contenido</a>
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
 						<a class="dropdown-item" data-toggle="modal" href="#addcontent">
 							<i class="fas fa-image mr-2"></i>Contenido Multimedia

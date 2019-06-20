@@ -1,19 +1,6 @@
 @include('layouts.header')
 @include('layouts.navbar')
 
-
-
-
-{{--<div class="embed-responsive">
-	<iframe class="embed-responsive-item" src="{{  }}"></iframe>
-</div>--}}
-
-
-
-
-
-
-
 <br>
 <div class="container my-5 pt-5 animated fadeIn bg">
 
@@ -28,9 +15,14 @@
 							<img src="{{ asset('storage/'.$me->people->avatar) }}" class="rounded-circle" alt="404">
 						</div>
 						<div class="card-body">
-							<h4 class="card-title">{{ $me->people->first_name }} {{ $me->people->last_name }}</h4>
-							<p class="lead">{{ $me->type }}</p>
-							<p class="lead">{{ ucfirst($me->people->type) }}</p>
+							<h4 class="card-title mt-3">{{ $me->people->first_name }} {{ $me->people->last_name }}</h4>
+							@if($me->type == 'admin')
+							<p class="lead">Administrador</p>
+							@elseif($me->type == 'teacher')
+							<p class="lead">Profesor</p>
+							@elseif($me->type == 'student')
+							<p class="lead">Estudiante</p>
+							@endif
 						</div>
 					</div>
 				</div>

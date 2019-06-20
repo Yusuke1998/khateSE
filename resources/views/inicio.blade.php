@@ -7,97 +7,6 @@
 </head>
 <body>
 
-	{{-- MODAL REGISTRO --}}
-
-	<div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<div class="modal-header cyan lighten-3 dark-text">
-					<h5 class="modal-title" id="exampleModalLabel">Regístrate</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<form action="{{ url('register') }}" method="post">
-					@csrf
-					<div class="modal-body px-5">
-
-						<div class="form-row">
-							<div class="col md-form">
-								<i class="fas fa-user prefix"></i>
-								<input type="text" name="first_name" id="name" class="validate form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" value="{{ old('first_name') }}" pattern="^[a-zA-Záéíóú]+(?:\s?[a-zA-Záéíóú]\s?)+$">
-								<label for="name">Nombre</label>
-								@if ($errors->has('first_name'))
-									<span class="invalid-feedback" role="alert">
-										<strong>{{ $errors->first('first_name') }}</strong>
-									</span>
-								@endif
-							</div>
-							<div class="col md-form">
-								<i class="fas fa-user prefix"></i>
-								<input type="text" name="last_name" id="apellido" class="validate form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" required pattern="^[a-zA-Záéíóú]+(?:\s?[a-zA-Záéíóú]\s?)+$" value="{{ old('last_name') }}"e>
-								<label for="apellido">Apellido</label>
-								@if ($errors->has('last_name'))
-									<span class="invalid-feedback" role="alert">
-										<strong>{{ $errors->first('last_name') }}</strong>
-									</span>
-								@endif
-							</div>
-						</div>
-
-						<div class="form-row">
-							<div class="col md-form">
-								<i class="fas fa-envelope prefix"></i>
-								<input type="email" name="email" id="correo" class="validate form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" required>
-								<label for="correo">Correo Electrónico</label>
-								@if ($errors->has('email'))
-									<span class="invalid-feedback" role="alert">
-										<strong>{{ $errors->first('email') }}</strong>
-									</span>
-								@endif
-							</div>
-							<div class="col md-form">
-								<i class="fas fa-user-circle prefix"></i>
-								<select name="type" class="ml-5 mdb-select colorful-select dropdown-primary" id="type" required>
-									<option disabled selected>Selecciona un tipo de cuenta</option>
-									<option value="student">Estudiante</option>
-									<option value="teacher">Profesor</option>
-								</select>
-							</div>
-
-						</div>
-
-						<div class="form-row">
-							<div class="col md-form">
-								<i class="fas fa-key prefix"></i>
-								<input type="password" id="pass" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" required>
-								<label for="pass">Contraseña</label>
-								@if ($errors->has('password'))
-									<span class="invalid-feedback" role="alert">
-										<strong>{{ $errors->first('password') }}</strong>
-									</span>
-								@endif
-							</div>
-							<div class="col-md-6 md-form">
-								 <i class="fas fa-key prefix"></i>
-								<input type="password" id="passw" name="password_confirmation" class="form-control" required>
-								<label for="passw">Repita Contraseña</label>
-							</div>
-						</div>
-
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-md cyan" data-dismiss="modal">Cerrar</button>
-						<button type="submit" class="btn btn-md cyan lighten-2"><i class="fas fa-save mr-2"></i>Guardar</button>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-
-	{{-- FIN MODAL REGISTRO --}}
-
-
 	<div class="card card-image" style="background: linear-gradient(#C7F9FF, #DCEFFF)">
 		<div class="py-5 px-4 my-5 container">
 			<div class="row">
@@ -556,6 +465,96 @@
 
 	</footer>
 
+	{{-- MODAL REGISTRO --}}
+
+	<div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header cyan lighten-3 dark-text">
+					<h5 class="modal-title" id="exampleModalLabel">Regístrate</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form action="{{ url('register') }}" method="post">
+					@csrf
+					<div class="modal-body px-5">
+
+						<div class="form-row">
+							<div class="col md-form">
+								<i class="fas fa-user prefix"></i>
+								<input type="text" name="first_name" id="name" class="validate form-control{{ $errors->has('first_name') ? ' is-invalid' : '' }}" value="{{ old('first_name') }}" pattern="^[a-zA-Záéíóú]+(?:\s?[a-zA-Záéíóú]\s?)+$">
+								<label for="name">Nombre</label>
+								@if ($errors->has('first_name'))
+									<span class="invalid-feedback" role="alert">
+										<strong>{{ $errors->first('first_name') }}</strong>
+									</span>
+								@endif
+							</div>
+							<div class="col md-form">
+								<i class="fas fa-user prefix"></i>
+								<input type="text" name="last_name" id="apellido" class="validate form-control{{ $errors->has('last_name') ? ' is-invalid' : '' }}" required pattern="^[a-zA-Záéíóú]+(?:\s?[a-zA-Záéíóú]\s?)+$" value="{{ old('last_name') }}"e>
+								<label for="apellido">Apellido</label>
+								@if ($errors->has('last_name'))
+									<span class="invalid-feedback" role="alert">
+										<strong>{{ $errors->first('last_name') }}</strong>
+									</span>
+								@endif
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="col md-form">
+								<i class="fas fa-envelope prefix"></i>
+								<input type="email" name="email" id="correo" class="validate form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" value="{{ old('email') }}" required>
+								<label for="correo">Correo Electrónico</label>
+								@if ($errors->has('email'))
+									<span class="invalid-feedback" role="alert">
+										<strong>{{ $errors->first('email') }}</strong>
+									</span>
+								@endif
+							</div>
+							<div class="col md-form">
+								<i class="fas fa-user-circle prefix"></i>
+								<select name="type" class="ml-5 mdb-select colorful-select dropdown-primary" id="type" required>
+									<option disabled selected>Selecciona un tipo de cuenta</option>
+									<option value="student">Estudiante</option>
+									<option value="teacher">Profesor</option>
+								</select>
+							</div>
+
+						</div>
+
+						<div class="form-row">
+							<div class="col md-form">
+								<i class="fas fa-key prefix"></i>
+								<input type="password" id="pass" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" required>
+								<label for="pass">Contraseña</label>
+								@if ($errors->has('password'))
+									<span class="invalid-feedback" role="alert">
+										<strong>{{ $errors->first('password') }}</strong>
+									</span>
+								@endif
+							</div>
+							<div class="col-md-6 md-form">
+								 <i class="fas fa-key prefix"></i>
+								<input type="password" id="passw" name="password_confirmation" class="form-control" required>
+								<label for="passw">Repita Contraseña</label>
+							</div>
+						</div>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-md cyan" data-dismiss="modal">Cerrar</button>
+						<button type="submit" class="btn btn-md cyan lighten-2"><i class="fas fa-save mr-2"></i>Guardar</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	{{-- FIN MODAL REGISTRO --}}
+	
 	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 	<script src="{{ asset('js/mdb.min.js') }}"></script>
 	<script>

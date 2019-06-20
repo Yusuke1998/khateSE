@@ -155,8 +155,6 @@ class HomeController extends Controller
 		$id = Auth::user()->id;
 		$me = User::find($id);
 
-		// dd($contents);
-
 		return view('user.topiccontent')
 				->with('contents', $contents)
 				->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
@@ -261,16 +259,10 @@ class HomeController extends Controller
 			->with('topics', $topics);
 	}
 
-	
-
-
 	// Solicitudes ajax
-
-
 	
 
 	// Logica del formulario
-
 	public function publicar(Request $req)
 	{
 		$post = new Content();
@@ -332,10 +324,8 @@ class HomeController extends Controller
 		$people   = People::find($peopleid);
 		$user     = User::find($userid);
 
-		$people->pin 		= $req->input('pin');
 		$people->first_name = $req->input('first_name');
 		$people->last_name  = $req->input('last_name');
-		$people->phone 		= $req->input('phone');
 
 		if ( $req->file('file') )
 		{
@@ -347,7 +337,6 @@ class HomeController extends Controller
 		}
 
 		$user->email = $req->input('email');
-		$user->about = $req->input('about');
 		$user->type  = $req->input('type')?? $user->type;
 
 		$people->save();

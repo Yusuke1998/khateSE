@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Answer extends Model
 {
     protected $fillable = [
-    	'text','people_id','question_id','test_id'
+    	'text','people_id','question_id','test_id','student_id'
     ];
 
     public function test()
@@ -25,8 +25,8 @@ class Answer extends Model
     	return $this->belongsTo(People::class);
     }
 
-    public function students()
+    public function student()
     {
-        return $this->belongsToMany('App\Student');
+        return $this->belongsTo('App\Student');
     }
 }

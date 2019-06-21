@@ -459,4 +459,24 @@ class HomeController extends Controller
 		return back();
 	}
 
+	public function historial($id_student)
+	{
+		$sections 	  	= Section::all()->sortByDesc('id');
+		$tests 	  		= Test::all()->sortByDesc('id');
+		$topics      	= Topic::all();
+		$estudiantes 	= User::where('type', 'student')->get();
+		$estudiante 	= User::where('id', $id_student)->first();
+		$id = Auth::user()->id;
+		$me = User::find($id);
+		// dd($estudiante);
+
+
+		return view('admin.historial')
+				->with('contents', $estudiantes)
+				->with('estudiante', $estudiante)
+				->with('me', $me)
+				->with('tests',$tests)
+				->with('sections', $sections)
+				->with('topics', $topics);
+	}
 }

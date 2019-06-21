@@ -20,13 +20,9 @@ class Student extends Model
     	return $this->belongsTo(Section::class);
     }
 
-    public function answers()
+    public function answer()
     {
-        return $this->belongsToMany('App\Answer');
+        return $this->hasOne('App\Answer');
     }
 
-    public function questions()
-    {
-        return $this->belongsToMany('App\Question');
-    }
 }

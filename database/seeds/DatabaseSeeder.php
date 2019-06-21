@@ -25,8 +25,8 @@ class DatabaseSeeder extends Seeder
 				'created_at' => now('America/Caracas')
 			],
 			[
-				'first_name' => 'jhonny jose',
-				'last_name'	 => 'perez martinez',
+				'first_name' => 'jhonny',
+				'last_name'	 => 'pérez',
 				'avatar'     => 'user.png',
 				'created_at' => now('America/Caracas')
 			],
@@ -150,6 +150,77 @@ class DatabaseSeeder extends Seeder
 			'people_id'  => 1,
 			'section_id' =>	rand(1,5),
 			'created_at' => now('America/Caracas')
+		]);
+
+		DB::table('tests')->insert([
+			[
+			'topic'			=>	'Hackers',
+			'note'			=>	'100',
+			'people_id'		=>	1,
+			'section_id'	=>	2
+			],
+			[
+			'topic'			=>	'Topologia de red',
+			'note'			=>	'100',
+			'people_id'		=>	1,
+			'section_id'	=>	2
+			]
+		]);
+
+		DB::table('questions')->insert([
+			[
+				'text'		=>	'Que son los hackers?',
+				'value'		=>	'20',
+				'test_id'	=>	1
+			],
+			[
+				'text'		=>	'Que es un hacker de sombrero blanco?',
+				'value'		=>	'20',
+				'test_id'	=>	1
+			],
+			[
+				'text'		=>	'Que es un exploit?',
+				'value'		=>	'20',
+				'test_id'	=>	1
+			],
+			[
+				'text'		=>	'Que es un delito informatico?',
+				'value'		=>	'20',
+				'test_id'	=>	1
+			],
+			[
+				'text'		=>	'Diferencias entre kraker y hacker',
+				'value'		=>	'20',
+				'test_id'	=>	1
+			],
+
+			// -------------------------------------------------------------
+			
+			[
+				'text'		=>	'Que es una topologia?',
+				'value'		=>	'20',
+				'test_id'	=>	2
+			],
+			[
+				'text'		=>	'Como funciona la topologia estrella?',
+				'value'		=>	'20',
+				'test_id'	=>	2
+			],
+			[
+				'text'		=>	'Funcion de un router?',
+				'value'		=>	'20',
+				'test_id'	=>	2
+			],
+			[
+				'text'		=>	'Uso de router Cisco con topologia de arbol',
+				'value'		=>	'20',
+				'test_id'	=>	2
+			],
+			[
+				'text'		=>	'Configuracion basica de red wifi WPA2',
+				'value'		=>	'20',
+				'test_id'	=>	2
+			]
 		]);
 	}
 }

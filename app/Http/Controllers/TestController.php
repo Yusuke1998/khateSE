@@ -106,6 +106,7 @@ class TestController extends Controller
 			'text'			=>	'required',
     		'people_id'		=>	'required',
     		'question_id'	=>	'required',
+    		'student_id'	=>	'required',
     		'test_id'		=>	'required'
 		]);
 
@@ -115,11 +116,23 @@ class TestController extends Controller
     		'text'			=>	$data['text'],
     		'people_id'		=>	$data['people_id'],
     		'question_id'	=>	$data['question_id'],
-    		'test_id'		=>	$data['test_id']
+    		'test_id'		=>	$data['test_id'],
+    		'student_id'	=>	$data['student_id']
 		]);
+
+		/**
 
 		$estudiante->answers()->attach($respuesta->id);
 		$estudiante->questions()->attach($data['question_id']);
+
+		$test = false;
+
+		if (!$test) {
+			$estudiante->tests()->attach($data['test_id']);
+			$test = true;
+		}
+
+		**/
 
 		return redirect(route('estudiante.evaluacion',$respuesta->test_id));
 	}

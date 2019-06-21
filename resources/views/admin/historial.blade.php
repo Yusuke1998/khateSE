@@ -6,7 +6,7 @@
 
 	<div class="row">
 
-		<div class="col-md-3 col-sm-12 animated slideInLeft slow">
+		<div class="col-md-3 col-sm-12 animated slideInLeft">
 			<div class="row">
 				<div class="col-sm-6 col-md-12">
 					<div class="card testimonial-card">
@@ -52,38 +52,25 @@
 		<div class="col-md-9 col-sm-12 animated slideInRight">
 			<div class="card" >
 				<div class="card-header">
-					<p>Evaluacion: {{ $test->topic }}</p>
-					<p>Pregunta: {{ $question->text }}</p>
+					<p>Estudiante: {{ $estudiante->people->first_name }} {{ $estudiante->people->last_name }}</p>
+					<p>Seccion: {{ $estudiante->people->student->section->section }}</p>
 				</div>
 				<div class="card-body">
-					<form action="{{ route('respuesta.guardar') }}" method="post">
-						@csrf
-						<input type="hidden" name="people_id" value="{{ $me->people->id }}">
-						<input type="hidden" name="test_id" value="{{ $test->id }}">
-						<input type="hidden" name="question_id" value="{{ $question->id }}">
-						<input type="hidden" name="student_id" value="{{ $me->people->student->id }}">
-
-						<div class="form-row">
-							<div class="col md-form">
-								<input type="text" name="text" id="text" class="form-control {{ $errors->has('text') ? ' is-invalid' : '' }} validate" value="{{ old('text') }}" required>
-								<label for="text">Contenido de la respuesta</label>
-								@if ($errors->has('text'))
-									<span class="invalid-feedback" role="alert">
-										<strong>{{ $errors->first('text') }}</strong>
-									</span>
-								@endif
-							</div>
-						</div>
-						<div class="d-flex justify-content-center animated zoomIn delay-1s">
-							<button class="btn btn-md cyan lighten-2" type="submit">Guardar</button>
-						</div>
-					</form>
+					<?php $tests = $estudiante->people->student->tests;?>
+					@if($tests->count())
+					Evaluaciones realizadas:
+					<ul>
+						@foreach($tests as $test)
+						<li>{{ $test->topic }}</li>
+						@endforeach
+					</ul>
+					@else
+						<p>No ha realizado evaluaciones...</p>
+					@endif
 				</div>
 			</div>
-			
 		</div>
 	</div>
 </div>
-
 
 @include('layouts.footer')

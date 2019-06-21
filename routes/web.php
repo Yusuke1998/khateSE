@@ -26,14 +26,10 @@ Route::get('pruebas', 'HomeController@pruebas');
 Route::get('evaluaciones', 'HomeController@evaluaciones');
 Route::get('tema/{topic}', 'HomeController@topic')->where('topic', '^[A-Za-z0-9_]+$');
 Route::get('descarga/{id}', 'HomeController@descarga')->where('id', '^[0-9]+$');
-
 Route::get('evaluacion/{id}','testController@evaluacion')->name('evaluacion.ver');
 Route::get('pregunta/{id_test}','testController@pregunta')->name('pregunta');
 Route::post('pregunta/guardar','testController@pregunta_guardar')->name('pregunta.guardar');
-
 Route::get('estudiante/evaluacion/{id}','testController@evaluacion_estudiante')->name('estudiante.evaluacion');
-
-
 Route::get('respuesta/{id_test}/{id_question}','testController@respuesta')->name('respuesta');
-
 Route::post('respuesta/guardar','testController@respuesta_guardar')->name('respuesta.guardar');
+Route::get('historial/{student_id}','HomeController@historial')->name('historial');

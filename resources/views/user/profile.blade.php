@@ -51,32 +51,32 @@
 
 							<div class="row">
 								<div class="col-3 text-left font-weight-bold h6">Nombres:</div>
-								<div class="col-3">{{ $me->people->first_name }}</div>
+								<div class="col-3" style="text-transform: uppercase;">{{ $me->people->first_name }}</div>
 							</div>
 
 							<div class="row my-3">
 								<div class="col-3 text-left font-weight-bold h6">Apellidos:</div>
-								<div class="col-3">{{ $me->people->last_name }}</div>
+								<div class="col-3" style="text-transform: uppercase;">{{ $me->people->last_name }}</div>
 							</div>
 
 							<div class="row mb-3">
 								<div class="col-3 text-left font-weight-bold h6">Correo:</div>
-								<div class="col-3">{{ $me->email }}</div>
+								<div class="col-3" style="text-transform: uppercase;">{{ $me->email }}</div>
 							</div>
 							<div class="row">
-								<div class="col-3 text-left font-weight-bold h6">Cuenta:</div>
+								<div class="col-3 text-left font-weight-bold h6" >Cuenta:</div>
 								@if($me->type == 'admin')
-								<div class="col-3">Administrador</div>
+								<div class="col-3" style="text-transform: uppercase;">Administrador</div>
 								@elseif($me->type == 'teacher')
-								<div class="col-3">Profesor</div>
+								<div class="col-3" style="text-transform: uppercase;">Profesor</div>
 								@elseif($me->type == 'student')
-								<div class="col-3">Estudiante</div>
+								<div class="col-3" style="text-transform: uppercase;">Estudiante</div>
 								@endif
 							</div>
 							@if($me->type == 'student')
 							<div class="row mb-3">
 								<div class="col-3 text-left font-weight-bold h6">Seccion:</div>
-								<div class="col-3">{{ $me->people->student->section->section }}</div>
+								<div class="col-3" style="text-transform: uppercase;">{{ $me->people->student->section->section }}</div>
 							</div>
 							@endif
 						</div>

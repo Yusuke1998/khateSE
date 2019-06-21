@@ -74,7 +74,15 @@
 								<td>{{ $question->value }}</td>
 								@if($respuesta = $question->answer)
 								<td>
-									@if($respuesta->people_id == $me->people->id)
+									{{-- 
+									--}}
+									{{-- @if($respuesta->people_id == $me->people->id) --}}
+									{{-- @if($respuesta
+										->where('people_id',$me->people->id)
+										->where('test_id',$test->id)
+										->where('question_id',$question->id)) --}}
+									@if($question->answer->people->id == $me->people->id)
+
 									<?php $respondida = true;?>
 									<span class="bg p-1 bg-success">Respondida</span>
 									@else

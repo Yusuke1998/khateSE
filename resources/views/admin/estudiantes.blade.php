@@ -61,6 +61,7 @@
 							<th>Sección</th>
 							<th>Email</th>
 							<th>Registrado</th>
+							<th>Historial</th>
 						</thead>
 						<tbody>
 							@foreach($contents as $est)
@@ -71,6 +72,9 @@
 								<td>{{ $est->people->student->section->section }}</td>
 								<td>{{ $est->email }}</td>
 								<td>{{ $est->created_at->format('d/m/Y') }}</td>
+								<td>
+									<a href="{{ route('historial',$est->id) }}" title="Historico de {{ $est->people->first_name }}">VER</a>
+								</td>
 							</tr>
 							@endforeach
 						</tbody>

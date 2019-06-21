@@ -15,13 +15,8 @@ class Question extends Model
     	return $this->belongsTo(Test::class);
     }
 
-    public function answer()
+    public function answers()
     {
-    	return $this->hasOne(Answer::class);
-    }
-
-    public function students()
-    {
-        return $this->belongsToMany('App\Student');
+    	return $this->hasMany(Answer::class);
     }
 }

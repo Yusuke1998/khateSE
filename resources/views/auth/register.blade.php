@@ -68,11 +68,20 @@
 						@endif
 					</div>
 					<div class="col md-form">
-						<i class="fas fa-user-circle prefix"></i>
 						<select name="type" class="ml-5 mdb-select colorful-select dropdown-primary" id="type" required>
 							<option disabled selected>Selecciona un tipo de cuenta</option>
 							<option value="student">Estudiante</option>
 							<option value="teacher">Profesor</option>
+						</select>
+					</div>
+
+					<div class="col md-form">
+						<select name="section_id" class="mdb-select colorful-select dropdown-primary" id="type" required>
+							<option disabled selected>Si eres estudiante selecciona tu sección</option>
+							@foreach($sections as $section)
+							<option value="{{ $section->id }}">{{ $section->section }}</option>}
+							option
+							@endforeach
 						</select>
 					</div>
 				</div>

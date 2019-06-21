@@ -50,12 +50,40 @@
 		</div>
 			
 		<div class="col-md-9 col-sm-12 animated slideInRight">
-			<!-- <div class="card-columns cardcolumns "> -->
 			<div class="card" >
+				<div class="card-header">
+					{{ $test->topic }}
+				</div>
 				<div class="card-body">
-
-					<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScUb_-sAanF0GhirVIht1Q_dYVFEbGg069G9H3ogJcknPSfAQ/viewform?embedded=true" width="640" height="1587" frameborder="0" marginheight="0" marginwidth="0">Cargando...</iframe>
-					
+					<form action="{{ route('pregunta.guardar') }}" method="post">
+						@csrf
+						<input type="hidden" name="test_id" value="{{ $test->id }}">
+						<div class="form-row">
+							<div class="col md-form">
+								<input type="text" name="text" id="text" class="form-control {{ $errors->has('text') ? ' is-invalid' : '' }} validate" value="{{ old('text') }}" required>
+								<label for="text">Contenido de la pregunta</label>
+								@if ($errors->has('text'))
+									<span class="invalid-feedback" role="alert">
+										<strong>{{ $errors->first('text') }}</strong>
+									</span>
+								@endif
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="col md-form">
+								<input type="number" name="value" id="value" class="form-control {{ $errors->has('value') ? ' is-invalid' : '' }} validate" value="{{ old('value') }}" required>
+								<label for="value">Valor de la pregunta</label>
+								@if ($errors->has('value'))
+									<span class="invalid-feedback" role="alert">
+										<strong>{{ $errors->first('value') }}</strong>
+									</span>
+								@endif
+							</div>
+						</div>
+						<div class="d-flex justify-content-center animated zoomIn delay-1s">
+							<button class="btn btn-md cyan lighten-2" type="submit">Guardar</button>
+						</div>
+					</form>
 				</div>
 			</div>
 			

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\People;
+use App\Student;
 
 use Illuminate\Support\Facades\DB;
 
@@ -30,7 +31,8 @@ class RegisterController extends Controller
 			'last_name'  => ['required', 'string', 'max:191'],
 			'email'      => ['required', 'string', 'email', 'max:191', 'unique:users'],
 			'password'   => ['required', 'string', 'min:5', 'confirmed'],
-			'type'		 => ['required', 'string']
+			'type'		 => ['required', 'string'],
+			'section_id' => ['nullable']
 		]);
 	}
 
@@ -41,6 +43,13 @@ class RegisterController extends Controller
 			'last_name'  => $data['last_name'],
 			'avatar'	 => 'user.png',
 		]);
+		
+		if ($data['type'] == 'student') {
+			Student::create([
+				'section_id'	=> $data['section_id'],
+				'people_id'		=> $id->id	
+			]);
+		}
 
 		return User::create([
 			'email'      => $data['email'],
@@ -48,5 +57,6 @@ class RegisterController extends Controller
 			'type'       => $data['type'],
 			'people_id'  => $id->id
 		]);
+
 	}
 }

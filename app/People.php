@@ -26,6 +26,11 @@ class People extends Model
         return $this->hasOne(User::class);
     }
 
+    public function student()
+    {
+        return $this->hasOne(Student::class);
+    }
+
     public function tests()
     {
         return $this->hasMany(Test::class);

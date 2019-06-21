@@ -50,13 +50,52 @@
 		</div>
 			
 		<div class="col-md-9 col-sm-12 animated slideInRight">
-			<!-- <div class="card-columns cardcolumns "> -->
 			<div class="card" >
-				<div class="card-body">
-
-					<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScUb_-sAanF0GhirVIht1Q_dYVFEbGg069G9H3ogJcknPSfAQ/viewform?embedded=true" width="640" height="1587" frameborder="0" marginheight="0" marginwidth="0">Cargando...</iframe>
-					
+				<div class="card-header">
+					{{ $test->topic }}
 				</div>
+				<?php $count = $test->questions()->count() ?>
+				@if($count == 0)
+				<div class="card-body">
+					<p class="text-center">Agrega preguntas a esta evaluacion!</p>
+					<a href="{{ route('pregunta',$test->id) }}" class="pull-right btn btn-info btn-sm btn-flat" title="nueva pregunta">Nueva pregunta</a>
+				</div>
+				@endif
+
+				@if($count >= 1 && $count < 5)
+				<div class="card-body">
+					<p class="text-center">Agrega al menos 5 preguntas a esta evaluacion!</p>
+					<a href="{{ route('pregunta',$test->id) }}" class="pull-right btn btn-info btn-sm btn-flat" title="nueva pregunta">Nueva pregunta</a>
+				</div>
+				@endif
+
+				@if($count = $test->questions()->count() >= 1)
+				<div class="card-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Pregunta</th>
+								<th>Valor</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($test->questions as $question)
+							<tr>
+								<td>{{ $question->text }}</td>
+								<td>{{ $question->value }}</td>
+							</tr>
+							@endforeach
+						</tbody>
+						<tfoot>
+							<tr>
+								<td>VALOR TOTAL</td>
+								<td>{{ $test->questions->sum('value') }}</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+				@endif
+
 			</div>
 			
 		</div>

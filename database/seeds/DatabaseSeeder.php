@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
-	/**
-	 * Seed the application's database.
-	 *
-	 * @return void
-	 */
 	public function run()
 	{
 		DB::table('people')->insert([
@@ -74,11 +69,6 @@ class DatabaseSeeder extends Seeder
 			]
 		]);
 
-		DB::table('topics')->insert([
-			['topic' => 'tema_uno', 'image' => 'image2.jpg', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, consequuntur officiis nobis ex nihil impedit.', 'created_at' => now('America/Caracas')],
-			['topic' => 'Cables', 'image' => 'image3.jpg', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit.', 'created_at' => now('America/Caracas')],
-		]);
-
 		DB::table('sections')->insert([
 			[
 			'section'	=> 'K1'
@@ -97,11 +87,28 @@ class DatabaseSeeder extends Seeder
 			],
 		]);
 
+		DB::table('students')->insert([
+			[
+				'section_id'	=>	'2',
+				'people_id'		=>	'2'
+			],
+			[
+				'section_id'	=>	'2',
+				'people_id'		=>	'4'
+			]
+		]);
+
+		DB::table('topics')->insert([
+			['topic' => 'tema_uno', 'image' => 'image2.jpg', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, consequuntur officiis nobis ex nihil impedit.', 'created_at' => now('America/Caracas')],
+			['topic' => 'Cables', 'image' => 'image3.jpg', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit.', 'created_at' => now('America/Caracas')],
+		]);
+
+
 		DB::table('contents')->insert([
 			[
 				'name'		 => 'Cable Par trenzado cat 5e',
 				'comment'    => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis iure, distinctio necessitatibus, perferendis deserunt quasi explicabo dolorem suscipit laborum dicta voluptas inventore quis sit voluptatem aut voluptatum delectus, sequi repellat.',
-				'file'       => 'image3.jpg',
+				'file'       => 'image.jpg',
 				'topic_id'	 => 2,
 				'people_id'  => 1,
 				'created_at' => now('America/Caracas'),
@@ -110,7 +117,7 @@ class DatabaseSeeder extends Seeder
 			[
 				'name'		 => 'Topologia de red x',
 				'comment'    => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque officiis vel placeat sed excepturi rem, quidem ad, consequatur aliquam veritatis aliquid voluptates inventore quo, odio sint debitis molestiae impedit blanditiis.',
-				'file'       => 'image.jpg',
+				'file'       => 'image1.jpg',
 				'topic_id'	 => 1,
 				'people_id'  => 1,
 				'created_at' => now('America/Caracas'),
@@ -120,37 +127,29 @@ class DatabaseSeeder extends Seeder
 				'name'		 => 'MEdio de transmision radial',
 				'comment'    => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloremque officiis vel placeat sed excepturi rem, quidem ad, consequatur aliquam veritatis aliquid voluptates inventore quo, odio sint debitis molestiae impedit blanditiis.',
 				'file'       => 'image2.jpg',
-				'topic_id'	 => 1,
+				'topic_id'	 => 2,
+				'people_id'  => 1,
+				'created_at' => now('America/Caracas'),
+				'section_id' =>	rand(1,5)
+			],
+			[
+				'name'		 => 'Arepa adeaPar trenzado cat 5e',
+				'comment'    => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis iure.',
+				'file'       => 'image3.jpg',
+				'topic_id'	 => 2,
 				'people_id'  => 1,
 				'created_at' => now('America/Caracas'),
 				'section_id' =>	rand(1,5)
 			]
 		]);
 
-		// DB::table('comments')->insert([
-		// 	'comment'    => 'HOla esto es un comentario bla a sdasd',
-		// 	'people_id'  => 1,
-		// 	'content_id' => 2,
-		// 	'created_at' => now('America/Caracas')
-		// ]);
-
-
-		// DB::table('tests')->insert([
-		// 	'link' 	     => 'http://forms.enlaceaprueba.com',
-		// 	'topic_id'   => 1,
-		// 	'created_at' => now('America/Caracas')
-		// ]);
-
-		// DB::table('notes')->insert([
-		// 	'note' 	     => '80',
-		// 	'test_id'    => 1,
-		// 	'user_id' 	 => 2,
-		// 	'created_at' => now('America/Caracas')
-		// ]);
-
-		// DB::table('certificates')->insert([
-		// 	'note_id' => 1,
-		// 	'created_at' => now('America/Caracas')
-		// ]);
+		DB::table('text_contents')->insert([
+			'name'		 	=> 'Cable Par alñfkñla cat 5e',
+			'textcontent'   => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis iure, distinctio necessitatibus, perferendis deserunt quasi explicabo dolorem suscipit laborum dicta voluptas inventore quis sit voluptatem aut voluptatum delectus, sequi repellat.',
+			'topic_id'	 => 2,
+			'people_id'  => 1,
+			'section_id' =>	rand(1,5),
+			'created_at' => now('America/Caracas')
+		]);
 	}
 }

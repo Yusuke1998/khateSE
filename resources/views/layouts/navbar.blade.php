@@ -27,6 +27,9 @@
 				<li class="nav-item">
 					<a class="nav-link" href="{{ url('pruebas') }}"><i class="fas fa-chart-line mr-2"></i>Pruebas</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{{ url('evaluaciones') }}"><i class="fas fa-chart-line mr-2"></i>Evaluaciones</a>
+				</li>
 			@else
 				<li class="nav-item">
 					<a class="nav-link" href="{{ url('estudiantes') }}"><i class="fas fa-bolt mr-2"></i>Estudiantes</a>

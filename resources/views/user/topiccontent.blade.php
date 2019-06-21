@@ -22,6 +22,7 @@
 							<p class="lead">Profesor</p>
 							@elseif($me->type == 'student')
 							<p class="lead">Estudiante</p>
+							<p class="small">Sección {{ $me->people->student->section->section }}</p>
 							@endif
 						</div>
 					</div>
@@ -49,19 +50,19 @@
 		</div>
 			
 		<div class="col-md-9 col-sm-12 animated zoomInRight slow">
+			@if(!empty($contentsm) && !empty($contents))
 			<div class="card" >
+				@if(count($contents) > 0)
 				<div class="card-body px-5">
 					<p class="text-center">Contenido textual</p>
-					@if(count($contents) > 0)
 						<h2 class="animated rollIn delay-1s font-weight-light mb-5">{{ $contents[0]->topic->topic }}</h2>
-
 						<ul class="list-group">
 							@foreach( $contents as $c )
 								<div class="list-group">
 									<a href="#!" class="mb-5 py-4 list-group-item list-group-item-action flex-column align-items-start">
 										<div class="d-flex w-100 justify-content-between">
 											<h5 class="mb-2 h5">{{ $c->name }}</h5>
-											<small>{{ $carbon->diffForHumans($c->created_at) }}</small>
+											<small>{{ $c->created_at->diffForHumans() }}</small>
 										</div>
 										<p class="mb-2 text-truncate content">{{ $c->textcontent }}</p>
 										<div class="d-flex justify-content-end mt-3">
@@ -71,14 +72,12 @@
 								</div>
 							@endforeach
 						</ul>
-					@else
-						<h2 class="text-center font-weight-light">No hay información registrada aún.</h2>
-					@endif
 				</div>
+				@endif
 
+				@if(count($contentsm) > 0)
 				<div class="card-body mt-5 px-5">
 					<p class="text-center">Contenido multimedia</p>
-					@if(count($contentsm) > 0)
 						<h2 class="animated rollIn delay-1s font-weight-light mb-5">{{ $contentsm->first()->topic->topic }}</h2>
 
 						<ul class="list-group">
@@ -87,7 +86,7 @@
 									<a href="#!" class="mb-5 py-4 list-group-item list-group-item-action flex-column align-items-start">
 										<div class="d-flex w-100 justify-content-between">
 											<h5 class="mb-2 h5">{{ $c->name }}</h5>
-											<small>{{ $carbon->diffForHumans($c->created_at) }}</small>
+											<small>{{ $c->created_at->diffForHumans() }}</small>
 										</div>
 										<div class="card mb-3 view zoom hoverable">
 											<div class="card-body d-flex justify-content-center">
@@ -102,16 +101,15 @@
 								</div>
 							@endforeach
 						</ul>
-					@else
-						<h2 class="text-center font-weight-light">No hay información registrada aún.</h2>
-					@endif
 				</div>
+				@endif
 			</div>
+			@else
+			<p>No hay contenido para mostrar!</p>
+			@endif
 		</div>
 	</div>
 </div>
-
-
 
 <!-- Modal -->
 <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="modaltitle" aria-hidden="true">

@@ -5,7 +5,6 @@
 <div class="container my-5 pt-5 animated fadeIn bg">
 
 	<div class="row">
-
 		<div class="col-md-3 col-sm-12 animated slideInLeft slow">
 			<div class="row">
 				<div class="col-sm-6 col-md-12">
@@ -50,13 +49,59 @@
 		</div>
 			
 		<div class="col-md-9 col-sm-12 animated slideInRight">
-			<!-- <div class="card-columns cardcolumns "> -->
 			<div class="card" >
-				<div class="card-body">
-
-					<iframe src="https://docs.google.com/forms/d/e/1FAIpQLScUb_-sAanF0GhirVIht1Q_dYVFEbGg069G9H3ogJcknPSfAQ/viewform?embedded=true" width="640" height="1587" frameborder="0" marginheight="0" marginwidth="0">Cargando...</iframe>
-					
+				<div class="card-header">
+					{{ $test->topic }}
 				</div>
+				<?php $count = $test->questions()->count() ?>
+				
+				@if($count >= 1)
+				<div class="card-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Pregunta</th>
+								<th>Valor</th>
+								<td>Estado</td>
+								<th>Accion</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($test->questions as $question)
+							<?php $respondida = false;?>
+							<tr>
+								<td>{{ $question->text }}</td>
+								<td>{{ $question->value }}</td>
+								@if($respuesta = $question->answer)
+								<td>
+									@if($respuesta->people_id == $me->people->id)
+									<?php $respondida = true;?>
+									<span class="bg p-1 bg-success">Respondida</span>
+									@else
+									<span class="bg p-1 bg-warning">Sin responder</span>
+									@endif
+								</td>
+								@else
+								<td>
+									<span class="bg p-1 bg-warning">Sin responder</span>
+								</td>
+								@endif
+								<td>
+									<a href="{{ (!$respondida)?route('respuesta',[$test->id,$question->id]):'#'}}" title="Responder" onclick="{{ (!$respondida)?route('respuesta',[$test->id,$question->id]):'alert(\'Ya respondiste!\')'}}">Responder</a>
+								</td>
+							</tr>
+							@endforeach
+						</tbody>
+						<tfoot>
+							<tr>
+								<td>VALOR TOTAL</td>
+								<td>{{ $test->questions->sum('value') }}</td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+				@endif
+
 			</div>
 			
 		</div>

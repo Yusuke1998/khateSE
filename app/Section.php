@@ -27,4 +27,9 @@ class Section extends Model
     {
         return $this->hasMany(Test::class);
     }
+
+    public function students()
+    {
+        return $this->hasMany(Student::class);
+    }
 }

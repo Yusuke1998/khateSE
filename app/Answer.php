@@ -24,4 +24,9 @@ class Answer extends Model
     {
     	return $this->belongsTo(People::class);
     }
+
+    public function students()
+    {
+        return $this->belongsToMany('App\Student');
+    }
 }

@@ -22,6 +22,7 @@
 							<p class="lead">Profesor</p>
 							@elseif($me->type == 'student')
 							<p class="lead">Estudiante</p>
+							<p class="small">Sección {{ $me->people->student->section->section }}</p>
 							@endif
 						</div>
 					</div>
@@ -57,6 +58,7 @@
 							<th>ID</th>
 							<th>Nombre</th>
 							<th>Apellido</th>
+							<th>Sección</th>
 							<th>Email</th>
 							<th>Registrado</th>
 						</thead>
@@ -66,6 +68,7 @@
 								<th>{{ $est->id }}</th>
 								<td>{{ $est->people->first_name }}</td>
 								<td>{{ $est->people->last_name }}</td>
+								<td>{{ $est->people->student->section->section }}</td>
 								<td>{{ $est->email }}</td>
 								<td>{{ $est->created_at->format('d/m/Y') }}</td>
 							</tr>

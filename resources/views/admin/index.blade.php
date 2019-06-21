@@ -22,6 +22,7 @@
 							<p class="lead">Profesor</p>
 							@elseif($me->type == 'student')
 							<p class="lead">Estudiante</p>
+							<p class="small">Sección {{ $me->people->student->section->section }}</p>
 							@endif
 						</div>
 					</div>
@@ -211,7 +212,7 @@
 									<td>{{ $test->section->section }}</td>
 									<td>
 										<div class="btn-group">
-										<a class="btn btn-sm btn-flat btn-info" href="#" title="">Ver</a>
+										<a class="btn btn-sm btn-flat btn-info" href="{{ route('evaluacion.ver',$test->id) }}" title="">Ver</a>
 									</td>
 								</tr>
 								@endforeach

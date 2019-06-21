@@ -19,4 +19,9 @@ class Question extends Model
     {
     	return $this->hasOne(Answer::class);
     }
+
+    public function students()
+    {
+        return $this->belongsToMany('App\Student');
+    }
 }

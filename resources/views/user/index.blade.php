@@ -22,6 +22,7 @@
 							<p class="lead">Profesor</p>
 							@elseif($me->type == 'student')
 							<p class="lead">Estudiante</p>
+							<p class="small">Sección {{ $me->people->student->section->section }}</p>
 							@endif
 						</div>
 					</div>

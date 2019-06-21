@@ -22,6 +22,7 @@
 							<p class="lead">Profesor</p>
 							@elseif($me->type == 'student')
 							<p class="lead">Estudiante</p>
+							<p class="small">Sección {{ $me->people->student->section->section }}</p>
 							@endif
 						</div>
 					</div>
@@ -49,33 +50,35 @@
 						<div class="card-body">
 
 							<div class="row">
-								<div class="col-2 text-right font-weight-bold h6">Nombre:</div>
-								<div class="col-4">{{ $me->people->first_name }}</div>
+								<div class="col-3 text-left font-weight-bold h6">Nombres:</div>
+								<div class="col-3">{{ $me->people->first_name }}</div>
 							</div>
 
 							<div class="row my-3">
-								<div class="col-2 text-right font-weight-bold h6">Apellido:</div>
-								<div class="col-4">{{ $me->people->last_name }}</div>
+								<div class="col-3 text-left font-weight-bold h6">Apellidos:</div>
+								<div class="col-3">{{ $me->people->last_name }}</div>
 							</div>
 
 							<div class="row mb-3">
-								<div class="col-2 text-right font-weight-bold h6">Correo:</div>
-								<div class="col-4">{{ $me->email }}</div>
-
-
-								<!-- {{--<div class="col-2 text-right font-weight-bold">Clave:</div>
-								<div class="col-4 d-flex justify-content-between">
-									<input type="password" id="clave" class="form-control px-1 w-75" readonly value="{{ decrypt($me[0]->password) }}">
-									<button class="btn btn-primary p-2" id="reveal" type="button">
-										<i class="fas fa-eye ml-2"></i>
-									</button>
-								</div>--}} -->
+								<div class="col-3 text-left font-weight-bold h6">Correo:</div>
+								<div class="col-3">{{ $me->email }}</div>
 							</div>
 							<div class="row">
-								<div class="col-2 text-right font-weight-bold h6">Cuenta:</div>
-								<div class="col-4">{{ $me->type}}</div>
+								<div class="col-3 text-left font-weight-bold h6">Cuenta:</div>
+								@if($me->type == 'admin')
+								<div class="col-3">Administrador</div>
+								@elseif($me->type == 'teacher')
+								<div class="col-3">Profesor</div>
+								@elseif($me->type == 'student')
+								<div class="col-3">Estudiante</div>
+								@endif
 							</div>
-
+							@if($me->type == 'student')
+							<div class="row mb-3">
+								<div class="col-3 text-left font-weight-bold h6">Seccion:</div>
+								<div class="col-3">{{ $me->people->student->section->section }}</div>
+							</div>
+							@endif
 						</div>
 					</div>
 
@@ -111,12 +114,12 @@
 						<div class="col md-form">
 							<i class="fas fa-user prefix"></i>
 							<input type="text" name="first_name" id="name" class="validate form-control"  pattern="^[a-zA-Záéíóú]+(?:\s?[a-zA-Záéíóú]\s?)+$" value="{{ $me->people->first_name }}" required>
-							<label for="name">Nombre</label>
+							<label for="name">Nombre(s)</label>
 						</div>
 						<div class="col md-form">
 							<i class="fas fa-user prefix"></i>
 							<input type="text" name="last_name" id="apellido" class="validate form-control" required pattern="^[a-zA-Záéíóú]+(?:\s?[a-zA-Záéíóú]\s?)+$" value="{{ $me->people->last_name }}">
-							<label for="apellido">Apellido</label>
+							<label for="apellido">Apellido(s)</label>
 						</div>
 					</div>
 
@@ -129,7 +132,7 @@
 					</div>
 
 					<div class="form-row mb-3">
-						<div class="col-md-6 md-form">
+						<div class="col md-form">
 						    <div class="file-field">
 						        <div class="btn btn-primary btn-md float-left">
 						            <i class="fas fa-file-upload"></i>
@@ -141,14 +144,14 @@
 						    </div>
 						</div>
 
-						<div class="col-md-6 md-form">
+						{{-- <div class="col-md-6 md-form">
 							<i class="fas fa-user-circle prefix"></i>
 							<select name="type" id="type" class="mdb-select ml-5">
 								<option disabled selected>Tipo de cuenta</option>
 								<option value="student">Estudiante</option>
 								<option value="teacher">Profesor</option>
 							</select>
-						</div>
+						</div> --}}
 					</div>
 				</div>
 

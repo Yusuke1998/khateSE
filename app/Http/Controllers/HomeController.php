@@ -22,7 +22,13 @@ class HomeController extends Controller
 {
 	public function __construct()
 	{
-		$this->middleware('auth');
+		$this->middleware('auth')->except('inicio');
+	}
+
+	public function inicio()
+	{
+		$sections = Section::all();
+		return view('inicio',compact('sections'));
 	}
 
 	// Muestra la vista principal con todas la INFORMACION
@@ -55,11 +61,11 @@ class HomeController extends Controller
 		$me = User::find($id);
 
 		if ( Auth::user()->type == 'student' ) {
-			
 			return view('user.index')
 					->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 					->with('me', $me)
 					->with('tests',$tests)
+					->with('sections', $sections)
 					->with('topics', $topics);
 		}
 
@@ -78,10 +84,12 @@ class HomeController extends Controller
 
 	public function videos()
 	{
-		$sections 	  = Section::all()->sortByDesc('id');
+		$sections = Section::all()->sortByDesc('id');
 		$tests 	  = Test::all()->sortByDesc('id');
 		$topics   = Topic::all();
-		$contents = Content::all()->sortByDesc('id');
+		$id = Auth::user()->id;
+		$me = User::find($id);
+		$contents = Content::where('section_id',$me->people->student->section->id)->get();
 
 		$videos   = [];
 
@@ -91,15 +99,12 @@ class HomeController extends Controller
 			}
 		}
 
-		$id = Auth::user()->id;
-		$me = User::find($id);
-
 		return view('user.video')
 				->with('videos', $videos)
 				->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 				->with('me', $me)
 				->with('tests',$tests)
-				->with('seccions', $seccions)
+				->with('sections', $sections)
 				->with('topics', $topics);
 	}
 
@@ -108,7 +113,9 @@ class HomeController extends Controller
 		$topics   = Topic::all();
 		$sections 	  = Section::all()->sortByDesc('id');
 		$tests 	  = Test::all()->sortByDesc('id');
-		$contents = Content::all()->sortByDesc('id');
+		$id = Auth::user()->id;
+		$me = User::find($id);
+		$contents = Content::where('section_id',$me->people->student->section->id)->get();
 
 		$images 	  = [];
 
@@ -118,8 +125,6 @@ class HomeController extends Controller
 			}
 		}
 
-		$id = Auth::user()->id;
-		$me = User::find($id);
 
 		return view('user.images')
 				->with('contents', $images)
@@ -152,14 +157,31 @@ class HomeController extends Controller
 
 	public function pruebas()
 	{
-		$topics = Topic::all();
-		$sections 	  = Section::all()->sortByDesc('id');
-		$tests 	  = Test::all()->sortByDesc('id');
+		$topics   = Topic::all();
+		$sections = Section::all()->sortByDesc('id');
+		$id = Auth::user()->id;
+		$me = User::find($id);
+		$tests = Test::where('section_id',$me->people->student->section->id)->get();
 		$id = Auth::user()->id;
 		$me = User::find($id);
 
-
 		return view('user.pruebas')
+				->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
+				->with('me', $me)
+				->with('tests',$tests)
+				->with('sections', $sections)
+				->with('topics', $topics);
+	}
+
+	public function evaluaciones()
+	{
+		$topics   = Topic::all();
+		$sections = Section::all()->sortByDesc('id');
+		$id = Auth::user()->id;
+		$me = User::find($id);
+		$tests 	  = Test::where('section_id',$me->people->student->section->id)->get();
+
+		return view('user.evaluaciones')
 				->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 				->with('me', $me)
 				->with('tests',$tests)
@@ -173,11 +195,8 @@ class HomeController extends Controller
 		$topicid  	= Topic::where('topic', $topic)->first();
 		$topicid = $topicid->id;
 
-
 		$contents 	= TextContent::where('topic_id', $topicid)->get();
 		$contentsm 	= Content::where('topic_id', $topicid)->get();
-
-		// dd($contents);
 
 		$topics   	= Topic::all();
 		$tests	  	= Test::all()->sortByDesc('id');
@@ -403,7 +422,7 @@ class HomeController extends Controller
 		}
 
 		$user->email = $req->input('email');
-		$user->type  = $req->input('type')?? $user->type;
+		// $user->type  = $req->input('type')?? $user->type;
 
 		$people->save();
 		$user->save();

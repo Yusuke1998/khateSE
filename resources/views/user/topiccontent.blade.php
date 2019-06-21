@@ -51,14 +51,14 @@
 		<div class="col-md-9 col-sm-12 animated zoomInRight slow">
 			<div class="card" >
 				<div class="card-body px-5">
-
-					@if( count($contents) > 0 )
+					<p class="text-center">Contenido textual</p>
+					@if(count($contents) > 0)
 						<h2 class="animated rollIn delay-1s font-weight-light mb-5">{{ $contents[0]->topic->topic }}</h2>
 
 						<ul class="list-group">
 							@foreach( $contents as $c )
 								<div class="list-group">
-									<a href="#!" class="py-4 list-group-item list-group-item-action flex-column align-items-start">
+									<a href="#!" class="mb-5 py-4 list-group-item list-group-item-action flex-column align-items-start">
 										<div class="d-flex w-100 justify-content-between">
 											<h5 class="mb-2 h5">{{ $c->name }}</h5>
 											<small>{{ $carbon->diffForHumans($c->created_at) }}</small>
@@ -71,14 +71,42 @@
 								</div>
 							@endforeach
 						</ul>
-
 					@else
 						<h2 class="text-center font-weight-light">No hay información registrada aún.</h2>
 					@endif
+				</div>
 
+				<div class="card-body mt-5 px-5">
+					<p class="text-center">Contenido multimedia</p>
+					@if(count($contentsm) > 0)
+						<h2 class="animated rollIn delay-1s font-weight-light mb-5">{{ $contentsm->first()->topic->topic }}</h2>
+
+						<ul class="list-group">
+							@foreach( $contentsm as $c )
+								<div class="list-group">
+									<a href="#!" class="mb-5 py-4 list-group-item list-group-item-action flex-column align-items-start">
+										<div class="d-flex w-100 justify-content-between">
+											<h5 class="mb-2 h5">{{ $c->name }}</h5>
+											<small>{{ $carbon->diffForHumans($c->created_at) }}</small>
+										</div>
+										<div class="card mb-3 view zoom hoverable">
+											<div class="card-body d-flex justify-content-center">
+												<img class="img-fluid" src='{{ asset("storage/$c->file") }}' alt="">
+											</div>
+										</div>
+										<p class="mb-2 text-truncate content">{{ $c->comment }}</p>
+										<div class="d-flex justify-content-end mt-3">
+											<button data-toggle="modal" data-target="#basicExampleModal2" class="btnmodalcontent btn btn-sm cyan lighten-2"><i class="fas fa-search mr-2"></i> Entrar</button>
+										</div>
+									</a>
+								</div>
+							@endforeach
+						</ul>
+					@else
+						<h2 class="text-center font-weight-light">No hay información registrada aún.</h2>
+					@endif
 				</div>
 			</div>
-			
 		</div>
 	</div>
 </div>
@@ -87,24 +115,46 @@
 
 <!-- Modal -->
 <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="modaltitle" aria-hidden="true">
-<div class="modal-dialog modal-lg" role="document">
-	<div class="modal-content">
-		<div class="modal-header">
-			<h5 class="modal-title" id="modaltitle">Loading...</h5>
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
-		<div class="modal-body">
-			
-			<p id="contenido">Loading...</p>
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modaltitle">Loading...</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				
+				<p id="contenido">Loading...</p>
 
-		</div>
-		<div class="modal-footer">
-			<button type="button" class="btn btn-sm cyan lighten-2" data-dismiss="modal">Cerrar</button>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-sm cyan lighten-2" data-dismiss="modal">Cerrar</button>
+			</div>
 		</div>
 	</div>
 </div>
+
+<!-- Modal2 -->
+<div class="modal fade" id="basicExampleModal2" tabindex="-1" role="dialog" aria-labelledby="modaltitle" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="modaltitle">Loading...</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				
+				<p id="contenido">Loading...</p>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-sm cyan lighten-2" data-dismiss="modal">Cerrar</button>
+			</div>
+		</div>
+	</div>
 </div>
 
 

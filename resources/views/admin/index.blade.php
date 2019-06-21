@@ -193,11 +193,33 @@
 
 					</div>
 					<div class="tab-pane fade" id="test-classic-orange" role="tabpanel" aria-labelledby="test-tab-classic-orange">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-							dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-							ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-							eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
-						deserunt mollit anim id est laborum.</p>
+						@if($tests->count() > 0)
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Tema</th>
+									<th>Ponderacion</th>
+									<th>Seccion</th>
+									<th>Accion</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($tests as $test)
+								<tr>
+									<td>{{ $test->topic }}</td>
+									<td>{{ $test->note }}</td>
+									<td>{{ $test->section->section }}</td>
+									<td>
+										<div class="btn-group">
+										<a class="btn btn-sm btn-flat btn-info" href="#" title="">Ver</a>
+									</td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+						@else
+						<p>No hay pruebas creadas</p>
+						@endif
 					</div>
 				</div>
 

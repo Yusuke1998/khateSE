@@ -13,6 +13,8 @@ use App\Content;
 use App\Topic;
 use App\People;
 use App\User;
+use App\Section;
+use App\Test;
 use App\TextContent;
 
 
@@ -29,6 +31,8 @@ class HomeController extends Controller
 		$topics   	  = Topic::all();
 		$contents 	  = Content::all()->sortByDesc('id');
 		$textcontents = TextContent::all()->sortByDesc('id');
+		$sections 	  = Section::all()->sortByDesc('id');
+		$tests 	  	  = Test::all()->sortByDesc('id');
 		$files 	  	  = [];
 		$videos   	  = [];
 		$images	  	  = [];
@@ -55,6 +59,7 @@ class HomeController extends Controller
 			return view('user.index')
 					->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 					->with('me', $me)
+					->with('tests',$tests)
 					->with('topics', $topics);
 		}
 
@@ -65,12 +70,16 @@ class HomeController extends Controller
 				->with('videos', $videos)
 				->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 				->with('me', $me)
+				->with('tests',$tests)
+				->with('sections', $sections)
 				->with('topics', $topics);
 
 	}
 
 	public function videos()
 	{
+		$sections 	  = Section::all()->sortByDesc('id');
+		$tests 	  = Test::all()->sortByDesc('id');
 		$topics   = Topic::all();
 		$contents = Content::all()->sortByDesc('id');
 
@@ -89,12 +98,16 @@ class HomeController extends Controller
 				->with('videos', $videos)
 				->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 				->with('me', $me)
+				->with('tests',$tests)
+				->with('seccions', $seccions)
 				->with('topics', $topics);
 	}
 
 	public function imagenes()
 	{
 		$topics   = Topic::all();
+		$sections 	  = Section::all()->sortByDesc('id');
+		$tests 	  = Test::all()->sortByDesc('id');
 		$contents = Content::all()->sortByDesc('id');
 
 		$images 	  = [];
@@ -112,11 +125,15 @@ class HomeController extends Controller
 				->with('contents', $images)
 				->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 				->with('me', $me)
+				->with('tests',$tests)
+				->with('sections', $sections)
 				->with('topics', $topics);
 	}
 
 	public function estudiantes()
 	{
+		$sections 	  = Section::all()->sortByDesc('id');
+		$tests 	  = Test::all()->sortByDesc('id');
 		$topics      = Topic::all();
 		$estudiantes = User::where('type', 'student')->get();
 
@@ -128,13 +145,16 @@ class HomeController extends Controller
 				->with('contents', $estudiantes)
 				->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 				->with('me', $me)
+				->with('tests',$tests)
+				->with('sections', $sections)
 				->with('topics', $topics);
 	}
 
 	public function pruebas()
 	{
 		$topics = Topic::all();
-
+		$sections 	  = Section::all()->sortByDesc('id');
+		$tests 	  = Test::all()->sortByDesc('id');
 		$id = Auth::user()->id;
 		$me = User::find($id);
 
@@ -142,45 +162,80 @@ class HomeController extends Controller
 		return view('user.pruebas')
 				->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 				->with('me', $me)
+				->with('tests',$tests)
+				->with('sections', $sections)
 				->with('topics', $topics);
 	}
 
 	public function topic($topic)
 	{
-		$topicid  = Topic::where('topic', $topic)->get();
+		$sections 	= Section::all()->sortByDesc('id');
+		$topicid  	= Topic::where('topic', $topic)->first();
+		$topicid = $topicid->id;
 
-		$contents = textcontent::where('topic_id', $topicid[0]->id)->get();
-		$topics   = Topic::all();
+
+		$contents 	= TextContent::where('topic_id', $topicid)->get();
+		$contentsm 	= Content::where('topic_id', $topicid)->get();
+
+		// dd($contents);
+
+		$topics   	= Topic::all();
+		$tests	  	= Test::all()->sortByDesc('id');
 
 		$id = Auth::user()->id;
 		$me = User::find($id);
 
 		return view('user.topiccontent')
 				->with('contents', $contents)
+				->with('contentsm', $contentsm)
 				->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 				->with('me', $me)
+				->with('tests',$tests)
+				->with('sections', $sections)
 				->with('topics', $topics);
 	}
 
+	// Todo lo referente a la evaluacion
+	public function addevaluacion(Request $req)
+	{
+		$data = request()->validate([
+			'topic'			=>	'required',
+			'note'			=>	'required',
+			'section_id'	=>	'required',
+			'people_id'		=>	'required'
+		]);
 
+		$prueba = Test::create([
+			'topic'			=>	$data['topic'],
+			'note'			=>	$data['note'],
+			'people_id'		=>	$data['people_id'],
+			'section_id'	=>	$data['section_id']
+		]);
 
+		return back()->with('success', 'Se ha registrado la evaluacion');
+	}
+
+	public function addpregunta(Request $req)
+	{
+		dd($req);
+	}
+
+	public function addrespuesta(Request $req)
+	{
+		dd($req);
+	}
 
 	// FUncion que se encarga de insertar el contenido en la db
 	public function addContent(Request $req)
 	{
-
 		// ini_set('post_max_size', '500M');
-
 		$post = new Content();
-
-		$post->name      = $req->name;
-		$post->comment   = $req->publicar;
-		$post->file 	 = $req->file('file')->store('');
-		$post->topic_id  = $req->topicid;
-		$post->people_id = $req->peopleid;
-		// Cambio provicional, para que no tire eeror con la seccion
-		$post->section_id = '1';
-
+		$post->name      	= $req->name;
+		$post->section_id   = $req->section_id;
+		$post->comment   	= $req->publicar;
+		$post->file 	 	= $req->file('file')->store('');
+		$post->topic_id  	= $req->topicid;
+		$post->people_id 	= $req->peopleid;
 		$post->save();
 
 		return redirect('home');
@@ -189,14 +244,11 @@ class HomeController extends Controller
 	public function addcontenttext(Request $req)
 	{
 		$posttext = new TextContent();
-
+		$posttext->section_id   = $req->section_id;
 		$posttext->name        = $req->nametext;
 		$posttext->textcontent = $req->publicartext;
 		$posttext->topic_id    = $req->topicid;
 		$posttext->people_id   = $req->peopleid;
-		// Cambio provicional, para que no tire eeror con la seccion
-		$posttext->section_id = '1';
-
 		$posttext->save();
 
 		return redirect('home');
@@ -205,18 +257,22 @@ class HomeController extends Controller
 	public function profile()
 	{
 		$topics = Topic::all();
-
+		$sections = Section::all()->sortByDesc('id');
+		$tests = Test::all()->sortByDesc('id');
 		$id = Auth::user()->id;
 		$me = User::find($id);
 
 		return view('user.profile')
 				->with('topics', $topics)
-				->with('me', $me);
+				->with('sections', $sections)
+				->with('me', $me)
+				->with('tests',$tests);
 	}
 
 	public function topicid(Request $req)
 	{
-
+		$sections = Section::all()->sortByDesc('id');
+		$tests = Test::all()->sortByDesc('id');
 		$posttopics = DB::table('posts')
 						->join('people', 'people.id', '=', 'posts.people_id')
 						->join('users', 'people.id', '=', 'users.people_id')
@@ -234,6 +290,8 @@ class HomeController extends Controller
 
 		return view('user.dashboard')
 			->with('me', $me)
+			->with('tests',$tests)
+			->with('sections', $sections)
 			->with('estudiantes', $students)
 			->with('posts', $posttopics)
 			->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
@@ -242,6 +300,8 @@ class HomeController extends Controller
 
 	public function postid($id)
 	{
+		$sections = Section::all()->sortByDesc('id');
+		$tests = Test::all()->sortByDesc('id');
 		$topics   = Topic::all();
 		$post 	  = Content::find($id);
 		$comments = Comment::all();
@@ -256,6 +316,8 @@ class HomeController extends Controller
 
 		return view('user.dashboard')
 			->with('me', $me)
+			->with('tests',$tests)
+			->with('sections', $sections)
 			->with('estudiantes', $students)
 			->with('posts', $post)
 			->with('comments', $comments)

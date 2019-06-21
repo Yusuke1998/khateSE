@@ -34,6 +34,9 @@
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="modal" href="#temanuevo"><i class="fas fa-plus mr-2"></i>Añadir tema</a>
 				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="modal" href="#evaluacionnuevo"><i class="fas fa-plus mr-2"></i>Añadir Evaluación</a>
+				</li>
 
 				<!-- Dropdown -->
 				<li class="nav-item dropdown">
@@ -76,7 +79,6 @@
 		</ul>
 	</div>
 	<!-- Collapsible content -->
-
 </nav>
 <!--/.Navbar-->
 
@@ -99,7 +101,7 @@
 						<input type="text" name="tema" id="tema" class="form-control validate" placeholder="sin espacios entre palabras" required pattern="^[A-Za-z0-9_]+$">
 						<label for="tema">Tema</label>
 					</div>
-
+					
 					<div class="form-group md-form my-5">
 						<i class="fas fa-edit prefix"></i>
 						<textarea id="description" name="description" class="md-textarea form-control"></textarea>
@@ -128,6 +130,50 @@
 	</div>
 </div>
 
+<!-- Modal añadir evaluacion-->
+<div class="modal fade" id="evaluacionnuevo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-md" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Añadir evaluación</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form action="{{ url('addevaluacion') }}" method="post" enctype="multipart/form-data">
+				@csrf
+				<div class="modal-body">
+
+					<div class="form-group md-form ">
+						<i class="fas fa-book prefix"></i>
+						<input type="text" name="topic" id="tema" class="form-control validate" placeholder="Tema de la evaluación" required>
+						<label for="tema">Tema</label>
+					</div>
+					
+					<div class="form-group md-form my-5">
+						<i class="fas fa-edit prefix"></i>
+						<input id="note" type="number" name="note" class="form-control validate">
+						<label for="note">Ponderacion total de la evaluacion</label>
+					</div>
+
+					<div class="col md-form">
+						<select name="section_id" class="mdb-select colorful-select dropdown-primary" id="type" required>
+							<option disabled selected>Selecciona la seccion</option>
+							@foreach($sections as $section)
+							<option value="{{ $section->id }}">{{ $section->section }}</option>
+							@endforeach
+						</select>
+					</div>
+					<input type="hidden" name="people_id" value="{{ Auth::user()->people_id }}">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn-md btn red lighten-1" data-dismiss="modal"><i class="fas fa-times mr-2"></i>Cerrar</button>
+					<button type="submit" class="btn-md btn cyan lighten-2"><i class="fas fa-save mr-2"></i>Guardar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 
 <!-- Modal registrar contenido multimedia-->
 <div class="modal fade" id="addcontent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -150,6 +196,15 @@
 							<label for="name">Nombre</label>
 							<input type="text" name="name" class="form-control" required id="name">
 						</div>
+					</div>
+
+					<div class="col md-form">
+						<select name="section_id" class="mdb-select colorful-select dropdown-primary" id="type" required>
+							<option disabled selected>Selecciona la seccion</option>
+							@foreach($sections as $section)
+							<option value="{{ $section->id }}">{{ $section->section }}</option>
+							@endforeach
+						</select>
 					</div>
 
 					<div class="form-row my-3">
@@ -194,8 +249,7 @@
 	</div>
 </div>
 
-
-<!-- MODAL registrar focntenido textuial -->
+<!-- MODAL registrar contenido textual -->
 <div class="modal fade" id="addcontenttext" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
@@ -215,6 +269,14 @@
 						<div class="col">
 							<label for="name">Nombre</label>
 							<input type="text" name="nametext" class="form-control" required id="name">
+						</div>
+						<div class="col md-form">
+							<select name="section_id" class="mdb-select colorful-select dropdown-primary" id="type" required>
+								<option disabled selected>Selecciona la seccion</option>
+								@foreach($sections as $section)
+								<option value="{{ $section->id }}">{{ $section->section }}</option>
+								@endforeach
+							</select>
 						</div>
 						<div class="col">
 							<label class="mdb-main-label">Tema en el cual registrar el contenido</label>

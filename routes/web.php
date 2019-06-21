@@ -21,8 +21,9 @@ Route::get('profile', 'HomeController@profile');
 Route::get('post/{id}', 'HomeController@postid')->where('id', '^[\d]+$');
 
 Route::post('addtema', 'HomeController@addtema');
-// Route::post('addeval', 'HomeController@addeval');
-
+Route::post('addevaluacion', 'HomeController@addevaluacion');
+Route::post('addpregunta', 'HomeController@addpregunta');
+Route::post('addrespuesta', 'HomeController@addrespuesta');
 
 Auth::routes();
 

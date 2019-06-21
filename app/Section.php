@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Section extends Model
 {
-    protected $fillable = ['sections'];
+    protected $fillable = ['section'];
 
     public function text_content()
     {
@@ -21,5 +21,10 @@ class Section extends Model
     public function people()
     {
     	return $this->hasOne(People::class);
+    }
+
+    public function tests()
+    {
+        return $this->hasMany(Test::class);
     }
 }

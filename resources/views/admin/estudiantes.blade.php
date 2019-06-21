@@ -49,38 +49,31 @@
 		</div>
 			
 		<div class="col-md-9 col-sm-12 animated slideInRight">
-			<!-- <div class="card-columns cardcolumns "> -->
 			<div class="card" >
 				<div class="card-body">
-
-					<h6 class="mb-4 text-right"><i class="fas fa-group mr-2"></i>Hay {{ count($contents) }} estudiante registrado</h6>
-
-					@foreach($contents as $est)
-						
-						<table class="table table-bordeder table-sm" id="dtstudents">
-							<thead>
-								<th>ID</th>
-								<th>Nombre</th>
-								<th>Apellido</th>
-								<th>Email</th>
-								<th>created at</th>
-							</thead>
-							<tbody>
-								<tr>
-									<th>{{ $est->id }}</th>
-									<td>{{ $est->people->first_name }}</td>
-									<td>{{ $est->people->last_name }}</td>
-									<td>{{ $est->email }}</td>
-									<td>{{ $est->created_at }}</td>
-								</tr>
-							</tbody>
-						</table>
-
-					@endforeach
-
+					<h6 class="mb-4 text-right"><i class="fas fa-group mr-2"></i>Hay {{ $cantidad = count($contents) }} {{ ($cantidad>1)?'estudiantes registrados':'estudiante registrado' }}</h6>
+					<table class="table table-bordeder table-sm" id="dtstudents">
+						<thead>
+							<th>ID</th>
+							<th>Nombre</th>
+							<th>Apellido</th>
+							<th>Email</th>
+							<th>Registrado</th>
+						</thead>
+						<tbody>
+							@foreach($contents as $est)
+							<tr>
+								<th>{{ $est->id }}</th>
+								<td>{{ $est->people->first_name }}</td>
+								<td>{{ $est->people->last_name }}</td>
+								<td>{{ $est->email }}</td>
+								<td>{{ $est->created_at->format('d/m/Y') }}</td>
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
 				</div>
 			</div>
-			
 		</div>
 	</div>
 </div>

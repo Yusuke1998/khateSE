@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->unsignedInteger('people_id');
             $table->timestamps();
 
-            $table->foreign('people_id')->references('id')->on('people');
+            $table->foreign('people_id')->references('id')->on('people')->onDelete('cascade');
         });
     }
     

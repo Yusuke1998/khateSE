@@ -16,14 +16,6 @@ class DatabaseSeeder extends Seeder
 	 */
 	public function run()
 	{
-		// $this->call(ProductsTableSeeder::class);
-
-		// factory(App\People::class, 2)->create();
-		// factory(App\Category::class, 5)->create();
-		// factory(App\Product::class, 9)->create();
-		// factory(App\User::class, 1)->create();
-
-
 		DB::table('people')->insert([
 			[
 				'first_name' => 'Adrienne',
@@ -40,6 +32,12 @@ class DatabaseSeeder extends Seeder
 			[
 				'first_name' => 'jhonny jose',
 				'last_name'	 => 'perez martinez',
+				'avatar'     => 'user.png',
+				'created_at' => now('America/Caracas')
+			],
+			[
+				'first_name' => 'Kamila',
+				'last_name'	 => 'Zerpa',
 				'avatar'     => 'user.png',
 				'created_at' => now('America/Caracas')
 			]
@@ -66,6 +64,13 @@ class DatabaseSeeder extends Seeder
 				'type'		 => 'teacher',
 				'people_id'	 => 3,
 				'created_at' => now('America/Caracas')
+			],
+			[
+				'email' 	 => 'kamila@zerpa.com',
+				'password'   => bcrypt('kamila123'),
+				'type'		 => 'student',
+				'people_id'	 => 4,
+				'created_at' => now('America/Caracas')
 			]
 		]);
 
@@ -76,19 +81,19 @@ class DatabaseSeeder extends Seeder
 
 		DB::table('sections')->insert([
 			[
-			'section'	=> 'seccion 1'
+			'section'	=> 'K1'
 			],
 			[
-			'section'	=> 'seccion 2'
+			'section'	=> 'K2'
 			],
 			[
-			'section'	=> 'seccion 3'
+			'section'	=> 'K3'
 			],
 			[
-			'section'	=> 'seccion 4'
+			'section'	=> 'K4'
 			],
 			[
-			'section'	=> 'seccion 5'
+			'section'	=> 'K5'
 			],
 		]);
 

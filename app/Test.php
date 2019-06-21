@@ -1,0 +1,28 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Test extends Model
+{
+    protected $fillable = [
+    	'topic','note','people_id','section_id'
+    ];
+
+    public function people()
+    {
+    	return $this->belongsTo(People::class);
+    }
+
+    public function section()
+    {
+    	return $this->belongsTo(Section::class);
+    }
+
+    public function answers()
+    {
+    	return $this->hasMany(Answer::class);
+    }
+
+}

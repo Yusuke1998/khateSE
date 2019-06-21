@@ -25,4 +25,14 @@ class People extends Model
     {
         return $this->hasOne(User::class);
     }
+
+    public function tests()
+    {
+        return $this->hasMany(Test::class);
+    }
+
+    public function answer()
+    {
+        return $this->hasOne(Answer::class);
+    }
 }

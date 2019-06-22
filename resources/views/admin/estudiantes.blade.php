@@ -85,36 +85,4 @@
 	</div>
 </div>
 
-
-<!-- Modal -->
-<!-- <div class="modal fade" id="imgmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-aria-hidden="true">
-	<div class="modal-dialog modal-lg" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="targettitulo">Loaging...</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body py-5">
-
-				<div class="card card-cascade wider reverse">
-					<div class="view view-cascade zoom">
-						<img class="card-img-top" id="targetimg" alt="error loading image">
-						<a href="#!">
-							<div class="mask rgba-white-slight"></div>
-						</a>
-					</div>
-					<div class="card-body card-body-cascade text-center">
-						<h6 class="font-weight-bold indigo-text py-2" id="targettopic">Loading...</h6>
-						<p class="card-text" id="targetcontenido">Loading...</p>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-</div> -->
-
 @include('layouts.footer')

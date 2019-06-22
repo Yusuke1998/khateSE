@@ -33,3 +33,8 @@ Route::get('estudiante/evaluacion/{id}','testController@evaluacion_estudiante')-
 Route::get('respuesta/{id_test}/{id_question}','testController@respuesta')->name('respuesta');
 Route::post('respuesta/guardar','testController@respuesta_guardar')->name('respuesta.guardar');
 Route::get('historial/{student_id}','HomeController@historial')->name('historial');
+
+
+// Notas
+Route::get('nota/{people}/{test}/{question}/{answer}','testController@nota')->name('nota.nueva');
+Route::post('asignar/nota','testController@asignar_nota')->name('nota.asignar');

@@ -30,4 +30,9 @@ class Test extends Model
         return $this->hasMany(Question::class);
     }
 
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
+    }
+
 }

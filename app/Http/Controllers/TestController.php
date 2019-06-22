@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\Auth;
 use App\Topic;
 use App\Section;
 use App\User;
+use App\People;
 use App\Question;
 use App\Student;
 use App\Answer;
 use App\Test;
+use App\Note;
 
 class TestController extends Controller
 {
@@ -26,7 +28,6 @@ class TestController extends Controller
 		$sections = Section::all()->sortByDesc('id');
 		$id = Auth::user()->id;
 		$me = User::find($id);
-		// $test = Test::find($id_test);
 		$test = Test::where('id',$id_test)->first();
 
 		return view('admin.evaluacion')
@@ -119,5 +120,41 @@ class TestController extends Controller
 		]);
 
 		return redirect(route('estudiante.evaluacion',$respuesta->test_id));
+	}
+
+	public function nota($people,$test,$question,$answer)
+	{
+		$people 	= People::where('id',$people)->first();
+		$test 		= Test::where('id',$test)->first();
+		$question 	= Question::where('id',$question)->first();
+		$answer 	= Answer::where('id',$answer)->first();
+
+		$topics   = Topic::all();
+		$sections = Section::all()->sortByDesc('id');
+		$id = Auth::user()->id;
+		$me = User::find($id);
+
+		return view('admin.notas',compact('topics','sections','me','question','test','people','answer'));
+	}
+
+	public function asignar_nota(Request $request)
+	{
+		$data = request()->validate([
+    		'people_id'		=>	'required',
+    		'question_id'	=>	'required',
+    		'answer_id'		=>	'required',
+    		'test_id'		=>	'required',
+			'note'			=>	'required'
+		]);
+
+		$nota = Note::create([
+			'people_id'		=>	$data['people_id'],
+    		'question_id'	=>	$data['question_id'],
+    		'answer_id'		=>	$data['answer_id'],
+    		'test_id'		=>	$data['test_id'],
+			'note'			=>	$data['note']
+		]);
+		$usuario = User::where('people_id',$data['people_id'])->first();
+		return redirect(route('historial',$usuario->id));
 	}
 }

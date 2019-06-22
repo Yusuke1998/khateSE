@@ -36,8 +36,13 @@ class People extends Model
         return $this->hasMany(Test::class);
     }
 
-    public function answer()
+    public function answers()
     {
-        return $this->hasOne(Answer::class);
+        return $this->hasMany(Answer::class);
+    }
+
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
     }
 }

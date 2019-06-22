@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Answer extends Model
+class Note extends Model
 {
     protected $fillable = [
-    	'text','people_id','question_id','test_id','student_id'
+    	'note','test_id','people_id','question_id','answer_id'
     ];
 
     public function test()
@@ -25,13 +25,8 @@ class Answer extends Model
     	return $this->belongsTo(People::class);
     }
 
-    public function student()
+    public function answer()
     {
-        return $this->belongsTo('App\Student');
-    }
-
-    public function notes()
-    {
-        return $this->hasMany(Note::class);
+    	return $this->belongsTo(Answer::class);
     }
 }

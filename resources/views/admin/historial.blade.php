@@ -55,18 +55,50 @@
 					<p>Estudiante: {{ $estudiante->people->first_name }} {{ $estudiante->people->last_name }}</p>
 					<p>Seccion: {{ $estudiante->people->student->section->section }}</p>
 				</div>
+				<?php $estudiante = $estudiante->people;?>
 				<div class="card-body">
-					<?php $tests = $estudiante->people->student->tests;?>
-					@if($tests->count())
-					Evaluaciones realizadas:
-					<ul>
-						@foreach($tests as $test)
-						<li>{{ $test->topic }}</li>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Evaluacion</th>
+								<th>Pregunta</th>
+								<th>Respuesta</th>
+								<th>Nota</th>
+								<th>Accion</th>
+							</tr>
+						</thead>
+						<tbody>
+						@foreach($estudiante->answers as $answer)
+							<tr>
+								<td>{{ $answer->test->topic }}</td>
+								<td>{{ $answer->question->text }}</td>
+								<td>{{ $answer->text }}</td>
+								<?php $tieneNota = false;?>
+								<?php $nota = '00';?>
+								<td>
+									@if($answer->notes)
+										@foreach($answer->notes as $note)
+											@if($note->people_id == $answer->people_id)
+												<?php $tieneNota = true;?>
+												<?php $nota = $note->note;?>
+											@endif
+										@endforeach
+									@endif
+									<span class="p-1 bg-{{ ($tieneNota)?'success':'warning' }}">{{ $nota }}</span>
+								</td>
+								<td>
+									<div class="btn-group">
+										<?php $people 	= $answer->people_id;?>
+										<?php $test 	= $answer->test_id;?>
+										<?php $question = $answer->question->id;?>
+										<?php $answer 	= $answer->id;?>
+										<a href="{{ ($tieneNota)?'#':route('nota.nueva',[$people,$test,$question,$answer]) }}" onclick="{{ ($tieneNota)?'alert(\'Ya se le asigno la nota!\')':'' }}" class="btn btn-sm btn-info" title="">VER</a>
+									</div>
+								</td>
+							</tr>
 						@endforeach
-					</ul>
-					@else
-						<p>No ha realizado evaluaciones...</p>
-					@endif
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>

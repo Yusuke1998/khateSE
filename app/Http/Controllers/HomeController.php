@@ -468,8 +468,6 @@ class HomeController extends Controller
 		$estudiante 	= User::where('id', $id_student)->first();
 		$id = Auth::user()->id;
 		$me = User::find($id);
-		// dd($estudiante);
-
 
 		return view('admin.historial')
 				->with('contents', $estudiantes)

@@ -30,4 +30,9 @@ class Student extends Model
         return $this->hasOne(Question::class);
     }
 
+    public function tests()
+    {
+        return $this->belongsToMany(Test::class);
+    }
+
 }

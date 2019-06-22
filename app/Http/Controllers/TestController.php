@@ -75,8 +75,38 @@ class TestController extends Controller
 		$id = Auth::user()->id;
 		$me = User::find($id);
 		$test = Test::where('id',$id_test)->first();
+		$total_evl = $test->questions->sum('value');
+		$total_pts = 0;
+		// Kamila 55
+		// Kathe  80
+		// test/questions/ansrers/notas
+		foreach ($test->questions as $question) {
+			if ($question->answers) {
+				foreach ($question->answers as $answer) {
+					if ($answer->people_id === $me->people->id) {
+						$total_pts += $answer->notes->sum('note');
+					}
+				}
+			}
+		}
+
+		// $total_pts = $test->questions[3]->answers->first()->notes->sum('note');
+		
+		// $total_pts = $me->people->student->tests->find($test->id)->notes->sum('note');
+		// dd($total_pts);
+
+
+		// $total_pts = 0;
+		if($total_pts >= ($total_evl/2)){
+			$aprobado = true;
+		}else{
+			$aprobado = false;
+		}
 
 		return view('user.evaluacion')
+				->with('total_evl', $total_evl)
+				->with('total_pts', $total_pts)
+				->with('aprobado', $aprobado)
 				->with('me', $me)
 				->with('test',$test)
 				->with('sections', $sections)
@@ -109,6 +139,9 @@ class TestController extends Controller
     		'student_id'	=>	'required',
     		'test_id'		=>	'required'
 		]);
+
+		$test = Test::find($data['test_id']);
+		$test->students()->attach($data['student_id']);
 
 		$respuesta = Answer::create([
     		'text'			=>	$data['text'],

@@ -197,8 +197,10 @@
 							<thead>
 								<tr>
 									<th>Tema</th>
-									<th>Ponderacion</th>
-									<th>Seccion</th>
+									<th align="center">Preguntas</th>
+									<th align="center">Ponderacion</th>
+									<th align="center">Seccion</th>
+									<th align="center">Estudiantes</th>
 									<th>Accion</th>
 								</tr>
 							</thead>
@@ -206,8 +208,10 @@
 								@foreach($tests as $test)
 								<tr>
 									<td>{{ $test->topic }}</td>
-									<td>{{ $test->note }}</td>
-									<td>{{ $test->section->section }}</td>
+									<td align="center">{{ $test->questions->count() }}</td>
+									<td align="center">{{ $test->note }}</td>
+									<td align="center">{{ $test->section->section }}</td>
+									<td align="center">{{ $test->students->count() }}</td>
 									<td>
 										<div class="btn-group">
 										<a class="btn btn-sm btn-flat btn-info" href="{{ route('evaluacion.ver',$test->id) }}" title="">Ver</a>

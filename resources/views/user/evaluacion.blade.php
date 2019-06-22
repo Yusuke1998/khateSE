@@ -54,7 +54,6 @@
 					{{ $test->topic }}
 				</div>
 				<?php $count = $test->questions()->count() ?>
-				
 				@if($count >= 1)
 				<div class="card-body">
 					<table class="table">
@@ -69,22 +68,21 @@
 						</thead>
 						<tbody>
 							@foreach($test->questions as $question)
-							<?php $respondida = false;?>
-							<?php $notaobt = false;?>
-							<tr>
+							<?php $respondida = false;$notaobt = false;$notacompleta = 0;?>
+							<tr align="center">
 								<td>{{ $question->text }}</td>
 								<td>{{ $question->value }}</td>
-								<td>
+								<td width="140">
 									@if($question->answers)
 										@foreach($question->answers as $answer)
 											@if($me->people->id === $answer->people_id)
 												<?php $respondida = true;?>
-												<span class="bg p-1 bg-success">Respondida</span>
+												<span class="h6">Respondida</span>
 											@endif
 										@endforeach
 									@endif
 									@if(!$respondida)
-										<span class="bg p-1 bg-warning">Sin responder</span>
+										<span class="h6">Sin responder</span>
 									@endif
 								</td>
 								<td>
@@ -92,12 +90,12 @@
 										@foreach($question->notes as $nota)
 											@if($me->people->id === $nota->people_id)
 												<?php $notaobt = true;?>
-												<span class="bg p-1 bg-success">{{ $nota->note }}</span>
+												<span class="h6">{{ $nota->note }}</span>
 											@endif
 										@endforeach
 									@endif
 									@if(!$notaobt)
-										<span class="bg p-1 bg-warning">Sin nota</span>
+										<span class="h6">Nota</span class="h6">
 									@endif
 								</td>
 								<td>
@@ -107,9 +105,12 @@
 							@endforeach
 						</tbody>
 						<tfoot>
-							<tr>
-								<td>VALOR TOTAL</td>
-								<td>{{ $test->questions->sum('value') }}</td>
+							<tr class="bg bg-info text-white">
+								<td class="text-center">TOTAL EVALUACION</td>
+								<td class="text-center">{{ $total_evl }}pts</td>
+								<td class="text-center">TOTAL OBTENIDO</td>
+								<td class="text-center">{{ $total_pts }}pts</td>
+								<td>{{ ($aprobado)?'Aprobado':'Reprobado' }}</td>
 							</tr>
 						</tfoot>
 					</table>

@@ -1,7 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
 
+use Symfony\Component\Console\Helper\FormatterHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -209,62 +209,6 @@ class HomeController extends Controller
 				->with('sections', $sections)
 				->with('topics', $topics);
 	}
-
-	// public function topicid(Request $req)
-	// {
-	// 	$sections = Section::all()->sortByDesc('id');
-	// 	$tests = Test::all()->sortByDesc('id');
-	// 	$posttopics = DB::table('posts')
-	// 					->join('people', 'people.id', '=', 'posts.people_id')
-	// 					->join('users', 'people.id', '=', 'users.people_id')
-	// 					->join('topics', 'topics.id', '=', 'posts.topic_id')
-	// 					->select('people.first_name', 'people.last_name', 'people.avatar', 'users.type', 'users.email', 'posts.post', 'posts.id', 'posts.file', 'posts.created_at', 'topics.topic')
-	// 					->where('topic_id', $req->input('topicid'))
-	// 					->get()->sortByDesc('id');
-
-	// 	$topics     = Topic::all();
-
-	// 	$students   = User::where('type', 'Estudiante')->get();
-
-	// 	$id = Auth::user()->id;
-	// 	$me = User::find($id);
-
-	// 	return view('user.dashboard')
-	// 		->with('me', $me)
-	// 		->with('tests',$tests)
-	// 		->with('sections', $sections)
-	// 		->with('estudiantes', $students)
-	// 		->with('posts', $posttopics)
-	// 		->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
-	// 		->with('topics', $topics);
-	// }
-
-	// public function postid($id)
-	// {
-	// 	$sections = Section::all()->sortByDesc('id');
-	// 	$tests = Test::all()->sortByDesc('id');
-	// 	$topics   = Topic::all();
-	// 	$post 	  = Content::find($id);
-	// 	$comments = Comment::all();
-	// 	$students = People::where('type', 'student')->get();
-
-	// 	$id = Auth::user()->id;
-	// 	$me = User::find($id);
-
-	// 	foreach ($post as $p) {
-	// 		dd($p);
-	// 	}
-
-	// 	return view('user.dashboard')
-	// 		->with('me', $me)
-	// 		->with('tests',$tests)
-	// 		->with('sections', $sections)
-	// 		->with('estudiantes', $students)
-	// 		->with('posts', $post)
-	// 		->with('comments', $comments)
-	// 		->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
-	// 		->with('topics', $topics);
-	// }
 	
 	// Todo lo referente a la evaluacion
 	public function addevaluacion(Request $req)

@@ -35,4 +35,9 @@ class Test extends Model
         return $this->hasMany(Note::class);
     }
 
+    public function students()
+    {
+        return $this->belongsToMany(Student::class);
+    }
+
 }

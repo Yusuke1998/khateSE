@@ -51,7 +51,7 @@
 		{{-- Sidebar --}}
 			
 		<div class="col-md-9 col-sm-12 animated zoomInRight slow">
-			@if(!empty($contentsm) && !empty($contents))
+			@if($contentsm != '' || $contents != '')
 			<div class="card" >
 				@if(count($contents) > 0)
 				<div class="card-body px-5">
@@ -65,10 +65,12 @@
 											<h5 class="mb-2 h5">{{ $c->name }}</h5>
 											<small>{{ $c->created_at->diffForHumans() }}</small>
 										</div>
-										<p class="mb-2 text-truncate content">{{ $c->textcontent }}</p>
-										<div class="d-flex justify-content-end mt-3">
+										<p class="mb-2 content text-truncate">
+											{!! $c->textcontent !!}
+										</p>
+										{{-- <div class="d-flex justify-content-end mt-3">
 											<button data-toggle="modal" data-target="#basicExampleModal" class="btnmodalcontent btn btn-sm cyan lighten-2"><i class="fas fa-search mr-2"></i> Entrar</button>
-										</div>
+										</div> --}}
 									</a>
 								</div>
 							@endforeach
@@ -86,7 +88,7 @@
 								<div class="list-group">
 									<a href="#!" class="mb-5 py-4 list-group-item list-group-item-action flex-column align-items-start">
 										<div class="d-flex w-100 justify-content-between">
-											<h5 class="mb-2 h5">{{ $c->name }}</h5>
+											<h5 class="mb-2 h5" id="topic-mult-title">{{ $c->name }}</h5>
 											<small>{{ $c->created_at->diffForHumans() }}</small>
 										</div>
 										<div class="card mb-3 view zoom hoverable">
@@ -94,10 +96,12 @@
 												<img class="img-fluid" src='{{ asset("storage/$c->file") }}' alt="">
 											</div>
 										</div>
-										<p class="mb-2 text-truncate content">{{ $c->comment }}</p>
-										<div class="d-flex justify-content-end mt-3">
-											<button data-toggle="modal" data-target="#basicExampleModal2" class="btnmodalcontent btn btn-sm cyan lighten-2"><i class="fas fa-search mr-2"></i> Entrar</button>
-										</div>
+										<p id="topic-mult-text" class="mb-2 text-truncate content">
+											{{ $c->comment }}
+										</p>
+										{{-- <div class="d-flex justify-content-end mt-3">
+											<button data-toggle="modal" data-target="#basicExampleModal2" class="btnmodalcontent2 btn btn-sm cyan lighten-2"><i class="fas fa-search mr-2"></i> Entrar</button>
+										</div> --}}
 									</a>
 								</div>
 							@endforeach
@@ -106,8 +110,9 @@
 				@endif
 			</div>
 			@else
-			<p>No hay contenido para mostrar!</p>
+			<p>No hay nada para mostrar!</p>
 			@endif
+
 		</div>
 	</div>
 </div>
@@ -117,15 +122,13 @@
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="modaltitle">Loading...</h5>
+				<h5 class="modal-title" id="modal-title-1">Loading...</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body">
-				
-				<p id="contenido">Loading...</p>
-
+				<p id="modal-content-1">Loading...</p>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-sm cyan lighten-2" data-dismiss="modal">Cerrar</button>
@@ -139,14 +142,14 @@
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="modaltitle">Loading...</h5>
+				<h5 class="modal-title" id="modal-title-2">Loading...</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body">
 				
-				<p id="contenido">Loading...</p>
+				<p id="modal-content-2">Loading...</p>
 
 			</div>
 			<div class="modal-footer">

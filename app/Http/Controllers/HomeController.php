@@ -52,8 +52,6 @@ class HomeController extends Controller
 				$images[] = $contents[$k];
 			}
 
-			dd($files);
-
 			if ( preg_match("/(.mp4)$/", $v->file) ) {
 				$videos[] = $contents[$k];
 			}
@@ -193,18 +191,14 @@ class HomeController extends Controller
 
 	public function topic($topic)
 	{
-		$sections 	= Section::all()->sortByDesc('id');
-		$topicid  	= Topic::where('topic', $topic)->first();
-		$topicid = $topicid->id;
-
-		$contents 	= TextContent::where('topic_id', $topicid)->get();
-		$contentsm 	= Content::where('topic_id', $topicid)->get();
-
+		$topic  	= Topic::where('topic', $topic)->first();
+		$contents 	= TextContent::where('topic_id', $topic->id)->get();
+		$contentsm 	= Content::where('topic_id', $topic->id)->get();
 		$topics   	= Topic::all();
 		$tests	  	= Test::all()->sortByDesc('id');
-
 		$id = Auth::user()->id;
 		$me = User::find($id);
+		$sections 	= Section::all()->sortByDesc('id');
 
 		return view('user.topiccontent')
 				->with('contents', $contents)
@@ -245,6 +239,33 @@ class HomeController extends Controller
 	// 		->with('topics', $topics);
 	// }
 
+	// public function postid($id)
+	// {
+	// 	$sections = Section::all()->sortByDesc('id');
+	// 	$tests = Test::all()->sortByDesc('id');
+	// 	$topics   = Topic::all();
+	// 	$post 	  = Content::find($id);
+	// 	$comments = Comment::all();
+	// 	$students = People::where('type', 'student')->get();
+
+	// 	$id = Auth::user()->id;
+	// 	$me = User::find($id);
+
+	// 	foreach ($post as $p) {
+	// 		dd($p);
+	// 	}
+
+	// 	return view('user.dashboard')
+	// 		->with('me', $me)
+	// 		->with('tests',$tests)
+	// 		->with('sections', $sections)
+	// 		->with('estudiantes', $students)
+	// 		->with('posts', $post)
+	// 		->with('comments', $comments)
+	// 		->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
+	// 		->with('topics', $topics);
+	// }
+	
 	// Todo lo referente a la evaluacion
 	public function addevaluacion(Request $req)
 	{
@@ -327,32 +348,6 @@ class HomeController extends Controller
 	}
 
 
-	public function postid($id)
-	{
-		$sections = Section::all()->sortByDesc('id');
-		$tests = Test::all()->sortByDesc('id');
-		$topics   = Topic::all();
-		$post 	  = Content::find($id);
-		$comments = Comment::all();
-		$students = People::where('type', 'student')->get();
-
-		$id = Auth::user()->id;
-		$me = User::find($id);
-
-		foreach ($post as $p) {
-			dd($p);
-		}
-
-		return view('user.dashboard')
-			->with('me', $me)
-			->with('tests',$tests)
-			->with('sections', $sections)
-			->with('estudiantes', $students)
-			->with('posts', $post)
-			->with('comments', $comments)
-			->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
-			->with('topics', $topics);
-	}
 
 	// Logica del formulario
 	public function publicar(Request $req)

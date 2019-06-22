@@ -12,8 +12,6 @@ $(() => {
 	$('#dtstudents').DataTable();
 	$('.dataTables_length').addClass('mdb-select mdb-form');
 
-
-
 	$('#topicid').change(() => {
 		$('#topicidform').submit()
 	})
@@ -26,11 +24,6 @@ $(() => {
 		$('#clave').attr('type', 'password')
 	})
 
-
-
-
-	
-
 	// eliminar publicacion
 	$('.delpost').click(function(){
 		let postid = $(this)[0].dataset.postid
@@ -38,7 +31,6 @@ $(() => {
 
 		console.log($('#commentid'))
 	})
-
 
 	// editar publiacion
 	$('.editpost').click(function(){
@@ -66,29 +58,26 @@ $(() => {
 		})
 	})
 
-
 	CKEDITOR.replace('publicartext');
 
-
 	$('.img').click(function(e){
-
 		let h = $(this).children()
-
-		console.log(h[1])
-
 		$('#targettitulo').text(h[1].firstElementChild.innerText)
 		$('#targetimg').attr('src', h[0].firstElementChild.src)
 		$('#targettopic').text(h[1].children[1].innerText)
 		$('#targetcontenido').text(h[1].lastElementChild.innerText)
 	})
 
+	// $('.btnmodalcontent').click(function(){
+	// 	let a = $(this).parent().parent()
+	// 	$('#modal-title-1').text(a.children('div.w-100').children('h5').text())
+	// 	$('#modal-content-1').html(a.children('p.content').text())
+	// 	console.log(a.children('p.content').text())
+	// })
 
-	$('.btnmodalcontent').click(function(){
-
-		let a = $(this).parent().parent()
-
-		$('#modaltitle').text(a.children('div.w-100').children('h5').text())
-		$('#contenido').html(a.children('p.content').text())
-	})
+	// $('.btnmodalcontent2').click(function(){
+	// 	$('#modal-title-2').text('Hola Mundo')
+	// 	$('#modal-content-2').html('Hola Mundo')
+	// })
 
 })

@@ -43,7 +43,6 @@ class TestController extends Controller
 		$sections = Section::all()->sortByDesc('id');
 		$id = Auth::user()->id;
 		$me = User::find($id);
-		// $test = Test::find($id_test);
 		$test = Test::where('id',$id_test)->first();
 
 		return view('admin.pregunta')

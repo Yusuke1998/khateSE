@@ -5,7 +5,7 @@
 <div class="container my-5 pt-5 animated fadeIn bg">
 
 	<div class="row">
-
+		{{-- Sidebar --}}
 		<div class="col-md-3 col-sm-12 animated slideInLeft">
 			<div class="row">
 				<div class="col-sm-6 col-md-12">
@@ -48,6 +48,7 @@
 				</div>
 			</div>
 		</div>
+		{{-- Sidebar --}}
 			
 		<div class="col-md-9 col-sm-12 animated zoomInRight slow">
 			@if(!empty($contentsm) && !empty($contents))

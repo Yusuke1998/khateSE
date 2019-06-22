@@ -52,6 +52,8 @@ class HomeController extends Controller
 				$images[] = $contents[$k];
 			}
 
+			dd($files);
+
 			if ( preg_match("/(.mp4)$/", $v->file) ) {
 				$videos[] = $contents[$k];
 			}
@@ -214,6 +216,35 @@ class HomeController extends Controller
 				->with('topics', $topics);
 	}
 
+	// public function topicid(Request $req)
+	// {
+	// 	$sections = Section::all()->sortByDesc('id');
+	// 	$tests = Test::all()->sortByDesc('id');
+	// 	$posttopics = DB::table('posts')
+	// 					->join('people', 'people.id', '=', 'posts.people_id')
+	// 					->join('users', 'people.id', '=', 'users.people_id')
+	// 					->join('topics', 'topics.id', '=', 'posts.topic_id')
+	// 					->select('people.first_name', 'people.last_name', 'people.avatar', 'users.type', 'users.email', 'posts.post', 'posts.id', 'posts.file', 'posts.created_at', 'topics.topic')
+	// 					->where('topic_id', $req->input('topicid'))
+	// 					->get()->sortByDesc('id');
+
+	// 	$topics     = Topic::all();
+
+	// 	$students   = User::where('type', 'Estudiante')->get();
+
+	// 	$id = Auth::user()->id;
+	// 	$me = User::find($id);
+
+	// 	return view('user.dashboard')
+	// 		->with('me', $me)
+	// 		->with('tests',$tests)
+	// 		->with('sections', $sections)
+	// 		->with('estudiantes', $students)
+	// 		->with('posts', $posttopics)
+	// 		->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
+	// 		->with('topics', $topics);
+	// }
+
 	// Todo lo referente a la evaluacion
 	public function addevaluacion(Request $req)
 	{
@@ -234,27 +265,26 @@ class HomeController extends Controller
 		return back()->with('success', 'Se ha registrado la evaluacion');
 	}
 
-	public function addpregunta(Request $req)
-	{
-		dd($req);
-	}
-
-	public function addrespuesta(Request $req)
-	{
-		dd($req);
-	}
 
 	// FUncion que se encarga de insertar el contenido en la db
 	public function addContent(Request $req)
 	{
-		// ini_set('post_max_size', '500M');
+		$data = request()->validate([
+			'name'			=>	'required|min:5',
+			'section_id'	=>	'required',
+			'publicar'		=>	'required|min:10',
+			'file'			=>	'required',
+			'topicid'		=>	'required',
+			'peopleid'		=>	'required'
+		]);
+
 		$post = new Content();
-		$post->name      	= $req->name;
-		$post->section_id   = $req->section_id;
-		$post->comment   	= $req->publicar;
+		$post->name      	= $data['name'];
+		$post->section_id   = $data['section_id'];
+		$post->comment   	= $data['publicar'];
 		$post->file 	 	= $req->file('file')->store('');
-		$post->topic_id  	= $req->topicid;
-		$post->people_id 	= $req->peopleid;
+		$post->topic_id  	= $data['topicid'];
+		$post->people_id 	= $data['peopleid'];
 		$post->save();
 
 		return redirect('home');
@@ -262,12 +292,20 @@ class HomeController extends Controller
 
 	public function addcontenttext(Request $req)
 	{
+		$data = request()->validate([
+			'nametext'		=>	'required|min:5',
+			'section_id'	=>	'required',
+			'publicartext'	=>	'required|min:10',
+			'topicid'		=>	'required',
+			'peopleid'		=>	'required'
+		]);
+
 		$posttext = new TextContent();
-		$posttext->section_id   = $req->section_id;
-		$posttext->name        = $req->nametext;
-		$posttext->textcontent = $req->publicartext;
-		$posttext->topic_id    = $req->topicid;
-		$posttext->people_id   = $req->peopleid;
+		$posttext->section_id   = $data['section_id'];
+		$posttext->name        	= $data['nametext'];
+		$posttext->textcontent 	= $data['publicartext'];
+		$posttext->topic_id    	= $data['topicid'];
+		$posttext->people_id   	= $data['peopleid'];
 		$posttext->save();
 
 		return redirect('home');
@@ -288,34 +326,6 @@ class HomeController extends Controller
 				->with('tests',$tests);
 	}
 
-	public function topicid(Request $req)
-	{
-		$sections = Section::all()->sortByDesc('id');
-		$tests = Test::all()->sortByDesc('id');
-		$posttopics = DB::table('posts')
-						->join('people', 'people.id', '=', 'posts.people_id')
-						->join('users', 'people.id', '=', 'users.people_id')
-						->join('topics', 'topics.id', '=', 'posts.topic_id')
-						->select('people.first_name', 'people.last_name', 'people.avatar', 'users.type', 'users.email', 'posts.post', 'posts.id', 'posts.file', 'posts.created_at', 'topics.topic')
-						->where('topic_id', $req->input('topicid'))
-						->get()->sortByDesc('id');
-
-		$topics     = Topic::all();
-
-		$students   = User::where('type', 'Estudiante')->get();
-
-		$id = Auth::user()->id;
-		$me = User::find($id);
-
-		return view('user.dashboard')
-			->with('me', $me)
-			->with('tests',$tests)
-			->with('sections', $sections)
-			->with('estudiantes', $students)
-			->with('posts', $posttopics)
-			->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
-			->with('topics', $topics);
-	}
 
 	public function postid($id)
 	{
@@ -344,25 +354,18 @@ class HomeController extends Controller
 			->with('topics', $topics);
 	}
 
-	// Solicitudes ajax
-	
-
 	// Logica del formulario
 	public function publicar(Request $req)
 	{
 		$post = new Content();
-
-		if ( $req->file('file') )
+		if ($req->file('file'))
 		{
 			$post->file = $req->file('file')->store('');
 		}
-
 		$post->comment   = $req->publicar;
 		$post->topic_id  = $req->topicid;
 		$post->people_id = $req->peopleid;
-
 		$post->save();
-
 		return redirect('home');
 	}
 
@@ -370,17 +373,14 @@ class HomeController extends Controller
 	{
 		$idpost = $req->input('postid');
 		$post   = Post::find($idpost);
-
 		if ( $req->file('file') )
 		{
 			Storage::delete($post->file);
 			$post->file  = $req->file('file')->store('');
 		}
-
 		$post->post      = $req->input('publicacion');
 		$post->topic_id  = $req->input('topicid');
 		$post->people_id = $req->input('peopleid');
-
 		$post->save();
 
 		return redirect("post/$idpost");
@@ -390,13 +390,10 @@ class HomeController extends Controller
 	{
 		$id   = $req->input('postid');
 		$post = Post::find($id);
-
 		if ( isset($post->file) ) {
 			Storage::delete($post->file);
 		}
-
 		$post->delete();
-
 		return redirect('home')->with('success', 'La publicación se ha eliminado correctamente.');
 	}
 
@@ -405,13 +402,10 @@ class HomeController extends Controller
 	{
 		$peopleid = $req->input('peopleid');
 		$userid   = $req->input('userid');
-
 		$people   = People::find($peopleid);
 		$user     = User::find($userid);
-
 		$people->first_name = $req->input('first_name');
 		$people->last_name  = $req->input('last_name');
-
 		if ( $req->file('file') )
 		{
 			if ( $people->avatar !== 'user.png' )
@@ -420,10 +414,7 @@ class HomeController extends Controller
 			}
 			$people->avatar = $req->file('file')->store('');
 		}
-
 		$user->email = $req->input('email');
-		// $user->type  = $req->input('type')?? $user->type;
-
 		$people->save();
 		$user->save();
 
@@ -432,8 +423,13 @@ class HomeController extends Controller
 
 	public function addtema(Request $req)
 	{
-		$topic = new Topic();
+		$data = request()->validate([
+			'tema'			=>	'required|min:5',
+			'description'	=>	'required|min:10',
+			'topicimg'		=>	'required'
+		]);
 
+		$topic = new Topic();
 		$topic->topic 		= $req->input('tema');
 		$topic->description = $req->input('description');
 		
@@ -450,10 +446,8 @@ class HomeController extends Controller
 	public function addeval(Request $req)
 	{
 		$test = new Test();
-
 		$test->link 	= $req->input('link');
 		$test->topic_id = $req->input('topicid');
-
 		$test->save();
 
 		return back();

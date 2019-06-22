@@ -101,13 +101,13 @@
 
 					<div class="form-group md-form ">
 						<i class="fas fa-book prefix"></i>
-						<input type="text" name="tema" id="tema" class="form-control validate" placeholder="sin espacios entre palabras" required pattern="^[A-Za-z0-9_]+$">
+						<input type="text" name="tema" id="tema" class="form-control validate {{ $errors->has('tema') ? ' is-invalid' : '' }}" placeholder="sin espacios entre palabras" required pattern="^[A-Za-z0-9_]+$">
 						<label for="tema">Tema</label>
 					</div>
 					
 					<div class="form-group md-form my-5">
 						<i class="fas fa-edit prefix"></i>
-						<textarea id="description" name="description" class="md-textarea form-control"></textarea>
+						<textarea id="description" name="description" class="md-textarea form-control {{ $errors->has('description') ? ' is-invalid' : '' }}"></textarea>
 						<label for="description">Descripción del tema</label>
 					</div>
 					
@@ -115,7 +115,7 @@
 						<div class="file-field">
 							<a class="btn-floating aqua-gradient mt-0 float-left">
 								<i class="fas fa-paperclip" aria-hidden="true"></i>
-								<input type="file" name="topicimg" accept="image/*">
+								<input type="file" name="topicimg" accept="image/*" required class="{{ $errors->has('topicimg') ? ' is-invalid' : '' }}">
 							</a>
 							<div class="file-path-wrapper">
 								<input class="file-path validate" type="text" placeholder="Upload your image">
@@ -149,18 +149,18 @@
 
 					<div class="form-group md-form ">
 						<i class="fas fa-book prefix"></i>
-						<input type="text" name="topic" id="tema" class="form-control validate" placeholder="Tema de la evaluación" required>
+						<input type="text" name="topic" id="tema" class="form-control validate {{ $errors->has('topic') ? ' is-invalid' : '' }}" placeholder="Tema de la evaluación" required>
 						<label for="tema">Tema</label>
 					</div>
 					
 					<div class="form-group md-form my-5">
 						<i class="fas fa-edit prefix"></i>
-						<input id="note" type="number" name="note" class="form-control validate">
+						<input id="note" type="number" name="note" class="form-control validate {{ $errors->has('note') ? ' is-invalid' : '' }}">
 						<label for="note">Ponderacion total de la evaluacion</label>
 					</div>
 
 					<div class="col md-form">
-						<select name="section_id" class="mdb-select colorful-select dropdown-primary" id="type" required>
+						<select name="section_id" class="mdb-select colorful-select dropdown-primary {{ $errors->has('section_id') ? ' is-invalid' : '' }}" id="type" required>
 							<option disabled selected>Selecciona la seccion</option>
 							@foreach($sections as $section)
 							<option value="{{ $section->id }}">{{ $section->section }}</option>
@@ -197,12 +197,12 @@
 					<div class="form-row">
 						<div class="col">
 							<label for="name">Nombre</label>
-							<input type="text" name="name" class="form-control" required id="name">
+							<input type="text" name="name" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" required id="name">
 						</div>
 					</div>
 
 					<div class="col md-form">
-						<select name="section_id" class="mdb-select colorful-select dropdown-primary" id="type" required>
+						<select name="section_id" class="mdb-select colorful-select dropdown-primary {{ $errors->has('section_id') ? ' is-invalid' : '' }}" id="type" required>
 							<option disabled selected>Selecciona la seccion</option>
 							@foreach($sections as $section)
 							<option value="{{ $section->id }}">{{ $section->section }}</option>
@@ -213,14 +213,14 @@
 					<div class="form-row my-3">
 						<div class="col">
 							<label for="publicar"><i class="fas fa-edit mr-2"></i>Escribe una descripción</label>
-							<textarea name="publicar" id="publicar" class="form-control" required></textarea>
+							<textarea name="publicar" id="publicar" class="form-control {{ $errors->has('publicar') ? ' is-invalid' : '' }}" required></textarea>
 						</div>
 					</div>
 
 					<div class="form-row">
 						<div class="col">
 							<label class="mdb-main-label">Tema en el cual registrar el contenido</label>
-							<select class="browser-default custom-select" required name="topicid">
+							<select class="browser-default custom-select {{ $errors->has('topicid') ? ' is-invalid' : '' }}" required name="topicid">
 								<option selected disabled>Escoge un tema</option>
 								@foreach( $topics as $t )
 									<option value="{{ $t->id }}">{{ $t->topic }}</option>
@@ -235,7 +235,7 @@
 										<input type="file" name="file">
 									</div>
 									<div class="file-path-wrapper">
-										<input class="file-path validate form" type="text" placeholder="Sube un archivo" required>
+										<input class="file-path validate form {{ $errors->has('file') ? ' is-invalid' : '' }}" type="text" placeholder="Sube un archivo" required>
 									</div> 
 								</div>
 							</div>
@@ -271,10 +271,10 @@
 					<div class="form-row">
 						<div class="col">
 							<label for="name">Nombre</label>
-							<input type="text" name="nametext" class="form-control" required id="name">
+							<input type="text" name="nametext" class="form-control {{ $errors->has('nametext') ? ' is-invalid' : '' }}" required id="name">
 						</div>
 						<div class="col md-form">
-							<select name="section_id" class="mdb-select colorful-select dropdown-primary" id="type" required>
+							<select name="section_id" class="mdb-select {{ $errors->has('section_id') ? ' is-invalid' : '' }} colorful-select dropdown-primary" id="type" required>
 								<option disabled selected>Selecciona la seccion</option>
 								@foreach($sections as $section)
 								<option value="{{ $section->id }}">{{ $section->section }}</option>
@@ -295,7 +295,7 @@
 					<div class="form-row my-3">
 						<div class="col">
 							<label for="publicartext"><i class="fas fa-edit mr-2"></i>Contenido</label>
-							<textarea name="publicartext" id="publicartext" rows="10" class="form-control" required></textarea>
+							<textarea name="publicartext" id="publicartext" rows="10" class="form-control {{ $errors->has('publicartext') ? ' is-invalid' : '' }}" required></textarea>
 						</div>
 					</div>
 
@@ -308,3 +308,31 @@
 		</div>
 	</div>
 </div>
+
+{{-- <div>
+	@foreach($errors->all() as $error)
+		<section class="content-header">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="alert alert-danger alert-dismissible">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							{{$error}}
+						</div>
+					</div>
+				</div>
+		</section>
+	@endforeach
+
+	@if(session('info'))
+		<section class="content-header">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="alert alert-success alert-dismissible">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							{{ session('info') }}
+						</div>
+					</div>
+				</div>
+		</section>
+	@endif
+</div> --}}

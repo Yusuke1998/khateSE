@@ -3,9 +3,7 @@
 
 <br>
 <div class="container my-5 pt-5 animated fadeIn bg">
-
 	<div class="row">
-
 		<div class="col-md-3 col-sm-12 animated slideInLeft">
 			<div class="row">
 				<div class="col-sm-6 col-md-12">
@@ -91,7 +89,7 @@
 								<div class="card mb-3 hoverable">
 									<div class="card-body">
 										<h4 class="card-title">{{ $t->name }}</h4>
-										<p class="card-text">{{!! $t->textcontent !!}}</p>
+										<p class="card-text">{!! $t->textcontent !!}</p>
 									</div>
 								</div>
 							@endforeach
@@ -178,7 +176,7 @@
 												<p class="card-text">{{ $content->comment }}</p>
 											</div>
 											<div class="card-footer">
-										    	<small class="text-muted">{{ $carbon->diffForHumans($content->created_at) }}</small>
+										    	<small class="text-muted">{{ $content->created_at->diffForHumans() }}</small>
 											</div>
 
 										</div>
@@ -226,19 +224,8 @@
 
 			</div>
 			<!-- Classic tabs -->
-
-
-
-
-
-
-
-
-			
-			
 		</div>
 	</div>
 </div>
-
 
 @include('layouts.footer')

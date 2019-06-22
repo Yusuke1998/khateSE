@@ -110,7 +110,7 @@
 								<td class="text-center">{{ $total_evl }}pts</td>
 								<td class="text-center">TOTAL OBTENIDO</td>
 								<td class="text-center">{{ $total_pts }}pts</td>
-								<td>{{ ($aprobado)?'Aprobado':'Reprobado' }}</td>
+								<td>{{ $aprobado }}</td>
 							</tr>
 						</tfoot>
 					</table>
@@ -122,6 +122,4 @@
 		</div>
 	</div>
 </div>
-
-
 @include('layouts.footer')

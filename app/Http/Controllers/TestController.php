@@ -77,8 +77,7 @@ class TestController extends Controller
 		$test = Test::where('id',$id_test)->first();
 		$total_evl = $test->questions->sum('value');
 		$total_pts = 0;
-		// Kamila 55
-		// Kathe  80
+
 		// test/questions/ansrers/notas
 		foreach ($test->questions as $question) {
 			if ($question->answers) {
@@ -90,17 +89,14 @@ class TestController extends Controller
 			}
 		}
 
-		// $total_pts = $test->questions[3]->answers->first()->notes->sum('note');
-		
-		// $total_pts = $me->people->student->tests->find($test->id)->notes->sum('note');
-		// dd($total_pts);
-
-
-		// $total_pts = 0;
 		if($total_pts >= ($total_evl/2)){
-			$aprobado = true;
+			$aprobado = 'Aprobado';
 		}else{
-			$aprobado = false;
+			$aprobado = 'Reprobado';
+		}
+
+		if ($total_pts == 0) {
+			$aprobado = 'Sin nota';
 		}
 
 		return view('user.evaluacion')

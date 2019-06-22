@@ -15,8 +15,13 @@ class Question extends Model
     	return $this->belongsTo(Test::class);
     }
 
+    // public function answer()
+    // {
+    // 	return $this->hasOne(Answer::class);
+    // }
+
     public function answers()
     {
-    	return $this->hasMany(Answer::class);
+        return $this->hasMany(Answer::class);
     }
 }

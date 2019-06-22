@@ -72,28 +72,19 @@
 							<tr>
 								<td>{{ $question->text }}</td>
 								<td>{{ $question->value }}</td>
-								@if($respuesta = $question->answer)
 								<td>
-									{{-- 
-									--}}
-									{{-- @if($respuesta->people_id == $me->people->id) --}}
-									{{-- @if($respuesta
-										->where('people_id',$me->people->id)
-										->where('test_id',$test->id)
-										->where('question_id',$question->id)) --}}
-									@if($question->answer->people->id == $me->people->id)
-
-									<?php $respondida = true;?>
-									<span class="bg p-1 bg-success">Respondida</span>
-									@else
-									<span class="bg p-1 bg-warning">Sin responder</span>
+									@if($question->answers)
+										@foreach($question->answers as $answer)
+											@if($me->people->id === $answer->people_id)
+												<?php $respondida = true;?>
+												<span class="bg p-1 bg-success">Respondida</span>
+											@endif
+										@endforeach
+									@endif
+									@if(!$respondida)
+										<span class="bg p-1 bg-warning">Sin responder</span>
 									@endif
 								</td>
-								@else
-								<td>
-									<span class="bg p-1 bg-warning">Sin responder</span>
-								</td>
-								@endif
 								<td>
 									<a href="{{ (!$respondida)?route('respuesta',[$test->id,$question->id]):'#'}}" title="Responder" onclick="{{ (!$respondida)?route('respuesta',[$test->id,$question->id]):'alert(\'Ya respondiste!\')'}}">Responder</a>
 								</td>

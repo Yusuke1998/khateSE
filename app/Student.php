@@ -22,7 +22,12 @@ class Student extends Model
 
     public function answer()
     {
-        return $this->hasOne('App\Answer');
+        return $this->hasOne(Answer::class);
+    }
+
+    public function question()
+    {
+        return $this->hasOne(Question::class);
     }
 
 }

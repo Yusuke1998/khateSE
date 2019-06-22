@@ -110,8 +110,6 @@ class TestController extends Controller
     		'test_id'		=>	'required'
 		]);
 
-		$estudiante = Student::where('people_id',$data['people_id'])->first();
-
 		$respuesta = Answer::create([
     		'text'			=>	$data['text'],
     		'people_id'		=>	$data['people_id'],
@@ -119,20 +117,6 @@ class TestController extends Controller
     		'test_id'		=>	$data['test_id'],
     		'student_id'	=>	$data['student_id']
 		]);
-
-		/**
-
-		$estudiante->answers()->attach($respuesta->id);
-		$estudiante->questions()->attach($data['question_id']);
-
-		$test = false;
-
-		if (!$test) {
-			$estudiante->tests()->attach($data['test_id']);
-			$test = true;
-		}
-
-		**/
 
 		return redirect(route('estudiante.evaluacion',$respuesta->test_id));
 	}

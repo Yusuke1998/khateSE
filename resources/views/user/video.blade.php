@@ -3,9 +3,7 @@
 
 <br>
 <div class="container my-5 pt-5 animated fadeIn bg">
-
 	<div class="row">
-
 		<div class="col-lg-3 col-sm-12 animated slideInLeft">
 			<div class="row">
 				<div class="col-sm-6 col-lg-12">
@@ -50,24 +48,30 @@
 		</div>
 			
 		<div class="col-lg-9 col-sm-12">
-				
+			@include('layouts.info')
 			<div class="row">
-				
 				<div class="col-12">
-					
-					@foreach($videos as $v)	
-						<div class="card animated slow wow zoomIn mb-4">
-							<div class="card-body">
-								<div class="embed-responsive embed-responsive-16by9">
-									<video controls src="{{ asset('storage/v2.mp4') }}"></video>
+					@if(count($videos) > 0)
+						@foreach($videos as $v)	
+							<div class="card animated slow wow zoomIn mb-4">
+								<div class="card-body">
+									<div class="embed-responsive embed-responsive-16by9">
+										<video controls src="{{ asset('storage/v2.mp4') }}"></video>
+									</div>
+								</div>
+								<div class="card-footer">
+									<p class="h4">{{ $v->name }}</p>
+									<p class="text-monospace">{{ $v->comment }}</p>
 								</div>
 							</div>
-							<div class="card-footer">
-								<p class="h4">{{ $v->name }}</p>
-								<p class="text-monospace">{{ $v->comment }}</p>
+						@endforeach
+					@else
+						<div class="card animated slow wow zoomIn mb-4">
+							<div class="card-body">
+								<p class="text-center h5">No hay videos para mostrar!</p>
 							</div>
 						</div>
-					@endforeach
+					@endif
 				</div>
 				
 			</div>
@@ -75,6 +79,5 @@
 		</div>
 	</div>
 </div>
-
 
 @include('layouts.footer')

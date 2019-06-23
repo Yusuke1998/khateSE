@@ -50,7 +50,7 @@
 		</div>
 			
 		<div class="col-md-9 col-sm-12 animated slideInRight">
-			<!-- <div class="card-columns cardcolumns "> -->
+			@include('layouts.info')
 			<div class="card" >
 				<div class="card-body">
 

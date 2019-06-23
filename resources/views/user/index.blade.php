@@ -50,15 +50,12 @@
 		</div>
 			
 		<div class="col-md-9 col-sm-12 animated zoomInRight slow">
+			@include('layouts.info')
 			<div class="card">
 				<div class="card-body px-5">
-
 					@if( count($topics) > 0 )
-
 						<h2 class="text-center mb-5 font-weight-light animated rollIn delay-1s">Seleciona un tema para empezar</h2>
-
 						<div class="row">
-							
 							@foreach($topics as $t)	
 								<!-- Card -->
 								<div class="card col-md-4 col-sm-3 mb-4 hoverable">

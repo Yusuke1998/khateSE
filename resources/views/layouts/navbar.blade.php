@@ -24,15 +24,22 @@
 				<li class="nav-item">
 					<a class="nav-link" href="{{ url('videos') }}"><i class="fas fa-chart-line mr-2"></i>Vídeos</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="{{ url('pruebas') }}"><i class="fas fa-chart-line mr-2"></i>Pruebas</a>
-				</li>
+
+				{{-- 
+					<li class="nav-item">
+						<a class="nav-link" href="{{ url('pruebas') }}"><i class="fas fa-chart-line mr-2"></i>Pruebas</a>
+					</li> 
+				--}}
+
 				<li class="nav-item">
 					<a class="nav-link" href="{{ url('evaluaciones') }}"><i class="fas fa-chart-line mr-2"></i>Evaluaciones</a>
 				</li>
 			@else
 				<li class="nav-item">
 					<a class="nav-link" href="{{ url('estudiantes') }}"><i class="fas fa-bolt mr-2"></i>Estudiantes</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" data-toggle="modal" href="#seccionnueva"><i class="fas fa-plus mr-2"></i>Añadir seccion</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" data-toggle="modal" href="#temanuevo"><i class="fas fa-plus mr-2"></i>Añadir tema</a>
@@ -43,7 +50,7 @@
 
 				<!-- Dropdown -->
 				<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-bolt"></i> Añadir contenido</a>
+					<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-plus"></i> Añadir contenido</a>
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
 						<a class="dropdown-item" data-toggle="modal" href="#addcontent">
 							<i class="fas fa-image mr-2"></i>Contenido Multimedia
@@ -123,6 +130,34 @@
 						</div>
 					</div>
 
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn-md btn red lighten-1" data-dismiss="modal"><i class="fas fa-times mr-2"></i>Cerrar</button>
+					<button type="submit" class="btn-md btn cyan lighten-2"><i class="fas fa-save mr-2"></i>Guardar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- Modal añadir seccion-->
+<div class="modal fade" id="seccionnueva" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Añadir seccion</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form action="{{ url('addseccion') }}" method="post">
+				@csrf
+				<div class="modal-body">
+					<div class="form-group md-form ">
+						<i class="fas fa-book prefix"></i>
+						<input type="text" name="section" id="section" class="form-control validate {{ $errors->has('section') ? ' is-invalid' : '' }}" placeholder="Nombre de la seccion" required pattern="^[A-Za-z0-9_]+$">
+						<label for="section">Seccion</label>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn-md btn red lighten-1" data-dismiss="modal"><i class="fas fa-times mr-2"></i>Cerrar</button>
@@ -308,31 +343,3 @@
 		</div>
 	</div>
 </div>
-
-{{-- <div>
-	@foreach($errors->all() as $error)
-		<section class="content-header">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="alert alert-danger alert-dismissible">
-							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-							{{$error}}
-						</div>
-					</div>
-				</div>
-		</section>
-	@endforeach
-
-	@if(session('info'))
-		<section class="content-header">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="alert alert-success alert-dismissible">
-							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-							{{ session('info') }}
-						</div>
-					</div>
-				</div>
-		</section>
-	@endif
-</div> --}}

@@ -124,8 +124,6 @@ class HomeController extends Controller
 				$images[] = $contents[$k];
 			}
 		}
-
-
 		return view('user.images')
 				->with('contents', $images)
 				->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
@@ -227,7 +225,7 @@ class HomeController extends Controller
 			'section_id'	=>	$data['section_id']
 		]);
 
-		return back()->with('success', 'Se ha registrado la evaluacion');
+		return back()->with('info', 'Se ha registrado la evaluacion');
 	}
 
 
@@ -252,7 +250,7 @@ class HomeController extends Controller
 		$post->people_id 	= $data['peopleid'];
 		$post->save();
 
-		return redirect('home');
+		return back()->with('info','Contenido multimedia creado exitosamente!');
 	}
 
 	public function addcontenttext(Request $req)
@@ -273,7 +271,7 @@ class HomeController extends Controller
 		$posttext->people_id   	= $data['peopleid'];
 		$posttext->save();
 
-		return redirect('home');
+		return back()->with('info','Contenido de texto creado exitosamente!');
 	}
 
 	public function profile()
@@ -289,51 +287,6 @@ class HomeController extends Controller
 				->with('sections', $sections)
 				->with('me', $me)
 				->with('tests',$tests);
-	}
-
-
-
-	// Logica del formulario
-	public function publicar(Request $req)
-	{
-		$post = new Content();
-		if ($req->file('file'))
-		{
-			$post->file = $req->file('file')->store('');
-		}
-		$post->comment   = $req->publicar;
-		$post->topic_id  = $req->topicid;
-		$post->people_id = $req->peopleid;
-		$post->save();
-		return redirect('home');
-	}
-
-	public function editarpublicacion(Request $req)
-	{
-		$idpost = $req->input('postid');
-		$post   = Post::find($idpost);
-		if ( $req->file('file') )
-		{
-			Storage::delete($post->file);
-			$post->file  = $req->file('file')->store('');
-		}
-		$post->post      = $req->input('publicacion');
-		$post->topic_id  = $req->input('topicid');
-		$post->people_id = $req->input('peopleid');
-		$post->save();
-
-		return redirect("post/$idpost");
-	}
-
-	public function eliminarpost(Request $req)
-	{
-		$id   = $req->input('postid');
-		$post = Post::find($id);
-		if ( isset($post->file) ) {
-			Storage::delete($post->file);
-		}
-		$post->delete();
-		return redirect('home')->with('success', 'La publicación se ha eliminado correctamente.');
 	}
 
 	// Editar perfil
@@ -357,7 +310,7 @@ class HomeController extends Controller
 		$people->save();
 		$user->save();
 
-		return redirect('profile')->with('success', 'Perfil editado satisfactoriamente.');
+		return redirect('profile')->with('info', 'Perfil editado satisfactoriamente.');
 	}
 
 	public function addtema(Request $req)
@@ -379,16 +332,29 @@ class HomeController extends Controller
 
 		$topic->save();
 
-		return back()->with('success', 'Se ha registrado el tema');
+		return back()->with('info', 'Se ha registrado el tema');
 	}
 
+	public function addseccion(Request $req)
+	{
+		$data = request()->validate([
+			'section'	=>	'required|min:1',
+		]);
+
+		$secction = new Section();
+		$secction->section 	= $data['section'];
+		$secction->save();
+
+		return back()->with('info', 'Se ha registrado la seccion');
+	}
+
+	// Sin uso D:
 	public function addeval(Request $req)
 	{
 		$test = new Test();
 		$test->link 	= $req->input('link');
 		$test->topic_id = $req->input('topicid');
 		$test->save();
-
 		return back();
 	}
 

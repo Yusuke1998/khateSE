@@ -51,6 +51,7 @@
 		{{-- Sidebar --}}
 			
 		<div class="col-md-9 col-sm-12 animated zoomInRight slow">
+			@include('layouts.info')
 			@if($contentsm != '' || $contents != '')
 			<div class="card" >
 				@if(count($contents) > 0)

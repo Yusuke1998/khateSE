@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use App\User;
-// Route::view('/', 'inicio');
+
 Route::get('/','HomeController@inicio');
 Auth::routes();
 Route::post('publicar', 'HomeController@publicar');
@@ -12,6 +12,7 @@ Route::post('eliminarpost', 'HomeController@eliminarpost');
 Route::post('editarperfil', 'HomeController@editarperfil');
 Route::get('profile', 'HomeController@profile');
 Route::get('post/{id}', 'HomeController@postid')->where('id', '^[\d]+$');
+Route::post('addseccion', 'HomeController@addseccion');
 Route::post('addtema', 'HomeController@addtema');
 Route::post('addevaluacion', 'HomeController@addevaluacion');
 Route::post('addpregunta', 'HomeController@addpregunta');

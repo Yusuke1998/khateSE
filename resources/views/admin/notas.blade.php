@@ -50,6 +50,7 @@
 		</div>
 			
 		<div class="col-md-9 col-sm-12 animated slideInRight">
+			@include('layouts.info')
 			<div class="card" >
 				<div class="card-header">
 					<p class="pull-left">Estudiante: {{ $people->first_name }} {{ $people->last_name }}</p>

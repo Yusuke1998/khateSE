@@ -12,7 +12,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('email')->unique();
             $table->string('password');
-            $table->enum('type', ['teacher', 'student']);
+            $table->enum('type', ['teacher', 'student', 'admin']);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->unsignedInteger('people_id');

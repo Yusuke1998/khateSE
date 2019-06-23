@@ -6,15 +6,12 @@
 	<link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
-
 	<div class="card card-image" style="background: linear-gradient(#C7F9FF, #DCEFFF)">
 		<div class="py-5 px-4 my-5 container">
 			<div class="row">
-
 				<div class="col animated slideInLeft white-text delay-1s d-flex align-items-center">
 					<div>
 						<h1 style="color: #3C3533; font-size: 45px;" class="font-weight-bold text-center animated zoomIn delay-2s">Software Educativo (Redes)</h1>
-
 						<hr class="my-4">
 						<div class="d-flex justify-content-center mt-5 animated zoomIn delay-2s">
 							<button class="btn btn-md cyan lighten-2" data-toggle="modal" href="#register">
@@ -25,7 +22,6 @@
 				</div>
 
 				<div class="col-1"></div>
-
 				<div class="col animated slideInRight">
 					<div class="card opacity">
 						<h3 style="color: #3C3533;" class="card-header cyan lighten-3 text-center py-4">
@@ -38,7 +34,7 @@
 								<div class="form-row">
 									<div class="col md-form">
 										<i class="fas fa-envelope prefix"></i>
-										<input type="email" name="email" id="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }} validate" value="{{ old('email') }}" required>
+										<input type="email" autofocus="true" name="email" id="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }} validate" value="{{ old('email') }}" required>
 										<label for="email">Correo Electrónico</label>
 										@if ($errors->has('email'))
 											<span class="invalid-feedback" role="alert">
@@ -47,11 +43,10 @@
 										@endif
 									</div>
 								</div>
-
 								<div class="form-row">
 									<div class="col md-form">
 										<i class="fas fa-key prefix"></i>
-										<input type="password" name="password" id="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" required>
+										<input type="password" autofocus="true" name="password" id="password" class="form-control {{ $errors->has('password') ? ' is-invalid' : '' }}" required>
 										<label for="password">Contraseña</label>
 										@if ($errors->has('password'))
 											<span class="invalid-feedback" role="alert">
@@ -60,7 +55,6 @@
 										@endif
 									</div>
 								</div>
-
 								<div class="d-flex justify-content-around mt-4">
 									<div>
 										<div class="form-check">
@@ -72,27 +66,21 @@
 										<a href="{{ route('password.request') }}">¿Olvidó su contraseña?</a>
 									</div>
 								</div>
-
 								<div class="mt-5 text-center">
 									<button class="btn cyan lighten-2" type="submit"><i class="fas fa-sign-in-alt mr-2"></i>Entrar</button>
 								</div>
 							</form>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>
 	</div>
 
-
 	<div class="container my-5">
-
 		<!-- Intro de la herramienta -->
-
 		<h2 class="text-center mt-5 wow fadeInDownBig">¿Estas listo? ¡Empieza ya!</h2>
 		<hr class="w-25 mb-5">
-
 		<!-- Row 1 -->
 		<div class="row">
 			<div class="col-6">
@@ -184,28 +172,13 @@
 				<img src="{{ asset('images/form_1.png') }}" alt="404" class="img-dimentions img-fluid img-thumbnail">
 			</div>
 		</div>
-
 		<hr class="my-5">
-
 		<!-- Fin de la intro -->
-
-
 		<h2 class="text-center mt-5 wow fadeInDownBig">Nuestros estudiantes</h2>
 		<hr class="w-25 mb-5">
-
-
 		<div class="my-5 py-2 wow fadeInUpBig">
-
 			<!--Carousel Wrapper-->
 			<div id="multi-item-example" class="carousel slide carousel-multi-item" data-ride="carousel">
-
-				<!--Controls-->
-				{{-- <div class="controls-top">
-					<a class="btn-floating" href="#multi-item-example" data-slide="prev"><i class="fa fa-chevron-left"></i></a>
-					<a class="btn-floating" href="#multi-item-example" data-slide="next"><i class="fa fa-chevron-right"></i></a>
-				</div> --}}
-				<!--/.Controls-->
-
 				<!--Indicators-->
 				<ol class="carousel-indicators">
 					<li data-target="#multi-item-example" data-slide-to="0" class="active"></li>
@@ -213,13 +186,10 @@
 					<li data-target="#multi-item-example" data-slide-to="2"></li>
 				</ol>
 				<!--/.Indicators-->
-
 				<!--Slides-->
 				<div class="carousel-inner" role="listbox">
-
 					<!--First slide-->
 					<div class="carousel-item active">
-
 						<div class="col-md-4">
 							<div class="card testimonial-card mr-5 hoverable">
 								<div class="card-up indigo lighten-1"></div>
@@ -233,7 +203,6 @@
 								</div>
 							</div>
 						</div>
-
 						<div class="col-md-4 clearfix d-none d-md-block">
 							<div class="card testimonial-card mr-5 hoverable">
 								<div class="card-up indigo lighten-1"></div>
@@ -247,7 +216,6 @@
 								</div>
 							</div>
 						</div>
-
 						<div class="col-md-4 clearfix d-none d-md-block">
 							<div class="card testimonial-card mr-5 hoverable">
 								<div class="card-up indigo lighten-1"></div>
@@ -261,13 +229,10 @@
 								</div>
 							</div>
 						</div>
-
 					</div>
 					<!--/.First slide-->
-
 					<!--Second slide-->
 					<div class="carousel-item">
-
 						<div class="col-md-4">
 							<div class="card testimonial-card mr-5 hoverable">
 								<div class="card-up indigo lighten-1"></div>
@@ -281,7 +246,6 @@
 								</div>
 							</div>
 						</div>
-
 						<div class="col-md-4 clearfix d-none d-md-block">
 							<div class="card testimonial-card mr-5 hoverable">
 								<div class="card-up indigo lighten-1"></div>
@@ -295,7 +259,6 @@
 								</div>
 							</div>
 						</div>
-
 						<div class="col-md-4 clearfix d-none d-md-block">
 							<div class="card testimonial-card mr-5 hoverable">
 								<div class="card-up indigo lighten-1"></div>
@@ -309,13 +272,10 @@
 								</div>
 							</div>
 						</div>
-
 					</div>
 					<!--/.Second slide-->
-
 					<!--Third slide-->
 					<div class="carousel-item">
-
 						<div class="col-md-4">
 							<div class="card testimonial-card mr-5 hoverable">
 								<div class="card-up indigo lighten-1"></div>
@@ -329,7 +289,6 @@
 								</div>
 							</div>
 						</div>
-
 						<div class="col-md-4 clearfix d-none d-md-block">
 							<div class="card testimonial-card mr-5 hoverable">
 								<div class="card-up indigo lighten-1"></div>
@@ -343,7 +302,6 @@
 								</div>
 							</div>
 						</div>
-
 						<div class="col-md-4 clearfix d-none d-md-block">
 							<div class="card testimonial-card mr-5 hoverable">
 								<div class="card-up indigo lighten-1"></div>
@@ -357,98 +315,30 @@
 								</div>
 							</div>
 						</div>
-
 					</div>
 					<!--/.Third slide-->
-
 				</div>
 				<!--/.Slides-->
-
 			</div>
 			<!--/.Carousel Wrapper-->
-
 		</div>
-
 	</div>
-
 	<footer class="page-footer font-small stylish-color-dark pt-4 wow fadeIn">
-
 		<div class="container-fluid text-center text-md-left ">
-
-
-
 			<!-- Grid row -->
 			<div class="row">
-
 				<!-- Grid column -->
-				<div class="col-md-4 mx-auto">
-
+				<div class="col text-center mx-auto">
 					<!-- Content -->
-					<h5 class="font-weight-bold text-uppercase mt-3 mb-4">Software Educativo</h5>
-					<p>Here you can use rows and columns here to organize your footer content. Lorem ipsum dolor sit amet, consectetur
-					adipisicing elit.</p>
-
+					<h5 class="font-weight-bold text-uppercase mt-3 mb-4">
+						Software Educativo
+					</h5>
+					<p>Desarrollado para compartir e impartir conocimiento entorno al estudio de las redes y telecomucicaciones.</p>
 				</div>
 				<!-- Grid column -->
-
 				<hr class="clearfix w-100 d-md-none">
-
-				<!-- Grid column -->
-				<div class="col-md-2 mx-auto">
-
-					<!-- Links -->
-					<h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
-
-					<ul class="list-unstyled">
-						<li>
-							<a href="#!">Link 1</a>
-						</li>
-						<li>
-							<a href="#!">Link 2</a>
-						</li>
-						<li>
-							<a href="#!">Link 3</a>
-						</li>
-						<li>
-							<a href="#!">Link 4</a>
-						</li>
-					</ul>
-
-				</div>
-				<!-- Grid column -->
-
-				<hr class="clearfix w-100 d-md-none">
-
-				<!-- Grid column -->
-				<div class="col-md-2 mx-auto">
-
-					<!-- Links -->
-					<h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
-
-					<ul class="list-unstyled">
-						<li>
-							<a href="#!">Link 1</a>
-						</li>
-						<li>
-							<a href="#!">Link 2</a>
-						</li>
-						<li>
-							<a href="#!">Link 3</a>
-						</li>
-						<li>
-							<a href="#!">Link 4</a>
-						</li>
-					</ul>
-
-				</div>
-				<!-- Grid column -->
-
 			</div>
 			<!-- Grid row -->
-
-
-
-
 			<hr>
 			<!-- Call to action -->
 			<ul class="list-unstyled list-inline text-center py-2">
@@ -458,11 +348,9 @@
 			</ul>
 			<!-- Call to action -->
 		</div>
-
 		<div class="footer-copyright text-center py-3">© 2018 Copyright:
 			<a href="https://mdbootstrap.com/education/bootstrap/"> MDBootstrap.com</a>
 		</div>
-
 	</footer>
 
 	{{-- MODAL REGISTRO --}}
@@ -551,7 +439,6 @@
 								<label for="passw">Repita Contraseña</label>
 							</div>
 						</div>
-
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-md cyan" data-dismiss="modal">Cerrar</button>
@@ -566,12 +453,6 @@
 	
 	<script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
 	<script src="{{ asset('js/mdb.min.js') }}"></script>
-	<script>
-		$('document').ready(function(){
-			$('#email').focus();
-			$('#password').focus();
-		});
-	</script>
 	<script src="{{ asset('js/scripts.js') }}"></script>
 </body>
 </html>

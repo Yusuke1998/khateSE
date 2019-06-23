@@ -65,7 +65,7 @@ class TestController extends Controller
     		'value'		=>	$data['value'],
     		'test_id'	=>	$data['test_id']
 		]);
-		return redirect(route('evaluacion.ver',$pregunta->test_id));
+		return redirect(route('evaluacion.ver',$pregunta->test_id))->with('info','Pregunta registrada exitosamente!');
 	}
 
 	public function evaluacion_estudiante($id_test)
@@ -147,7 +147,7 @@ class TestController extends Controller
     		'student_id'	=>	$data['student_id']
 		]);
 
-		return redirect(route('estudiante.evaluacion',$respuesta->test_id));
+		return redirect(route('estudiante.evaluacion',$respuesta->test_id))->with('info','Respuesta registrada exitosamente!');
 	}
 
 	public function nota($people,$test,$question,$answer)
@@ -174,6 +174,12 @@ class TestController extends Controller
     		'test_id'		=>	'required',
 			'note'			=>	'required'
 		]);
+		$pregunta_valor = Question::find($data['question_id'])->value;
+		$nota_valor = $data['note'];
+
+		if ($nota_valor > $pregunta_valor) {
+			return back()->with('info','La nota sobrepasa la ponderacion de la pregunta!');
+		}
 
 		$nota = Note::create([
 			'people_id'		=>	$data['people_id'],
@@ -182,7 +188,8 @@ class TestController extends Controller
     		'test_id'		=>	$data['test_id'],
 			'note'			=>	$data['note']
 		]);
+
 		$usuario = User::where('people_id',$data['people_id'])->first();
-		return redirect(route('historial',$usuario->id));
+		return redirect(route('historial',$usuario->id))->with('info','La nota fue asignada con exito!');
 	}
 }

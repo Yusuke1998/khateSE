@@ -2,13 +2,10 @@
 @include('layouts.navbar')
 
 <div class="container animated fadeIn mt-5 py-5 bg">
-
 	<div class="row">
-
 		<div class="col-4">
 			<div class="row">
 				<div class="col-12 mb-3">
-
 					<div class="card testimonial-card">
 						<div class="card-up cyan lighten-3"></div>
 						<div class="avatar mx-auto white">
@@ -34,10 +31,9 @@
 		</div>
 
 		<div class="col-8">
-
 			<div class="row">
 				<div class="col">
-
+					@include('layouts.info')
 					<div class="card">
 						<div class="card-header cyan lighten-3 dark-text">
 							<h3 class="d-flex justify-content-between align-items-center">

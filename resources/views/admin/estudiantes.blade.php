@@ -3,9 +3,7 @@
 
 <br>
 <div class="container my-5 pt-5 animated fadeIn bg">
-
 	<div class="row">
-
 		<div class="col-md-3 col-sm-12 animated slideInLeft">
 			<div class="row">
 				<div class="col-sm-6 col-md-12">
@@ -50,6 +48,7 @@
 		</div>
 			
 		<div class="col-md-9 col-sm-12 animated slideInRight">
+			@include('layouts.info')
 			<div class="card" >
 				<div class="card-body">
 					<h6 class="mb-4 text-right"><i class="fas fa-group mr-2"></i>Hay {{ $cantidad = count($contents) }} {{ ($cantidad>1)?'estudiantes registrados':'estudiante registrado' }}</h6>

@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon as BaseCarbon;
 use Barryvdh\DomPDF\Facade as PDF;
-
 use App\Content;
 use App\Topic;
 use App\People;
@@ -177,7 +176,9 @@ class HomeController extends Controller
 		$sections = Section::all()->sortByDesc('id');
 		$id = Auth::user()->id;
 		$me = User::find($id);
-		$tests 	  = Test::where('section_id',$me->people->student->section->id)->get();
+		$secction = $me->people->student->section->id;
+		$tests 	  = Test::where('section_id',$secction)
+		->get();
 
 		return view('user.evaluaciones')
 				->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
@@ -367,6 +368,8 @@ class HomeController extends Controller
 		$estudiante 	= User::where('id', $id_student)->first();
 		$id = Auth::user()->id;
 		$me = User::find($id);
+
+		// dd(\MyHelper::estudianteTestTotal(4));
 
 		return view('admin.historial')
 				->with('contents', $estudiantes)

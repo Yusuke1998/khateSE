@@ -61,16 +61,21 @@
 									<th align="center">Ponderacion</th>
 									<th align="center">Preguntas</th>
 									<th align="center">Seccion</th>
+									<th align="center">Nota</th>
 									<th align="center">Accion</th>
 								</tr>
 							</thead>
 							<tbody>
+								<?php $total_pts=0; ?>
 								@foreach($tests as $test)
 								<tr>
-									<td>{{ $test->topic }}</td>
+									<td align="left">{{ $test->topic }}</td>
 									<td align="center">{{ $test->note }}</td>
 									<td align="center">{{ $test->questions->count() }}</td>
 									<td align="center">{{ $test->section->section }}</td>
+									<td align="center">
+										{{ MyHelper::notaTotal($test->id,$me->people->id) }}
+									</td>
 									<td align="center">
 										<div class="btn-group">
 										<a class="btn btn-sm btn-flat btn-info" href="{{ route('estudiante.evaluacion',$test->id) }}" title="">Ver</a>

@@ -76,18 +76,7 @@ class TestController extends Controller
 		$me = User::find($id);
 		$test = Test::where('id',$id_test)->first();
 		$total_evl = $test->questions->sum('value');
-		$total_pts = 0;
-
-		// test/questions/ansrers/notas
-		foreach ($test->questions as $question) {
-			if ($question->answers) {
-				foreach ($question->answers as $answer) {
-					if ($answer->people_id === $me->people->id) {
-						$total_pts += $answer->notes->sum('note');
-					}
-				}
-			}
-		}
+		$total_pts = \MyHelper::notaTotal($id_test,$me->people->id);
 
 		if($total_pts >= ($total_evl/2)){
 			$aprobado = 'Aprobado';

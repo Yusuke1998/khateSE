@@ -67,11 +67,6 @@ class TestController extends Controller
 
 		$en = Test::where('id',$data['test_id'])->first()->note;
 		$pv = $data['value'];
-
-		if ($pv>$en) {
-			return back()->with('info','El valor de la pregunta supera la ponderacion maxima de la evaluacion!');
-		}
-
 		$ep = Test::where('id',$data['test_id'])->first()->questions->sum('value');
 
 		if ($ep === 0) {
@@ -80,9 +75,12 @@ class TestController extends Controller
 	    		'value'		=>	$data['value'],
 	    		'test_id'	=>	$data['test_id']
 			]);
+			return redirect(route('evaluacion.ver',$pregunta->test_id))->with('info','Pregunta registrada exitosamente!');
 		}
 
-		$ep = Test::where('id',$data['test_id'])->first()->questions->sum('value');
+		if ($pv>$en) {
+			return back()->with('info','El valor de la pregunta supera la ponderacion maxima de la evaluacion!');
+		}
 
 		if (($pv+$ep)>$en) {
 			return back()->with('info','El valor de la pregunta supera la cantidad restante!');

@@ -73,18 +73,9 @@
 								<td>{{ $answer->test->topic }}</td>
 								<td>{{ $answer->question->text }}</td>
 								<td>{{ $answer->text }}</td>
-								<?php $tieneNota = false;?>
-								<?php $nota = '00';?>
 								<td>
-									@if($answer->notes)
-										@foreach($answer->notes as $note)
-											@if($note->people_id == $answer->people_id)
-												<?php $tieneNota = true;?>
-												<?php $nota = $note->note;?>
-											@endif
-										@endforeach
-									@endif
-									<span class="p-1 bg-{{ ($tieneNota)?'success':'warning' }}">{{ $nota }}</span>
+									<?php $nota = MyHelper::notaTotalRespuesta($answer->id,$answer->people_id) ?>
+									<span class="p-1 bg-{{ ($nota!='00')?'success':'warning' }}">{{ $nota }}</span>									
 								</td>
 								<td>
 									<div class="btn-group">
@@ -92,7 +83,12 @@
 										<?php $test 	= $answer->test_id;?>
 										<?php $question = $answer->question->id;?>
 										<?php $answer 	= $answer->id;?>
-										<a href="{{ ($tieneNota)?'#':route('nota.nueva',[$people,$test,$question,$answer]) }}" onclick="{{ ($tieneNota)?'alert(\'Ya se le asigno la nota!\')':'' }}" class="btn btn-sm btn-info" title="">VER</a>
+										<a 
+											href="{{ ($nota!='00')?'#':route('nota.nueva',[$people,$test,$question,$answer]) }}"
+											onclick="{{ ($nota!='00')?'alert(\'Ya se le asigno la nota!\')':'' }}" 
+											class="btn btn-sm btn-info" 
+											title="">VER
+										</a>
 									</div>
 								</td>
 							</tr>

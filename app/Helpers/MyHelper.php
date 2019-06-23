@@ -30,6 +30,22 @@ class MyHelper{
 		return $total_pts;
 	}
 
+	// Calcular la nota de un estudiante en una respuesta
+	public static function notaTotalRespuesta($id_answer,$id_people){
+		$answer = Answer::where('id',$id_answer)->first();
+		$nota = 0;
+		foreach ($answer->notes as $note) {
+			if ($note->people_id == $id_people) {
+				$nota = $note->note;
+			}
+		}
+		$nota_total = ($nota==0) ? '00' : $nota ;
+		return $nota_total;
+	}
+
+	// Calcular el total de estudiantes en una evaluacion
+	// No funciona :'v
+	// csm
 	public static function estudianteTestTotal($id_test){
 
 		$total = Test::find($id_test)->students->count();

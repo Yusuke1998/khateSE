@@ -75,9 +75,29 @@ $(() => {
 	// 	console.log(a.children('p.content').text())
 	// })
 
-	// $('.btnmodalcontent2').click(function(){
-	// 	$('#modal-title-2').text('Hola Mundo')
-	// 	$('#modal-content-2').html('Hola Mundo')
-	// })
-
 })
+
+$(document).ready(function(){
+	let m = false;
+
+	if (!m) {
+		$('#section_user').hide();
+	}
+});
+
+$('#type_user').change(function(){
+
+	let estudiante = $('#type_user').val();
+
+	if (estudiante == 'student') {
+		m = true;
+	}else{
+		m = false;
+	}
+
+	if (m) {
+		$('#section_user').show();
+	}else{
+		$('#section_user').hide();
+	}
+});

@@ -60,7 +60,7 @@ class HomeController extends Controller
 		$id = Auth::user()->id;
 		$me = User::find($id);
 
-		if ( Auth::user()->type == 'student' ) {
+		if (Auth::user()->type == 'student') {
 			return view('user.index')
 					->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 					->with('me', $me)
@@ -68,9 +68,9 @@ class HomeController extends Controller
 					->with('testsgoogle',$testsgoogle)
 					->with('sections', $sections)
 					->with('topics', $topics);
-		}
-
-		return view('admin.index')
+		} elseif (Auth::user()->type == 'teacher') {
+			$tests = Test::where('people_id',Auth::user()->people->id)->get();
+			return view('admin.index')
 				->with('files', $files)
 				->with('textcontents', $textcontents)
 				->with('images', $images)
@@ -81,7 +81,19 @@ class HomeController extends Controller
 				->with('testsgoogle',$testsgoogle)
 				->with('sections', $sections)
 				->with('topics', $topics);
-
+		}else{
+			return view('admin.index')
+					->with('files', $files)
+					->with('textcontents', $textcontents)
+					->with('images', $images)
+					->with('videos', $videos)
+					->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
+					->with('me', $me)
+					->with('tests',$tests)
+					->with('testsgoogle',$testsgoogle)
+					->with('sections', $sections)
+					->with('topics', $topics);
+		}
 	}
 
 	public function videos()
@@ -141,12 +153,11 @@ class HomeController extends Controller
 
 	public function estudiantes()
 	{
-		$sections 	  = Section::all()->sortByDesc('id');
-		$tests 	  = Test::all()->sortByDesc('id');
-		$testsgoogle 	  = TestGoogle::all()->sortByDesc('id');
-		$topics      = Topic::all();
-		$estudiantes = User::where('type', 'student')->get();
-
+		$sections 	  	= Section::all()->sortByDesc('id');
+		$tests 	  		= Test::all()->sortByDesc('id');
+		$testsgoogle 	= TestGoogle::all()->sortByDesc('id');
+		$topics      	= Topic::all();
+		$estudiantes 	= User::where('type', 'student')->get();
 		$id = Auth::user()->id;
 		$me = User::find($id);
 
@@ -397,14 +408,12 @@ class HomeController extends Controller
 	{
 		$sections 	  	= Section::all()->sortByDesc('id');
 		$tests 	  		= Test::all()->sortByDesc('id');
-		$testsgoogle 	  		= TestGoogle::all()->sortByDesc('id');
+		$testsgoogle 	= TestGoogle::all()->sortByDesc('id');
 		$topics      	= Topic::all();
 		$estudiantes 	= User::where('type', 'student')->get();
 		$estudiante 	= User::where('id', $id_student)->first();
 		$id = Auth::user()->id;
 		$me = User::find($id);
-
-		// dd(\MyHelper::estudianteTestTotal(4));
 
 		return view('admin.historial')
 				->with('contents', $estudiantes)

@@ -12,4 +12,5 @@ Software educativo para el area de redes, dicho software cumple con los requisit
 - [4-En la consola de comandos escribir 'composer install' y esperar que se termine el proceso.](#).
 - [5-En la consola escribir 'php artisan key:generate'.](#).
 - [6-Ahora escribir 'php artisan migrate --seed' y esperar a que termine el proceso.](#).
-- [7-Solo queda escribir 'php artisan serve', aparecera algo como 'Laravel development server started: http://127.0.0.1:8000', ingresa a la direccion y listo, el sistema ya debe estar corriendo.](http://127.0.0.1:8000).
+- [7-Tambien escribir 'php artisan vendor:publish' para tener acceso al storage, esperar que termine el proceso.](#).
+- [8-Solo queda escribir 'php artisan serve', aparecera algo como 'Laravel development server started: http://127.0.0.1:8000', ingresa a la direccion y listo, el sistema ya debe estar corriendo.](http://127.0.0.1:8000).

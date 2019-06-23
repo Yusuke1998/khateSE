@@ -50,8 +50,8 @@
 		</div>
 			
 		<div class="col-md-9 col-sm-12 animated slideInRight">
-			<@include('layouts.info')
-			<div class="card" >
+			@include('layouts.info')
+			<div class="card">
 				<div class="card-body">
 					@if($tests->count() > 0)
 						<table class="table">
@@ -85,7 +85,7 @@
 							</tbody>
 						</table>
 						@else
-						<p>No hay pruebas creadas</p>
+						<p>No hay evaluaciones creadas</p>
 					@endif
 				</div>
 			</div>

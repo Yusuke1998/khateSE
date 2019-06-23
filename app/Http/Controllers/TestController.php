@@ -14,6 +14,8 @@ use App\Student;
 use App\Answer;
 use App\Test;
 use App\Note;
+use App\TestGoogle;
+use App\NoteGoogle;
 
 class TestController extends Controller
 {

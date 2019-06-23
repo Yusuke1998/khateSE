@@ -13,8 +13,13 @@ class Topic extends Model
     	return $this->hasOne(Content::class);
     }
 
-     public function text_content()
+    public function text_content()
     {
     	return $this->hasOne(TextContent::class);
+    }
+
+    public function tests()
+    {
+    	return $this->hasMany(Test::class);
     }
 }

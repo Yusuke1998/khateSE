@@ -10,11 +10,13 @@ class CreateTestsTable extends Migration
     {
         Schema::create('tests', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('topic');
             $table->integer('note');
-            $table->unsignedInteger('people_id');
+            $table->unsignedInteger('topic_id');
+            $table->unsignedInteger('teacher_id');
             $table->unsignedInteger('section_id');
-            $table->foreign('people_id')->references('id')->on('people')->onDelete('cascade');
+            
+            $table->foreign('topic_id')->references('id')->on('topics')->onDelete('cascade');
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
             $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
             $table->timestamps();
         });

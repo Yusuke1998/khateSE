@@ -51,6 +51,13 @@ class RegisterController extends Controller
 			]);
 		}
 
+		if ($data['type'] == 'teacher') {
+			Student::create([
+				'status'		=> 'Activo',
+				'people_id'		=> $id->id	
+			]);
+		}
+
 		return User::create([
 			'email'      => $data['email'],
 			'password'   => bcrypt($data['password']),

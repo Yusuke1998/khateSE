@@ -35,8 +35,6 @@ class Student extends Model
         return $this->belongsToMany(Test::class);
     }
 
-    // flecha
-
     public function teachers()
     {
         return $this->belongsToMany(Teacher::class);

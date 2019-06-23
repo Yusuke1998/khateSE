@@ -69,7 +69,8 @@ class HomeController extends Controller
 					->with('sections', $sections)
 					->with('topics', $topics);
 		} elseif (Auth::user()->type == 'teacher') {
-			$tests = Test::where('people_id',Auth::user()->people->id)->get();
+			// $tests = Test::where('teacher_id',$me->people->teacher_id)->get();
+			$tests = $me->people->teacher->tests;
 			return view('admin.index')
 				->with('files', $files)
 				->with('textcontents', $textcontents)
@@ -265,16 +266,16 @@ class HomeController extends Controller
 	public function addevaluacion(Request $req)
 	{
 		$data = request()->validate([
-			'topic'			=>	'required',
+			'topic_id'		=>	'required',
 			'note'			=>	'required',
 			'section_id'	=>	'required',
-			'people_id'		=>	'required'
+			'teacher_id'	=>	'required'
 		]);
 
 		$prueba = Test::create([
-			'topic'			=>	$data['topic'],
+			'topic_id'		=>	$data['topic_id'],
 			'note'			=>	$data['note'],
-			'people_id'		=>	$data['people_id'],
+			'teacher_id'	=>	$data['teacher_id'],
 			'section_id'	=>	$data['section_id']
 		]);
 
@@ -394,10 +395,12 @@ class HomeController extends Controller
 	{
 		$data = request()->validate([
 			'section'	=>	'required|min:1',
+			'teacher_id'=>	'required',
 		]);
 
 		$secction = new Section();
-		$secction->section 	= $data['section'];
+		$secction->section 		= $data['section'];
+		$secction->teacher_id 	= $data['teacher_id'];
 		$secction->save();
 
 		return back()->with('info', 'Se ha registrado la seccion');

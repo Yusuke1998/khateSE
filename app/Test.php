@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Test extends Model
 {
     protected $fillable = [
-    	'topic','note','people_id','section_id'
+    	'topic_id','note','teacher_id','section_id'
     ];
 
     public function people()
@@ -15,9 +15,19 @@ class Test extends Model
     	return $this->belongsTo(People::class);
     }
 
+    public function topic()
+    {
+        return $this->belongsTo(Topic::class);
+    }
+
     public function section()
     {
     	return $this->belongsTo(Section::class);
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
     }
 
     public function answers()

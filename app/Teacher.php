@@ -15,12 +15,15 @@ class Teacher extends Model
     	return $this->hasMany(Section::class);
     }
 
+    public function tests()
+    {
+        return $this->hasMany(Test::class);
+    }
+
     public function people()
     {
     	return $this->belongsTo(People::class);
     }
-
-    // flecha
 
     public function students()
     {

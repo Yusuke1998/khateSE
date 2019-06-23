@@ -196,33 +196,33 @@ class DatabaseSeeder extends Seeder
 
 		DB::table('tests')->insert([
 			[
-			'topic'			=>	'Seguridad informatica',
+			'topic_id'		=>	1,
 			'note'			=>	'100',
-			'people_id'		=>	1,
+			'teacher_id'	=>	1,
 			'section_id'	=>	2
 			],
 			[
-			'topic'			=>	'Topologia de red',
+			'topic_id'		=>	2,
 			'note'			=>	'100',
-			'people_id'		=>	1,
+			'teacher_id'	=>	1,
 			'section_id'	=>	2
 			],
 			[
-			'topic'			=>	'Medios de transmision de datos',
+			'topic_id'		=>	3,
 			'note'			=>	'100',
-			'people_id'		=>	1,
+			'teacher_id'	=>	1,
 			'section_id'	=>	2
 			],
 			[
-			'topic'			=>	'Fibra optica',
+			'topic_id'		=>	4,
 			'note'			=>	'100',
-			'people_id'		=>	1,
+			'teacher_id'	=>	1,
 			'section_id'	=>	2
 			],
 			[
-			'topic'			=>	'Direccionamiento IP',
+			'topic_id'		=>	5,
 			'note'			=>	'100',
-			'people_id'		=>	1,
+			'teacher_id'	=>	1,
 			'section_id'	=>	2
 			]
 		]);

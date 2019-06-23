@@ -203,14 +203,24 @@ class HomeController extends Controller
 	public function topic($topic)
 	{
 		$topic  	= Topic::where('topic', $topic)->first();
-		$contents 	= TextContent::where('topic_id', $topic->id)->get();
-		$contentsm 	= Content::where('topic_id', $topic->id)->get();
 		$topics   	= Topic::all();
-		$tests	  	= Test::all()->sortByDesc('id');
-		$testsgoogle	  	= TestGoogle::all()->sortByDesc('id');
 		$id = Auth::user()->id;
 		$me = User::find($id);
-		$sections 	= Section::all()->sortByDesc('id');
+
+		if ($me->type == 'teacher') {
+			$contents 	= TextContent::where('topic_id', $topic->id)->get();
+			$contentsm 	= Content::where('topic_id', $topic->id)->get();
+		}else{
+			$contents 	= TextContent::where('topic_id', $topic->id)
+			->where('section_id',$me->people->student->section_id)
+			->get();
+			$contentsm 	= Content::where('topic_id', $topic->id)
+			->where('section_id',$me->people->student->section_id)
+			->get();
+		}
+		$tests	  		= Test::all()->sortByDesc('id');
+		$testsgoogle	= TestGoogle::all()->sortByDesc('id');
+		$sections 		= Section::all()->sortByDesc('id');
 
 		return view('user.topiccontent')
 				->with('contents', $contents)

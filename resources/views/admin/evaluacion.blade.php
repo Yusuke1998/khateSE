@@ -53,24 +53,22 @@
 			@include('layouts.info')
 			<div class="card" >
 				<div class="card-header">
-					{{ $test->topic }}
+					<p style="text-transform: uppercase; font-family: sans-serif;">Evaluacion: "{{ $test->topic }}"</p>
+					<ul style="text-transform: uppercase; font-family: sans-serif; list-style: upper-roman; color: #004">
+						<li>Ponderacion total de la evaluacion: {{ $a = $test->note }}pts</li>
+						<li>Valor total de preguntas: {{ $b = $test->questions->sum('value') }}pts</li>
+					</ul>
 				</div>
 				<?php $count = $test->questions()->count() ?>
-				@if($count == 0)
+
+				@if($b < $a && $count >= 1)
 				<div class="card-body">
-					<p class="text-center">Agrega preguntas a esta evaluacion!</p>
+					<p class="text-center">Agrega más preguntas!</p>
 					<a href="{{ route('pregunta',$test->id) }}" class="pull-right btn btn-info btn-sm btn-flat" title="nueva pregunta">Nueva pregunta</a>
 				</div>
 				@endif
 
-				@if($count >= 1 && $count < 5)
-				<div class="card-body">
-					<p class="text-center">Agrega al menos 5 preguntas a esta evaluacion!</p>
-					<a href="{{ route('pregunta',$test->id) }}" class="pull-right btn btn-info btn-sm btn-flat" title="nueva pregunta">Nueva pregunta</a>
-				</div>
-				@endif
-
-				@if($count = $test->questions()->count() >= 1)
+				@if($count >= 1)
 				<div class="card-body">
 					<table class="table">
 						<thead>
@@ -95,10 +93,13 @@
 						</tfoot>
 					</table>
 				</div>
+				@else
+				<div class="card-body">
+					<p class="text-center">Agrega preguntas a esta evaluacion!</p>
+					<a href="{{ route('pregunta',$test->id) }}" class="pull-right btn btn-info btn-sm btn-flat" title="nueva pregunta">Nueva pregunta</a>
+				</div>
 				@endif
-
 			</div>
-			
 		</div>
 	</div>
 </div>

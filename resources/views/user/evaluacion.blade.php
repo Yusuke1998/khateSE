@@ -1,9 +1,7 @@
 @include('layouts.header')
 @include('layouts.navbar')
-
 <br>
 <div class="container my-5 pt-5 animated fadeIn bg">
-
 	<div class="row">
 		<div class="col-md-3 col-sm-12 animated slideInLeft slow">
 			<div class="row">
@@ -78,12 +76,12 @@
 										@foreach($question->answers as $answer)
 											@if($me->people->id === $answer->people_id)
 												<?php $respondida = true;?>
-												<span class="h6">Respondida</span>
+												<span class="text-success">Respondida</span>
 											@endif
 										@endforeach
 									@endif
 									@if(!$respondida)
-										<span class="h6">Sin responder</span>
+										<span class="text-warning">Sin responder</span>
 									@endif
 								</td>
 								<td>
@@ -111,15 +109,13 @@
 								<td class="text-center">{{ $total_evl }}pts</td>
 								<td class="text-center">TOTAL OBTENIDO</td>
 								<td class="text-center">{{ $total_pts }}pts</td>
-								<td>{{ $aprobado }}</td>
+								<td class="text-center" style="font-family: serif; font-size: 18px;color: {{ ($aprobado=='Aprobado')?'green;':'red;' }}"><b>{{ $aprobado }}</b></td>
 							</tr>
 						</tfoot>
 					</table>
 				</div>
 				@endif
-
 			</div>
-			
 		</div>
 	</div>
 </div>

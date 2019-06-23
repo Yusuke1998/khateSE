@@ -86,12 +86,6 @@ class TestController extends Controller
 
 		if (($pv+$ep)>$en) {
 			return back()->with('info','El valor de la pregunta supera la cantidad restante!');
-		}elseif (($pv+$ep) === $en) {
-			$pregunta = Question::create([
-	    		'text'		=>	$data['text'],
-	    		'value'		=>	$data['value'],
-	    		'test_id'	=>	$data['test_id']
-			]);
 		}else{
 			$pregunta = Question::create([
 	    		'text'		=>	$data['text'],

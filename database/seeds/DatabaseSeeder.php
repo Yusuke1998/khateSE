@@ -69,21 +69,31 @@ class DatabaseSeeder extends Seeder
 			]
 		]);
 
+		DB::table('teachers')->insert([
+			'status'	=>	'Activo',
+			'people_id'	=>	1
+		]);
+
 		DB::table('sections')->insert([
 			[
-			'section'	=> 'K1'
+				'section'		=> 'K1',
+				'teacher_id'	=>	1
 			],
 			[
-			'section'	=> 'K2'
+				'section'		=> 'K2',
+				'teacher_id'	=>	1
 			],
 			[
-			'section'	=> 'K3'
+				'section'		=> 'K3',
+				'teacher_id'	=>	1
 			],
 			[
-			'section'	=> 'K4'
+				'section'		=> 'K4',
+				'teacher_id'	=>	1
 			],
 			[
-			'section'	=> 'K5'
+				'section'		=> 'K5',
+				'teacher_id'	=>	1
 			],
 		]);
 
@@ -99,6 +109,21 @@ class DatabaseSeeder extends Seeder
 			[
 				'section_id'	=>	'2',
 				'people_id'		=>	'4'
+			]
+		]);
+
+		DB::table('student_teacher')->insert([
+			[
+				'student_id'	=>	1,
+				'teacher_id'	=>	1,
+			],
+			[
+				'student_id'	=>	2,
+				'teacher_id'	=>	1,
+			],
+			[
+				'student_id'	=>	3,
+				'teacher_id'	=>	1,
 			]
 		]);
 

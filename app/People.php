@@ -28,6 +28,11 @@ class People extends Model
         return $this->hasOne(Student::class);
     }
 
+    public function teacher()
+    {
+        return $this->hasOne(Teacher::class);
+    }
+
     public function tests()
     {
         return $this->hasMany(Test::class);

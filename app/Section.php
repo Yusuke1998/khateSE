@@ -6,11 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Section extends Model
 {
-    protected $fillable = ['section'];
+    protected $fillable = ['section','teacher_id'];
 
     public function text_content()
     {
     	return $this->hasOne(TextContent::class);
+    }
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
     }
 
     public function content()

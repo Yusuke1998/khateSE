@@ -61,13 +61,50 @@ class TestController extends Controller
     		'value'		=>	'required',
     		'test_id'	=>	'required'
 		]);
+		// $en valor maximo de la evaluacion
+		// $pv valor de la pregunta que se quiere crear
+		// $ep valor total de las preguntas de la evaluacion
 
-		$pregunta = Question::create([
-    		'text'		=>	$data['text'],
-    		'value'		=>	$data['value'],
-    		'test_id'	=>	$data['test_id']
-		]);
-		return redirect(route('evaluacion.ver',$pregunta->test_id))->with('info','Pregunta registrada exitosamente!');
+		$en = Test::where('id',$data['test_id'])->first()->note;
+		$pv = $data['value'];
+
+		if ($pv>$en) {
+			return back()->with('info','El valor de la pregunta supera la ponderacion maxima de la evaluacion!');
+		}
+
+		$ep = Test::where('id',$data['test_id'])->first()->questions->sum('value');
+
+		if ($ep === 0) {
+			$pregunta = Question::create([
+	    		'text'		=>	$data['text'],
+	    		'value'		=>	$data['value'],
+	    		'test_id'	=>	$data['test_id']
+			]);
+		}
+
+		$ep = Test::where('id',$data['test_id'])->first()->questions->sum('value');
+
+		if (($pv+$ep)>$en) {
+			return back()->with('info','El valor de la pregunta supera la cantidad restante!');
+		}elseif (($pv+$ep) === $en) {
+			$pregunta = Question::create([
+	    		'text'		=>	$data['text'],
+	    		'value'		=>	$data['value'],
+	    		'test_id'	=>	$data['test_id']
+			]);
+		}else{
+			$pregunta = Question::create([
+	    		'text'		=>	$data['text'],
+	    		'value'		=>	$data['value'],
+	    		'test_id'	=>	$data['test_id']
+			]);
+		}
+
+		if (isset($pregunta)) {
+			return redirect(route('evaluacion.ver',$pregunta->test_id))->with('info','Pregunta registrada exitosamente!');
+		}else{
+			return back()->with('info','No se ha creado la pregunta!');
+		}
 	}
 
 	public function evaluacion_estudiante($id_test)

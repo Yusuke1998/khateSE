@@ -44,7 +44,7 @@
 				</li>
 				
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="modal" href="#evaluacionnuevogoogle"><i class="fas fa-plus mr-2"></i>Añadir Evaluación Google Forms</a>
+					<a class="nav-link" data-toggle="modal" href="#evaluacionnuevogoogle"><i class="fas fa-plus mr-2"></i>Google Forms</a>
 				</li>
 
 				<li class="nav-item">

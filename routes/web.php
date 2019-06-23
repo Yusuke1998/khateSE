@@ -6,13 +6,6 @@ Auth::routes();
 Route::get('/','HomeController@inicio');
 Route::get('home', 'HomeController@index')->name('home');
 
-// Route::post('publicar', 'HomeController@publicar');
-// Route::post('comentar', 'HomeController@comentar');
-// Route::post('filtro', 'HomeController@topicid');
-// Route::post('eliminarpost', 'HomeController@eliminarpost');
-// Route::get('post/{id}', 'HomeController@postid')->where('id', '^[\d]+$');
-
-
 // Perfil
 Route::get('profile', 'HomeController@profile');
 Route::post('editarperfil', 'HomeController@editarperfil');

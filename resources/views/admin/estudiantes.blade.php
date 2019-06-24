@@ -69,10 +69,10 @@
 								<td>{{ $est->people->first_name }}</td>
 								<td>{{ $est->people->last_name }}</td>
 								<td>{{ $est->people->student->section->section }}</td>
-								<td>{{ $est->email }}</td>
+								<td>{{ $est->people->user->email }}</td>
 								<td>{{ $est->created_at->format('d/m/Y') }}</td>
 								<td>
-									<a href="{{ route('historial',$est->id) }}" title="Historico de {{ $est->people->first_name }}">VER</a>
+									<a href="{{ route('historial',$est->people->user->id) }}" title="Historico de {{ $est->people->first_name }}">VER</a>
 								</td>
 							</tr>
 							@endforeach

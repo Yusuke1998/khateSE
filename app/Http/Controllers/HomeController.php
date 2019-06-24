@@ -56,7 +56,6 @@ class HomeController extends Controller
 				$videos[] = $contents[$k];
 			}
 		}
-
 		$id = Auth::user()->id;
 		$me = User::find($id);
 
@@ -69,7 +68,6 @@ class HomeController extends Controller
 					->with('sections', $sections)
 					->with('topics', $topics);
 		} elseif (Auth::user()->type == 'teacher') {
-			// $tests = Test::where('teacher_id',$me->people->teacher_id)->get();
 			$tests = $me->people->teacher->tests;
 			return view('admin.index')
 				->with('files', $files)
@@ -154,14 +152,13 @@ class HomeController extends Controller
 
 	public function estudiantes()
 	{
+		$id = Auth::user()->id;
+		$me = User::find($id);
 		$sections 	  	= Section::all()->sortByDesc('id');
 		$tests 	  		= Test::all()->sortByDesc('id');
 		$testsgoogle 	= TestGoogle::all()->sortByDesc('id');
 		$topics      	= Topic::all();
-		$estudiantes 	= User::where('type', 'student')->get();
-		$id = Auth::user()->id;
-		$me = User::find($id);
-
+		$estudiantes 	= $me->people->teacher->students;
 
 		return view('admin.estudiantes')
 				->with('contents', $estudiantes)
@@ -251,18 +248,20 @@ class HomeController extends Controller
 		$data = request()->validate([
 			'topic_id'		=>	'required',
 			'section_id'	=>	'required',
+			'teacher_id'	=>	'required',
 			'link'			=>	'required'
 		]);
 
 		$testgoogle = TestGoogle::create([
 			'link' 			=> $data['link'],
+			'teacher_id'	=> $data['teacher_id'],
 			'topic_id' 		=> $data['topic_id'],
-			'section_id' 	=> $data['section_id'],
+			'section_id' 	=> $data['section_id']
 		]);
 		return back()->with('info', 'Se ha registrado la nueva evaluacion');
 	}
 	
-	// Evaluacion con google forms
+	// Evaluacion normal
 	public function addevaluacion(Request $req)
 	{
 		$data = request()->validate([
@@ -406,17 +405,17 @@ class HomeController extends Controller
 		return back()->with('info', 'Se ha registrado la seccion');
 	}
 
-
-	public function historial($id_student)
+	public function historial($id_user)
 	{
+		$id = Auth::user()->id;
+		$me = User::find($id);
 		$sections 	  	= Section::all()->sortByDesc('id');
 		$tests 	  		= Test::all()->sortByDesc('id');
 		$testsgoogle 	= TestGoogle::all()->sortByDesc('id');
 		$topics      	= Topic::all();
+
 		$estudiantes 	= User::where('type', 'student')->get();
-		$estudiante 	= User::where('id', $id_student)->first();
-		$id = Auth::user()->id;
-		$me = User::find($id);
+		$estudiante 	= User::where('id', $id_user)->first();
 
 		return view('admin.historial')
 				->with('contents', $estudiantes)

@@ -13,8 +13,10 @@ class CreateTestGooglesTable extends Migration
             $table->string('link');
             $table->unsignedInteger('topic_id');
             $table->unsignedInteger('section_id');
+            $table->unsignedInteger('teacher_id');
             $table->foreign('topic_id')->references('id')->on('topics');
             $table->foreign('section_id')->references('id')->on('sections')->onDelete('cascade');
+            $table->foreign('teacher_id')->references('id')->on('teachers')->onDelete('cascade');
             $table->timestamps();
         });
     }

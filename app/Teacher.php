@@ -20,6 +20,11 @@ class Teacher extends Model
         return $this->hasMany(Test::class);
     }
 
+    public function testsgoogles()
+    {
+        return $this->hasMany(TestGoogle::class);
+    }
+
     public function people()
     {
     	return $this->belongsTo(People::class);

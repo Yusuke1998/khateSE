@@ -4,6 +4,7 @@ use App\Answer;
 use App\Content;
 use App\Note;
 use App\People;
+use App\Teacher;
 use App\Question;
 use App\Section;
 use App\Student;
@@ -47,8 +48,15 @@ class MyHelper{
 	// No funciona :'v
 	// csm
 	public static function estudianteTestTotal($id_test){
-
 		$total = Test::find($id_test)->students->count();
+		// $total = 0;
+		// foreach (Student::all() as $estudiante) {
+		// 	foreach ($estudiante->tests as $test) {
+		// 		if ($test->id == $id_test) {
+		// 			$total +=1;
+		// 		}
+		// 	}
+		// }
 		
 		return $total;
 	}

@@ -50,7 +50,7 @@
 			@include('layouts.info')
 			<div class="card" >
 				<div class="card-header">
-					{{ $test->topic }}
+					{{ $test->topic->topic }}
 				</div>
 				<?php $count = $test->questions()->count() ?>
 				@if($count >= 1)

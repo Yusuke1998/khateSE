@@ -70,8 +70,9 @@ class DatabaseSeeder extends Seeder
 		]);
 
 		DB::table('teachers')->insert([
-			'status'	=>	'Activo',
-			'people_id'	=>	1
+			'status'		=>	'Activo',
+			'people_id'		=>	1,
+			'created_at' 	=> now('America/Caracas')
 		]);
 
 		DB::table('sections')->insert([
@@ -100,15 +101,18 @@ class DatabaseSeeder extends Seeder
 		DB::table('students')->insert([
 			[
 				'section_id'	=>	'2',
-				'people_id'		=>	'2'
+				'people_id'		=>	'2',
+				'created_at' 	=> now('America/Caracas')
 			],
 			[
 				'section_id'	=>	'2',
-				'people_id'		=>	'3'
+				'people_id'		=>	'3',
+				'created_at' 	=> now('America/Caracas')
 			],
 			[
 				'section_id'	=>	'2',
-				'people_id'		=>	'4'
+				'people_id'		=>	'4',
+				'created_at' 	=> now('America/Caracas')
 			]
 		]);
 

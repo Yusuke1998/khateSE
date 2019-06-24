@@ -106,6 +106,8 @@ class TestController extends Controller
 		$id = Auth::user()->id;
 		$me = User::find($id);
 		$test = Test::where('id',$id_test)->first();
+		// $test = $me->people->teacher->tests->where('id',$id_test)->first();
+
 		$total_evl = $test->questions->sum('value');
 		$total_pts = \MyHelper::notaTotal($id_test,$me->people->id);
 
@@ -155,10 +157,10 @@ class TestController extends Controller
     		'student_id'	=>	'required',
     		'test_id'		=>	'required'
 		]);
-
-		$test = Test::find($data['test_id']);
-		$test->students()->attach($data['student_id']);
-
+		// $test 		= Test::find($data['test_id']);
+		// $test->students()->attach($data['student_id']);
+		// $student = Student::find($data['student_id']);
+		// $student->tests()->attach($data['test_id']);
 		$respuesta = Answer::create([
     		'text'			=>	$data['text'],
     		'people_id'		=>	$data['people_id'],

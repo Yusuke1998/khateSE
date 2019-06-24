@@ -155,6 +155,9 @@
 			</div>
 			<form action="{{ url('addseccion') }}" method="post">
 				@csrf
+				@if(Auth::User()->people->teacher)
+				<input type="hidden" name="teacher_id" value="{{ Auth::User()->people->teacher->id }}">
+				@endif
 				<div class="modal-body">
 					<div class="form-group md-form ">
 						<i class="fas fa-book prefix"></i>
@@ -183,12 +186,18 @@
 			</div>
 			<form action="{{ url('addevaluacion') }}" method="post" enctype="multipart/form-data">
 				@csrf
+				@if(Auth::User()->people->teacher)
+				<input type="hidden" name="teacher_id" value="{{ Auth::User()->people->teacher->id }}">
+				@endif
 				<div class="modal-body">
-
-					<div class="form-group md-form ">
-						<i class="fas fa-book prefix"></i>
-						<input type="text" name="topic" id="tema" class="form-control validate {{ $errors->has('topic') ? ' is-invalid' : '' }}" placeholder="Tema de la evaluación" required>
-						<label for="tema">Tema</label>
+					
+					<div class="col md-form mt-5">
+						<select class="mdb-select dropdown-primary md-form colorful-select {{ $errors->has('topic_id') ? ' is-invalid' : '' }}" name="topic_id" required id="tema">
+							<option disabled selected>Escoge el tema de la evaluación</option>
+							@foreach( $topics as $topic )
+								<option value="{{ $topic->id }}">{{ $topic->topic }}</option>
+							@endforeach
+						</select>
 					</div>
 					
 					<div class="form-group md-form my-5">
@@ -228,6 +237,9 @@
 			</div>
 			<form action="{{ url('addeval') }}" method="post">
 				@csrf
+				@if(Auth::User()->people->teacher)
+				<input type="hidden" name="teacher_id" value="{{ Auth::User()->people->teacher->id }}">
+				@endif
 				<div class="modal-body">
 					<div class="form-group md-form">
 						<i class="fas fa-link prefix"></i>

@@ -70,7 +70,7 @@
 						<tbody>
 						@foreach($estudiante->answers as $answer)
 							<tr>
-								<td>{{ $answer->test->topic }}</td>
+								<td>{{ $answer->test->topic->topic }}</td>
 								<td>{{ $answer->question->text }}</td>
 								<td>{{ $answer->text }}</td>
 								<td>

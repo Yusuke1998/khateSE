@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TestGoogle extends Model
 {
-    protected $fillable = ['link','topic_id','section_id'];
+    protected $fillable = ['link','topic_id','section_id','teacher_id'];
 
     public function notegoogle()
     {
@@ -16,5 +16,10 @@ class TestGoogle extends Model
     public function topic()
     {
     	return $this->belongsTo(Topic::class);
+    }
+
+    public function teacher()
+    {
+    	return $this->belongsTo(Teacher::class);
     }
 }

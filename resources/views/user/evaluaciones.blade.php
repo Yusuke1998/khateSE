@@ -69,7 +69,7 @@
 								<?php $total_pts=0; ?>
 								@foreach($tests as $test)
 								<tr>
-									<td align="left">{{ $test->topic }}</td>
+									<td align="left">{{ $test->topic->topic }}</td>
 									<td align="center">{{ $test->note }}</td>
 									<td align="center">{{ $test->questions->count() }}</td>
 									<td align="center">{{ $test->section->section }}</td>

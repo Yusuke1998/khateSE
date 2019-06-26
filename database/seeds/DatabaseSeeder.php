@@ -203,31 +203,36 @@ class DatabaseSeeder extends Seeder
 			'topic_id'		=>	1,
 			'note'			=>	'100',
 			'teacher_id'	=>	1,
-			'section_id'	=>	2
+			'section_id'	=>	2,
+			'created_at' 	=> now('America/Caracas')
 			],
 			[
 			'topic_id'		=>	2,
 			'note'			=>	'100',
 			'teacher_id'	=>	1,
-			'section_id'	=>	2
+			'section_id'	=>	2,
+			'created_at' 	=> now('America/Caracas')
 			],
 			[
 			'topic_id'		=>	3,
 			'note'			=>	'100',
 			'teacher_id'	=>	1,
-			'section_id'	=>	2
+			'section_id'	=>	2,
+			'created_at' 	=> now('America/Caracas')
 			],
 			[
 			'topic_id'		=>	4,
 			'note'			=>	'100',
 			'teacher_id'	=>	1,
-			'section_id'	=>	2
+			'section_id'	=>	2,
+			'created_at' 	=> now('America/Caracas')
 			],
 			[
 			'topic_id'		=>	5,
 			'note'			=>	'100',
 			'teacher_id'	=>	1,
-			'section_id'	=>	2
+			'section_id'	=>	2,
+			'created_at' 	=> now('America/Caracas')
 			]
 		]);
 

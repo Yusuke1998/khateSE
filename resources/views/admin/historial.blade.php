@@ -60,6 +60,7 @@
 					<table class="table">
 						<thead>
 							<tr>
+								<th>Fecha</th>
 								<th>Evaluacion</th>
 								<th>Pregunta</th>
 								<th>Respuesta</th>
@@ -70,6 +71,7 @@
 						<tbody>
 						@foreach($estudiante->answers as $answer)
 							<tr>
+								<td>{{ $answer->test->created_at->format('d/m/Y') }}</td>
 								<td>{{ $answer->test->topic->topic }}</td>
 								<td>{{ $answer->question->text }}</td>
 								<td>{{ $answer->text }}</td>

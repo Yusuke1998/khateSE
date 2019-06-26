@@ -195,6 +195,7 @@
 						<table class="table">
 							<thead>
 								<tr>
+									<th align="center">Fecha</th>
 									<th align="center">Tema</th>
 									<th align="center">Preguntas</th>
 									<th align="center">Ponderacion</th>
@@ -206,6 +207,7 @@
 							<tbody>
 								@foreach($tests as $test)
 								<tr>
+									<td align="center">{{ $test->created_at->format('d/m/Y') }}</td>
 									<td>{{ $test->topic->topic }}</td>
 									<td align="center">{{ $test->questions->count() }}</td>
 									<td align="center">{{ $test->note }}</td>

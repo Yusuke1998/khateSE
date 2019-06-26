@@ -57,6 +57,7 @@
 						<table class="table">
 							<thead>
 								<tr>
+									<th align="center">Fecha</th>
 									<th align="center">Tema</th>
 									<th align="center">Ponderacion</th>
 									<th align="center">Preguntas</th>
@@ -69,7 +70,8 @@
 								<?php $total_pts=0; ?>
 								@foreach($tests as $test)
 								<tr>
-									<td align="left">{{ $test->topic }}</td>
+									<td align="left">{{ $test->created_at->format('d/m/Y') }}</td>
+									<td align="left">{{ $test->topic->topic }}</td>
 									<td align="center">{{ $test->note }}</td>
 									<td align="center">{{ $test->questions->count() }}</td>
 									<td align="center">{{ $test->section->section }}</td>

@@ -53,7 +53,7 @@
 			@include('layouts.info')
 			<div class="card" >
 				<div class="card-header">
-					<p style="text-transform: uppercase; font-family: sans-serif;">Evaluacion: "{{ $test->topic }}"</p>
+					<p style="text-transform: uppercase; font-family: sans-serif;">Evaluacion: "{{ $test->topic->topic }}"</p>
 					<ul style="text-transform: uppercase; font-family: sans-serif; list-style: upper-roman; color: #004">
 						<li>Ponderacion total de la evaluacion: {{ $a = $test->note }}pts</li>
 						<li>Valor total de preguntas: {{ $b = $test->questions->sum('value') }}pts</li>

@@ -61,6 +61,7 @@
 						<thead>
 							<tr>
 								<th>Evaluacion</th>
+								<th>Fecha</th>
 								<th>Pregunta</th>
 								<th>Respuesta</th>
 								<th>Nota</th>
@@ -70,12 +71,13 @@
 						<tbody>
 						@foreach($estudiante->answers as $answer)
 							<tr>
-								<td>{{ $answer->test->topic }}</td>
+								<td>{{ $answer->test->topic->topic }}</td>
+								<td>{{ $answer->test->created_at->format('d/m/Y') }}</td>
 								<td>{{ $answer->question->text }}</td>
 								<td>{{ $answer->text }}</td>
 								<td>
 									<?php $nota = MyHelper::notaTotalRespuesta($answer->id,$answer->people_id) ?>
-									<span class="p-1 bg-{{ ($nota!='00')?'success':'warning' }}">{{ $nota }}</span>									
+									<span class="p-1 bg-{{ ($nota!='00')?'success':'warning' }}">{{ $nota }}</span>
 								</td>
 								<td>
 									<div class="btn-group">

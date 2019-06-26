@@ -54,7 +54,7 @@
 			<div class="card" >
 				<div class="card-header">
 					<p class="pull-left">Estudiante: {{ $people->first_name }} {{ $people->last_name }}</p>
-					<p class="pull-right">Evaluacion: {{ $test->topic }}</p>
+					<p class="pull-right">Evaluacion: {{ $test->topic->topic }}</p>
 				</div>
 				<div class="card-body">
 					<p class="h5">Pregunta: {{ $question->text }}</p>

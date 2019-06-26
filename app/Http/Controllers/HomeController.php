@@ -261,19 +261,19 @@ class HomeController extends Controller
 		return back()->with('info', 'Se ha registrado la nueva evaluacion');
 	}
 	
-	// Evaluacion con google forms
+	// Evaluacion normal
 	public function addevaluacion(Request $req)
 	{
 		$data = request()->validate([
-			'topic'			=>	'required',
+			'topic_id'		=>	'required',
 			'note'			=>	'required',
 			'section_id'	=>	'required',
 			'people_id'		=>	'required'
 		]);
 
 		$prueba = Test::create([
-			'topic'			=>	$data['topic'],
 			'note'			=>	$data['note'],
+			'topic_id'		=>	$data['topic_id'],
 			'people_id'		=>	$data['people_id'],
 			'section_id'	=>	$data['section_id']
 		]);

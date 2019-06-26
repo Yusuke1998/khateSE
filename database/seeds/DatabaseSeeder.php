@@ -104,19 +104,19 @@ class DatabaseSeeder extends Seeder
 
 		DB::table('topics')->insert([
 			[
-				'topic' => 'Perifericos', 'image' => 'image2.jpg', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, consequuntur officiis nobis ex nihil impedit.', 'created_at' => now('America/Caracas')
+				'topic' => 'Seguridad_Informatica', 'image' => 'image2.jpg', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit, consequuntur officiis nobis ex nihil impedit.', 'created_at' => now('America/Caracas')
 			],
 			[
-				'topic' => 'Cables', 'image' => 'image3.jpg', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit.', 'created_at' => now('America/Caracas')
+				'topic' => 'Redes', 'image' => 'image3.jpg', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit.', 'created_at' => now('America/Caracas')
 			],
 			[
-				'topic' => 'Dispositivos', 'image' => 'image4.jpg', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit.', 'created_at' => now('America/Caracas')
+				'topic' => 'Transmision_de_datos', 'image' => 'image4.jpg', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit.', 'created_at' => now('America/Caracas')
 			],
 			[
-				'topic' => 'Hardware', 'image' => 'image5.jpg', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit.', 'created_at' => now('America/Caracas')
+				'topic' => 'Cables', 'image' => 'image5.jpg', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit.', 'created_at' => now('America/Caracas')
 			],
 			[
-				'topic' => 'Software', 'image' => 'image6.jpg', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit.', 'created_at' => now('America/Caracas')
+				'topic' => 'Redireccionamiento_IP', 'image' => 'image6.jpg', 'description' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit.', 'created_at' => now('America/Caracas')
 			],
 		]);
 
@@ -171,34 +171,39 @@ class DatabaseSeeder extends Seeder
 
 		DB::table('tests')->insert([
 			[
-			'topic'			=>	'Seguridad informatica',
 			'note'			=>	'100',
+			'topic_id'	 	=>  1,
 			'people_id'		=>	1,
-			'section_id'	=>	2
+			'section_id'	=>	2,
+			'created_at' 	=> now('America/Caracas')
 			],
 			[
-			'topic'			=>	'Topologia de red',
 			'note'			=>	'100',
+			'topic_id'	 	=> 	2,
 			'people_id'		=>	1,
-			'section_id'	=>	2
+			'section_id'	=>	2,
+			'created_at' 	=> now('America/Caracas')
 			],
 			[
-			'topic'			=>	'Medios de transmision de datos',
 			'note'			=>	'100',
+			'topic_id'	 	=>  3,
 			'people_id'		=>	1,
-			'section_id'	=>	2
+			'section_id'	=>	2,
+			'created_at' 	=> now('America/Caracas')
 			],
 			[
-			'topic'			=>	'Fibra optica',
+			'topic_id'	 	=>  4,
 			'note'			=>	'100',
 			'people_id'		=>	1,
-			'section_id'	=>	2
+			'section_id'	=>	2,
+			'created_at' 	=> now('America/Caracas')
 			],
 			[
-			'topic'			=>	'Direccionamiento IP',
+			'topic_id'	 	=>  5,
 			'note'			=>	'100',
 			'people_id'		=>	1,
-			'section_id'	=>	2
+			'section_id'	=>	2,
+			'created_at' 	=> now('America/Caracas')
 			]
 		]);
 

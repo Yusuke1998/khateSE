@@ -53,7 +53,7 @@
 			@include('layouts.info')
 			<div class="card" >
 				<div class="card-header">
-					{{ $test->topic }}
+					{{ $test->topic->topic }}
 				</div>
 				<div class="card-body">
 					<form action="{{ route('pregunta.guardar') }}" method="post">

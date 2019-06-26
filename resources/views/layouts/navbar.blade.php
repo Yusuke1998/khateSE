@@ -184,19 +184,19 @@
 			<form action="{{ url('addevaluacion') }}" method="post" enctype="multipart/form-data">
 				@csrf
 				<div class="modal-body">
-
-					<div class="form-group md-form ">
-						<i class="fas fa-book prefix"></i>
-						<input type="text" name="topic" id="tema" class="form-control validate {{ $errors->has('topic') ? ' is-invalid' : '' }}" placeholder="Tema de la evaluación" required>
-						<label for="tema">Tema</label>
+					<div class="col md-form mt-5">
+						<select class="mdb-select dropdown-primary md-form colorful-select {{ $errors->has('topic_id') ? ' is-invalid' : '' }}" name="topic_id" required id="tema">
+							<option disabled selected>Escoge el tema de la evaluación</option>
+							@foreach( $topics as $topic )
+								<option value="{{ $topic->id }}">{{ $topic->topic }}</option>
+							@endforeach
+						</select>
 					</div>
-					
 					<div class="form-group md-form my-5">
 						<i class="fas fa-edit prefix"></i>
 						<input id="note" type="number" name="note" class="form-control validate {{ $errors->has('note') ? ' is-invalid' : '' }}">
 						<label for="note">Ponderacion total de la evaluacion</label>
 					</div>
-
 					<div class="col md-form">
 						<select name="section_id" class="mdb-select colorful-select dropdown-primary {{ $errors->has('section_id') ? ' is-invalid' : '' }}" id="type" required>
 							<option disabled selected>Selecciona la seccion</option>

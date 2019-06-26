@@ -53,6 +53,16 @@ class MyHelper{
 		return $total;
 	}
 
+	// Calcula todas las notas de un estudiante en una evaluacion
+	public static function notasEstudiante($id_test,$id_stud){
+
+		dd($id_stud,$id_test);
+		
+		// return $total;
+	}
+
+
+
 
 
 

@@ -53,7 +53,7 @@
 			@include('layouts.info')
 			<div class="card" >
 				<div class="card-header">
-					<p>Evaluacion: {{ $test->topic }}</p>
+					<p>Evaluacion: {{ $test->topic->topic }}</p>
 					<p>Pregunta: {{ $question->text }}</p>
 				</div>
 				<div class="card-body">

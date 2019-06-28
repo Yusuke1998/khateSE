@@ -191,12 +191,11 @@ class TestSimpleController extends Controller
 		$id = Auth::user()->id;
 		$me = User::find($id);
 		$id_people = User::find($id)->people->id;
+		$id_studend = User::find($id)->people->student->id;
 		$test = TestSimple::where('id',$id_test)->first();
 		$total_evl = $test->questionsimples->sum('value');
 
-		$total_pts = \MyHelper::notaSimpleTotal($id_test,$id_people);
-
-		// dd($total_pts);
+		$total_pts = \MyHelper::notaSimpleTotal($id_test,$id_studend);
 
 		if($total_pts >= ($total_evl/2)){
 			$aprobado = 'Aprobado';

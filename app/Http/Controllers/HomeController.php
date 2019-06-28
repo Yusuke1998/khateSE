@@ -391,14 +391,14 @@ class HomeController extends Controller
 	}
 
 
-	public function historial($id_student)
+	public function historial($id)
 	{
 		$sections 	  	= Section::all()->sortByDesc('id');
 		$tests 	  		= Test::all()->sortByDesc('id');
 		$testsgoogle 	= TestGoogle::all()->sortByDesc('id');
 		$topics      	= Topic::all();
 		$estudiantes 	= User::where('type', 'student')->get();
-		$estudiante 	= User::where('id', $id_student)->first();
+		$estudiante 	= User::where('id', $id)->first();
 		$id = Auth::user()->id;
 		$me = User::find($id);
 

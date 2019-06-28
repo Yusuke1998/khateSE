@@ -63,46 +63,35 @@ class MyHelper{
 	}
 
 	// sumar todas las notas de un estudiante en una evaluacion de seleccion
-	public static function notaSimpleTotal($id_test,$id_people){
-		$nota = NoteSelect::where('test_simple_id',$id_test)
-		->where('people_id',$id_people)
-		// ->where('question_simple_id',$id_question)
-		->get();
-		// $test = TestSimple::where('id',$id_test)->first();
+	public static function notaSimpleTotal($id_test,$id_student){
 		$total_pts = 0;
-		// foreach ($test->questionsimples as $question) {
-		// 	if ($question->answersimples) {
-		// 		foreach ($question->noteselects as $note) {
-		// 			if ($note->people_id === $id_people) {
-		// 				$total_pts += $note->sum('note');
-		// 				// $total_pts = 1;
-		// 			}
-		// 		}
-		// 	}
-		// }
+		$notas = NoteSelect::where('test_simple_id',$id_test)
+		->where('student_id',$id_student)
+		->get();
+
+		if (!is_null($notas)) {
+			$total_pts = $notas->sum('note');
+		}
 		return $total_pts;
 	}
 
-	// public static function tieneNotaSelect($id_test,$id_question,$id_student){
-	// 	$test = TestSimple::find($id_test);
-	// 	foreach ($test->questionsimples as $questions) {
-	// 		if ($question->id == $id_question) {
-	// 			foreach ($question->answersimples as $answer) {
-	// 				# code...
-	// 			}
-	// 		}
-	// 		# code...
-	// 	}
-	// 	return true;
-	// }
-
-
-
-
-
-
-
-
+	public static function tieneNotaSelect($id_question,$id_student){
+		$estudiante = Student::find($id_student);
+		$pregunta = QuestionSimple::find($id_question);
+		foreach ($pregunta->answersimples as $answer) {
+			if($misnotas = $estudiante->noteselects)
+			{
+				foreach($misnotas as $nota)
+				{
+					if($answer->id == $nota->answer_simple_id)
+					{
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
 
 
 

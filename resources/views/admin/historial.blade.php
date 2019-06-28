@@ -69,32 +69,47 @@
 							</tr>
 						</thead>
 						<tbody>
-						@foreach($estudiante->answers as $answer)
+						@if($estudiante->answers->count() > 0)
+							@foreach($estudiante->answers as $answer)
+								<tr>
+									<td>{{ $answer->test->topic->topic }}</td>
+									<td>{{ $answer->test->created_at->format('d/m/Y') }}</td>
+									<td>{{ $answer->question->text }}</td>
+									<td>{{ $answer->text }}</td>
+									<td>
+										<?php $nota = MyHelper::notaTotalRespuesta($answer->id,$answer->people_id) ?>
+										<span class="p-1 bg-{{ ($nota!='00')?'success':'warning' }}">{{ $nota }}</span>
+									</td>
+									<td>
+										<div class="btn-group">
+											<?php $people 	= $answer->people_id;?>
+											<?php $test 	= $answer->test_id;?>
+											<?php $question = $answer->question->id;?>
+											<?php $answer 	= $answer->id;?>
+											<a 
+												href="{{ ($nota!='00')?'#':route('nota.nueva',[$people,$test,$question,$answer]) }}"
+												onclick="{{ ($nota!='00')?'alert(\'Ya se le asigno la nota!\')':'' }}" 
+												class="btn btn-sm btn-info" 
+												title="">VER
+											</a>
+										</div>
+									</td>
+								</tr>
+							@endforeach
+						@endif
+
+						@if($estudiante->student->noteselects->count() > 0)
+							{{-- @foreach($estudiante->student->noteselects as $nota) --}}
 							<tr>
-								<td>{{ $answer->test->topic->topic }}</td>
-								<td>{{ $answer->test->created_at->format('d/m/Y') }}</td>
-								<td>{{ $answer->question->text }}</td>
-								<td>{{ $answer->text }}</td>
-								<td>
-									<?php $nota = MyHelper::notaTotalRespuesta($answer->id,$answer->people_id) ?>
-									<span class="p-1 bg-{{ ($nota!='00')?'success':'warning' }}">{{ $nota }}</span>
-								</td>
-								<td>
-									<div class="btn-group">
-										<?php $people 	= $answer->people_id;?>
-										<?php $test 	= $answer->test_id;?>
-										<?php $question = $answer->question->id;?>
-										<?php $answer 	= $answer->id;?>
-										<a 
-											href="{{ ($nota!='00')?'#':route('nota.nueva',[$people,$test,$question,$answer]) }}"
-											onclick="{{ ($nota!='00')?'alert(\'Ya se le asigno la nota!\')':'' }}" 
-											class="btn btn-sm btn-info" 
-											title="">VER
-										</a>
-									</div>
-								</td>
+								<td>hola</td>
+								<td>hola</td>
+								<td>hola</td>
+								<td>hola</td>
+								<td>hola</td>
+								<td>hola</td>
 							</tr>
-						@endforeach
+							{{-- @endforeach --}}
+						@endif
 						</tbody>
 					</table>
 				</div>

@@ -66,17 +66,34 @@
 							</tr>
 						</thead>
 						<tbody>
+							<?php 
+								$todo = true;
+								$respondida = false;
+
+								if (MyHelper::tieneNotaSelect($question->id,$me->people->student->id)) {
+									$todo = false;
+								}
+							?>
+
 							@foreach($question->answersimples as $answer)
-							<?php $true = false; ?>
-							<?php $respondida = false; ?>
+								<?php $respondida = false; ?>
+								@if($misnotas = $me->people->student->noteselects)
+									@foreach($misnotas as $nota)
+										@if($answer->id == $nota->answer_simple_id)
+											<?php $respondida = true; ?>
+										@endif
+									@endforeach
+								@endif
 							<tr>
 								<td>{{ $answer->number }}</td>
 								<td>{{ $answer->text }}</td>
-								<td align="center">
-									<span class="fas {{ ($true)?'fa-check':'' }}"></span>
+								<td class="text-left">
+									<span class="fas {{ ($respondida)?'fa-check':'' }}"></span>
 								</td>
 								<td align="center">
-									<a href="{{ (!$respondida)?route('estudiante.asignar',[$test->id,$question->id,$answer->id,$answer->number]):'#' }}" class="btn btn-sm btn-success" title="Presiona aqui, para asignar esta respusta como la correcta!" onclick="{{ (!$respondida)?'':'alert(\'Ya respondiste!\')'}}">Asignar</a>
+									@if($todo)
+									<a href="{{ ($respondida)?'#':route('estudiante.asignar',[$test->id,$question->id,$answer->id,$answer->number]) }}" class="btn btn-sm btn-success" title="Presiona aqui, para asignar esta respuesta como la correcta!" onclick="{{ (!$respondida)?'':'alert(\'Ya respondiste!\')'}}">Asignar</a>
+									@endif
 								</td>
 							</tr>
 							@endforeach

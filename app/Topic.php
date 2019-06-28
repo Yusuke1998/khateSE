@@ -18,6 +18,11 @@ class Topic extends Model
     	return $this->hasMany(Test::class);
     }
 
+    public function testsimples()
+    {
+        return $this->hasMany(TestSimple::class);
+    }
+
     public function testgoogle()
     {
     	return $this->hasMany(TestGoogle::class);

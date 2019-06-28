@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
 			[
 				'first_name' => 'Adrienne',
 				'last_name'	 => 'Rangel',
-				'avatar'     => 'user.png',
+				'avatar'     => 'adrienne.jpg',
 				'created_at' => now('America/Caracas')
 			],
 			[
@@ -27,13 +27,13 @@ class DatabaseSeeder extends Seeder
 			[
 				'first_name' => 'Jhonny',
 				'last_name'	 => 'Pérez',
-				'avatar'     => 'user.png',
+				'avatar'     => 'jhonny.jpg',
 				'created_at' => now('America/Caracas')
 			],
 			[
 				'first_name' => 'Kamila',
 				'last_name'	 => 'Zerpa',
-				'avatar'     => 'user.png',
+				'avatar'     => 'kamila.jpg',
 				'created_at' => now('America/Caracas')
 			]
 		]);

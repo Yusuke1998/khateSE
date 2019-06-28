@@ -15,6 +15,7 @@ use App\User;
 use App\Section;
 use App\Test;
 use App\TestGoogle;
+use App\TestSimple;
 use App\TextContent;
 
 class HomeController extends Controller
@@ -39,6 +40,7 @@ class HomeController extends Controller
 		$sections 	  = Section::all()->sortByDesc('id');
 		$tests 	  	  = Test::all()->sortByDesc('id');
 		$testsgoogle  = TestGoogle::all()->sortByDesc('id');
+		$testsimple   = TestSimple::all()->sortByDesc('id');
 		$files 	  	  = [];
 		$videos   	  = [];
 		$images	  	  = [];
@@ -65,6 +67,7 @@ class HomeController extends Controller
 					->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 					->with('me', $me)
 					->with('tests',$tests)
+					->with('testsimple',$testsimple)
 					->with('testsgoogle',$testsgoogle)
 					->with('sections', $sections)
 					->with('topics', $topics);
@@ -78,6 +81,7 @@ class HomeController extends Controller
 				->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 				->with('me', $me)
 				->with('tests',$tests)
+				->with('testsimple',$testsimple)
 				->with('testsgoogle',$testsgoogle)
 				->with('sections', $sections)
 				->with('topics', $topics);
@@ -90,6 +94,7 @@ class HomeController extends Controller
 					->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 					->with('me', $me)
 					->with('tests',$tests)
+					->with('testsimple',$testsimple)
 					->with('testsgoogle',$testsgoogle)
 					->with('sections', $sections)
 					->with('topics', $topics);
@@ -259,26 +264,6 @@ class HomeController extends Controller
 			'section_id' 	=> $data['section_id'],
 		]);
 		return back()->with('info', 'Se ha registrado la nueva evaluacion');
-	}
-	
-	// Evaluacion normal
-	public function addevaluacion(Request $req)
-	{
-		$data = request()->validate([
-			'topic_id'		=>	'required',
-			'note'			=>	'required',
-			'section_id'	=>	'required',
-			'people_id'		=>	'required'
-		]);
-
-		$prueba = Test::create([
-			'note'			=>	$data['note'],
-			'topic_id'		=>	$data['topic_id'],
-			'people_id'		=>	$data['people_id'],
-			'section_id'	=>	$data['section_id']
-		]);
-
-		return back()->with('info', 'Se ha registrado la evaluacion');
 	}
 
 

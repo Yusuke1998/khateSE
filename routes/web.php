@@ -24,11 +24,30 @@ Route::get('historial/{student_id}','HomeController@historial')->name('historial
 
 // evaluacion con google forms
 Route::post('addeval', 'HomeController@addeval');
+
+// evaluacion de seleccion simple
+Route::post('addevaluacionsimple', 'TestSimpleController@addevaluacionsimple');
+Route::post('pregunta/simple/guardar','TestSimpleController@pregunta_guardar')->name('preguntasimple.guardar');
+
+Route::post('respuesta/simple/guardar', 'TestSimpleController@respuesta_guardar')->name('respuestasimple.guardar');
+
+Route::get('evaluacion/simple/{id}','TestSimpleController@evaluacion')->name('evaluacionsimple.ver');
+
+Route::get('pregunta/simple/{id_test}','TestSimpleController@pregunta')->name('preguntasimple');
+
+Route::get('respuesta/simple/{id_test}/{id_question}','TestSimpleController@respuesta')->name('respuestasimple');
+
+Route::get('respuestas/simples/{id_test}/{id_question}','TestSimpleController@respuestas')
+->name('respuestassimples.todas');
+
+Route::get('respuesta/simple/asignar/{id_question}/{number}','TestSimpleController@asignar')->name('asignar');
+
 // evaluacion normal
-Route::post('addevaluacion', 'HomeController@addevaluacion');
+Route::post('addevaluacion', 'testController@addevaluacion');
 Route::post('addpregunta', 'HomeController@addpregunta');
 Route::post('addrespuesta', 'HomeController@addrespuesta');
 Route::get('evaluaciones', 'HomeController@evaluaciones');
+
 Route::get('estudiante/evaluacion/{id}','testController@evaluacion_estudiante')->name('estudiante.evaluacion');
 Route::post('pregunta/guardar','testController@pregunta_guardar')->name('pregunta.guardar');
 Route::get('respuesta/{id_test}/{id_question}','testController@respuesta')->name('respuesta');

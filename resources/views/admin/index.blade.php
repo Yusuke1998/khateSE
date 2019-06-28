@@ -191,6 +191,7 @@
 
 					</div>
 					<div class="tab-pane fade" id="test-classic-orange" role="tabpanel" aria-labelledby="test-tab-classic-orange">
+						<p class="h5 text-center">Evaluaciones normales</p>
 						@if($tests->count() > 0)
 						<table class="table">
 							<thead>
@@ -220,7 +221,40 @@
 							</tbody>
 						</table>
 						@else
-						<p>No hay pruebas creadas</p>
+						<p>No hay evaluaciones normales creadas</p>
+						@endif
+
+						<p class="h5 text-center">Evaluaciones de selección</p>
+						@if($tests->count() > 0)
+						<table class="table">
+							<thead>
+								<tr>
+									<th align="center">Fecha</th>
+									<th align="center">Tema</th>
+									<th align="center">Preguntas</th>
+									<th align="center">Ponderacion</th>
+									<th align="center">Seccion</th>
+									<th>Accion</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($testsimple as $test)
+								<tr>
+									<td>{{ $test->created_at->format('d/m/Y') }}</td>
+									<td>{{ $test->topic->topic }}</td>
+									<td align="center">{{ $test->questionsimples->count() }}</td>
+									<td align="center">{{ $test->note }}</td>
+									<td align="center">{{ $test->section->section }}</td>
+									<td>
+										<div class="btn-group">
+										<a class="btn btn-sm btn-flat btn-info" href="{{ route('evaluacionsimple.ver',$test->id) }}" title="">Ver</a>
+									</td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+						@else
+						<p>No hay evaluaciones de seleeción creadas</p>
 						@endif
 					</div>
 				</div>

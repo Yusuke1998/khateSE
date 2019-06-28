@@ -39,6 +39,26 @@ class TestController extends Controller
 				->with('topics', $topics);
 	}
 
+	// Evaluacion normal
+	public function addevaluacion(Request $req)
+	{
+		$data = request()->validate([
+			'topic_id'		=>	'required',
+			'note'			=>	'required',
+			'section_id'	=>	'required',
+			'people_id'		=>	'required'
+		]);
+
+		$prueba = Test::create([
+			'note'			=>	$data['note'],
+			'topic_id'		=>	$data['topic_id'],
+			'people_id'		=>	$data['people_id'],
+			'section_id'	=>	$data['section_id']
+		]);
+
+		return back()->with('info', 'Se ha registrado la evaluacion');
+	}
+
 	public function pregunta($id_test)
 	{
 		$topics   = Topic::all();

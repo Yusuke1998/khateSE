@@ -24,10 +24,11 @@
 				<li class="nav-item">
 					<a class="nav-link" href="{{ url('videos') }}"><i class="fas fa-chart-line mr-2"></i>Vídeos</a>
 				</li>
+				
 
-				<li class="nav-item">
+				{{-- <li class="nav-item">
 					<a class="nav-link" href="{{ url('pruebas') }}"><i class="fas fa-chart-line mr-2"></i>Pruebas</a>
-				</li> 
+				</li>  --}}
 
 				<li class="nav-item">
 					<a class="nav-link" href="{{ url('evaluaciones') }}"><i class="fas fa-chart-line mr-2"></i>Evaluaciones</a>
@@ -43,13 +44,14 @@
 					<a class="nav-link" data-toggle="modal" href="#temanuevo"><i class="fas fa-plus mr-2"></i>Añadir tema</a>
 				</li>
 				
-				<li class="nav-item">
+				{{-- <li class="nav-item">
 					<a class="nav-link" data-toggle="modal" href="#evaluacionnuevogoogle"><i class="fas fa-plus mr-2"></i>Google Forms</a>
-				</li>
-
-				<li class="nav-item">
+				</li> --}}
+				{{-- <li class="nav-item">
 					<a class="nav-link" data-toggle="modal" href="#evaluacionnuevo"><i class="fas fa-plus mr-2"></i>Añadir Evaluación</a>
-				</li>
+				</li> --}}
+
+
 
 				<!-- Dropdown -->
 				<li class="nav-item dropdown">
@@ -60,6 +62,22 @@
 						</a>
 						<a class="dropdown-item" data-toggle="modal" href="#addcontenttext">
 							<i class="fas fa-edit mr-2"></i>Contenido Textual
+						</a>
+					</div>
+				</li>
+				
+				<!-- Dropdown -->
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-plus"></i> Añadir Evaluacion</a>
+					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+						<a class="dropdown-item" data-toggle="modal" href="#evaluacionnuevo">
+							<i class="fas fa-image mr-2"></i>Preguntas
+						</a>
+						{{-- <a class="dropdown-item" data-toggle="modal" href="#verdfalsnuevo">
+							<i class="fas fa-edit mr-2"></i>Verdadero/Falso
+						</a> --}}
+						<a class="dropdown-item" data-toggle="modal" href="#selectnuevo">
+							<i class="fas fa-edit mr-2"></i>Selección
 						</a>
 					</div>
 				</li>
@@ -177,6 +195,96 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h5 class="modal-title" id="exampleModalLabel">Añadir evaluación</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form action="{{ url('addevaluacion') }}" method="post" enctype="multipart/form-data">
+				@csrf
+				<div class="modal-body">
+					<div class="col md-form mt-5">
+						<select class="mdb-select dropdown-primary md-form colorful-select {{ $errors->has('topic_id') ? ' is-invalid' : '' }}" name="topic_id" required id="tema">
+							<option disabled selected>Escoge el tema de la evaluación</option>
+							@foreach( $topics as $topic )
+								<option value="{{ $topic->id }}">{{ $topic->topic }}</option>
+							@endforeach
+						</select>
+					</div>
+					<div class="form-group md-form my-5">
+						<i class="fas fa-edit prefix"></i>
+						<input id="note" type="number" name="note" class="form-control validate {{ $errors->has('note') ? ' is-invalid' : '' }}">
+						<label for="note">Ponderacion total de la evaluacion</label>
+					</div>
+					<div class="col md-form">
+						<select name="section_id" class="mdb-select colorful-select dropdown-primary {{ $errors->has('section_id') ? ' is-invalid' : '' }}" id="type" required>
+							<option disabled selected>Selecciona la seccion</option>
+							@foreach($sections as $section)
+							<option value="{{ $section->id }}">{{ $section->section }}</option>
+							@endforeach
+						</select>
+					</div>
+					<input type="hidden" name="people_id" value="{{ Auth::user()->people_id }}">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn-md btn red lighten-1" data-dismiss="modal"><i class="fas fa-times mr-2"></i>Cerrar</button>
+					<button type="submit" class="btn-md btn cyan lighten-2"><i class="fas fa-save mr-2"></i>Guardar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- Modal añadir evaluacion de seleccion simple-->
+<div class="modal fade" id="selectnuevo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-md" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Añadir evaluación, Selección</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form action="{{ url('addevaluacionsimple') }}" method="post" enctype="multipart/form-data">
+				@csrf
+				<div class="modal-body">
+					<div class="col md-form mt-5">
+						<select class="mdb-select dropdown-primary md-form colorful-select {{ $errors->has('topic_id') ? ' is-invalid' : '' }}" name="topic_id" required id="tema">
+							<option disabled selected>Escoge el tema de la evaluación</option>
+							@foreach( $topics as $topic )
+								<option value="{{ $topic->id }}">{{ $topic->topic }}</option>
+							@endforeach
+						</select>
+					</div>
+					<div class="form-group md-form my-5">
+						<i class="fas fa-edit prefix"></i>
+						<input id="note" type="number" name="note" class="form-control validate {{ $errors->has('note') ? ' is-invalid' : '' }}">
+						<label for="note">Ponderacion total de la evaluacion</label>
+					</div>
+					<div class="col md-form">
+						<select name="section_id" class="mdb-select colorful-select dropdown-primary {{ $errors->has('section_id') ? ' is-invalid' : '' }}" id="type" required>
+							<option disabled selected>Selecciona la seccion</option>
+							@foreach($sections as $section)
+							<option value="{{ $section->id }}">{{ $section->section }}</option>
+							@endforeach
+						</select>
+					</div>
+					<input type="hidden" name="people_id" value="{{ Auth::user()->people_id }}">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn-md btn red lighten-1" data-dismiss="modal"><i class="fas fa-times mr-2"></i>Cerrar</button>
+					<button type="submit" class="btn-md btn cyan lighten-2"><i class="fas fa-save mr-2"></i>Guardar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- Modal añadir evaluacion de verdadero o falso-->
+<div class="modal fade" id="verdfalsnuevo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-md" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Añadir evaluación, Verdadero o Falso</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>

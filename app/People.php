@@ -33,6 +33,11 @@ class People extends Model
         return $this->hasMany(Test::class);
     }
 
+    public function testsimples()
+    {
+        return $this->hasMany(TestSimple::class);
+    }
+
     public function answers()
     {
         return $this->hasMany(Answer::class);

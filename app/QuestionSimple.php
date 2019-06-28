@@ -10,6 +10,11 @@ class QuestionSimple extends Model
     	'text','value','test_simple_id','good'
     ];
 
+    public function noteselects()
+    {
+        return $this->hasMany(NoteSelect::class);
+    }
+
     public function testsimple()
     {
     	return $this->belongsTo(TestSimple::class);

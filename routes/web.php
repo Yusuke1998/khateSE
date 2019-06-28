@@ -40,7 +40,14 @@ Route::get('respuesta/simple/{id_test}/{id_question}','TestSimpleController@resp
 Route::get('respuestas/simples/{id_test}/{id_question}','TestSimpleController@respuestas')
 ->name('respuestassimples.todas');
 
+Route::get('estudiante/pregunta/simple/{id_test}/{id_question}','TestSimpleController@preguntas_simples')
+->name('estudiante.pregunta.simple');
+
 Route::get('respuesta/simple/asignar/{id_question}/{number}','TestSimpleController@asignar')->name('asignar');
+
+Route::get('respuesta/simple/asignar/{id_test}/{id_question}/{answer_id}/{number}','TestSimpleController@estudiante_asignar')->name('estudiante.asignar');
+
+Route::get('estudiante/evaluacion/simple/{id}','TestSimpleController@evaluacion_simple_estudiante')->name('evaluacion.simple');
 
 // evaluacion normal
 Route::post('addevaluacion', 'testController@addevaluacion');

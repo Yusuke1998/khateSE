@@ -35,4 +35,9 @@ class Student extends Model
         return $this->belongsToMany(Test::class);
     }
 
+    public function noteselects()
+    {
+        return $this->hasMany(NoteSelect::class);
+    }
+
 }

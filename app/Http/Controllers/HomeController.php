@@ -199,19 +199,21 @@ class HomeController extends Controller
 
 	public function evaluaciones()
 	{
-		$topics   = Topic::all();
-		$sections = Section::all()->sortByDesc('id');
-		$id = Auth::user()->id;
-		$me = User::find($id);
-		$secction = $me->people->student->section->id;
-		$tests 	  = Test::where('section_id',$secction)->get();
-		$testsgoogle 	  = TestGoogle::where('section_id',$secction)->get();
+		$topics   			= Topic::all();
+		$sections 			= Section::all()->sortByDesc('id');
+		$id 				= Auth::user()->id;
+		$me 				= User::find($id);
+		$secction 			= $me->people->student->section->id;
+		$tests 	  			= Test::where('section_id',$secction)->get();
+		$testsimples 	  	= TestSimple::where('section_id',$secction)->get();
+		$testsgoogle 	  	= TestGoogle::where('section_id',$secction)->get();
 
 		return view('user.evaluaciones')
 				->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 				->with('me', $me)
 				->with('tests',$tests)
 				->with('testsgoogle',$testsgoogle)
+				->with('testsimples',$testsimples)
 				->with('sections', $sections)
 				->with('topics', $topics);
 	}

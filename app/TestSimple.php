@@ -34,4 +34,9 @@ class TestSimple extends Model
     {
         return $this->hasMany(QuestionSimple::class);
     }
+
+    public function noteselects()
+    {
+        return $this->hasMany(NoteSelect::class);
+    }
 }

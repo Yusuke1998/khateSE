@@ -1,11 +1,8 @@
 @include('layouts.header')
 @include('layouts.navbar')
-
 <br>
 <div class="container my-5 pt-5 animated fadeIn bg">
-
 	<div class="row">
-
 		<div class="col-md-3 col-sm-12 animated slideInLeft slow">
 			<div class="row">
 				<div class="col-sm-6 col-md-12">
@@ -53,23 +50,10 @@
 			@include('layouts.info')
 			<div class="card" >
 				<div class="card-header">
-					<p style="text-transform: uppercase; font-family: sans-serif;">Evaluacion de Selección</p>
-					<p style="text-transform: uppercase; font-family: sans-serif;">
-						"{{ $test->topic->topic }}"</p>
-					<ul style="text-transform: uppercase; font-family: sans-serif; list-style: upper-roman; color: #004">
-						<li>Ponderacion total de la evaluacion: {{ $a = $test->note }}pts</li>
-						<li>Valor total de preguntas: {{ $b = $test->questionsimples->sum('value') }}pts</li>
-					</ul>
+					{{ $test->topic->topic }}
 				</div>
 				<?php $count = $test->questionsimples()->count() ?>
-
-				@if($b < $a && $count >= 1)
-				<div class="card-body">
-					<p class="text-center">Agrega más preguntas!</p>
-					<a href="{{ route('preguntasimple',$test->id) }}" class="pull-right btn btn-info btn-sm btn-flat" title="nueva pregunta">Nueva pregunta</a>
-				</div>
-				@endif
-
+				<?php $respondida = false;?>
 				@if($count >= 1)
 				<div class="card-body">
 					<table class="table">
@@ -77,52 +61,38 @@
 							<tr>
 								<th>Pregunta</th>
 								<th>Valor</th>
-								<th>Rp. Correcta</th>
-								<th>Respuestas</th>
+								<th></th>
+								<th>Nota</th>
+								<th>Acción</th>
 							</tr>
 						</thead>
 						<tbody>
 							@foreach($test->questionsimples as $question)
-							<tr>
-								<?php $red = false; ?>
+							<tr align="center">
 								<td>{{ $question->text }}</td>
 								<td>{{ $question->value }}</td>
-								<td>{{$cantg = $question->good }}</td>
-								<?php $cantc = $question->answersimples->count(); ?>
-								<?php if($cantc<$cantg){$red=true;}else{$red=false;} ?>
-								<td class="{{ ($red)?'text-danger':'text-success' }}">
-									{{ $cantc }}</td>
+								<td></td>
+								<td>{{ MyHelper::notaSimpleTotalRespuesta($me->people->student->id,$question->id) }}</td>
 								<td>
-									<a href="{{ route('respuestasimple',[$test->id,$question->id]) }}" title="Debes agregar minimo {{ $question->good }} {{ ($cantg>1)?'respuestas!':'respuesta!' }}">
-										<span class="fas fa-plus"></span>
-									</a>
-									<a href="{{ route('respuestassimples.todas',[$test->id,$question->id]) }}" title="Ver todas las respuestas">
-										<span class="fas fa-eye"></span>
-									</a>
+									<a href="{{ route('estudiante.pregunta.simple',[$test->id,$question->id]) }}" title="Responder" onclick="{{ (!$respondida)?route('respuesta',[$test->id,$question->id]):'alert(\'Ya respondiste!\')'}}">Responder</a>
 								</td>
 							</tr>
 							@endforeach
 						</tbody>
 						<tfoot>
-							<tr>
-								<td>VALOR TOTAL</td>
-								<td>{{ $test->questionsimples->sum('value') }}</td>
-								<td></td>
-								<td></td>
+							<tr class="bg bg-info text-white">
+								<td class="text-center">TOTAL EVALUACION</td>
+								<td class="text-center">{{ $total_evl }}pts</td>
+								<td class="text-center">TOTAL OBTENIDO</td>
+								<td class="text-center">{{ $total_pts }}pts</td>
+								<td class="text-center" style="font-family: serif; font-size: 18px;color: {{ ($aprobado=='Aprobado')?'green;':'red;' }}"><b>{{ $aprobado }}</b></td>
 							</tr>
 						</tfoot>
 					</table>
-				</div>
-				@else
-				<div class="card-body">
-					<p class="text-center">Agrega preguntas a esta evaluacion!</p>
-					<a href="{{ route('preguntasimple',$test->id) }}" class="pull-right btn btn-info btn-sm btn-flat" title="nueva pregunta">Nueva pregunta</a>
 				</div>
 				@endif
 			</div>
 		</div>
 	</div>
 </div>
-
-
 @include('layouts.footer')

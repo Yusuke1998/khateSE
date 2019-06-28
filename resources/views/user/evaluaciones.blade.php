@@ -53,6 +53,7 @@
 			@include('layouts.info')
 			<div class="card">
 				<div class="card-body">
+					<p class="h5 text-center">Evaluación Normal</p>
 					@if($tests->count() > 0)
 						<table class="table">
 							<thead>
@@ -81,6 +82,43 @@
 									<td align="center">
 										<div class="btn-group">
 										<a class="btn btn-sm btn-flat btn-info" href="{{ route('estudiante.evaluacion',$test->id) }}" title="">Ver</a>
+									</td>
+								</tr>
+								@endforeach
+							</tbody>
+						</table>
+						@else
+						<p>No hay evaluaciones creadas</p>
+					@endif
+					<p class="h5 text-center">Evaluación de Selección</p>
+					@if($testsimples->count() > 0)
+						<table class="table">
+							<thead>
+								<tr>
+									<th align="center">Fecha</th>
+									<th align="center">Tema</th>
+									<th align="center">Ponderacion</th>
+									<th align="center">Preguntas</th>
+									<th align="center">Seccion</th>
+									<th align="center">Nota</th>
+									<th align="center">Accion</th>
+								</tr>
+							</thead>
+							<tbody>
+								<?php $total_pts=0; ?>
+								@foreach($testsimples as $test)
+								<tr>
+									<td align="left">{{ $test->created_at->format('d/m/Y') }}</td>
+									<td align="left">{{ $test->topic->topic }}</td>
+									<td align="center">{{ $test->note }}</td>
+									<td align="center">{{ $test->questionsimples->count() }}</td>
+									<td align="center">{{ $test->section->section }}</td>
+									<td align="center">
+										{{ MyHelper::notaTotal($test->id,$me->people->id) }}
+									</td>
+									<td align="center">
+										<div class="btn-group">
+										<a class="btn btn-sm btn-flat btn-info" href="{{ route('evaluacion.simple',$test->id) }}" title="">Ver</a>
 									</td>
 								</tr>
 								@endforeach

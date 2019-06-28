@@ -47,4 +47,9 @@ class People extends Model
     {
         return $this->hasMany(Note::class);
     }
+
+    public function noteselects()
+    {
+        return $this->hasMany(NoteSelect::class);
+    }
 }

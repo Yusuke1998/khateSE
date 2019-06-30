@@ -44,7 +44,7 @@ Route::get('estudiante/evaluacion/simple/{id}','TestSimpleController@evaluacion_
 Route::post('addevaluacion', 'testController@addevaluacion');
 Route::post('addpregunta', 'HomeController@addpregunta');
 Route::post('addrespuesta', 'HomeController@addrespuesta');
-Route::get('evaluaciones', 'HomeController@evaluaciones');
+Route::get('evaluaciones', 'HomeController@evaluaciones')->name('evaluaciones');
 Route::get('estudiante/evaluacion/{id}','testController@evaluacion_estudiante')->name('estudiante.evaluacion');
 Route::post('pregunta/guardar','testController@pregunta_guardar')->name('pregunta.guardar');
 Route::get('respuesta/{id_test}/{id_question}','testController@respuesta')->name('respuesta');

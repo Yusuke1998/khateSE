@@ -50,6 +50,9 @@
 		</div>
 			
 		<div class="col-md-9 col-sm-12 animated slideInRight">
+			<div class="col-md-12 col-sm-12 text-right">
+				<a href="{{ route('evaluacion.simple',$test->id) }}" class="btn btn-sm btn-warning" title="">Volver</a>
+			</div>
 			@include('layouts.info')
 			<div class="card" >
 				<div class="card-header">

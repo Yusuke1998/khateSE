@@ -17,6 +17,7 @@ use App\Topic;
 use App\User;
 
 class MyHelper{
+	
 	// Calcular nota completa obtenida en un test
     public static function notaTotal($id_test,$id_people){
 		$test = Test::where('id',$id_test)->first();
@@ -62,7 +63,7 @@ class MyHelper{
 		return $nota_total;
 	}
 
-	// sumar todas las notas de un estudiante en una evaluacion de seleccion
+	// Se encarga de sumar todas las notas de un estudiante en una evaluacion de seleccion
 	public static function notaSimpleTotal($id_test,$id_student){
 		$total_pts = 0;
 		$notas = NoteSelect::where('test_simple_id',$id_test)
@@ -75,6 +76,7 @@ class MyHelper{
 		return $total_pts;
 	}
 
+	// Compara el id de una respuesta de la nota de un estudiante con el id de la respuesta de una pregunta
 	public static function tieneNotaSelect($id_question,$id_student){
 		$estudiante = Student::find($id_student);
 		$pregunta = QuestionSimple::find($id_question);
@@ -88,6 +90,18 @@ class MyHelper{
 						return true;
 					}
 				}
+			}
+		}
+		return false;
+	}
+
+	// Compara el student_id de una nota, con un id de estudiante recibido 
+	public static function tieneNotaSelectII($id_student,$id_question){
+		$pregunta = QuestionSimple::find($id_question);
+
+		foreach ($pregunta->noteselects as $nota) {
+			if ($nota->student_id == $id_student) {
+				return true;
 			}
 		}
 		return false;

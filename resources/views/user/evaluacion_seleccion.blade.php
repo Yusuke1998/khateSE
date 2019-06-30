@@ -45,8 +45,7 @@
 				</div>
 			</div>
 		</div>
-			
-		<div class="col-md-9 col-sm-12 animated slideInRight">
+		<div class="col-md-7 col-sm-12 animated slideInRight">
 			@include('layouts.info')
 			<div class="card" >
 				<div class="card-header">
@@ -68,22 +67,25 @@
 						</thead>
 						<tbody>
 							@foreach($test->questionsimples as $question)
+							<?php $true = MyHelper::tieneNotaSelectII($me->people->student->id,$question->id) ?>
 							<tr align="center">
 								<td>{{ $question->text }}</td>
 								<td>{{ $question->value }}</td>
-								<td></td>
+								<td align="center">
+									<span class="fas {{ ($true)?'fa-check':'' }}"></span>
+								</td>
 								<td>{{ MyHelper::notaSimpleTotalRespuesta($me->people->student->id,$question->id) }}</td>
 								<td>
-									<a href="{{ route('estudiante.pregunta.simple',[$test->id,$question->id]) }}" title="Responder" onclick="{{ (!$respondida)?route('respuesta',[$test->id,$question->id]):'alert(\'Ya respondiste!\')'}}">Responder</a>
+									<a href="{{ route('estudiante.pregunta.simple',[$test->id,$question->id]) }}" title="{{ (!$true)?'Responder':'Ver' }}">{{ (!$true)?'Responder':'Ver' }}</a>
 								</td>
 							</tr>
 							@endforeach
 						</tbody>
 						<tfoot>
 							<tr class="bg bg-info text-white">
-								<td class="text-center">TOTAL EVALUACION</td>
+								<td class="text-center">EVALUACION</td>
 								<td class="text-center">{{ $total_evl }}pts</td>
-								<td class="text-center">TOTAL OBTENIDO</td>
+								<td class="text-center">OBTENIDO</td>
 								<td class="text-center">{{ $total_pts }}pts</td>
 								<td class="text-center" style="font-family: serif; font-size: 18px;color: {{ ($aprobado=='Aprobado')?'green;':'red;' }}"><b>{{ $aprobado }}</b></td>
 							</tr>
@@ -92,6 +94,9 @@
 				</div>
 				@endif
 			</div>
+		</div>
+		<div class="col-md-2 text-right">
+			<a href="{{ route('evaluaciones') }}" class="btn btn-sm btn-warning" title="">Volver</a>
 		</div>
 	</div>
 </div>

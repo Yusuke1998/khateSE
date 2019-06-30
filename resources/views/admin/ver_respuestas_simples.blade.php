@@ -1,11 +1,8 @@
 @include('layouts.header')
 @include('layouts.navbar')
-
 <br>
 <div class="container my-5 pt-5 animated fadeIn bg">
-
 	<div class="row">
-
 		<div class="col-md-3 col-sm-12 animated slideInLeft slow">
 			<div class="row">
 				<div class="col-sm-6 col-md-12">
@@ -47,9 +44,8 @@
 					</div>
 				</div>
 			</div>
-		</div>
-			
-		<div class="col-md-9 col-sm-12 animated slideInRight">
+		</div>	
+		<div class="col-md-7 col-sm-12 animated slideInRight">
 			@include('layouts.info')
 			<div class="card" >
 				<div class="card-header">
@@ -85,10 +81,11 @@
 					</table>
 				</div>
 			</div>
-			
+		</div>
+		<div class="col-md-2 text-right">
+			<a href="{{ route('evaluacionsimple.ver',$test->id) }}" class="btn btn-sm btn-warning" title="">Volver</a>
 		</div>
 	</div>
 </div>
-
 
 @include('layouts.footer')

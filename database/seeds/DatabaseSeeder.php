@@ -120,7 +120,6 @@ class DatabaseSeeder extends Seeder
 			],
 		]);
 
-
 		DB::table('contents')->insert([
 			[
 				'name'		 => 'Cable Par trenzado cat 5e',
@@ -201,6 +200,16 @@ class DatabaseSeeder extends Seeder
 			[
 			'topic_id'	 	=>  5,
 			'note'			=>	'100',
+			'people_id'		=>	1,
+			'section_id'	=>	2,
+			'created_at' 	=> now('America/Caracas')
+			]
+		]);
+
+		DB::table('test_simples')->insert([
+			[
+			'note'			=>	'100',
+			'topic_id'	 	=>  4,
 			'people_id'		=>	1,
 			'section_id'	=>	2,
 			'created_at' 	=> now('America/Caracas')
@@ -305,6 +314,131 @@ class DatabaseSeeder extends Seeder
 				'value'		=>	'50',
 				'test_id'	=>	5
 			]
+		]);
+
+		DB::table('question_simples')->insert([
+			[
+				'text'				=>	'Que son las redes neuronales?',
+				'value'				=>	'25',
+				'good'				=>	'2',
+				'test_simple_id'	=>	1
+			],
+			[
+				'text'				=>	'Que es un hacker?',
+				'value'				=>	'25',
+				'good'				=>	'2',
+				'test_simple_id'	=>	1
+			],
+			[
+				'text'				=>	'Que se conoce como gateway?',
+				'value'				=>	'25',
+				'good'				=>	'2',
+				'test_simple_id'	=>	1
+			],
+			[
+				'text'				=>	'Que es un ciclo repetitivo en programacion?',
+				'value'				=>	'25',
+				'good'				=>	'2',
+				'test_simple_id'	=>	1
+			],
+		]);
+
+		DB::table('answer_simples')->insert([
+			[
+				'number'				=>	'1',
+				'text'					=>	'Soy una respuesta ficticia generada para una prueba!',
+				'people_id'				=>	'1',
+				'question_simple_id'	=>	'1',
+				'test_simple_id'		=>	'1'
+			],
+			[
+				'number'				=>	'2',
+				'text'					=>	'Soy una respuesta ficticia generada para una prueba!',
+				'people_id'				=>	'1',
+				'question_simple_id'	=>	'1',
+				'test_simple_id'		=>	'1'
+			],
+			[
+				'number'				=>	'3',
+				'text'					=>	'Soy una respuesta ficticia generada para una prueba!',
+				'people_id'				=>	'1',
+				'question_simple_id'	=>	'1',
+				'test_simple_id'		=>	'1'
+			],
+			[
+				'number'				=>	'4',
+				'text'					=>	'Soy una respuesta ficticia generada para una prueba!',
+				'people_id'				=>	'1',
+				'question_simple_id'	=>	'1',
+				'test_simple_id'		=>	'1'
+			],
+			// -----------------------------------------------------------------------------
+			[
+				'number'				=>	'1',
+				'text'					=>	'Soy una respuesta ficticia generada para una prueba!',
+				'people_id'				=>	'1',
+				'question_simple_id'	=>	'2',
+				'test_simple_id'		=>	'1'
+			],
+			[
+				'number'				=>	'2',
+				'text'					=>	'Soy una respuesta ficticia generada para una prueba!',
+				'people_id'				=>	'1',
+				'question_simple_id'	=>	'2',
+				'test_simple_id'		=>	'1'
+			],
+			[
+				'number'				=>	'3',
+				'text'					=>	'Soy una respuesta ficticia generada para una prueba!',
+				'people_id'				=>	'1',
+				'question_simple_id'	=>	'2',
+				'test_simple_id'		=>	'1'
+			],
+			[
+				'number'				=>	'4',
+				'text'					=>	'Soy una respuesta ficticia generada para una prueba!',
+				'people_id'				=>	'1',
+				'question_simple_id'	=>	'2',
+				'test_simple_id'		=>	'1'
+			],
+			// -----------------------------------------------------------------------------
+			[
+				'number'				=>	'1',
+				'text'					=>	'Soy una respuesta ficticia generada para una prueba!',
+				'people_id'				=>	'1',
+				'question_simple_id'	=>	'3',
+				'test_simple_id'		=>	'1'
+			],
+			[
+				'number'				=>	'2',
+				'text'					=>	'Soy una respuesta ficticia generada para una prueba!',
+				'people_id'				=>	'1',
+				'question_simple_id'	=>	'3',
+				'test_simple_id'		=>	'1'
+			],
+			// -----------------------------------------------------------------------------
+			[
+				'number'				=>	'1',
+				'text'					=>	'Soy una respuesta ficticia generada para una prueba!',
+				'people_id'				=>	'1',
+				'question_simple_id'	=>	'4',
+				'test_simple_id'		=>	'1'
+			],
+			[
+				'number'				=>	'2',
+				'text'					=>	'Soy una respuesta ficticia generada para una prueba!',
+				'people_id'				=>	'1',
+				'question_simple_id'	=>	'4',
+				'test_simple_id'		=>	'1'
+			],
+			[
+				'number'				=>	'3',
+				'text'					=>	'Soy una respuesta ficticia generada para una prueba!',
+				'people_id'				=>	'1',
+				'question_simple_id'	=>	'4',
+				'test_simple_id'		=>	'1'
+			],
+			// -----------------------------------------------------------------------------
 		]);
 	}
 }

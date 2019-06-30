@@ -3,9 +3,7 @@
 
 <br>
 <div class="container my-5 pt-5 animated fadeIn bg">
-
 	<div class="row">
-
 		<div class="col-md-3 col-sm-12 animated slideInLeft slow">
 			<div class="row">
 				<div class="col-sm-6 col-md-12">
@@ -48,7 +46,6 @@
 				</div>
 			</div>
 		</div>
-			
 		<div class="col-md-9 col-sm-12 animated slideInRight">
 			@include('layouts.info')
 			<div class="card">
@@ -125,11 +122,10 @@
 							</tbody>
 						</table>
 						@else
-						<p>No hay evaluaciones creadas</p>
+						<p>No hay evaluaciones de selección creadas</p>
 					@endif
 				</div>
 			</div>
-			
 		</div>
 	</div>
 </div>

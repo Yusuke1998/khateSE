@@ -111,7 +111,7 @@
 									<td align="center">{{ $test->questionsimples->count() }}</td>
 									<td align="center">{{ $test->section->section }}</td>
 									<td align="center">
-										{{ MyHelper::notaTotal($test->id,$me->people->id) }}
+										{{ MyHelper::notaTotalSimple($test->id,$me->people->id) }}
 									</td>
 									<td align="center">
 										<div class="btn-group">

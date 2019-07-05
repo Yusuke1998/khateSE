@@ -54,6 +54,7 @@
 				<div class="card-header">
 					<p>Estudiante: {{ $estudiante->people->first_name }} {{ $estudiante->people->last_name }}</p>
 					<p>Seccion: {{ $estudiante->people->student->section->section }}</p>
+					<p class="h4 text-center">Evaluación de preguntas</p>
 				</div>
 				<?php $estudiante = $estudiante->people;?>
 				<div class="card-body">
@@ -97,21 +98,36 @@
 								</tr>
 							@endforeach
 						@endif
-
-						@if($estudiante->student->noteselects->count() > 0)
-							{{-- @foreach($estudiante->student->noteselects as $nota) --}}
-							<tr>
-								<td>hola</td>
-								<td>hola</td>
-								<td>hola</td>
-								<td>hola</td>
-								<td>hola</td>
-								<td>hola</td>
-							</tr>
-							{{-- @endforeach --}}
-						@endif
-						</tbody>
 					</table>
+					<div class="card-header">
+						<p class="h4 text-center">Evaluación de selección</p>
+					</div>
+					<div class="card-body">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Evaluacion</th>
+									<th>Fecha</th>
+									<th>Pregunta</th>
+									<th>Respuesta</th>
+									<th>Nota</th>
+								</tr>
+							</thead>
+							<tbody>
+							@if($estudiante->student->noteselects->count() > 0)
+								@foreach($estudiante->student->noteselects as $nota)
+								<tr>
+									<td>{{ $nota->testsimple->topic->topic }}</td>
+									<td>{{ $nota->testsimple->created_at->format('d/m/Y') }}</td>
+									<td>{{ $nota->questionsimple->text }}</td>
+									<td>{{ $nota->answersimple->text }}</td>
+									<td>{{ $nota->note }}</td>
+								</tr>
+								@endforeach
+							@endif
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>

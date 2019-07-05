@@ -23,14 +23,29 @@ class MyHelper{
 		$test = Test::where('id',$id_test)->first();
 		$total_pts = 0;
 		// test/questions/ansrers/notes
-		foreach ($test->questions as $question) {
-			if ($question->answers) {
-				foreach ($question->answers as $answer) {
-					if ($answer->people_id === $id_people) {
-						$total_pts += $answer->notes->sum('note');
+		if (isset($test->questions)) {
+			foreach ($test->questions as $question) {
+				if ($question->answers) {
+					foreach ($question->answers as $answer) {
+						if ($answer->people_id === $id_people) {
+							$total_pts += $answer->notes->sum('note');
+						}
 					}
 				}
 			}
+		}
+		return $total_pts;
+	}
+
+	// Calcular nota completa obtenida en un testsimple
+    public static function notaTotalSimple($id_test,$id_people){
+		$notasimple = NoteSelect::where('people_id',$id_people)
+		->where('test_simple_id',$id_test)
+		->get();
+
+		$total_pts = 0;
+		foreach ($notasimple as $note) {
+			$total_pts += $note->note;
 		}
 		return $total_pts;
 	}

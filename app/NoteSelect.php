@@ -12,17 +12,17 @@ class NoteSelect extends Model
 
     public function testsimple()
     {
-    	return $this->belongsTo(TestSimple::class);
+    	return $this->belongsTo(TestSimple::class,'test_simple_id');
     }
 
     public function questionsimple()
     {
-    	return $this->belongsTo(QuestionSimple::class);
+    	return $this->belongsTo(QuestionSimple::class,'question_simple_id');
     }
 
     public function answersimple()
     {
-    	return $this->belongsTo(AnswerSimple::class);
+    	return $this->belongsTo(AnswerSimple::class,'answer_simple_id');
     }
 
     public function people()

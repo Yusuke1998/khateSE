@@ -1,8 +1,5 @@
 <?php
 
-//"caffeinated/shinobi": "^3.2",
-
-
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 

@@ -197,6 +197,7 @@
 							<thead>
 								<tr>
 									<th align="center">Fecha</th>
+									<th align="center">Tiempo</th>
 									<th align="center">Tema</th>
 									<th align="center">Preguntas</th>
 									<th align="center">Ponderacion</th>
@@ -208,6 +209,7 @@
 								@foreach($tests as $test)
 								<tr>
 									<td>{{ $test->created_at->format('d/m/Y') }}</td>
+									<td>{{ $test->time }} <small>minutos</small></td>
 									<td>{{ $test->topic->topic }}</td>
 									<td align="center">{{ $test->questions->count() }}</td>
 									<td align="center">{{ $test->note }}</td>
@@ -230,6 +232,7 @@
 							<thead>
 								<tr>
 									<th align="center">Fecha</th>
+									<th align="center">Tiempo</th>
 									<th align="center">Tema</th>
 									<th align="center">Preguntas</th>
 									<th align="center">Ponderacion</th>
@@ -241,6 +244,7 @@
 								@foreach($testsimple as $test)
 								<tr>
 									<td>{{ $test->created_at->format('d/m/Y') }}</td>
+									<td>{{ $test->time }} <small>minutos</small></td>
 									<td>{{ $test->topic->topic }}</td>
 									<td align="center">{{ $test->questionsimples->count() }}</td>
 									<td align="center">{{ $test->note }}</td>

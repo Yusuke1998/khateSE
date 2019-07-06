@@ -14,7 +14,6 @@ use App\People;
 use App\User;
 use App\Section;
 use App\Test;
-use App\TestGoogle;
 use App\TestSimple;
 use App\TextContent;
 
@@ -39,7 +38,6 @@ class HomeController extends Controller
 		$textcontents = TextContent::all()->sortByDesc('id');
 		$sections 	  = Section::all()->sortByDesc('id');
 		$tests 	  	  = Test::all()->sortByDesc('id');
-		$testsgoogle  = TestGoogle::all()->sortByDesc('id');
 		$testsimple   = TestSimple::all()->sortByDesc('id');
 		$files 	  	  = [];
 		$videos   	  = [];
@@ -68,7 +66,6 @@ class HomeController extends Controller
 					->with('me', $me)
 					->with('tests',$tests)
 					->with('testsimple',$testsimple)
-					->with('testsgoogle',$testsgoogle)
 					->with('sections', $sections)
 					->with('topics', $topics);
 		} elseif (Auth::user()->type == 'teacher') {
@@ -82,7 +79,6 @@ class HomeController extends Controller
 				->with('me', $me)
 				->with('tests',$tests)
 				->with('testsimple',$testsimple)
-				->with('testsgoogle',$testsgoogle)
 				->with('sections', $sections)
 				->with('topics', $topics);
 		}else{
@@ -95,7 +91,6 @@ class HomeController extends Controller
 					->with('me', $me)
 					->with('tests',$tests)
 					->with('testsimple',$testsimple)
-					->with('testsgoogle',$testsgoogle)
 					->with('sections', $sections)
 					->with('topics', $topics);
 		}
@@ -105,7 +100,6 @@ class HomeController extends Controller
 	{
 		$sections = Section::all()->sortByDesc('id');
 		$tests 	  = Test::all()->sortByDesc('id');
-		$testsgoogle 	  = TestGoogle::all()->sortByDesc('id');
 		$topics   = Topic::all();
 		$id = Auth::user()->id;
 		$me = User::find($id);
@@ -124,7 +118,6 @@ class HomeController extends Controller
 				->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 				->with('me', $me)
 				->with('tests',$tests)
-				->with('testsgoogle',$testsgoogle)
 				->with('sections', $sections)
 				->with('topics', $topics);
 	}
@@ -134,7 +127,6 @@ class HomeController extends Controller
 		$topics   = Topic::all();
 		$sections 	  = Section::all()->sortByDesc('id');
 		$tests 	  = Test::all()->sortByDesc('id');
-		$testsgoogle 	  = TestGoogle::all()->sortByDesc('id');
 		$id = Auth::user()->id;
 		$me = User::find($id);
 		$contents = Content::where('section_id',$me->people->student->section->id)->get();
@@ -151,7 +143,6 @@ class HomeController extends Controller
 				->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 				->with('me', $me)
 				->with('tests',$tests)
-				->with('testsgoogle',$testsgoogle)
 				->with('sections', $sections)
 				->with('topics', $topics);
 	}
@@ -160,7 +151,6 @@ class HomeController extends Controller
 	{
 		$sections 	  	= Section::all()->sortByDesc('id');
 		$tests 	  		= Test::all()->sortByDesc('id');
-		$testsgoogle 	= TestGoogle::all()->sortByDesc('id');
 		$topics      	= Topic::all();
 		$estudiantes 	= User::where('type', 'student')->get();
 		$id = Auth::user()->id;
@@ -172,7 +162,6 @@ class HomeController extends Controller
 				->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 				->with('me', $me)
 				->with('tests',$tests)
-				->with('testsgoogle',$testsgoogle)
 				->with('sections', $sections)
 				->with('topics', $topics);
 	}
@@ -184,7 +173,6 @@ class HomeController extends Controller
 		$id = Auth::user()->id;
 		$me = User::find($id);
 		$tests = Test::where('section_id',$me->people->student->section->id)->get();
-		$testsgoogle = TestGoogle::where('section_id',$me->people->student->section->id)->get();
 		$id = Auth::user()->id;
 		$me = User::find($id);
 
@@ -192,7 +180,6 @@ class HomeController extends Controller
 				->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 				->with('me', $me)
 				->with('tests',$tests)
-				->with('testsgoogle',$testsgoogle)
 				->with('sections', $sections)
 				->with('topics', $topics);
 	}
@@ -206,13 +193,11 @@ class HomeController extends Controller
 		$secction 			= $me->people->student->section->id;
 		$tests 	  			= Test::where('section_id',$secction)->get();
 		$testsimples 	  	= TestSimple::where('section_id',$secction)->get();
-		$testsgoogle 	  	= TestGoogle::where('section_id',$secction)->get();
 
 		return view('user.evaluaciones')
 				->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 				->with('me', $me)
 				->with('tests',$tests)
-				->with('testsgoogle',$testsgoogle)
 				->with('testsimples',$testsimples)
 				->with('sections', $sections)
 				->with('topics', $topics);
@@ -237,7 +222,6 @@ class HomeController extends Controller
 			->get();
 		}
 		$tests	  		= Test::all()->sortByDesc('id');
-		$testsgoogle	= TestGoogle::all()->sortByDesc('id');
 		$sections 		= Section::all()->sortByDesc('id');
 
 		return view('user.topiccontent')
@@ -246,28 +230,9 @@ class HomeController extends Controller
 				->with('carbon', new BaseCarbon(now('America/Caracas'), 'America/Caracas'))
 				->with('me', $me)
 				->with('tests',$tests)
-				->with('testsgoogle',$testsgoogle)
 				->with('sections', $sections)
 				->with('topics', $topics);
 	}
-
-	// Evaluacion con google forms
-	public function addeval(Request $req)
-	{
-		$data = request()->validate([
-			'topic_id'		=>	'required',
-			'section_id'	=>	'required',
-			'link'			=>	'required'
-		]);
-
-		$testgoogle = TestGoogle::create([
-			'link' 			=> $data['link'],
-			'topic_id' 		=> $data['topic_id'],
-			'section_id' 	=> $data['section_id'],
-		]);
-		return back()->with('info', 'Se ha registrado la nueva evaluacion');
-	}
-
 
 	// FUncion que se encarga de insertar el contenido en la db
 	public function addContent(Request $req)
@@ -319,7 +284,6 @@ class HomeController extends Controller
 		$topics = Topic::all();
 		$sections = Section::all()->sortByDesc('id');
 		$tests = Test::all()->sortByDesc('id');
-		$testsgoogle = TestGoogle::all()->sortByDesc('id');
 		$id = Auth::user()->id;
 		$me = User::find($id);
 
@@ -327,7 +291,6 @@ class HomeController extends Controller
 				->with('topics', $topics)
 				->with('sections', $sections)
 				->with('me', $me)
-				->with('testsgoogle',$testsgoogle)
 				->with('tests',$tests);
 	}
 
@@ -395,7 +358,6 @@ class HomeController extends Controller
 	{
 		$sections 	  	= Section::all()->sortByDesc('id');
 		$tests 	  		= Test::all()->sortByDesc('id');
-		$testsgoogle 	= TestGoogle::all()->sortByDesc('id');
 		$topics      	= Topic::all();
 		$estudiantes 	= User::where('type', 'student')->get();
 		$estudiante 	= User::where('id', $id)->first();
@@ -407,7 +369,6 @@ class HomeController extends Controller
 				->with('estudiante', $estudiante)
 				->with('me', $me)
 				->with('tests',$tests)
-				->with('testsgoogle',$testsgoogle)
 				->with('sections', $sections)
 				->with('topics', $topics);
 	}

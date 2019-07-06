@@ -44,15 +44,6 @@
 					<a class="nav-link" data-toggle="modal" href="#temanuevo"><i class="fas fa-plus mr-2"></i>Añadir tema</a>
 				</li>
 				
-				{{-- <li class="nav-item">
-					<a class="nav-link" data-toggle="modal" href="#evaluacionnuevogoogle"><i class="fas fa-plus mr-2"></i>Google Forms</a>
-				</li> --}}
-				{{-- <li class="nav-item">
-					<a class="nav-link" data-toggle="modal" href="#evaluacionnuevo"><i class="fas fa-plus mr-2"></i>Añadir Evaluación</a>
-				</li> --}}
-
-
-
 				<!-- Dropdown -->
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-plus"></i> Añadir contenido</a>
@@ -91,11 +82,6 @@
 					<a class="dropdown-item" href="{{ url('profile') }}">
 						<i class="fas fa-user mr-2"></i>Perfil
 					</a>
-					@if ( Auth::user()->people->type == 'teacher' )
-						<a class="dropdown-item" href="https://docs.google.com/forms/u/0/d/1ljxTuDGYSjuElImNkafnqu1Vj3DgViMfrzCTV6hy2qY/edit?ntd=1&usp=forms_home&ths=true" target="_blank">
-							<i class="fab fa-google mr-2"></i>Crear Evaluación
-						</a>
-					@endif
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="#"
 						onclick="event.preventDefault();document.getElementById('logout-form').submit();">
@@ -324,50 +310,6 @@
 						</select>
 					</div>
 					<input type="hidden" name="people_id" value="{{ Auth::user()->people_id }}">
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn-md btn red lighten-1" data-dismiss="modal"><i class="fas fa-times mr-2"></i>Cerrar</button>
-					<button type="submit" class="btn-md btn cyan lighten-2"><i class="fas fa-save mr-2"></i>Guardar</button>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
-
-<!-- Modal añadir evaluacion google forms-->
-<div class="modal fade" id="evaluacionnuevogoogle" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Registrar evaluación</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<form action="{{ url('addeval') }}" method="post">
-				@csrf
-				<div class="modal-body">
-					<div class="form-group md-form">
-						<i class="fas fa-link prefix"></i>
-						<input type="text" name="link" id="link" class="form-control validate" required>
-						<label for="link">Enlace</label>
-					</div>
-					<div class="col md-form mt-5">
-						<select class="mdb-select dropdown-primary md-form colorful-select {{ $errors->has('topic_id') ? ' is-invalid' : '' }}" name="topic_id" required id="tema">
-							<option disabled selected>Escoge el tema de la evaluación</option>
-							@foreach( $topics as $topic )
-								<option value="{{ $topic->id }}">{{ $topic->topic }}</option>
-							@endforeach
-						</select>
-					</div>
-					<div class="col md-form mt-5">
-						<select name="section_id" class="mdb-select colorful-select dropdown-primary {{ $errors->has('section_id') ? ' is-invalid' : '' }}" id="type" required>
-							<option disabled selected>Selecciona la seccion</option>
-							@foreach($sections as $section)
-							<option value="{{ $section->id }}">{{ $section->section }}</option>
-							@endforeach
-						</select>
-					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn-md btn red lighten-1" data-dismiss="modal"><i class="fas fa-times mr-2"></i>Cerrar</button>

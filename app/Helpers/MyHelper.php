@@ -123,23 +123,26 @@ class MyHelper{
 		return false;
 	}
 
-	// FLECHAS PARA EL TEMPORIZADOR
-	public static function temporisadorTest($test_id)
+	// FLECHAS VER SI HAGO EL TEMPORIZADOR DE EVALUACION
+	public static function temporisadorTest($test_id,$type)
 	{
-		// test_time, tiempo de la evaluacion en minutos
-		$test = Test::findOrFail($test_id);
-		dd($test);
+		if ($type == 'simple') {
+			$test = TestSimple::findOrFail($test_id);
+		}elseif($type == 'normal'){
+			$test = Test::findOrFail($test_id);
+		}
 
-		$test_time = 50;
-		$date_old = "2019-07-06 11:00:05.843087";
 		$now = Carbon::now();
+		$last_time = $now->addMinutes($test->time);
 
-		// $result = $now->diffInHours($date_old);
-		$result = $now->diffInMinutes($date_old);
-
-
-		return $result;
+		return $last_time;
 	}
 
-
+	public static function timefinish($end_time)
+	{
+		$now = Carbon::now();
+		$igualOantes = $now->greaterThanOrEqualTo($end_time);
+		if ($igualOantes) {return true;}
+		return false;
+	}
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +17,7 @@ use App\Test;
 use App\Note;
 use App\TestGoogle;
 use App\NoteGoogle;
+use App\AllTime;
 
 class TestController extends Controller
 {
@@ -46,11 +48,13 @@ class TestController extends Controller
 			'topic_id'		=>	'required',
 			'note'			=>	'required',
 			'section_id'	=>	'required',
-			'people_id'		=>	'required'
+			'people_id'		=>	'required',
+			'time'			=>	'required'
 		]);
 
 		$prueba = Test::create([
 			'note'			=>	$data['note'],
+			'time'			=>	$data['time'],
 			'topic_id'		=>	$data['topic_id'],
 			'people_id'		=>	$data['people_id'],
 			'section_id'	=>	$data['section_id']
@@ -121,10 +125,30 @@ class TestController extends Controller
 
 	public function evaluacion_estudiante($id_test)
 	{
-		$topics   = Topic::all();
-		$sections = Section::all()->sortByDesc('id');
 		$id = Auth::user()->id;
 		$me = User::find($id);
+		$people = User::find($id)->people;
+
+        $end_time = \MyHelper::temporisadorTest($id_test,'normal');
+        $now_time = Carbon::now();
+
+        $temp = AllTime::where('people_id',$people->id)
+        ->where('test_id',$id_test)
+        ->first();
+
+        if (!isset($temp)) {
+	        $temp = AllTime::create([
+	        	'start_time'	=>	$now_time,
+	        	'end_time'		=>	$end_time,
+	        	'people_id'		=>	$me->people_id,
+	        	'test_id'		=>	$id_test
+	        ]);
+        }
+
+        $end_time = $temp->end_time;
+
+		$topics   = Topic::all();
+		$sections = Section::all()->sortByDesc('id');
 		$test = Test::where('id',$id_test)->first();
 		$total_evl = $test->questions->sum('value');
 		$total_pts = \MyHelper::notaTotal($id_test,$me->people->id);
@@ -145,6 +169,7 @@ class TestController extends Controller
 				->with('aprobado', $aprobado)
 				->with('me', $me)
 				->with('test',$test)
+				->with('end_time',$end_time)
 				->with('sections', $sections)
 				->with('topics', $topics);
 	}

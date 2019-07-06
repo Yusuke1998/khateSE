@@ -46,6 +46,11 @@
 			</div>
 		</div>
 		<div class="col-md-9 col-sm-12 animated slideInRight">
+			<div class="col-md-12 col-sm-12 text-center">
+				<div class="countdown-timer-wrapper">
+			      <div class="timer" id="countdown"></div>
+			    </div>
+			</div>
 			<div class="col-md-12 col-sm-12 text-right">
 				<a href="{{ route('evaluaciones') }}" class="btn btn-sm btn-warning" title="">Volver</a>
 			</div>
@@ -54,71 +59,92 @@
 				<div class="card-header">
 					{{ $test->topic->topic }}
 				</div>
-				<?php $count = $test->questions()->count() ?>
-				@if($count >= 1)
+				@if(MyHelper::timefinish($end_time))
 				<div class="card-body">
-					<table class="table">
-						<thead>
-							<tr>
-								<th>Pregunta</th>
-								<th>Valor</th>
-								<td>Estado</td>
-								<td>Nota obtenida</td>
-								<th>Accion</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach($test->questions as $question)
-							<?php $respondida = false;$notaobt = false;$notacompleta = 0;?>
-							<tr align="center">
-								<td>{{ $question->text }}</td>
-								<td>{{ $question->value }}</td>
-								<td width="140">
-									@if($question->answers)
-										@foreach($question->answers as $answer)
-											@if($me->people->id === $answer->people_id)
-												<?php $respondida = true;?>
-												<span class="text-success">Respondida</span>
-											@endif
-										@endforeach
-									@endif
-									@if(!$respondida)
-										<span class="text-warning">Sin responder</span>
-									@endif
-								</td>
-								<td>
-									@if($question->answers)
-										@foreach($question->notes as $nota)
-											@if($me->people->id === $nota->people_id)
-												<?php $notaobt = true;?>
-												<span class="h6">{{ $nota->note }}</span>
-											@endif
-										@endforeach
-									@endif
-									@if(!$notaobt)
-										<span class="h6">Nota</span class="h6">
-									@endif
-								</td>
-								<td>
-									<a href="{{ (!$respondida)?route('respuesta',[$test->id,$question->id]):'#'}}" title="Responder" onclick="{{ (!$respondida)?route('respuesta',[$test->id,$question->id]):'alert(\'Ya respondiste!\')'}}">Responder</a>
-								</td>
-							</tr>
-							@endforeach
-						</tbody>
-						<tfoot>
-							<tr class="bg bg-info text-white">
-								<td class="text-center">TOTAL EVALUACION</td>
-								<td class="text-center">{{ $total_evl }}pts</td>
-								<td class="text-center">TOTAL OBTENIDO</td>
-								<td class="text-center">{{ $total_pts }}pts</td>
-								<td class="text-center" style="font-family: serif; font-size: 18px;color: {{ ($aprobado=='Aprobado')?'green;':'red;' }}"><b>{{ $aprobado }}</b></td>
-							</tr>
-						</tfoot>
-					</table>
+					<p class="h4 text-center">La Evaluación a culminado!</p>
 				</div>
+				@else
+					<?php $count = $test->questions()->count() ?>
+					@if($count >= 1)
+					<div class="card-body">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Pregunta</th>
+									<th>Valor</th>
+									<td>Estado</td>
+									<td>Nota obtenida</td>
+									<th>Accion</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($test->questions as $question)
+								<?php $respondida = false;$notaobt = false;$notacompleta = 0;?>
+								<tr align="center">
+									<td>{{ $question->text }}</td>
+									<td>{{ $question->value }}</td>
+									<td width="140">
+										@if($question->answers)
+											@foreach($question->answers as $answer)
+												@if($me->people->id === $answer->people_id)
+													<?php $respondida = true;?>
+													<span class="text-success">Respondida</span>
+												@endif
+											@endforeach
+										@endif
+										@if(!$respondida)
+											<span class="text-warning">Sin responder</span>
+										@endif
+									</td>
+									<td>
+										@if($question->answers)
+											@foreach($question->notes as $nota)
+												@if($me->people->id === $nota->people_id)
+													<?php $notaobt = true;?>
+													<span class="h6">{{ $nota->note }}</span>
+												@endif
+											@endforeach
+										@endif
+										@if(!$notaobt)
+											<span class="h6">Nota</span class="h6">
+										@endif
+									</td>
+									<td>
+										<a href="{{ (!$respondida)?route('respuesta',[$test->id,$question->id]):'#'}}" title="Responder" onclick="{{ (!$respondida)?route('respuesta',[$test->id,$question->id]):'alert(\'Ya respondiste!\')'}}">Responder</a>
+									</td>
+								</tr>
+								@endforeach
+							</tbody>
+							<tfoot>
+								<tr class="bg bg-info text-white">
+									<td class="text-center">TOTAL EVALUACION</td>
+									<td class="text-center">{{ $total_evl }}pts</td>
+									<td class="text-center">TOTAL OBTENIDO</td>
+									<td class="text-center">{{ $total_pts }}pts</td>
+									<td class="text-center" style="font-family: serif; font-size: 18px;color: {{ ($aprobado=='Aprobado')?'green;':'red;' }}"><b>{{ $aprobado }}</b></td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+					@endif
 				@endif
 			</div>
 		</div>
 	</div>
 </div>
+@section('my_code_js')
+	<script>
+		$(document).ready(function(){
+			var myDate = new Date('{{ $end_time }}');
+			console.log(myDate);
+			$("#countdown").countdown(myDate, function (event) {
+				$(this).html(
+					event.strftime(
+                        '<div class="timer-wrapper"><div class="time">%D</div><span class="text">Dias</span></div><div class="timer-wrapper"><div class="time">%H</div><span class="text">Horas</span></div><div class="timer-wrapper"><div class="time">%M</div><span class="text">Minutos</span></div><div class="timer-wrapper"><div class="time">%S</div><span class="text">Segundos</span></div>'
+                    )
+				);
+            });
+		});
+	</script>
+@stop
 @include('layouts.footer')

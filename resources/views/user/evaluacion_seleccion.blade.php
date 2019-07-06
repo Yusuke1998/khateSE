@@ -46,52 +46,63 @@
 			</div>
 		</div>
 		<div class="col-md-7 col-sm-12 animated slideInRight">
+			<div class="col-md-12 col-sm-12 text-center">
+				<div class="countdown-timer-wrapper">
+			      <div class="timer" id="countdown"></div>
+			    </div>
+			</div>
 			@include('layouts.info')
 			<div class="card" >
 				<div class="card-header">
 					{{ $test->topic->topic }}
 				</div>
-				<?php $count = $test->questionsimples()->count() ?>
-				<?php $respondida = false;?>
-				@if($count >= 1)
+				@if(MyHelper::timefinish($end_time))
 				<div class="card-body">
-					<table class="table">
-						<thead>
-							<tr>
-								<th>Pregunta</th>
-								<th>Valor</th>
-								<th></th>
-								<th>Nota</th>
-								<th>Acción</th>
-							</tr>
-						</thead>
-						<tbody>
-							@foreach($test->questionsimples as $question)
-							<?php $true = MyHelper::tieneNotaSelectII($me->people->student->id,$question->id) ?>
-							<tr align="center">
-								<td>{{ $question->text }}</td>
-								<td>{{ $question->value }}</td>
-								<td align="center">
-									<span class="fas {{ ($true)?'fa-check':'' }}"></span>
-								</td>
-								<td>{{ MyHelper::notaSimpleTotalRespuesta($me->people->student->id,$question->id) }}</td>
-								<td>
-									<a href="{{ route('estudiante.pregunta.simple',[$test->id,$question->id]) }}" title="{{ (!$true)?'Responder':'Ver' }}">{{ (!$true)?'Responder':'Ver' }}</a>
-								</td>
-							</tr>
-							@endforeach
-						</tbody>
-						<tfoot>
-							<tr class="bg bg-info text-white">
-								<td class="text-center">EVALUACION</td>
-								<td class="text-center">{{ $total_evl }}pts</td>
-								<td class="text-center">OBTENIDO</td>
-								<td class="text-center">{{ $total_pts }}pts</td>
-								<td class="text-center" style="font-family: serif; font-size: 18px;color: {{ ($aprobado=='Aprobado')?'green;':'red;' }}"><b>{{ $aprobado }}</b></td>
-							</tr>
-						</tfoot>
-					</table>
+					<p class="h4 text-center">La Evaluación a culminado!</p>
 				</div>
+				@else
+					<?php $count = $test->questionsimples()->count() ?>
+					<?php $respondida = false;?>
+					@if($count >= 1)
+					<div class="card-body">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Pregunta</th>
+									<th>Valor</th>
+									<th></th>
+									<th>Nota</th>
+									<th>Acción</th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach($test->questionsimples as $question)
+								<?php $true = MyHelper::tieneNotaSelectII($me->people->student->id,$question->id) ?>
+								<tr align="center">
+									<td>{{ $question->text }}</td>
+									<td>{{ $question->value }}</td>
+									<td align="center">
+										<span class="fas {{ ($true)?'fa-check':'' }}"></span>
+									</td>
+									<td>{{ MyHelper::notaSimpleTotalRespuesta($me->people->student->id,$question->id) }}</td>
+									<td>
+										<a href="{{ route('estudiante.pregunta.simple',[$test->id,$question->id]) }}" title="{{ (!$true)?'Responder':'Ver' }}">{{ (!$true)?'Responder':'Ver' }}</a>
+									</td>
+								</tr>
+								@endforeach
+							</tbody>
+							<tfoot>
+								<tr class="bg bg-info text-white">
+									<td class="text-center">EVALUACION</td>
+									<td class="text-center">{{ $total_evl }}pts</td>
+									<td class="text-center">OBTENIDO</td>
+									<td class="text-center">{{ $total_pts }}pts</td>
+									<td class="text-center" style="font-family: serif; font-size: 18px;color: {{ ($aprobado=='Aprobado')?'green;':'red;' }}"><b>{{ $aprobado }}</b></td>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
+					@endif
 				@endif
 			</div>
 		</div>
@@ -100,4 +111,22 @@
 		</div>
 	</div>
 </div>
+@section('my_code_js')
+	<script>
+		$(document).ready(function(){
+			var myDate = new Date('{{ $end_time }}');
+			console.log(myDate);
+			$("#countdown").countdown(myDate, function (event) {
+				$(this).html(
+					event.strftime(
+                        '<div class="timer-wrapper"><div class="time">%D</div><span class="text">Dias</span></div><div class="timer-wrapper"><div class="time">%H</div><span class="text">Horas</span></div><div class="timer-wrapper"><div class="time">%M</div><span class="text">Minutos</span></div><div class="timer-wrapper"><div class="time">%S</div><span class="text">Segundos</span></div>'
+                    )
+				)
+				// .on('finish.countdown', function(){
+				// 	alert('Hola mundo :v');
+				// });
+            });
+		});
+	</script>
+@stop
 @include('layouts.footer')

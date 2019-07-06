@@ -215,6 +215,11 @@
 						<input id="note" type="number" name="note" class="form-control validate {{ $errors->has('note') ? ' is-invalid' : '' }}">
 						<label for="note">Ponderacion total de la evaluacion</label>
 					</div>
+					<div class="form-group md-form my-5">
+						<i class="fas fa-edit prefix"></i>
+						<input id="time" type="number" name="time" class="form-control validate {{ $errors->has('time') ? ' is-invalid' : '' }}">
+						<label for="time">Tiempo en minutos de la evaluacion</label>
+					</div>
 					<div class="col md-form">
 						<select name="section_id" class="mdb-select colorful-select dropdown-primary {{ $errors->has('section_id') ? ' is-invalid' : '' }}" id="type" required>
 							<option disabled selected>Selecciona la seccion</option>
@@ -259,6 +264,11 @@
 						<i class="fas fa-edit prefix"></i>
 						<input id="note" type="number" name="note" class="form-control validate {{ $errors->has('note') ? ' is-invalid' : '' }}">
 						<label for="note">Ponderacion total de la evaluacion</label>
+					</div>
+					<div class="form-group md-form my-5">
+						<i class="fas fa-edit prefix"></i>
+						<input id="time" type="number" name="time" class="form-control validate {{ $errors->has('time') ? ' is-invalid' : '' }}">
+						<label for="time">Tiempo en minutos de la evaluacion</label>
 					</div>
 					<div class="col md-form">
 						<select name="section_id" class="mdb-select colorful-select dropdown-primary {{ $errors->has('section_id') ? ' is-invalid' : '' }}" id="type" required>

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Carbon\Carbon;
 use App\TestSimple;
 use App\QuestionSimple;
 use App\AnswerSimple;
@@ -8,6 +9,7 @@ use App\User;
 use App\Section;
 use App\Topic;
 use App\NoteSelect;
+use App\AllTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -21,11 +23,13 @@ class TestSimpleController extends Controller
 			'topic_id'		=>	'required',
 			'note'			=>	'required',
 			'section_id'	=>	'required',
-			'people_id'		=>	'required'
+			'people_id'		=>	'required',
+			'time'		=>	'required'
 		]);
 
 		$prueba = TestSimple::create([
 			'note'			=>	$data['note'],
+			'time'			=>	$data['time'],
 			'topic_id'		=>	$data['topic_id'],
 			'people_id'		=>	$data['people_id'],
 			'section_id'	=>	$data['section_id']
@@ -186,10 +190,31 @@ class TestSimpleController extends Controller
 
 	public function evaluacion_simple_estudiante($id_test)
 	{
-		$topics   = Topic::all();
-		$sections = Section::all()->sortByDesc('id');
 		$id = Auth::user()->id;
 		$me = User::find($id);
+		$people = User::find($id)->people;
+
+        $end_time = \MyHelper::temporisadorTest($id_test,'simple');
+        $now_time = Carbon::now();
+
+        $temp = AllTime::where('people_id',$people->id)
+        ->where('test_simple_id',$id_test)
+        ->first();
+
+        if (!isset($temp)) {
+	        $temp = AllTime::create([
+	        	'start_time'		=>	$now_time,
+	        	'end_time'			=>	$end_time,
+	        	'people_id'			=>	$me->people_id,
+	        	'test_simple_id'	=>	$id_test
+	        ]);
+        }
+
+        $end_time = $temp->end_time;
+
+		$topics   = Topic::all();
+		$sections = Section::all()->sortByDesc('id');
+		
 		$id_people = User::find($id)->people->id;
 		$id_studend = User::find($id)->people->student->id;
 		$test = TestSimple::where('id',$id_test)->first();
@@ -213,6 +238,7 @@ class TestSimpleController extends Controller
 				->with('aprobado', $aprobado)
 				->with('me', $me)
 				->with('test',$test)
+				->with('end_time',$end_time)
 				->with('sections', $sections)
 				->with('topics', $topics);
 	}

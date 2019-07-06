@@ -10,7 +10,9 @@
 	<script src="{{ asset('js/popper.min.js') }}"></script>
 	<script src="{{ asset('js/mdb.min.js') }}"></script>
 	<script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
+	<script src="{{ asset('js/countdown-timer.js') }}"></script>
 	<script src="{{ asset('js/scripts.js') }}"></script>
+	@yield('my_code_js')
 
 </body>
 </html>

@@ -54,7 +54,3 @@ Route::get('pregunta/{id_test}','testController@pregunta')->name('pregunta');
 // Notas
 Route::get('nota/{people}/{test}/{question}/{answer}','testController@nota')->name('nota.nueva');
 Route::post('asignar/nota','testController@asignar_nota')->name('nota.asignar');
-
-Route::get('temporisador',function(){
-	return MyHelper::temporisadorTest(1);
-});

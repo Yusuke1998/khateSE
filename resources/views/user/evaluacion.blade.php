@@ -142,7 +142,7 @@
 					event.strftime(
                         '<div class="timer-wrapper"><div class="time">%D</div><span class="text">Dias</span></div><div class="timer-wrapper"><div class="time">%H</div><span class="text">Horas</span></div><div class="timer-wrapper"><div class="time">%M</div><span class="text">Minutos</span></div><div class="timer-wrapper"><div class="time">%S</div><span class="text">Segundos</span></div>'
                     )
-				);
+				)
             });
 		});
 	</script>

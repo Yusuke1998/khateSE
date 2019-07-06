@@ -131,10 +131,8 @@ class MyHelper{
 		}elseif($type == 'normal'){
 			$test = Test::findOrFail($test_id);
 		}
-
 		$now = Carbon::now();
 		$last_time = $now->addMinutes($test->time);
-
 		return $last_time;
 	}
 

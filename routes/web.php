@@ -21,10 +21,8 @@ Route::post('addtema', 'HomeController@addtema');
 Route::get('tema/{topic}', 'HomeController@topic')->where('topic', '^[A-Za-z0-9_]+$');
 Route::post('addseccion', 'HomeController@addseccion');
 Route::get('historial/{student_id}','HomeController@historial')->name('historial');
-
 // evaluacion con google forms
 Route::post('addeval', 'HomeController@addeval');
-
 // evaluacion de seleccion simple
 Route::post('addevaluacionsimple', 'TestSimpleController@addevaluacionsimple');
 Route::post('pregunta/simple/guardar','TestSimpleController@pregunta_guardar')->name('preguntasimple.guardar');
@@ -39,7 +37,6 @@ Route::get('estudiante/pregunta/simple/{id_test}/{id_question}','TestSimpleContr
 Route::get('respuesta/simple/asignar/{id_question}/{number}','TestSimpleController@asignar')->name('asignar');
 Route::get('respuesta/simple/asignar/{id_test}/{id_question}/{answer_id}/{number}','TestSimpleController@estudiante_asignar')->name('estudiante.asignar');
 Route::get('estudiante/evaluacion/simple/{id}','TestSimpleController@evaluacion_simple_estudiante')->name('evaluacion.simple');
-
 // evaluacion normal
 Route::post('addevaluacion', 'testController@addevaluacion');
 Route::post('addpregunta', 'HomeController@addpregunta');

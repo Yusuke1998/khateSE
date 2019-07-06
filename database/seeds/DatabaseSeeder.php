@@ -168,6 +168,7 @@ class DatabaseSeeder extends Seeder
 		DB::table('tests')->insert([
 			[
 			'note'			=>	'100',
+			'time'			=>	'10',
 			'topic_id'	 	=>  1,
 			'people_id'		=>	1,
 			'section_id'	=>	2,
@@ -175,6 +176,7 @@ class DatabaseSeeder extends Seeder
 			],
 			[
 			'note'			=>	'100',
+			'time'			=>	'10',
 			'topic_id'	 	=> 	2,
 			'people_id'		=>	1,
 			'section_id'	=>	2,
@@ -182,6 +184,7 @@ class DatabaseSeeder extends Seeder
 			],
 			[
 			'note'			=>	'100',
+			'time'			=>	'20',
 			'topic_id'	 	=>  3,
 			'people_id'		=>	1,
 			'section_id'	=>	2,
@@ -190,6 +193,7 @@ class DatabaseSeeder extends Seeder
 			[
 			'topic_id'	 	=>  4,
 			'note'			=>	'100',
+			'time'			=>	'20',
 			'people_id'		=>	1,
 			'section_id'	=>	2,
 			'created_at' 	=> now('America/Caracas')
@@ -197,6 +201,7 @@ class DatabaseSeeder extends Seeder
 			[
 			'topic_id'	 	=>  5,
 			'note'			=>	'100',
+			'time'			=>	'30',
 			'people_id'		=>	1,
 			'section_id'	=>	2,
 			'created_at' 	=> now('America/Caracas')
@@ -206,6 +211,7 @@ class DatabaseSeeder extends Seeder
 		DB::table('test_simples')->insert([
 			[
 			'note'			=>	'100',
+			'time'			=>	'40',
 			'topic_id'	 	=>  4,
 			'people_id'		=>	1,
 			'section_id'	=>	2,

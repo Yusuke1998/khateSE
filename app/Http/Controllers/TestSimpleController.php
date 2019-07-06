@@ -185,7 +185,6 @@ class TestSimpleController extends Controller
 		return back()->with('info','Respuesta asignada con exito!');
 	}
 
-
 	// Estudiante
 
 	public function evaluacion_simple_estudiante($id_test)
@@ -242,7 +241,6 @@ class TestSimpleController extends Controller
 				->with('sections', $sections)
 				->with('topics', $topics);
 	}
-
 
 	public function preguntas_simples($id_test,$id_question)
 	{

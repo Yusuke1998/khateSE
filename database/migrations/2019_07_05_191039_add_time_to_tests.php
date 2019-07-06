@@ -10,7 +10,7 @@ class AddTimeToTests extends Migration
     public function up()
     {
         Schema::table('tests', function (Blueprint $table) {
-            $table->integer('time')->nullable();
+            $table->addColumn('integer', 'time')->nullable();
         });
     }
 

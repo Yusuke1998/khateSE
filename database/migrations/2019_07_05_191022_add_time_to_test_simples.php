@@ -9,7 +9,7 @@ class AddTimeToTestSimples extends Migration
     public function up()
     {
         Schema::table('test_simples', function (Blueprint $table) {
-            $table->integer('time')->nullable();
+            $table->addColumn('integer', 'time')->nullable();
         });
     }
 

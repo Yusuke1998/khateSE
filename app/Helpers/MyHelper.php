@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use App\Answer;
 use App\AnswerSimple;
 use App\Content;
@@ -122,8 +123,23 @@ class MyHelper{
 		return false;
 	}
 
+	// FLECHAS PARA EL TEMPORIZADOR
+	public static function temporisadorTest($test_id)
+	{
+		// test_time, tiempo de la evaluacion en minutos
+		$test = Test::findOrFail($test_id);
+		dd($test);
+
+		$test_time = 50;
+		$date_old = "2019-07-06 11:00:05.843087";
+		$now = Carbon::now();
+
+		// $result = $now->diffInHours($date_old);
+		$result = $now->diffInMinutes($date_old);
 
 
+		return $result;
+	}
 
 
 }

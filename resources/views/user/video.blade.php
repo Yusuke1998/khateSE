@@ -56,7 +56,7 @@
 							<div class="card animated slow wow zoomIn mb-4">
 								<div class="card-body">
 									<div class="embed-responsive embed-responsive-16by9">
-										<video controls src="{{ asset('storage/v2.mp4') }}"></video>
+										<video controls src="{{ asset('storage/$v->file') }}"></video>
 									</div>
 								</div>
 								<div class="card-footer">

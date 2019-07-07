@@ -118,7 +118,7 @@
 							@foreach( $videos as $v )
 								<div class="card mb-3 hoverable">
 									<div class="card-body">
-										<video class="video-fluid" controls src='{{ "storage/$v->file" }}'></video>
+										<video class="video-fluid" controls src="{{ asset('storage/$v->file') }}"></video>
 									</div>
 									<div class="card-footer">
 										<p class="h4 text-monospace">{{ $v->name }}</p>
